@@ -1,0 +1,43 @@
+<resources xmlns:tools="http://schemas.android.com/tools">
+
+    <!-- Tema Base para o Modo Escuro -->
+    <style name="Base.Theme.IORITv.Dark" parent="Theme.Material3.DayNight.NoActionBar">
+        <!-- Cor da StatusBar no Modo Escuro -->
+        <item name="android:statusBarColor">@color/darkBackground</item>
+        <item name="android:navigationBarColor">@color/darkBackground</item>
+        <item name="android:windowLightStatusBar">false</item> <!-- Define o texto da StatusBar como claro -->
+        <item name="android:textColorHint">@color/white</item> <!-- Cor do texto do EditText -->
+        <item name="android:buttonTint">@color/white</item> <!-- Cor do texto e ícones nos botões -->
+        <item name="android:windowBackground">@color/darkBackground</item>
+
+        <!-- Cor Primária e Secundária -->
+        <item name="colorPrimary">@color/greenmedium</item>
+        <item name="colorOnPrimary">@color/greendeep</item>
+        <item name="colorSecondary">@color/gray</item>
+        <item name="colorOnSecondary">@color/white</item>
+    </style>
+
+    <!-- Tema customizado para o modo escuro da LoginActivity -->
+    <style name="Theme.IORITv.LoginActivity.Dark" parent="Base.Theme.IORITv.Dark">
+        <item name="android:statusBarColor">@color/greendeep</item>
+        <item name="android:navigationBarColor">@color/greendeep</item>
+        <item name="android:textColor">@color/white</item>
+        <item name="android:textColorHint">@color/white</item> <!-- Cor do texto do EditText -->
+        <item name="android:buttonTint">@color/white</item> <!-- Cor do texto e ícones nos botões -->
+        <item name="cardBackgroundColor">@color/darkCardBackground</item> <!-- Cor de fundo dos cartões -->
+    </style>
+
+    <!-- Tema customizado para o modo claro da MainActivity2 -->
+    <style name="Theme.IORITv.MainActivity2.Dark" parent="Base.Theme.IORITv.Dark">
+        <item name="android:statusBarColor">@color/darkBackground</item>
+        <item name="android:windowLightStatusBar">false</item> <!-- Define o texto da StatusBar como claro -->
+        <item name="android:textColor">@color/white</item>
+        <item name="android:buttonTint">@color/white</item> <!-- Cor do texto e ícones nos botões -->
+        <item name="cardBackgroundColor">@color/darkCardBackground</item> <!-- Cor de fundo dos cartões -->
+        <item name="cardElevation">@color/focus_color</item>
+    </style>
+
+    <style name="Theme.IORITv.MainActivity4.Dark." parent="Base.Theme.IORITv.Dark">
+
+    </style>
+</resources>

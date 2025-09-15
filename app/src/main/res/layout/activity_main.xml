@@ -1,0 +1,236 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:fitsSystemWindows="true">
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:padding="16dp"
+        android:fillViewport="true">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:id="@+id/textView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="ADICIONAR CADASTRO"
+                android:textSize="16sp"
+                android:textStyle="bold"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toStartOf="parent"
+                tools:ignore="MissingConstraints"
+                tools:layout_editor_absoluteY="3dp" />
+
+            <EditText
+                android:id="@+id/editTextNome"
+                android:layout_width="0dp"
+                android:layout_height="45dp"
+                android:layout_marginTop="16dp"
+                android:background="@drawable/button_rounded"
+                android:hint="Nome"
+                android:padding="12dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/textView" />
+
+            <EditText
+                android:id="@+id/editTextUsuario"
+                android:layout_width="0dp"
+                android:layout_height="45dp"
+                android:hint="Usuário"
+                android:padding="12dp"
+                android:background="@drawable/button_rounded"
+                app:layout_constraintTop_toBottomOf="@id/editTextNome"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                android:layout_marginTop="8dp" />
+
+            <!-- Senha -->
+            <EditText
+                android:id="@+id/editTextSenha"
+                android:layout_width="0dp"
+                android:layout_height="45dp"
+                android:hint="Senha"
+                android:padding="12dp"
+                android:background="@drawable/button_rounded"
+                android:inputType="textPassword"
+                app:layout_constraintTop_toBottomOf="@id/editTextUsuario"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                android:layout_marginTop="8dp" />
+
+            <!-- WhatsApp -->
+            <EditText
+                android:id="@+id/editTextWhatsapp"
+                android:layout_width="0dp"
+                android:layout_height="45dp"
+                android:hint="WhatsApp"
+                android:padding="12dp"
+                android:background="@drawable/button_rounded"
+                app:layout_constraintTop_toBottomOf="@id/editTextSenha"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                android:layout_marginTop="8dp"
+                android:inputType="phone" />
+
+            <!-- Modelo -->
+            <EditText
+                android:id="@+id/editTextModelo"
+                android:layout_width="0dp"
+                android:layout_height="45dp"
+                android:hint="Modelo"
+                android:padding="12dp"
+                android:background="@drawable/button_rounded"
+                app:layout_constraintTop_toBottomOf="@id/editTextWhatsapp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                android:layout_marginTop="8dp" />
+
+            <!-- Início -->
+            <EditText
+                android:id="@+id/editTextInicio"
+                android:layout_width="0dp"
+                android:layout_height="45dp"
+                android:hint="Início"
+                android:padding="12dp"
+                android:background="@drawable/button_rounded"
+                app:layout_constraintTop_toBottomOf="@id/editTextModelo"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                android:layout_marginTop="8dp"
+                android:inputType="date" />
+
+            <!-- Créditos -->
+            <EditText
+                android:id="@+id/editTextCreditos"
+                android:layout_width="0dp"
+                android:layout_height="45dp"
+                android:hint="Créditos"
+                android:padding="12dp"
+                android:background="@drawable/button_rounded"
+                app:layout_constraintTop_toBottomOf="@id/editTextInicio"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                android:layout_marginTop="8dp"
+                android:inputType="numberDecimal" />
+
+            <!-- MAC -->
+            <EditText
+                android:id="@+id/editTextMAC"
+                android:layout_width="0dp"
+                android:layout_height="45dp"
+                android:hint="MAC"
+                android:padding="12dp"
+                android:background="@drawable/button_rounded"
+                app:layout_constraintTop_toBottomOf="@id/editTextCreditos"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                android:layout_marginTop="8dp" />
+
+            <!-- OTP -->
+            <EditText
+                android:id="@+id/editTextOTP"
+                android:layout_width="0dp"
+                android:layout_height="45dp"
+                android:hint="OTP"
+                android:padding="12dp"
+                android:background="@drawable/button_rounded"
+                app:layout_constraintTop_toBottomOf="@id/editTextMAC"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                android:layout_marginTop="8dp" />
+
+            <!-- Device -->
+            <EditText
+                android:id="@+id/editTextDevice"
+                android:layout_width="0dp"
+                android:layout_height="45dp"
+                android:hint="Device"
+                android:padding="12dp"
+                android:background="@drawable/button_rounded"
+                app:layout_constraintTop_toBottomOf="@id/editTextOTP"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                android:layout_marginTop="8dp" />
+
+            <!-- Valor -->
+            <EditText
+                android:id="@+id/editTextValor"
+                android:layout_width="0dp"
+                android:layout_height="45dp"
+                android:hint="Valor"
+                android:padding="12dp"
+                android:background="@drawable/button_rounded"
+                app:layout_constraintTop_toBottomOf="@id/editTextDevice"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                android:layout_marginTop="8dp"
+                android:inputType="numberDecimal" />
+
+            <!-- Custo -->
+            <EditText
+                android:id="@+id/editTextCusto"
+                android:layout_width="0dp"
+                android:layout_height="45dp"
+                android:hint="Custo"
+                android:padding="12dp"
+                android:background="@drawable/button_rounded"
+                app:layout_constraintTop_toBottomOf="@id/editTextValor"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                android:layout_marginTop="8dp"
+                android:inputType="numberDecimal" />
+
+            <!-- Desconto -->
+            <EditText
+                android:id="@+id/editTextDesconto"
+                android:layout_width="0dp"
+                android:layout_height="45dp"
+                android:hint="Desconto"
+                android:padding="12dp"
+                android:background="@drawable/button_rounded"
+                app:layout_constraintTop_toBottomOf="@id/editTextCusto"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                android:layout_marginTop="8dp"
+                android:inputType="numberDecimal" />
+
+            <!-- Servidor -->
+            <EditText
+                android:id="@+id/editTextServidor"
+                android:layout_width="0dp"
+                android:layout_height="45dp"
+                android:hint="Servidor"
+                android:padding="12dp"
+                android:background="@drawable/button_rounded"
+                app:layout_constraintTop_toBottomOf="@id/editTextDesconto"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                android:layout_marginTop="8dp" />
+
+            <!-- Botão Salvar -->
+            <Button
+                android:id="@+id/buttonSalvar"
+                android:layout_width="200dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="16dp"
+                android:layout_marginEnd="8dp"
+                android:text="Salvar"
+                app:backgroundTint="@drawable/button_state_selector"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/editTextServidor" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </ScrollView>
+</androidx.constraintlayout.widget.ConstraintLayout>

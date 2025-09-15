@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<shape xmlns:android="http://schemas.android.com/apk/res/android">
+    <!-- Definindo a cor de fundo -->
+    <solid android:color="@color/graylight" /> <!-- Cor cinza claro -->
+
+    <!-- Definindo os cantos arredondados -->
+    <corners android:radius="50dp" />
+
+    <!-- Definindo o padding interno (opcional) -->
+    <padding
+        android:left="10dp"
+        android:top="10dp"
+        android:right="10dp"
+        android:bottom="10dp" />
+
+    <!-- Definindo a borda (opcional) -->
+    <stroke
+        android:width="0dp"
+        android:color="#A1ECECEC" /> <!-- Cor cinza escuro -->
+
+</shape>

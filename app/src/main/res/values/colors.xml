@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="black">#FF000000</color>
+    <color name="white">#FFFFFFFF</color>
+    <color name="gray">#FFC0C0C0</color>
+    <color name="greendeep">#001A18</color>
+    <color name="greendark">#004B44</color>
+    <color name="greenlight">#009688</color>
+    <color name="greenmedium">#4CAF50</color>
+    <color name="graylight">#A1ECECEC</color>
+    <color name="purple">#2F1A51</color>
+    <color name="darkBackground">#ffffff</color>
+    <color name="darkCardBackground">#ffffff</color>
+    <color name="searchview_background">#ECE9E9</color>
+    <color name="searchview_text">#000000</color>
+    <color name="textColorLightTheme">#000000</color>
+    <color name="bar_color_active">#004B44</color>
+    <color name="bar_color_due">#009688</color>
+    <color name="bar_color_overdue">#4CAF50</color>
+    <color name="bar_color_standby">#9E9E9E</color>
+    <color name="focus_color">#009688</color>
+    <color name="splash_background">#FFFFFF</color>
+
+</resources>

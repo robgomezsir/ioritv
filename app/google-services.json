@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "836647250439",
+    "project_id": "ioritv-70318",
+    "storage_bucket": "ioritv-70318.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:836647250439:android:b65f29ef773dad997f98a2",
+        "android_client_info": {
+          "package_name": "com.elevadorcom.ioritv"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAF_I4WcM3oOP0_xTQ9eM8UA0s8Ae-wols"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

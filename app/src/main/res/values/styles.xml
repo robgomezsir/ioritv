@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources xmlns:tools="http://schemas.android.com/tools">
+
+    <!-- Estilo personalizado para SearchView -->
+    <style name="CustomSearchView" parent="Widget.AppCompat.SearchView">
+        <item name="queryBackground">@null</item>
+        <item name="android:background">@color/graylight</item>
+        <item name="android:queryBackground">@android:color/transparent</item>
+        <item name="android:iconifiedByDefault">false</item>
+        <item name="android:queryHint">Pesquisar...</item>
+    </style>
+
+    <!-- Tema Principal do Aplicativo -->
+    <style name="Theme.MyApp" parent="Theme.MaterialComponents.DayNight.NoActionBar">
+        <!-- Personalize as cores do seu tema -->
+        <item name="colorPrimary">@color/greendark</item>
+        <item name="colorPrimaryVariant">@color/greendark</item>
+        <item name="colorAccent">@color/greendark</item>
+        <item name="android:statusBarColor" tools:targetApi="l">@color/greendark</item>
+        <item name="colorControlActivated">@color/focus_color</item>
+
+    </style>
+
+    <!-- Tema para a Splash Screen -->
+    <style name="SplashTheme" parent="Theme.MaterialComponents.DayNight.NoActionBar">
+        <item name="android:windowBackground">@drawable/splash_screen_background</item>
+        <item name="android:statusBarColor" tools:targetApi="l">@color/darkBackground</item>
+        <item name="android:navigationBarColor">@color/darkBackground</item>
+    </style>
+
+</resources>

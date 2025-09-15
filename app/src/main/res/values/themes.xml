@@ -1,0 +1,40 @@
+<!-- res/values/themes.xml -->
+<resources xmlns:tools="http://schemas.android.com/tools">
+
+    <!-- Tema Base para o Modo Claro -->
+    <style name="Base.Theme.IORITv" parent="Theme.Material3.Light.NoActionBar">
+        <!-- Cor da StatusBar no Modo Claro -->
+        <item name="android:statusBarColor">@color/white</item>
+        <item name="android:navigationBarColor">@color/white</item>
+        <item name="android:windowLightStatusBar">true</item> <!-- Define o texto da StatusBar como escuro -->
+        <!-- Outras definições de cores para o modo claro -->
+        <item name="colorPrimary">@color/black</item>
+        <item name="colorOnPrimary">@color/white</item>
+        <item name="colorSecondary">@color/gray</item>
+        <item name="colorOnSecondary">@color/graylight</item>
+        <item name="windowSplashScreenAnimatedIcon">@drawable/ic_logo</item>
+        <item name="windowSplashScreenBackground">@color/greendark</item>
+        <item name="postSplashScreenTheme">@style/Theme.MyApp</item>
+    </style>
+
+    <!-- Tema customizado para a LoginActivity no Modo Claro -->
+    <style name="Theme.IORITv.LoginActivity" parent="Base.Theme.IORITv">
+        <item name="android:statusBarColor">@color/greendeep</item>
+        <item name="android:navigationBarColor">@color/greendeep</item>
+        <item name="android:textColor">@color/black</item>
+        <item name="android:buttonTint">@color/white</item>
+    </style>
+
+    <!-- Tema customizado para o modo claro da MainActivity2 -->
+    <style name="Theme.IORITv.MainActivity2.Dark" parent="Base.Theme.IORITv.Dark">
+        <item name="android:statusBarColor">@color/darkBackground</item>
+        <item name="android:windowLightStatusBar">false</item> <!-- Define o texto da StatusBar como claro -->
+        <item name="android:textColor">@color/black</item>
+        <item name="android:buttonTint">@color/white</item> <!-- Cor do texto e ícones nos botões -->
+        <item name="cardBackgroundColor">@color/white</item> <!-- Cor de fundo dos cartões -->
+        <item name="cardElevation">@color/focus_color</item>
+
+    </style>
+
+</resources>
+

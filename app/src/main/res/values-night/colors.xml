@@ -1,0 +1,15 @@
+<resources>
+    <color name="darkCardBackground">#14211F</color>
+    <color name="darkBackground">#00100E</color>
+    <color name="searchview_background">#14211F</color>
+    <color name="purple">#2F1A51</color>
+    <color name="white">#FFFFFF</color>
+    <color name="textColorLightTheme">#FFFFFF</color>
+    <color name="bar_color_active">#004B44</color>
+    <color name="bar_color_due">#009688</color>
+    <color name="bar_color_overdue">#4CAF50</color>
+    <color name="bar_color_standby">#9E9E9E</color>
+    <color name="focus_color">#009688</color>
+    <color name="splash_background">#00100E</color>
+
+</resources>
