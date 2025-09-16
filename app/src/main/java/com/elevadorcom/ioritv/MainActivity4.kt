@@ -142,6 +142,7 @@ class MainActivity4 : AppCompatActivity() {
                 var totalAVencer = 0
                 var totalAtivos = 0
                 var totalStandby = 0
+                var valorVencido = 0.0
                 var valorStandby = 0.0
 
                 for (document in result) {
@@ -153,7 +154,10 @@ class MainActivity4 : AppCompatActivity() {
                     totalVendas += (valor - desconto)
 
                     when (situacao) {
-                        "VENCIDO" -> totalVencidos++
+                        "VENCIDO" -> {
+                            totalVencidos++
+                            valorVencido += valor
+                        }
                         "A VENCER" -> totalAVencer++
                         "ATIVO" -> totalAtivos++
                         "STANDBY" -> {
@@ -174,7 +178,7 @@ class MainActivity4 : AppCompatActivity() {
                         }
 
                         val custoFixo = 850.0
-                        val lucroTotal = totalVendas - custoFixo - valorStandby
+                        val lucroTotal = totalVendas - custoFixo - valorVencido - valorStandby
                         val lucroFinal = lucroTotal - totalDespesas
 
                         displayData(
