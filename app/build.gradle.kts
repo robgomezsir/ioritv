@@ -1,19 +1,19 @@
-import org.jetbrains.kotlin.de.undercouch.gradle.tasks.download.org.apache.commons.logging.LogFactory.release
 
 plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.jetbrains.kotlin.android)
+    alias(libs.plugins.compose.compiler)
     id("com.google.gms.google-services")
 }
 
 android {
     namespace = "com.elevadorcom.ioritv"
-    compileSdk = 34
+    compileSdk = 35
 
     defaultConfig {
         applicationId = "com.elevadorcom.ioritv"
         minSdk = 26
-        targetSdk = 34
+        targetSdk = 35
         versionCode = 1
         versionName = "1.0"
 
@@ -21,10 +21,17 @@ android {
     }
     buildFeatures {
         viewBinding = true
+        compose = true
     }
     buildTypes {
+        debug {
+            isDebuggable = true
+            applicationIdSuffix = ".debug"
+            versionNameSuffix = "-debug"
+        }
         release {
             isMinifyEnabled = true
+            isShrinkResources = true
             proguardFiles(
                 getDefaultProguardFile("proguard-android-optimize.txt"),
                 "proguard-rules.pro"
@@ -33,15 +40,23 @@ android {
         }
     }
     compileOptions {
-        sourceCompatibility = JavaVersion.VERSION_1_8
-        targetCompatibility = JavaVersion.VERSION_1_8
+        sourceCompatibility = JavaVersion.VERSION_17
+        targetCompatibility = JavaVersion.VERSION_17
     }
     kotlinOptions {
-        jvmTarget = "1.8"
+        jvmTarget = "17"
+    }
+    
+    packaging {
+        resources {
+            excludes += "/META-INF/{AL2.0,LGPL2.1}"
+            excludes += "/META-INF/gradle/incremental.annotation.processors"
+        }
     }
 }
 
 dependencies {
+    // Core Android dependencies
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.appcompat)
     implementation(libs.material)
@@ -54,37 +69,50 @@ dependencies {
     implementation(libs.androidx.navigation.ui.ktx)
     implementation(libs.androidx.gridlayout)
     implementation(libs.androidx.foundation.android)
+    implementation(libs.androidx.splashscreen)
 
+    // Material Design 3
+    implementation(libs.material3)
+    implementation(platform(libs.androidx.compose.bom))
+    implementation(libs.androidx.compose.ui)
+    implementation(libs.androidx.compose.ui.tooling.preview)
+    implementation(libs.androidx.compose.activity)
+    implementation(libs.androidx.compose.viewmodel)
+    
+    // Shimmer Loading
+    implementation(libs.facebook.shimmer)
+    implementation(libs.lottie)
+    
+    // Kotlin Coroutines
+    implementation(libs.kotlinx.coroutines.core)
+    implementation(libs.kotlinx.coroutines.android)
+
+    // Testing
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
+    androidTestImplementation(platform(libs.androidx.compose.bom))
+    androidTestImplementation(libs.androidx.compose.ui.test.junit4)
+    debugImplementation(libs.androidx.compose.ui.tooling)
+    debugImplementation(libs.androidx.compose.ui.test.manifest)
 
     // Firebase BOM for managing Firebase versions
     implementation(platform("com.google.firebase:firebase-bom:33.2.0"))
     implementation("com.google.firebase:firebase-firestore-ktx")
     implementation("com.google.firebase:firebase-auth-ktx")
     implementation("com.google.firebase:firebase-storage-ktx")
-    implementation(libs.firebase.messaging.ktx)
-    implementation(libs.firebase.firestore)
-    implementation("com.squareup.picasso:picasso:2.71828")   // Para regalement de imagem
-    implementation(libs.firebase.messaging)
+    implementation("com.google.firebase:firebase-messaging-ktx")
 
-    // Other dependencies
-    implementation("androidx.appcompat:appcompat:1.6.1")
-    implementation("androidx.constraintlayout:constraintlayout:2.1.4")
-    implementation("com.google.android.material:material:1.9.0")
-    implementation("androidx.work:work-runtime-ktx:2.7.1")
-    implementation("androidx.recyclerview:recyclerview:1.2.1")
-    implementation("androidx.viewpager2:viewpager2:1.0.0")
-    implementation("com.getbase:floatingactionbutton:1.10.1")
-    implementation("androidx.cardview:cardview:1.0.0")
-    implementation("androidx.biometric:biometric:1.1.0")
+    // Additional dependencies
+    implementation("androidx.work:work-runtime-ktx:2.9.0")
+    implementation("androidx.recyclerview:recyclerview:1.3.2")
+    implementation("androidx.viewpager2:viewpager2:1.1.0")
     implementation("androidx.biometric:biometric:1.2.0-alpha05")
     implementation("com.github.PhilJay:MPAndroidChart:v3.1.0")
-    implementation("com.squareup.okhttp3:okhttp:4.9.3")
+    implementation("com.squareup.okhttp3:okhttp:4.12.0")
     implementation("com.getkeepsafe.taptargetview:taptargetview:1.13.3")
-    implementation("androidx.core:core-splashscreen:1.0.0")
-    implementation("androidx.media:media:1.6.0")
+    implementation("androidx.media:media:1.7.0")
     implementation("com.onesignal:OneSignal:5.1.6")
+    implementation("com.squareup.picasso:picasso:2.8")
 
 }

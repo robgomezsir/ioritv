@@ -40,11 +40,20 @@ import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
 import com.getkeepsafe.taptargetview.TapTarget
 import com.getkeepsafe.taptargetview.TapTargetSequence
 import com.getkeepsafe.taptargetview.TapTargetView
+import com.google.android.material.appbar.MaterialToolbar
+import com.elevadorcom.ioritv.utils.AnimationUtils
+import com.elevadorcom.ioritv.utils.AccessibilityUtils
+import com.elevadorcom.ioritv.utils.PerformanceUtils
+import android.view.ViewGroup
+import android.view.LayoutInflater
+import android.widget.FrameLayout
 
 class RankingActivity : AppCompatActivity() {
 
     private val db = FirebaseFirestore.getInstance()
     private lateinit var binding: ActivityRankingWithNavBinding
+    private var isLoading = true
+    private lateinit var loadingView: View
     private lateinit var barChart: BarChart
     private lateinit var totalCredit: TextView
     private val sharedPreferences by lazy {
@@ -66,25 +75,24 @@ class RankingActivity : AppCompatActivity() {
         binding = ActivityRankingWithNavBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
+        // Configurar a Toolbar
+        setSupportActionBar(binding.toolbar)
+        supportActionBar?.title = "Meu Ioritv"
+
+                // Configurar acessibilidade
+                setupAccessibility()
+
+        // Inicializar loading view
+        initializeLoadingView()
+
         totalCredit = findViewById(R.id.totalCredit)
-
-        // Agora inicialize o ImageButton
-        val imageButton: ImageButton = findViewById(R.id.menu_button)
-
-        // Defina a imagem do botão de acordo com o tema
-        if (isDarkMode) {
-            imageButton.setImageResource(R.drawable.menu_light)
-        } else {
-            imageButton.setImageResource(R.drawable.menu_dark)
-        }
-
-        // Define o listener para o botão de menu
-        binding.menuButton.setOnClickListener {
-            showPopupMenu()
-        }
 
         // Inicializa suas Views usando o binding
         setupViews()
+
+        // Mostra loading inicial e carrega dados
+        showLoading()
+        updateUIWithData()
 
         // Configuração da Barra de Navegação
         binding.bottomNavigation.setOnNavigationItemSelectedListener { item ->
@@ -131,7 +139,6 @@ class RankingActivity : AppCompatActivity() {
         }
 
         // Acessando os elementos que serão destacados no tutorial
-        val menuButton = findViewById<View>(R.id.menu_button)
         val sloganTextView = findViewById<TextView>(R.id.sloganTextView4)
         val progressBarClientes = findViewById<ProgressBar>(R.id.progressBarClientes)
         val totalCredit = findViewById<TextView>(R.id.totalCredit)
@@ -379,37 +386,33 @@ class RankingActivity : AppCompatActivity() {
         }
     }
 
-    private fun showPopupMenu() {
-        // Cria o PopupMenu com o botão de menu como âncora
-        val popupMenu = PopupMenu(this, binding.menuButton)
-        popupMenu.menuInflater.inflate(R.menu.popup_menu, popupMenu.menu)
+    override fun onCreateOptionsMenu(menu: android.view.Menu?): Boolean {
+        menuInflater.inflate(R.menu.toolbar_menu, menu)
+        return true
+    }
 
-        // Define o listener para os itens do menu
-        popupMenu.setOnMenuItemClickListener { menuItem ->
-            when (menuItem.itemId) {
-                R.id.menu_configuracoes -> {
-                    // Ação para "Configurações" - Abre a SettingsActivity
-                    val intent = Intent(this, SettingsActivity::class.java)
-                    startActivity(intent)
-                    true
-                }
-
-                R.id.menu_tutorial -> {
-                    // Ação para Iniciar Tutorial
-                    iniciarTutorial(sharedPreferences)
-                    true
-                }
-
-                R.id.menu_sair -> {
-                    // Ação para "sair"
-                    logout()
-                    true
-                }
-                else -> false
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        return when (item.itemId) {
+            R.id.menu_settings -> {
+                // Ação para "Configurações" - Abre a SettingsActivity
+                val intent = Intent(this, SettingsActivity::class.java)
+                startActivity(intent)
+                true
             }
+
+            R.id.menu_tutorial -> {
+                // Ação para Iniciar Tutorial
+                iniciarTutorial(sharedPreferences)
+                true
+            }
+
+            R.id.menu_logout -> {
+                // Ação para "sair"
+                logout()
+                true
+            }
+            else -> super.onOptionsItemSelected(item)
         }
-        // Exibe o menu
-        popupMenu.show()
     }
 
     private fun logout() {
@@ -466,42 +469,50 @@ class RankingActivity : AppCompatActivity() {
     private fun iniciarTutorial(sharedPref: SharedPreferences) {
         TapTargetSequence(this)
             .targets(
-                // Destaque do botão de menu
-                TapTarget.forView(binding.menuButton, "Suas configurações gerais", "Acesse aqui as configurações gerais do aplicativo.")
-                    .outerCircleColor(R.color.greenlight)
-                    .targetCircleColor(R.color.greendeep)
+                // Destaque da toolbar
+                TapTarget.forView(binding.toolbar, "Suas configurações gerais", "Acesse aqui as configurações gerais do aplicativo através do menu.")
+                    .outerCircleColor(R.color.md_theme_light_primary)
+                    .targetCircleColor(R.color.md_theme_light_primaryContainer)
                     .titleTextSize(20)
                     .descriptionTextSize(15)
                     .cancelable(false),
 
-                // Destaque do TextView com o lema
-                TapTarget.forView(binding.sloganTextView4, "Este é o lema atual!", "Aqui você pode ver o lema que define o momento.")
-                    .outerCircleColor(R.color.greenlight)
-                    .targetCircleColor(R.color.greendeep)
+                // Destaque do card de ranking
+                TapTarget.forView(binding.rankingCard, "Ranking de Performance", "Aqui você pode ver seu ranking baseado no número de clientes.")
+                    .outerCircleColor(R.color.md_theme_light_primary)
+                    .targetCircleColor(R.color.md_theme_light_primaryContainer)
                     .titleTextSize(20)
                     .descriptionTextSize(15)
                     .cancelable(false),
 
                 // Destaque da barra de progresso de clientes
                 TapTarget.forView(binding.progressBarClientes, "Alcance de sua meta", "Acompanhe aqui o progresso para alcançar sua meta de clientes.")
-                    .outerCircleColor(R.color.greenlight)
-                    .targetCircleColor(R.color.greendeep)
+                    .outerCircleColor(R.color.md_theme_light_primary)
+                    .targetCircleColor(R.color.md_theme_light_primaryContainer)
                     .titleTextSize(20)
                     .descriptionTextSize(15)
                     .cancelable(false),
 
                 // Destaque do campo de créditos
-                TapTarget.forView(totalCredit, "Adicione ou altere seus créditos", "Gerencie os créditos diretamente por aqui.")
-                    .outerCircleColor(R.color.greenlight)
-                    .targetCircleColor(R.color.greendeep)
+                TapTarget.forView(binding.totalCredit, "Adicione ou altere seus créditos", "Gerencie os créditos diretamente por aqui.")
+                    .outerCircleColor(R.color.md_theme_light_primary)
+                    .targetCircleColor(R.color.md_theme_light_primaryContainer)
                     .titleTextSize(20)
                     .descriptionTextSize(15)
                     .cancelable(false),
 
-                // Destaque do campo de créditos
-                TapTarget.forView(binding.iorinhoImageView, "Seu macote Iorinho está aqui!", "O Iorinho muda sua pose a cada abertura do aplicativo.")
-                    .outerCircleColor(R.color.greenlight)
-                    .targetCircleColor(R.color.greendeep)
+                // Destaque do Iorinho
+                TapTarget.forView(binding.iorinhoImageView, "Seu mascote Iorinho está aqui!", "O Iorinho muda sua pose a cada abertura do aplicativo.")
+                    .outerCircleColor(R.color.md_theme_light_primary)
+                    .targetCircleColor(R.color.md_theme_light_primaryContainer)
+                    .titleTextSize(20)
+                    .descriptionTextSize(15)
+                    .cancelable(false),
+
+                // Destaque do gráfico
+                TapTarget.forView(binding.barChart, "Status dos Clientes", "Visualize o status de todos os seus clientes em um gráfico.")
+                    .outerCircleColor(R.color.md_theme_light_primary)
+                    .targetCircleColor(R.color.md_theme_light_primaryContainer)
                     .titleTextSize(20)
                     .descriptionTextSize(15)
                     .cancelable(false)
@@ -519,19 +530,156 @@ class RankingActivity : AppCompatActivity() {
             .start()
     }
 
-    override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        return when (item.itemId) {
-            R.id.menu_tutorial -> {
-                // Limpar o valor de tutorialShown para false
-                sharedPreferences.edit().putBoolean("tutorialShown", false).apply()
-
-                // Executar o tutorial novamente
-                iniciarTutorial(sharedPreferences)
-
-                true
-            }
-            else -> super.onOptionsItemSelected(item)
+    /**
+     * Inicializa a view de loading
+     */
+    private fun initializeLoadingView() {
+        loadingView = LayoutInflater.from(this).inflate(R.layout.loading_ranking, null)
+        
+        // Adiciona a loading view como overlay
+        val rootView = findViewById<ViewGroup>(android.R.id.content)
+        val loadingContainer = FrameLayout(this).apply {
+            layoutParams = ViewGroup.LayoutParams(
+                ViewGroup.LayoutParams.MATCH_PARENT,
+                ViewGroup.LayoutParams.MATCH_PARENT
+            )
+            addView(loadingView)
         }
+        rootView.addView(loadingContainer)
+    }
+
+    /**
+     * Mostra o estado de loading
+     */
+    private fun showLoading() {
+        isLoading = true
+        loadingView.visibility = View.VISIBLE
+        binding.root.visibility = View.GONE
+    }
+
+    /**
+     * Esconde o estado de loading e mostra o conteúdo com animação
+     */
+    private fun hideLoading() {
+        isLoading = false
+        AnimationUtils.transitionFromLoadingToContent(loadingView, binding.root)
+        
+        // Anima a entrada dos cards
+        val cards = listOf(
+            binding.rankingCard,
+            binding.cardView2,
+            binding.meusCreditos,
+            binding.cardView4,
+            binding.cardView5
+        )
+        
+        AnimationUtils.animateCardsEnter(cards, 100)
+    }
+
+    /**
+     * Atualiza a interface com dados carregados
+     */
+    private fun updateUIWithData() {
+        // Simula carregamento de dados (substitua pela lógica real)
+        Thread {
+            Thread.sleep(2000) // Simula delay de carregamento
+            
+            runOnUiThread {
+                hideLoading()
+            }
+        }.start()
+    }
+
+    /**
+     * Configura acessibilidade para todos os elementos
+     */
+    private fun setupAccessibility() {
+        // Configurar cards
+        AccessibilityUtils.setupCardAccessibility(
+            binding.rankingCard,
+            "Card de ranking de performance com posições de pódio"
+        )
+        
+        AccessibilityUtils.setupCardAccessibility(
+            binding.cardView2,
+            "Card de progresso da carteira de clientes"
+        )
+        
+        AccessibilityUtils.setupCardAccessibility(
+            binding.meusCreditos,
+            "Card de créditos disponíveis",
+            true
+        )
+        
+        AccessibilityUtils.setupCardAccessibility(
+            binding.cardView4,
+            "Card do mascote Iorinho"
+        )
+        
+        AccessibilityUtils.setupCardAccessibility(
+            binding.cardView5,
+            "Card do gráfico de status dos clientes"
+        )
+
+        // Configurar navegação sequencial
+        val focusableViews = listOf(
+            binding.rankingCard,
+            binding.cardView2,
+            binding.meusCreditos,
+            binding.cardView4,
+            binding.cardView5,
+            binding.bottomNavigation
+        )
+        AccessibilityUtils.setupSequentialNavigation(focusableViews)
+
+        // Configurar descrições dinâmicas
+        setupDynamicAccessibility()
+    }
+
+    /**
+     * Configura descrições dinâmicas baseadas no estado atual
+     */
+    private fun setupDynamicAccessibility() {
+        // Atualizar descrição do progresso
+        val progressDescription = AccessibilityUtils.createProgressDescription(
+            0, 100, "Progresso da carteira de clientes"
+        )
+        binding.progressBarClientes.contentDescription = progressDescription
+
+        // Configurar feedback háptico para elementos importantes
+        binding.meusCreditos.setOnClickListener {
+            AccessibilityUtils.setupHapticFeedback(it)
+        }
+    }
+
+    /**
+     * Otimiza performance da atividade
+     */
+    private fun optimizePerformance() {
+        // Otimizar RecyclerView se houver
+        // PerformanceUtils.optimizeRecyclerView(binding.recyclerView)
+        
+        // Configurar lazy loading se necessário
+        // PerformanceUtils.setupLazyLoading(binding.recyclerView) {
+        //     // Carregar mais dados
+        // }
+        
+        // Monitorar uso de memória
+        PerformanceUtils.executeInBackground {
+            val memoryInfo = PerformanceUtils.getMemoryUsage()
+            if (memoryInfo.isMemoryLow()) {
+                PerformanceUtils.forceGarbageCollectionIfNeeded()
+            }
+            if (memoryInfo.isMemoryCritical()) {
+                PerformanceUtils.clearImageCacheIfNeeded()
+            }
+        }
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        // Limpar recursos de performance
+        PerformanceUtils.cleanup()
     }
 
 }

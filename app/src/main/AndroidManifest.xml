@@ -16,7 +16,7 @@
         tools:ignore="ScopedStorage" />
 
     <application
-        android:name=".App"
+        android:name=".IORITvApplication"
         android:allowBackup="true"
         android:dataExtractionRules="@xml/data_extraction_rules"
         android:fullBackupContent="@xml/backup_rules"
@@ -25,6 +25,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Base.Theme.IORITv"
+        android:hardwareAccelerated="true"
+        android:largeHeap="true"
         tools:targetApi="31">
 
         <!-- Meta-data do Firebase Messaging -->

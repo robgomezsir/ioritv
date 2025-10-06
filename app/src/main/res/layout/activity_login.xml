@@ -1,126 +1,201 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/telalogin2"
-    android:padding="16dp">
+    android:fitsSystemWindows="true">
 
-
+    <!-- Logo -->
     <ImageView
         android:id="@+id/logoImageView"
         android:layout_width="134dp"
         android:layout_height="wrap_content"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentTop="true"
-        android:layout_alignParentEnd="true"
-        android:layout_marginStart="131dp"
         android:layout_marginTop="84dp"
-        android:layout_marginEnd="130dp"
-        android:elevation="4dp"
-        android:src="@drawable/logo" />
+        android:elevation="8dp"
+        android:src="@drawable/logo"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
-    <androidx.cardview.widget.CardView
+    <!-- Card Principal com Material Design 3 -->
+    <com.google.android.material.card.MaterialCardView
         android:id="@+id/cardView"
-        android:layout_width="match_parent"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_centerInParent="true"
-        android:layout_margin="16dp"
-        android:padding="16dp"
-        app:cardCornerRadius="4dp"
-        app:cardElevation="4dp">
+        android:layout_marginStart="24dp"
+        android:layout_marginEnd="24dp"
+        app:cardCornerRadius="28dp"
+        app:cardElevation="8dp"
+        app:strokeWidth="0dp"
+        app:cardBackgroundColor="?attr/colorSurfaceContainer"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/logoImageView"
+        app:layout_constraintVertical_bias="0.3">
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
-            android:padding="24dp"
-            android:background="@color/white">
+            android:padding="32dp">
 
+            <!-- Título -->
             <TextView
                 android:id="@+id/titleTextView"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Bem-vindo ao Meu IORI.TV"
+                android:text="Bem-vindo ao IORI.TV"
                 android:textAlignment="center"
-                android:textColor="#673AB7"
-                android:textSize="20sp"
-                android:textStyle="bold" />
+                android:textAppearance="@style/TextAppearance.IORITv.HeadlineMedium"
+                android:textColor="?attr/colorOnSurface"
+                android:layout_marginBottom="8dp" />
 
-            <EditText
-                android:id="@+id/emailEditText"
+            <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="16dp"
-                android:background="@drawable/button_rounded_log"
-                android:textColorHint="@color/gray"
-                android:textColor="@color/greendark"
+                android:text="Faça login para continuar"
+                android:textAlignment="center"
+                android:textAppearance="@style/TextAppearance.IORITv.BodyMedium"
+                android:textColor="?attr/colorOnSurfaceVariant"
+                android:layout_marginBottom="32dp" />
+
+            <!-- Campo de Email -->
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/emailInputLayout"
+                style="@style/Widget.Material3.TextInputLayout.OutlinedBox"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="16dp"
                 android:hint="Email"
-                android:inputType="textEmailAddress" />
+                app:boxCornerRadiusTopStart="16dp"
+                app:boxCornerRadiusTopEnd="16dp"
+                app:boxCornerRadiusBottomStart="16dp"
+                app:boxCornerRadiusBottomEnd="16dp"
+                app:boxStrokeColor="?attr/colorOutline"
+                app:boxStrokeWidth="2dp"
+                app:boxStrokeWidthFocused="2dp"
+                app:errorEnabled="true"
+                app:helperTextEnabled="false"
+                app:startIconDrawable="@drawable/ic_baseline_email_24"
+                app:startIconTint="?attr/colorPrimary">
 
-            <EditText
-                android:id="@+id/passwordEditText"
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/emailEditText"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:inputType="textEmailAddress"
+                    android:textAppearance="@style/TextAppearance.IORITv.BodyLarge"
+                    android:textColor="?attr/colorOnSurface"
+                    android:textColorHint="?attr/colorOnSurfaceVariant" />
+
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <!-- Campo de Senha -->
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/passwordInputLayout"
+                style="@style/Widget.Material3.TextInputLayout.OutlinedBox"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="16dp"
-                android:background="@drawable/button_rounded_log"
-                android:textColorHint="@color/gray"
-                android:textColor="@color/greendark"
+                android:layout_marginBottom="24dp"
                 android:hint="Senha"
-                android:inputType="textPassword" />
+                app:boxCornerRadiusTopStart="16dp"
+                app:boxCornerRadiusTopEnd="16dp"
+                app:boxCornerRadiusBottomStart="16dp"
+                app:boxCornerRadiusBottomEnd="16dp"
+                app:boxStrokeColor="?attr/colorOutline"
+                app:boxStrokeWidth="2dp"
+                app:boxStrokeWidthFocused="2dp"
+                app:endIconMode="password_toggle"
+                app:endIconTint="?attr/colorOnSurfaceVariant"
+                app:errorEnabled="true"
+                app:helperTextEnabled="false"
+                app:startIconDrawable="@drawable/ic_baseline_lock_24"
+                app:startIconTint="?attr/colorPrimary">
 
-            <Button
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/passwordEditText"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:inputType="textPassword"
+                    android:textAppearance="@style/TextAppearance.IORITv.BodyLarge"
+                    android:textColor="?attr/colorOnSurface"
+                    android:textColorHint="?attr/colorOnSurfaceVariant" />
+
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <!-- Botão de Login -->
+            <com.google.android.material.button.MaterialButton
                 android:id="@+id/loginButton"
+                style="@style/Widget.Material3.Button"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="24dp"
+                android:layout_height="56dp"
+                android:layout_marginBottom="16dp"
                 android:text="Entrar"
-                android:textColor="#FFFFFF"
-                app:backgroundTint="@drawable/button_state_selector" />
+                android:textAppearance="@style/TextAppearance.IORITv.LabelLarge"
+                app:backgroundTint="?attr/colorPrimary"
+                app:cornerRadius="16dp"
+                app:icon="@drawable/ic_baseline_login_24"
+                app:iconGravity="textStart"
+                app:iconPadding="8dp"
+                app:iconTint="?attr/colorOnPrimary" />
 
+            <!-- Links -->
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
-                android:orientation="horizontal">
+                android:orientation="horizontal"
+                android:gravity="center">
 
-                <TextView
+                <com.google.android.material.button.MaterialButton
                     android:id="@+id/forgotPasswordTextView"
+                    style="@style/Widget.Material3.Button.TextButton"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_weight="1"
                     android:text="Esqueci a senha"
-                    android:textColor="@color/greendark" />
+                    android:textColor="?attr/colorPrimary"
+                    app:cornerRadius="12dp" />
 
                 <TextView
-                    android:id="@+id/registerTextView"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:text="Criar uma conta"
-                    android:textAlignment="textEnd"
-                    android:textColor="@color/greendark" />
+                    android:text="•"
+                    android:textColor="?attr/colorOnSurfaceVariant"
+                    android:layout_marginHorizontal="8dp" />
+
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/registerTextView"
+                    style="@style/Widget.Material3.Button.TextButton"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Criar conta"
+                    android:textColor="?attr/colorPrimary"
+                    app:cornerRadius="12dp" />
 
             </LinearLayout>
 
         </LinearLayout>
 
-    </androidx.cardview.widget.CardView>
+    </com.google.android.material.card.MaterialCardView>
 
+    <!-- Rodapé -->
     <TextView
         android:id="@+id/textView2"
-        android:layout_width="344dp"
-        android:layout_height="34dp"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentEnd="true"
-        android:layout_alignParentBottom="true"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
         android:layout_marginEnd="16dp"
         android:layout_marginBottom="16dp"
         android:text="elevadorcom® - Todos os direitos reservados - 2025/26 - v4.2"
         android:textAlignment="center"
-        android:textColor="#FFFFFF"
-        android:textColorLink="#FFFFFF"
-        android:textSize="10sp" />
+        android:textAppearance="@style/TextAppearance.IORITv.LabelSmall"
+        android:textColor="@color/white"
+        android:textSize="10sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
 
-</RelativeLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>

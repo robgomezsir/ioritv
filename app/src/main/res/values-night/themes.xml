@@ -1,43 +1,74 @@
 <resources xmlns:tools="http://schemas.android.com/tools">
 
-    <!-- Tema Base para o Modo Escuro -->
+    <!-- Tema Base para o Modo Escuro - Material Design 3 -->
     <style name="Base.Theme.IORITv.Dark" parent="Theme.Material3.DayNight.NoActionBar">
-        <!-- Cor da StatusBar no Modo Escuro -->
-        <item name="android:statusBarColor">@color/darkBackground</item>
-        <item name="android:navigationBarColor">@color/darkBackground</item>
-        <item name="android:windowLightStatusBar">false</item> <!-- Define o texto da StatusBar como claro -->
-        <item name="android:textColorHint">@color/white</item> <!-- Cor do texto do EditText -->
-        <item name="android:buttonTint">@color/white</item> <!-- Cor do texto e ícones nos botões -->
-        <item name="android:windowBackground">@color/darkBackground</item>
-
-        <!-- Cor Primária e Secundária -->
-        <item name="colorPrimary">@color/greenmedium</item>
-        <item name="colorOnPrimary">@color/greendeep</item>
-        <item name="colorSecondary">@color/gray</item>
-        <item name="colorOnSecondary">@color/white</item>
+        <!-- Material Design 3 Dark Colors - Core -->
+        <item name="colorPrimary">@color/md_theme_dark_primary</item>
+        <item name="colorOnPrimary">@color/md_theme_dark_onPrimary</item>
+        <item name="colorPrimaryContainer">@color/md_theme_dark_primaryContainer</item>
+        <item name="colorOnPrimaryContainer">@color/md_theme_dark_onPrimaryContainer</item>
+        <item name="colorSecondary">@color/md_theme_dark_secondary</item>
+        <item name="colorOnSecondary">@color/md_theme_dark_onSecondary</item>
+        <item name="colorSecondaryContainer">@color/md_theme_dark_secondaryContainer</item>
+        <item name="colorOnSecondaryContainer">@color/md_theme_dark_onSecondaryContainer</item>
+        <item name="colorTertiary">@color/md_theme_dark_tertiary</item>
+        <item name="colorOnTertiary">@color/md_theme_dark_onTertiary</item>
+        <item name="colorTertiaryContainer">@color/md_theme_dark_tertiaryContainer</item>
+        <item name="colorOnTertiaryContainer">@color/md_theme_dark_onTertiaryContainer</item>
+        <item name="colorError">@color/md_theme_dark_error</item>
+        <item name="colorOnError">@color/md_theme_dark_onError</item>
+        <item name="colorErrorContainer">@color/md_theme_dark_errorContainer</item>
+        <item name="colorOnErrorContainer">@color/md_theme_dark_onErrorContainer</item>
+        <item name="colorOutline">@color/md_theme_dark_outline</item>
+        <item name="colorOutlineVariant">@color/md_theme_dark_outlineVariant</item>
+        <item name="colorSurface">@color/md_theme_dark_surface</item>
+        <item name="colorOnSurface">@color/md_theme_dark_onSurface</item>
+        <item name="colorSurfaceVariant">@color/md_theme_dark_surfaceVariant</item>
+        <item name="colorOnSurfaceVariant">@color/md_theme_dark_onSurfaceVariant</item>
+        <item name="colorSurfaceInverse">@color/md_theme_dark_inverseSurface</item>
+        <item name="colorOnSurfaceInverse">@color/md_theme_dark_inverseOnSurface</item>
+        <item name="colorPrimaryInverse">@color/md_theme_dark_inversePrimary</item>
+        <item name="colorSurfaceContainer">@color/md_theme_dark_surfaceContainer</item>
+        <item name="colorSurfaceContainerHigh">@color/md_theme_dark_surfaceContainerHigh</item>
+        <item name="colorSurfaceContainerHighest">@color/md_theme_dark_surfaceContainerHighest</item>
+        <item name="colorSurfaceContainerLow">@color/md_theme_dark_surfaceContainerLow</item>
+        <item name="colorSurfaceContainerLowest">@color/md_theme_dark_surfaceContainerLowest</item>
+        <item name="colorSurfaceBright">@color/md_theme_dark_surfaceBright</item>
+        <item name="colorSurfaceDim">@color/md_theme_dark_surfaceDim</item>
+        
+        <!-- Status Bar e Navigation Bar -->
+        <item name="android:statusBarColor">@color/md_theme_dark_surface</item>
+        <item name="android:navigationBarColor">@color/md_theme_dark_surface</item>
+        <item name="android:windowLightStatusBar">false</item>
+        <item name="android:windowLightNavigationBar">false</item>
+        
+        <!-- Splash Screen -->
+        <item name="windowSplashScreenAnimatedIcon">@drawable/ic_logo</item>
+        <item name="windowSplashScreenBackground">@color/md_theme_dark_primary</item>
+        <item name="postSplashScreenTheme">@style/Base.Theme.IORITv.Dark</item>
+        
+        <!-- Typography -->
+        <item name="textAppearanceHeadlineLarge">@style/TextAppearance.IORITv.HeadlineLarge</item>
+        <item name="textAppearanceHeadlineMedium">@style/TextAppearance.IORITv.HeadlineMedium</item>
+        <item name="textAppearanceHeadlineSmall">@style/TextAppearance.IORITv.HeadlineSmall</item>
+        <item name="textAppearanceBodyLarge">@style/TextAppearance.IORITv.BodyLarge</item>
+        <item name="textAppearanceBodyMedium">@style/TextAppearance.IORITv.BodyMedium</item>
+        <item name="textAppearanceBodySmall">@style/TextAppearance.IORITv.BodySmall</item>
+        <item name="textAppearanceLabelLarge">@style/TextAppearance.IORITv.LabelLarge</item>
+        <item name="textAppearanceLabelMedium">@style/TextAppearance.IORITv.LabelMedium</item>
+        <item name="textAppearanceLabelSmall">@style/TextAppearance.IORITv.LabelSmall</item>
     </style>
 
     <!-- Tema customizado para o modo escuro da LoginActivity -->
     <style name="Theme.IORITv.LoginActivity.Dark" parent="Base.Theme.IORITv.Dark">
-        <item name="android:statusBarColor">@color/greendeep</item>
-        <item name="android:navigationBarColor">@color/greendeep</item>
-        <item name="android:textColor">@color/white</item>
-        <item name="android:textColorHint">@color/white</item> <!-- Cor do texto do EditText -->
-        <item name="android:buttonTint">@color/white</item> <!-- Cor do texto e ícones nos botões -->
-        <item name="cardBackgroundColor">@color/darkCardBackground</item> <!-- Cor de fundo dos cartões -->
+        <item name="android:statusBarColor">@color/md_theme_dark_primaryContainer</item>
+        <item name="android:navigationBarColor">@color/md_theme_dark_primaryContainer</item>
+        <item name="android:windowLightStatusBar">false</item>
     </style>
 
-    <!-- Tema customizado para o modo claro da MainActivity2 -->
+    <!-- Tema customizado para o modo escuro da MainActivity2 -->
     <style name="Theme.IORITv.MainActivity2.Dark" parent="Base.Theme.IORITv.Dark">
-        <item name="android:statusBarColor">@color/darkBackground</item>
-        <item name="android:windowLightStatusBar">false</item> <!-- Define o texto da StatusBar como claro -->
-        <item name="android:textColor">@color/white</item>
-        <item name="android:buttonTint">@color/white</item> <!-- Cor do texto e ícones nos botões -->
-        <item name="cardBackgroundColor">@color/darkCardBackground</item> <!-- Cor de fundo dos cartões -->
-        <item name="cardElevation">@color/focus_color</item>
-    </style>
-
-    <style name="Theme.IORITv.MainActivity4.Dark." parent="Base.Theme.IORITv.Dark">
-
+        <item name="android:statusBarColor">@color/md_theme_dark_surfaceContainer</item>
+        <item name="android:windowLightStatusBar">false</item>
     </style>
 </resources>

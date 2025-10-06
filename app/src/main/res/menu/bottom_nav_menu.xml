@@ -2,14 +2,15 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
     <item
         android:id="@+id/nav_home"
-        android:icon="@drawable/home"
-        android:title="Home" />
+        android:icon="@drawable/ic_baseline_home_24"
+        android:title="Dashboard"
+        android:checked="true" />
     <item
         android:id="@+id/nav_cadastros"
-        android:icon="@drawable/register"
+        android:icon="@drawable/ic_baseline_person_add_24"
         android:title="Cadastros" />
     <item
         android:id="@+id/nav_financas"
-        android:icon="@drawable/finance"
+        android:icon="@drawable/ic_baseline_account_balance_wallet_24"
         android:title="Finanças" />
 </menu>

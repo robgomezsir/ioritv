@@ -1,105 +1,196 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.swiperefreshlayout.widget.SwipeRefreshLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/swipeRefreshLayout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:fitsSystemWindows="true"
     tools:context=".MainActivity4">
 
-    <androidx.constraintlayout.widget.ConstraintLayout
+    <!-- App Bar -->
+    <com.google.android.material.appbar.AppBarLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="wrap_content"
+        android:fitsSystemWindows="true">
 
-        <!-- GridLayout para os cartões financeiros -->
-        <androidx.gridlayout.widget.GridLayout
-            android:id="@+id/gridLayout"
-            android:layout_width="0dp"
+        <com.google.android.material.appbar.MaterialToolbar
+            android:id="@+id/toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize"
+            android:background="?attr/colorSurfaceContainer"
+            app:title="Finanças"
+            app:titleTextAppearance="@style/TextAppearance.IORITv.TitleLarge"
+            app:titleTextColor="?attr/colorOnSurface" />
+
+    </com.google.android.material.appbar.AppBarLayout>
+
+    <!-- Conteúdo Principal -->
+    <androidx.core.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:fillViewport="true"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:padding="16dp"
-            app:columnCount="2"
-            app:orientation="horizontal"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"/>
+            android:padding="16dp">
 
-        <com.google.android.material.floatingactionbutton.FloatingActionButton
-            android:id="@+id/fabMenu"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="end|bottom"
-            android:layout_margin="16dp"
-            android:src="@drawable/plus"
-            app:backgroundTint="@color/greenlight"
-            app:layout_constraintBottom_toBottomOf="@+id/linearLayoutDespesas"
-            app:layout_constraintEnd_toEndOf="parent" />
-
-        <com.google.android.material.floatingactionbutton.FloatingActionButton
-            android:id="@+id/fabDespesa"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="end|bottom"
-            android:layout_margin="18dp"
-            android:visibility="gone"
-            android:src="@drawable/despesa"
-            app:layout_constraintBottom_toTopOf="@id/fabMenu"
-            app:layout_constraintEnd_toEndOf="parent" />
-
-        <com.google.android.material.floatingactionbutton.FloatingActionButton
-            android:id="@+id/fabDownload"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="end|bottom"
-            android:layout_margin="18dp"
-            android:visibility="gone"
-            android:src="@drawable/download"
-            app:layout_constraintBottom_toTopOf="@id/fabDespesa"
-            app:layout_constraintEnd_toEndOf="parent" />
-
-
-        <!-- LinearLayout para o cabeçalho e RecyclerView -->
-        <LinearLayout
-            android:id="@+id/linearLayoutDespesas"
-            android:layout_width="0dp"
-            android:layout_height="0dp"
-            android:orientation="vertical"
-            android:padding="4dp"
-            app:layout_constraintBottom_toTopOf="@+id/bottom_navigation"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/gridLayout">
-
-            <!-- Cabeçalho da Tabela -->
-            <TextView
+            <!-- Card de Resumo Financeiro -->
+            <com.google.android.material.card.MaterialCardView
+                android:id="@+id/resumoCard"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:background="@color/darkCardBackground"
-                android:gravity="center"
-                android:padding="8dp"
-                android:text="Despesas"
-                android:textSize="20sp" />
+                android:layout_marginBottom="16dp"
+                android:contentDescription="Card de resumo financeiro"
+                android:importantForAccessibility="yes"
+                app:cardCornerRadius="20dp"
+                app:cardElevation="6dp"
+                app:strokeWidth="0dp"
+                app:cardBackgroundColor="?attr/colorSurfaceContainer"
+                app:layout_constraintTop_toTopOf="parent">
 
-            <!-- RecyclerView para exibir os cartões de despesas -->
-            <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/recyclerViewDespesas"
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:padding="24dp">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:layout_marginBottom="16dp">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="💰 "
+                            android:textSize="20sp" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Resumo Financeiro"
+                            android:textAppearance="@style/TextAppearance.IORITv.TitleMedium"
+                            android:textColor="?attr/colorOnSurface" />
+
+                    </LinearLayout>
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Total de Despesas: R$ 0,00"
+                        android:textAppearance="@style/TextAppearance.IORITv.BodyLarge"
+                        android:textColor="?attr/colorOnSurfaceVariant"
+                        android:layout_marginBottom="8dp" />
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Total de Receitas: R$ 0,00"
+                        android:textAppearance="@style/TextAppearance.IORITv.BodyLarge"
+                        android:textColor="?attr/colorOnSurfaceVariant" />
+
+                </LinearLayout>
+
+            </com.google.android.material.card.MaterialCardView>
+
+            <!-- Card de Despesas -->
+            <com.google.android.material.card.MaterialCardView
+                android:id="@+id/despesasCard"
                 android:layout_width="match_parent"
-                android:layout_height="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="24dp"
+                android:contentDescription="Card de despesas com lista de itens financeiros"
+                android:importantForAccessibility="yes"
+                app:cardCornerRadius="20dp"
+                app:cardElevation="6dp"
+                app:strokeWidth="0dp"
+                app:cardBackgroundColor="?attr/colorSurfaceContainer"
+                app:layout_constraintTop_toBottomOf="@+id/resumoCard">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:padding="24dp">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:layout_marginBottom="16dp">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="📊 "
+                            android:textSize="20sp" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Despesas Recentes"
+                            android:textAppearance="@style/TextAppearance.IORITv.TitleMedium"
+                            android:textColor="?attr/colorOnSurface" />
+
+                    </LinearLayout>
+
+                    <!-- RecyclerView para exibir os cartões de despesas -->
+                    <androidx.recyclerview.widget.RecyclerView
+                        android:id="@+id/recyclerViewDespesas"
+                        android:layout_width="match_parent"
+                        android:layout_height="300dp"
+                        android:nestedScrollingEnabled="false"
+                        android:contentDescription="Lista de despesas financeiras" />
+
+                </LinearLayout>
+
+            </com.google.android.material.card.MaterialCardView>
+
+            <!-- Mensagem quando não há despesas -->
+            <TextView
+                android:id="@+id/emptyMessage"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Nenhuma despesa registrada ainda.\nToque no botão + para adicionar uma nova despesa."
+                android:textAppearance="@style/TextAppearance.IORITv.BodyMedium"
+                android:textColor="?attr/colorOnSurfaceVariant"
+                android:textAlignment="center"
                 android:layout_marginTop="16dp"
-                android:layout_weight="1"
-                app:layout_constraintTop_toBottomOf="@+id/linearLayoutDespesas" />
-        </LinearLayout>
+                android:visibility="visible"
+                app:layout_constraintTop_toBottomOf="@+id/despesasCard" />
 
-        <!-- Barra de navegação inferior -->
-        <com.google.android.material.bottomnavigation.BottomNavigationView
-            android:id="@+id/bottom_navigation"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:background="@color/darkBackground"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:menu="@menu/bottom_nav_menu"/>
+        </androidx.constraintlayout.widget.ConstraintLayout>
 
-    </androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.core.widget.NestedScrollView>
 
-</androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
+    <!-- Floating Action Button -->
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/fabAddDespesa"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="16dp"
+        android:src="@drawable/ic_baseline_add_24"
+        android:contentDescription="Adicionar nova despesa"
+        app:backgroundTint="?attr/colorPrimary"
+        app:tint="?attr/colorOnPrimary"
+        app:layout_anchor="@+id/bottom_navigation"
+        app:layout_anchorGravity="top|end" />
+
+    <!-- Barra de navegação inferior -->
+    <com.google.android.material.bottomnavigation.BottomNavigationView
+        android:id="@+id/bottom_navigation"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom"
+        android:background="?attr/colorSurfaceContainer"
+        android:contentDescription="Barra de navegação inferior com opções de Dashboard, Cadastros e Finanças"
+        app:menu="@menu/bottom_nav_menu"
+        app:itemIconTint="?attr/colorOnSurfaceVariant"
+        app:itemTextColor="?attr/colorOnSurfaceVariant"
+        app:itemActiveIndicatorStyle="@style/ActiveIndicator"
+        app:itemRippleColor="?attr/colorPrimary" />
+
+</androidx.coordinatorlayout.widget.CoordinatorLayout>

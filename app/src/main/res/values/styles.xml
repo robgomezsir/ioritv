@@ -1,31 +1,31 @@
 <?xml version="1.0" encoding="utf-8"?>
-<resources xmlns:tools="http://schemas.android.com/tools">
+<resources>
+    <!-- Estilo para indicador ativo da Bottom Navigation -->
+    <style name="ActiveIndicator" parent="Widget.Material3.BottomNavigationView.ActiveIndicator">
+        <item name="android:color">?attr/colorPrimary</item>
+        <item name="android:width">64dp</item>
+        <item name="android:height">32dp</item>
+        <item name="shapeAppearance">@style/ShapeAppearanceOverlay.Material3.BottomNavigationView.ActiveIndicator</item>
+    </style>
 
-    <!-- Estilo personalizado para SearchView -->
+    <!-- Estilo para cantos arredondados do indicador ativo -->
+    <style name="ShapeAppearanceOverlay.Material3.BottomNavigationView.ActiveIndicator" parent="">
+        <item name="cornerFamily">rounded</item>
+        <item name="cornerSize">16dp</item>
+    </style>
+
+    <!-- Estilo para ProgressBar customizada -->
+    <style name="Widget.IORITv.ProgressBar.Horizontal" parent="Widget.Material3.LinearProgressIndicator">
+        <item name="android:progressTint">?attr/colorPrimary</item>
+        <item name="android:progressBackgroundTint">?attr/colorSurfaceVariant</item>
+    </style>
+
+    <!-- Estilo para SearchView customizada -->
     <style name="CustomSearchView" parent="Widget.AppCompat.SearchView">
-        <item name="queryBackground">@null</item>
-        <item name="android:background">@color/graylight</item>
-        <item name="android:queryBackground">@android:color/transparent</item>
-        <item name="android:iconifiedByDefault">false</item>
-        <item name="android:queryHint">Pesquisar...</item>
+        <item name="android:background">@drawable/button_rounded</item>
+        <item name="android:textColor">?attr/colorOnSurface</item>
+        <item name="android:textColorHint">?attr/colorOnSurfaceVariant</item>
+        <item name="android:hint">Pesquisar clientes...</item>
+        <item name="queryHint">Pesquisar clientes...</item>
     </style>
-
-    <!-- Tema Principal do Aplicativo -->
-    <style name="Theme.MyApp" parent="Theme.MaterialComponents.DayNight.NoActionBar">
-        <!-- Personalize as cores do seu tema -->
-        <item name="colorPrimary">@color/greendark</item>
-        <item name="colorPrimaryVariant">@color/greendark</item>
-        <item name="colorAccent">@color/greendark</item>
-        <item name="android:statusBarColor" tools:targetApi="l">@color/greendark</item>
-        <item name="colorControlActivated">@color/focus_color</item>
-
-    </style>
-
-    <!-- Tema para a Splash Screen -->
-    <style name="SplashTheme" parent="Theme.MaterialComponents.DayNight.NoActionBar">
-        <item name="android:windowBackground">@drawable/splash_screen_background</item>
-        <item name="android:statusBarColor" tools:targetApi="l">@color/darkBackground</item>
-        <item name="android:navigationBarColor">@color/darkBackground</item>
-    </style>
-
 </resources>

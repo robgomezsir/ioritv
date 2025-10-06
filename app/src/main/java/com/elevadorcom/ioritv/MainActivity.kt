@@ -20,6 +20,7 @@ import java.util.*
 import java.util.concurrent.TimeUnit
 import com.elevadorcom.ioritv.utils.SituacaoUtil
 import com.elevadorcom.ioritv.utils.SituacaoConstants
+import com.google.android.material.appbar.MaterialToolbar
 
 class MainActivity : AppCompatActivity() {
 
@@ -43,6 +44,11 @@ class MainActivity : AppCompatActivity() {
         // Inflate o layout usando View Binding
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
+
+        // Configurar a Toolbar
+        setSupportActionBar(binding.toolbar)
+        supportActionBar?.setDisplayHomeAsUpEnabled(true)
+        supportActionBar?.title = "Adicionar Cadastro"
 
         // Inicializar o Firestore
         firestore = FirebaseFirestore.getInstance()
@@ -176,20 +182,20 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun limparCampos() {
-        binding.editTextNome.text.clear()
-        binding.editTextUsuario.text.clear()
-        binding.editTextSenha.text.clear()
-        binding.editTextWhatsapp.text.clear()
-        binding.editTextModelo.text.clear()
-        binding.editTextInicio.text.clear()
-        binding.editTextCreditos.text.clear()
-        binding.editTextMAC.text.clear()
-        binding.editTextOTP.text.clear()
-        binding.editTextDevice.text.clear()
-        binding.editTextValor.text.clear()
-        binding.editTextCusto.text.clear()
-        binding.editTextDesconto.text.clear()
-        binding.editTextServidor.text.clear()
+        binding.editTextNome.text?.clear()
+        binding.editTextUsuario.text?.clear()
+        binding.editTextSenha.text?.clear()
+        binding.editTextWhatsapp.text?.clear()
+        binding.editTextModelo.text?.clear()
+        binding.editTextInicio.text?.clear()
+        binding.editTextCreditos.text?.clear()
+        binding.editTextMAC.text?.clear()
+        binding.editTextOTP.text?.clear()
+        binding.editTextDevice.text?.clear()
+        binding.editTextValor.text?.clear()
+        binding.editTextCusto.text?.clear()
+        binding.editTextDesconto.text?.clear()
+        binding.editTextServidor.text?.clear()
     }
 
     // Função que ajusta as datas para ignorar horas, minutos e segundos

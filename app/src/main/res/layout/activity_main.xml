@@ -1,236 +1,527 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:fitsSystemWindows="true">
 
-    <ScrollView
+    <!-- App Bar -->
+    <com.google.android.material.appbar.AppBarLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:fitsSystemWindows="true">
+
+        <com.google.android.material.appbar.MaterialToolbar
+            android:id="@+id/toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize"
+            android:background="?attr/colorSurfaceContainer"
+            app:title="Adicionar Cadastro"
+            app:titleTextAppearance="@style/TextAppearance.IORITv.TitleLarge"
+            app:titleTextColor="?attr/colorOnSurface" />
+
+    </com.google.android.material.appbar.AppBarLayout>
+
+    <!-- Conteúdo Principal -->
+    <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:padding="16dp"
-        android:fillViewport="true">
+        android:fillViewport="true"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content"
+            android:padding="24dp">
 
-            <TextView
-                android:id="@+id/textView"
-                android:layout_width="wrap_content"
+            <!-- Card de Informações Pessoais -->
+            <com.google.android.material.card.MaterialCardView
+                android:id="@+id/personalInfoCard"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="ADICIONAR CADASTRO"
-                android:textSize="16sp"
-                android:textStyle="bold"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.0"
-                app:layout_constraintStart_toStartOf="parent"
-                tools:ignore="MissingConstraints"
-                tools:layout_editor_absoluteY="3dp" />
+                android:layout_marginBottom="16dp"
+                app:cardCornerRadius="16dp"
+                app:cardElevation="4dp"
+                app:strokeWidth="0dp"
+                app:cardBackgroundColor="?attr/colorSurfaceContainer"
+                app:layout_constraintTop_toTopOf="parent">
 
-            <EditText
-                android:id="@+id/editTextNome"
-                android:layout_width="0dp"
-                android:layout_height="45dp"
-                android:layout_marginTop="16dp"
-                android:background="@drawable/button_rounded"
-                android:hint="Nome"
-                android:padding="12dp"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.0"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/textView" />
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:padding="20dp">
 
-            <EditText
-                android:id="@+id/editTextUsuario"
-                android:layout_width="0dp"
-                android:layout_height="45dp"
-                android:hint="Usuário"
-                android:padding="12dp"
-                android:background="@drawable/button_rounded"
-                app:layout_constraintTop_toBottomOf="@id/editTextNome"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                android:layout_marginTop="8dp" />
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Informações Pessoais"
+                        android:textAppearance="@style/TextAppearance.IORITv.TitleMedium"
+                        android:textColor="?attr/colorOnSurface"
+                        android:layout_marginBottom="16dp" />
 
-            <!-- Senha -->
-            <EditText
-                android:id="@+id/editTextSenha"
-                android:layout_width="0dp"
-                android:layout_height="45dp"
-                android:hint="Senha"
-                android:padding="12dp"
-                android:background="@drawable/button_rounded"
-                android:inputType="textPassword"
-                app:layout_constraintTop_toBottomOf="@id/editTextUsuario"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                android:layout_marginTop="8dp" />
+                    <!-- Nome -->
+                    <com.google.android.material.textfield.TextInputLayout
+                        android:id="@+id/nomeInputLayout"
+                        style="@style/Widget.Material3.TextInputLayout.OutlinedBox"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="12dp"
+                        android:hint="Nome Completo"
+                        app:boxCornerRadiusTopStart="12dp"
+                        app:boxCornerRadiusTopEnd="12dp"
+                        app:boxCornerRadiusBottomStart="12dp"
+                        app:boxCornerRadiusBottomEnd="12dp"
+                        app:startIconDrawable="@drawable/ic_baseline_person_24">
 
-            <!-- WhatsApp -->
-            <EditText
-                android:id="@+id/editTextWhatsapp"
-                android:layout_width="0dp"
-                android:layout_height="45dp"
-                android:hint="WhatsApp"
-                android:padding="12dp"
-                android:background="@drawable/button_rounded"
-                app:layout_constraintTop_toBottomOf="@id/editTextSenha"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                android:layout_marginTop="8dp"
-                android:inputType="phone" />
+                        <com.google.android.material.textfield.TextInputEditText
+                            android:id="@+id/editTextNome"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:inputType="textPersonName"
+                            android:textAppearance="@style/TextAppearance.IORITv.BodyLarge" />
 
-            <!-- Modelo -->
-            <EditText
-                android:id="@+id/editTextModelo"
-                android:layout_width="0dp"
-                android:layout_height="45dp"
-                android:hint="Modelo"
-                android:padding="12dp"
-                android:background="@drawable/button_rounded"
-                app:layout_constraintTop_toBottomOf="@id/editTextWhatsapp"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                android:layout_marginTop="8dp" />
+                    </com.google.android.material.textfield.TextInputLayout>
 
-            <!-- Início -->
-            <EditText
-                android:id="@+id/editTextInicio"
-                android:layout_width="0dp"
-                android:layout_height="45dp"
-                android:hint="Início"
-                android:padding="12dp"
-                android:background="@drawable/button_rounded"
-                app:layout_constraintTop_toBottomOf="@id/editTextModelo"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                android:layout_marginTop="8dp"
-                android:inputType="date" />
+                    <!-- Usuário -->
+                    <com.google.android.material.textfield.TextInputLayout
+                        android:id="@+id/usuarioInputLayout"
+                        style="@style/Widget.Material3.TextInputLayout.OutlinedBox"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="12dp"
+                        android:hint="Nome de Usuário"
+                        app:boxCornerRadiusTopStart="12dp"
+                        app:boxCornerRadiusTopEnd="12dp"
+                        app:boxCornerRadiusBottomStart="12dp"
+                        app:boxCornerRadiusBottomEnd="12dp"
+                        app:startIconDrawable="@drawable/ic_baseline_account_circle_24">
 
-            <!-- Créditos -->
-            <EditText
-                android:id="@+id/editTextCreditos"
-                android:layout_width="0dp"
-                android:layout_height="45dp"
-                android:hint="Créditos"
-                android:padding="12dp"
-                android:background="@drawable/button_rounded"
-                app:layout_constraintTop_toBottomOf="@id/editTextInicio"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                android:layout_marginTop="8dp"
-                android:inputType="numberDecimal" />
+                        <com.google.android.material.textfield.TextInputEditText
+                            android:id="@+id/editTextUsuario"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:inputType="text"
+                            android:textAppearance="@style/TextAppearance.IORITv.BodyLarge" />
 
-            <!-- MAC -->
-            <EditText
-                android:id="@+id/editTextMAC"
-                android:layout_width="0dp"
-                android:layout_height="45dp"
-                android:hint="MAC"
-                android:padding="12dp"
-                android:background="@drawable/button_rounded"
-                app:layout_constraintTop_toBottomOf="@id/editTextCreditos"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                android:layout_marginTop="8dp" />
+                    </com.google.android.material.textfield.TextInputLayout>
 
-            <!-- OTP -->
-            <EditText
-                android:id="@+id/editTextOTP"
-                android:layout_width="0dp"
-                android:layout_height="45dp"
-                android:hint="OTP"
-                android:padding="12dp"
-                android:background="@drawable/button_rounded"
-                app:layout_constraintTop_toBottomOf="@id/editTextMAC"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                android:layout_marginTop="8dp" />
+                    <!-- Senha -->
+                    <com.google.android.material.textfield.TextInputLayout
+                        android:id="@+id/senhaInputLayout"
+                        style="@style/Widget.Material3.TextInputLayout.OutlinedBox"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:hint="Senha"
+                        app:boxCornerRadiusTopStart="12dp"
+                        app:boxCornerRadiusTopEnd="12dp"
+                        app:boxCornerRadiusBottomStart="12dp"
+                        app:boxCornerRadiusBottomEnd="12dp"
+                        app:endIconMode="password_toggle"
+                        app:startIconDrawable="@drawable/ic_baseline_lock_24">
 
-            <!-- Device -->
-            <EditText
-                android:id="@+id/editTextDevice"
-                android:layout_width="0dp"
-                android:layout_height="45dp"
-                android:hint="Device"
-                android:padding="12dp"
-                android:background="@drawable/button_rounded"
-                app:layout_constraintTop_toBottomOf="@id/editTextOTP"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                android:layout_marginTop="8dp" />
+                        <com.google.android.material.textfield.TextInputEditText
+                            android:id="@+id/editTextSenha"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:inputType="textPassword"
+                            android:textAppearance="@style/TextAppearance.IORITv.BodyLarge" />
 
-            <!-- Valor -->
-            <EditText
-                android:id="@+id/editTextValor"
-                android:layout_width="0dp"
-                android:layout_height="45dp"
-                android:hint="Valor"
-                android:padding="12dp"
-                android:background="@drawable/button_rounded"
-                app:layout_constraintTop_toBottomOf="@id/editTextDevice"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                android:layout_marginTop="8dp"
-                android:inputType="numberDecimal" />
+                    </com.google.android.material.textfield.TextInputLayout>
 
-            <!-- Custo -->
-            <EditText
-                android:id="@+id/editTextCusto"
-                android:layout_width="0dp"
-                android:layout_height="45dp"
-                android:hint="Custo"
-                android:padding="12dp"
-                android:background="@drawable/button_rounded"
-                app:layout_constraintTop_toBottomOf="@id/editTextValor"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                android:layout_marginTop="8dp"
-                android:inputType="numberDecimal" />
+                </LinearLayout>
 
-            <!-- Desconto -->
-            <EditText
-                android:id="@+id/editTextDesconto"
-                android:layout_width="0dp"
-                android:layout_height="45dp"
-                android:hint="Desconto"
-                android:padding="12dp"
-                android:background="@drawable/button_rounded"
-                app:layout_constraintTop_toBottomOf="@id/editTextCusto"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                android:layout_marginTop="8dp"
-                android:inputType="numberDecimal" />
+            </com.google.android.material.card.MaterialCardView>
 
-            <!-- Servidor -->
-            <EditText
-                android:id="@+id/editTextServidor"
-                android:layout_width="0dp"
-                android:layout_height="45dp"
-                android:hint="Servidor"
-                android:padding="12dp"
-                android:background="@drawable/button_rounded"
-                app:layout_constraintTop_toBottomOf="@id/editTextDesconto"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                android:layout_marginTop="8dp" />
+            <!-- Card de Contato -->
+            <com.google.android.material.card.MaterialCardView
+                android:id="@+id/contactCard"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="16dp"
+                app:cardCornerRadius="16dp"
+                app:cardElevation="4dp"
+                app:strokeWidth="0dp"
+                app:cardBackgroundColor="?attr/colorSurfaceContainer"
+                app:layout_constraintTop_toBottomOf="@+id/personalInfoCard">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:padding="20dp">
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Contato e Dispositivo"
+                        android:textAppearance="@style/TextAppearance.IORITv.TitleMedium"
+                        android:textColor="?attr/colorOnSurface"
+                        android:layout_marginBottom="16dp" />
+
+                    <!-- WhatsApp -->
+                    <com.google.android.material.textfield.TextInputLayout
+                        android:id="@+id/whatsappInputLayout"
+                        style="@style/Widget.Material3.TextInputLayout.OutlinedBox"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="12dp"
+                        android:hint="WhatsApp"
+                        app:boxCornerRadiusTopStart="12dp"
+                        app:boxCornerRadiusTopEnd="12dp"
+                        app:boxCornerRadiusBottomStart="12dp"
+                        app:boxCornerRadiusBottomEnd="12dp"
+                        app:startIconDrawable="@drawable/ic_baseline_phone_24">
+
+                        <com.google.android.material.textfield.TextInputEditText
+                            android:id="@+id/editTextWhatsapp"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:inputType="phone"
+                            android:textAppearance="@style/TextAppearance.IORITv.BodyLarge" />
+
+                    </com.google.android.material.textfield.TextInputLayout>
+
+                    <!-- Modelo -->
+                    <com.google.android.material.textfield.TextInputLayout
+                        android:id="@+id/modeloInputLayout"
+                        style="@style/Widget.Material3.TextInputLayout.OutlinedBox"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:hint="Modelo do Dispositivo"
+                        app:boxCornerRadiusTopStart="12dp"
+                        app:boxCornerRadiusTopEnd="12dp"
+                        app:boxCornerRadiusBottomStart="12dp"
+                        app:boxCornerRadiusBottomEnd="12dp"
+                        app:startIconDrawable="@drawable/ic_baseline_devices_24">
+
+                        <com.google.android.material.textfield.TextInputEditText
+                            android:id="@+id/editTextModelo"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:inputType="text"
+                            android:textAppearance="@style/TextAppearance.IORITv.BodyLarge" />
+
+                    </com.google.android.material.textfield.TextInputLayout>
+
+                </LinearLayout>
+
+            </com.google.android.material.card.MaterialCardView>
+
+            <!-- Card de Configurações -->
+            <com.google.android.material.card.MaterialCardView
+                android:id="@+id/configCard"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="16dp"
+                app:cardCornerRadius="16dp"
+                app:cardElevation="4dp"
+                app:strokeWidth="0dp"
+                app:cardBackgroundColor="?attr/colorSurfaceContainer"
+                app:layout_constraintTop_toBottomOf="@+id/contactCard">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:padding="20dp">
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Configurações do Serviço"
+                        android:textAppearance="@style/TextAppearance.IORITv.TitleMedium"
+                        android:textColor="?attr/colorOnSurface"
+                        android:layout_marginBottom="16dp" />
+
+                    <!-- Linha 1: Início e Créditos -->
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:layout_marginBottom="12dp">
+
+                        <com.google.android.material.textfield.TextInputLayout
+                            android:id="@+id/inicioInputLayout"
+                            style="@style/Widget.Material3.TextInputLayout.OutlinedBox"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:layout_marginEnd="8dp"
+                            android:hint="Data Início"
+                            app:boxCornerRadiusTopStart="12dp"
+                            app:boxCornerRadiusTopEnd="12dp"
+                            app:boxCornerRadiusBottomStart="12dp"
+                            app:boxCornerRadiusBottomEnd="12dp"
+                            app:startIconDrawable="@drawable/ic_baseline_calendar_today_24">
+
+                            <com.google.android.material.textfield.TextInputEditText
+                                android:id="@+id/editTextInicio"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:inputType="date"
+                                android:textAppearance="@style/TextAppearance.IORITv.BodyLarge" />
+
+                        </com.google.android.material.textfield.TextInputLayout>
+
+                        <com.google.android.material.textfield.TextInputLayout
+                            android:id="@+id/creditosInputLayout"
+                            style="@style/Widget.Material3.TextInputLayout.OutlinedBox"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:layout_marginStart="8dp"
+                            android:hint="Créditos"
+                            app:boxCornerRadiusTopStart="12dp"
+                            app:boxCornerRadiusTopEnd="12dp"
+                            app:boxCornerRadiusBottomStart="12dp"
+                            app:boxCornerRadiusBottomEnd="12dp"
+                            app:startIconDrawable="@drawable/ic_baseline_stars_24">
+
+                            <com.google.android.material.textfield.TextInputEditText
+                                android:id="@+id/editTextCreditos"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:inputType="numberDecimal"
+                                android:textAppearance="@style/TextAppearance.IORITv.BodyLarge" />
+
+                        </com.google.android.material.textfield.TextInputLayout>
+
+                    </LinearLayout>
+
+                    <!-- Linha 2: MAC e OTP -->
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:layout_marginBottom="12dp">
+
+                        <com.google.android.material.textfield.TextInputLayout
+                            android:id="@+id/macInputLayout"
+                            style="@style/Widget.Material3.TextInputLayout.OutlinedBox"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:layout_marginEnd="8dp"
+                            android:hint="MAC Address"
+                            app:boxCornerRadiusTopStart="12dp"
+                            app:boxCornerRadiusTopEnd="12dp"
+                            app:boxCornerRadiusBottomStart="12dp"
+                            app:boxCornerRadiusBottomEnd="12dp"
+                            app:startIconDrawable="@drawable/ic_baseline_router_24">
+
+                            <com.google.android.material.textfield.TextInputEditText
+                                android:id="@+id/editTextMAC"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:inputType="textCapCharacters"
+                                android:textAppearance="@style/TextAppearance.IORITv.BodyLarge" />
+
+                        </com.google.android.material.textfield.TextInputLayout>
+
+                        <com.google.android.material.textfield.TextInputLayout
+                            android:id="@+id/otpInputLayout"
+                            style="@style/Widget.Material3.TextInputLayout.OutlinedBox"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:layout_marginStart="8dp"
+                            android:hint="OTP"
+                            app:boxCornerRadiusTopStart="12dp"
+                            app:boxCornerRadiusTopEnd="12dp"
+                            app:boxCornerRadiusBottomStart="12dp"
+                            app:boxCornerRadiusBottomEnd="12dp"
+                            app:startIconDrawable="@drawable/ic_baseline_security_24">
+
+                            <com.google.android.material.textfield.TextInputEditText
+                                android:id="@+id/editTextOTP"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:inputType="text"
+                                android:textAppearance="@style/TextAppearance.IORITv.BodyLarge" />
+
+                        </com.google.android.material.textfield.TextInputLayout>
+
+                    </LinearLayout>
+
+                    <!-- Device -->
+                    <com.google.android.material.textfield.TextInputLayout
+                        android:id="@+id/deviceInputLayout"
+                        style="@style/Widget.Material3.TextInputLayout.OutlinedBox"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="12dp"
+                        android:hint="Device ID"
+                        app:boxCornerRadiusTopStart="12dp"
+                        app:boxCornerRadiusTopEnd="12dp"
+                        app:boxCornerRadiusBottomStart="12dp"
+                        app:boxCornerRadiusBottomEnd="12dp"
+                        app:startIconDrawable="@drawable/ic_baseline_phone_android_24">
+
+                        <com.google.android.material.textfield.TextInputEditText
+                            android:id="@+id/editTextDevice"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:inputType="text"
+                            android:textAppearance="@style/TextAppearance.IORITv.BodyLarge" />
+
+                    </com.google.android.material.textfield.TextInputLayout>
+
+                    <!-- Servidor -->
+                    <com.google.android.material.textfield.TextInputLayout
+                        android:id="@+id/servidorInputLayout"
+                        style="@style/Widget.Material3.TextInputLayout.OutlinedBox"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:hint="Servidor"
+                        app:boxCornerRadiusTopStart="12dp"
+                        app:boxCornerRadiusTopEnd="12dp"
+                        app:boxCornerRadiusBottomStart="12dp"
+                        app:boxCornerRadiusBottomEnd="12dp"
+                        app:startIconDrawable="@drawable/ic_baseline_dns_24">
+
+                        <com.google.android.material.textfield.TextInputEditText
+                            android:id="@+id/editTextServidor"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:inputType="textUri"
+                            android:textAppearance="@style/TextAppearance.IORITv.BodyLarge" />
+
+                    </com.google.android.material.textfield.TextInputLayout>
+
+                </LinearLayout>
+
+            </com.google.android.material.card.MaterialCardView>
+
+            <!-- Card Financeiro -->
+            <com.google.android.material.card.MaterialCardView
+                android:id="@+id/financialCard"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="24dp"
+                app:cardCornerRadius="16dp"
+                app:cardElevation="4dp"
+                app:strokeWidth="0dp"
+                app:cardBackgroundColor="?attr/colorSurfaceContainer"
+                app:layout_constraintTop_toBottomOf="@+id/configCard">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:padding="20dp">
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Informações Financeiras"
+                        android:textAppearance="@style/TextAppearance.IORITv.TitleMedium"
+                        android:textColor="?attr/colorOnSurface"
+                        android:layout_marginBottom="16dp" />
+
+                    <!-- Linha: Valor, Custo, Desconto -->
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:layout_marginBottom="12dp">
+
+                        <com.google.android.material.textfield.TextInputLayout
+                            android:id="@+id/valorInputLayout"
+                            style="@style/Widget.Material3.TextInputLayout.OutlinedBox"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:layout_marginEnd="6dp"
+                            android:hint="Valor"
+                            app:boxCornerRadiusTopStart="12dp"
+                            app:boxCornerRadiusTopEnd="12dp"
+                            app:boxCornerRadiusBottomStart="12dp"
+                            app:boxCornerRadiusBottomEnd="12dp"
+                            app:startIconDrawable="@drawable/ic_baseline_attach_money_24">
+
+                            <com.google.android.material.textfield.TextInputEditText
+                                android:id="@+id/editTextValor"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:inputType="numberDecimal"
+                                android:textAppearance="@style/TextAppearance.IORITv.BodyLarge" />
+
+                        </com.google.android.material.textfield.TextInputLayout>
+
+                        <com.google.android.material.textfield.TextInputLayout
+                            android:id="@+id/custoInputLayout"
+                            style="@style/Widget.Material3.TextInputLayout.OutlinedBox"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:layout_marginHorizontal="3dp"
+                            android:hint="Custo"
+                            app:boxCornerRadiusTopStart="12dp"
+                            app:boxCornerRadiusTopEnd="12dp"
+                            app:boxCornerRadiusBottomStart="12dp"
+                            app:boxCornerRadiusBottomEnd="12dp"
+                            app:startIconDrawable="@drawable/ic_baseline_trending_down_24">
+
+                            <com.google.android.material.textfield.TextInputEditText
+                                android:id="@+id/editTextCusto"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:inputType="numberDecimal"
+                                android:textAppearance="@style/TextAppearance.IORITv.BodyLarge" />
+
+                        </com.google.android.material.textfield.TextInputLayout>
+
+                        <com.google.android.material.textfield.TextInputLayout
+                            android:id="@+id/descontoInputLayout"
+                            style="@style/Widget.Material3.TextInputLayout.OutlinedBox"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:layout_marginStart="6dp"
+                            android:hint="Desconto"
+                            app:boxCornerRadiusTopStart="12dp"
+                            app:boxCornerRadiusTopEnd="12dp"
+                            app:boxCornerRadiusBottomStart="12dp"
+                            app:boxCornerRadiusBottomEnd="12dp"
+                            app:startIconDrawable="@drawable/ic_baseline_percent_24">
+
+                            <com.google.android.material.textfield.TextInputEditText
+                                android:id="@+id/editTextDesconto"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:inputType="numberDecimal"
+                                android:textAppearance="@style/TextAppearance.IORITv.BodyLarge" />
+
+                        </com.google.android.material.textfield.TextInputLayout>
+
+                    </LinearLayout>
+
+                </LinearLayout>
+
+            </com.google.android.material.card.MaterialCardView>
 
             <!-- Botão Salvar -->
-            <Button
+            <com.google.android.material.button.MaterialButton
                 android:id="@+id/buttonSalvar"
-                android:layout_width="200dp"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="8dp"
-                android:layout_marginTop="16dp"
-                android:layout_marginEnd="8dp"
-                android:text="Salvar"
-                app:backgroundTint="@drawable/button_state_selector"
-                app:layout_constraintEnd_toEndOf="parent"
+                style="@style/Widget.Material3.Button"
+                android:layout_width="match_parent"
+                android:layout_height="56dp"
+                android:text="Salvar Cliente"
+                android:textAppearance="@style/TextAppearance.IORITv.LabelLarge"
+                app:backgroundTint="?attr/colorPrimary"
+                app:cornerRadius="16dp"
+                app:icon="@drawable/ic_baseline_save_24"
+                app:iconGravity="textStart"
+                app:iconPadding="8dp"
+                app:iconTint="?attr/colorOnPrimary"
+                app:layout_constraintTop_toBottomOf="@+id/financialCard"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/editTextServidor" />
+                app:layout_constraintEnd_toEndOf="parent" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
-    </ScrollView>
-</androidx.constraintlayout.widget.ConstraintLayout>
+
+    </androidx.core.widget.NestedScrollView>
+
+</androidx.coordinatorlayout.widget.CoordinatorLayout>

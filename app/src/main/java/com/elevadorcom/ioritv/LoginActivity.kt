@@ -54,31 +54,33 @@ class LoginActivity : AppCompatActivity() {
 
     // Função de validação de email e senha
     private fun validateInput(email: String, password: String): Boolean {
+        var isValid = true
+        
         if (email.isEmpty()) {
-            binding.emailEditText.error = "Email é obrigatório"
+            binding.emailInputLayout.error = "Email é obrigatório"
             binding.emailEditText.requestFocus()
-            return false
-        }
-
-        if (!Patterns.EMAIL_ADDRESS.matcher(email).matches()) {
-            binding.emailEditText.error = "Insira um email válido"
+            isValid = false
+        } else if (!Patterns.EMAIL_ADDRESS.matcher(email).matches()) {
+            binding.emailInputLayout.error = "Insira um email válido"
             binding.emailEditText.requestFocus()
-            return false
+            isValid = false
+        } else {
+            binding.emailInputLayout.error = null
         }
 
         if (password.isEmpty()) {
-            binding.passwordEditText.error = "Senha é obrigatória"
+            binding.passwordInputLayout.error = "Senha é obrigatória"
             binding.passwordEditText.requestFocus()
-            return false
+            isValid = false
+        } else if (password.length < 6) {
+            binding.passwordInputLayout.error = "A senha deve ter no mínimo 6 caracteres"
+            binding.passwordEditText.requestFocus()
+            isValid = false
+        } else {
+            binding.passwordInputLayout.error = null
         }
 
-        if (password.length < 6) {
-            binding.passwordEditText.error = "A senha deve ter no mínimo 6 caracteres"
-            binding.passwordEditText.requestFocus()
-            return false
-        }
-
-        return true
+        return isValid
     }
 
     // Função de login com Firebase Authentication
