@@ -22,6 +22,7 @@ import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.QuerySnapshot
 import com.elevadorcom.ioritv.databinding.ActivityMain2Binding
 import com.google.firebase.firestore.Query
+import com.elevadorcom.ioritv.utils.ThemeUtils
 import java.util.Calendar
 import java.util.concurrent.TimeUnit
 
@@ -33,13 +34,9 @@ class MainActivity2 : AppCompatActivity() {
     private val filterStates = mutableMapOf<String, Boolean>()
 
     override fun onCreate(savedInstanceState: Bundle?) {
-        // Aplicar o tema apropriado com base no modo da noite
-        val isDarkMode = true
-        if (isDarkMode) {
-            setTheme(R.style.Theme_IORITv_MainActivity2_Dark)
-        } else {
-            setTheme(R.style.Base_Theme_IORITv_Dark)
-        }
+        // Aplica o tema apropriado usando ThemeUtils
+        ThemeUtils.applyTheme(this)
+        
         super.onCreate(savedInstanceState)
         binding = ActivityMain2Binding.inflate(layoutInflater)
         setContentView(binding.root)

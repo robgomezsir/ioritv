@@ -4,8 +4,8 @@
     <!-- Tema Base Material Design 3 para o Modo Claro -->
     <style name="Base.Theme.IORITv" parent="Theme.Material3.DayNight.NoActionBar">
         <!-- Material Design 3 Colors - Core -->
-        <item name="colorPrimary">@color/md_theme_light_primary</item>
-        <item name="colorOnPrimary">@color/md_theme_light_onPrimary</item>
+        <item name="colorPrimary">@color/toolbar_color_light</item>
+        <item name="colorOnPrimary">@color/black</item>
         <item name="colorPrimaryContainer">@color/md_theme_light_primaryContainer</item>
         <item name="colorOnPrimaryContainer">@color/md_theme_light_onPrimaryContainer</item>
         <item name="colorSecondary">@color/md_theme_light_secondary</item>
@@ -38,14 +38,18 @@
         <item name="colorSurfaceDim">@color/md_theme_light_surfaceDim</item>
         
         <!-- Status Bar e Navigation Bar -->
-        <item name="android:statusBarColor">@color/md_theme_light_surface</item>
+        <item name="android:statusBarColor">@color/toolbar_color_light</item>
         <item name="android:navigationBarColor">@color/md_theme_light_surface</item>
         <item name="android:windowLightStatusBar">true</item>
         <item name="android:windowLightNavigationBar">true</item>
+        <item name="android:windowTranslucentStatus">false</item>
+        <item name="android:windowDrawsSystemBarBackgrounds">true</item>
+        <item name="android:enforceStatusBarContrast">false</item>
+        <item name="android:enforceNavigationBarContrast">false</item>
         
         <!-- Splash Screen -->
         <item name="windowSplashScreenAnimatedIcon">@drawable/ic_logo</item>
-        <item name="windowSplashScreenBackground">@color/md_theme_light_primary</item>
+        <item name="windowSplashScreenBackground">@color/md_theme_light_surface</item>
         <item name="postSplashScreenTheme">@style/Base.Theme.IORITv</item>
         
         <!-- Typography -->
@@ -62,81 +66,35 @@
 
     <!-- Tema customizado para a LoginActivity -->
     <style name="Theme.IORITv.LoginActivity" parent="Base.Theme.IORITv">
-        <item name="android:statusBarColor">@color/md_theme_light_primaryContainer</item>
-        <item name="android:navigationBarColor">@color/md_theme_light_primaryContainer</item>
-        <item name="android:windowLightStatusBar">false</item>
+        <item name="android:statusBarColor">@color/toolbar_color_light</item>
+        <item name="android:navigationBarColor">@color/md_theme_light_surface</item>
+        <item name="android:windowLightStatusBar">true</item>
+        <item name="android:windowTranslucentStatus">false</item>
+        <item name="android:windowDrawsSystemBarBackgrounds">true</item>
+        <item name="android:enforceStatusBarContrast">false</item>
     </style>
 
     <!-- Tema customizado para MainActivity2 -->
-    <style name="Theme.IORITv.MainActivity2.Dark" parent="Base.Theme.IORITv">
-        <item name="android:statusBarColor">@color/md_theme_light_surfaceContainer</item>
+    <style name="Theme.IORITv.MainActivity2" parent="Base.Theme.IORITv">
+        <item name="android:statusBarColor">@color/toolbar_color_light</item>
         <item name="android:windowLightStatusBar">true</item>
-    </style>
-
-    <!-- Tema Dark Base -->
-    <style name="Base.Theme.IORITv.Dark" parent="Theme.Material3.DayNight.NoActionBar">
-        <!-- Material Design 3 Dark Colors - Core -->
-        <item name="colorPrimary">@color/md_theme_dark_primary</item>
-        <item name="colorOnPrimary">@color/md_theme_dark_onPrimary</item>
-        <item name="colorPrimaryContainer">@color/md_theme_dark_primaryContainer</item>
-        <item name="colorOnPrimaryContainer">@color/md_theme_dark_onPrimaryContainer</item>
-        <item name="colorSecondary">@color/md_theme_dark_secondary</item>
-        <item name="colorOnSecondary">@color/md_theme_dark_onSecondary</item>
-        <item name="colorSecondaryContainer">@color/md_theme_dark_secondaryContainer</item>
-        <item name="colorOnSecondaryContainer">@color/md_theme_dark_onSecondaryContainer</item>
-        <item name="colorTertiary">@color/md_theme_dark_tertiary</item>
-        <item name="colorOnTertiary">@color/md_theme_dark_onTertiary</item>
-        <item name="colorTertiaryContainer">@color/md_theme_dark_tertiaryContainer</item>
-        <item name="colorOnTertiaryContainer">@color/md_theme_dark_onTertiaryContainer</item>
-        <item name="colorError">@color/md_theme_dark_error</item>
-        <item name="colorOnError">@color/md_theme_dark_onError</item>
-        <item name="colorErrorContainer">@color/md_theme_dark_errorContainer</item>
-        <item name="colorOnErrorContainer">@color/md_theme_dark_onErrorContainer</item>
-        <item name="colorOutline">@color/md_theme_dark_outline</item>
-        <item name="colorOutlineVariant">@color/md_theme_dark_outlineVariant</item>
-        <item name="colorSurface">@color/md_theme_dark_surface</item>
-        <item name="colorOnSurface">@color/md_theme_dark_onSurface</item>
-        <item name="colorSurfaceVariant">@color/md_theme_dark_surfaceVariant</item>
-        <item name="colorOnSurfaceVariant">@color/md_theme_dark_onSurfaceVariant</item>
-        <item name="colorSurfaceInverse">@color/md_theme_dark_inverseSurface</item>
-        <item name="colorOnSurfaceInverse">@color/md_theme_dark_inverseOnSurface</item>
-        <item name="colorPrimaryInverse">@color/md_theme_dark_inversePrimary</item>
-        <item name="colorSurfaceContainer">@color/md_theme_dark_surfaceContainer</item>
-        <item name="colorSurfaceContainerHigh">@color/md_theme_dark_surfaceContainerHigh</item>
-        <item name="colorSurfaceContainerHighest">@color/md_theme_dark_surfaceContainerHighest</item>
-        <item name="colorSurfaceContainerLow">@color/md_theme_dark_surfaceContainerLow</item>
-        <item name="colorSurfaceContainerLowest">@color/md_theme_dark_surfaceContainerLowest</item>
-        <item name="colorSurfaceBright">@color/md_theme_dark_surfaceBright</item>
-        <item name="colorSurfaceDim">@color/md_theme_dark_surfaceDim</item>
-        
-        <!-- Status Bar e Navigation Bar -->
-        <item name="android:statusBarColor">@color/md_theme_dark_surface</item>
-        <item name="android:navigationBarColor">@color/md_theme_dark_surface</item>
-        <item name="android:windowLightStatusBar">false</item>
-        <item name="android:windowLightNavigationBar">false</item>
-        
-        <!-- Splash Screen -->
-        <item name="windowSplashScreenAnimatedIcon">@drawable/ic_logo</item>
-        <item name="windowSplashScreenBackground">@color/md_theme_dark_primary</item>
-        <item name="postSplashScreenTheme">@style/Base.Theme.IORITv.Dark</item>
-        
-        <!-- Typography -->
-        <item name="textAppearanceHeadlineLarge">@style/TextAppearance.IORITv.HeadlineLarge</item>
-        <item name="textAppearanceHeadlineMedium">@style/TextAppearance.IORITv.HeadlineMedium</item>
-        <item name="textAppearanceHeadlineSmall">@style/TextAppearance.IORITv.HeadlineSmall</item>
-        <item name="textAppearanceBodyLarge">@style/TextAppearance.IORITv.BodyLarge</item>
-        <item name="textAppearanceBodyMedium">@style/TextAppearance.IORITv.BodyMedium</item>
-        <item name="textAppearanceBodySmall">@style/TextAppearance.IORITv.BodySmall</item>
-        <item name="textAppearanceLabelLarge">@style/TextAppearance.IORITv.LabelLarge</item>
-        <item name="textAppearanceLabelMedium">@style/TextAppearance.IORITv.LabelMedium</item>
-        <item name="textAppearanceLabelSmall">@style/TextAppearance.IORITv.LabelSmall</item>
     </style>
 
     <!-- Tema para Splash Screen -->
     <style name="SplashTheme" parent="Theme.SplashScreen">
-        <item name="windowSplashScreenBackground">@color/md_theme_light_primary</item>
+        <item name="windowSplashScreenBackground">@android:color/black</item>
         <item name="windowSplashScreenAnimatedIcon">@drawable/ic_logo</item>
         <item name="postSplashScreenTheme">@style/Base.Theme.IORITv</item>
+        <item name="android:statusBarColor">@android:color/transparent</item>
+        <item name="android:navigationBarColor">@android:color/transparent</item>
+        <item name="android:windowLightStatusBar">false</item>
+        <item name="android:windowDrawsSystemBarBackgrounds">true</item>
+        <item name="android:enforceStatusBarContrast">false</item>
+        <item name="android:enforceNavigationBarContrast">false</item>
+        <item name="android:windowFullscreen">true</item>
+        <item name="android:windowContentOverlay">@null</item>
+        <item name="android:windowTranslucentStatus">false</item>
+        <item name="android:windowTranslucentNavigation">false</item>
     </style>
 
 </resources>

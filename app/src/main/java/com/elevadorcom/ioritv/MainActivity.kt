@@ -20,6 +20,7 @@ import java.util.*
 import java.util.concurrent.TimeUnit
 import com.elevadorcom.ioritv.utils.SituacaoUtil
 import com.elevadorcom.ioritv.utils.SituacaoConstants
+import com.elevadorcom.ioritv.utils.ThemeUtils
 import com.google.android.material.appbar.MaterialToolbar
 
 class MainActivity : AppCompatActivity() {
@@ -31,13 +32,8 @@ class MainActivity : AppCompatActivity() {
     private lateinit var buttonSalvar: Button
 
     override fun onCreate(savedInstanceState: Bundle?) {
-        // Aplicar o tema apropriado com base no modo da noite
-        val isDarkMode = true // Troque para uma lógica adequada para definir o modo noturno
-        if (isDarkMode) {
-            setTheme(R.style.Theme_IORITv_MainActivity2_Dark)
-        } else {
-            setTheme(R.style.Base_Theme_IORITv_Dark)
-        }
+        // Aplica o tema apropriado usando ThemeUtils
+        ThemeUtils.applyTheme(this)
 
         super.onCreate(savedInstanceState)
 

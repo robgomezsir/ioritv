@@ -13,6 +13,7 @@ import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.elevadorcom.ioritv.utils.AccessibilityUtils
 import com.elevadorcom.ioritv.utils.AnimationUtils
+import com.elevadorcom.ioritv.utils.ThemeUtils
 
 class MainActivity4 : AppCompatActivity() {
 
@@ -23,6 +24,9 @@ class MainActivity4 : AppCompatActivity() {
     private lateinit var bottomNavigation: BottomNavigationView
 
     override fun onCreate(savedInstanceState: Bundle?) {
+        // Aplica o tema apropriado usando ThemeUtils
+        ThemeUtils.applyTheme(this)
+        
         installSplashScreen()
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main4)

@@ -3,8 +3,8 @@
     <!-- Tema Base para o Modo Escuro - Material Design 3 -->
     <style name="Base.Theme.IORITv.Dark" parent="Theme.Material3.DayNight.NoActionBar">
         <!-- Material Design 3 Dark Colors - Core -->
-        <item name="colorPrimary">@color/md_theme_dark_primary</item>
-        <item name="colorOnPrimary">@color/md_theme_dark_onPrimary</item>
+        <item name="colorPrimary">@color/toolbar_color</item>
+        <item name="colorOnPrimary">@color/white</item>
         <item name="colorPrimaryContainer">@color/md_theme_dark_primaryContainer</item>
         <item name="colorOnPrimaryContainer">@color/md_theme_dark_onPrimaryContainer</item>
         <item name="colorSecondary">@color/md_theme_dark_secondary</item>
@@ -37,14 +37,16 @@
         <item name="colorSurfaceDim">@color/md_theme_dark_surfaceDim</item>
         
         <!-- Status Bar e Navigation Bar -->
-        <item name="android:statusBarColor">@color/md_theme_dark_surface</item>
-        <item name="android:navigationBarColor">@color/md_theme_dark_surface</item>
+        <item name="android:statusBarColor">@color/toolbar_color</item>
+        <item name="android:navigationBarColor">@color/md_theme_dark_surfaceContainerLow</item>
         <item name="android:windowLightStatusBar">false</item>
         <item name="android:windowLightNavigationBar">false</item>
+        <item name="android:windowTranslucentStatus">false</item>
+        <item name="android:windowDrawsSystemBarBackgrounds">true</item>
         
         <!-- Splash Screen -->
         <item name="windowSplashScreenAnimatedIcon">@drawable/ic_logo</item>
-        <item name="windowSplashScreenBackground">@color/md_theme_dark_primary</item>
+        <item name="windowSplashScreenBackground">@color/md_theme_dark_surface</item>
         <item name="postSplashScreenTheme">@style/Base.Theme.IORITv.Dark</item>
         
         <!-- Typography -->
@@ -61,14 +63,33 @@
 
     <!-- Tema customizado para o modo escuro da LoginActivity -->
     <style name="Theme.IORITv.LoginActivity.Dark" parent="Base.Theme.IORITv.Dark">
-        <item name="android:statusBarColor">@color/md_theme_dark_primaryContainer</item>
-        <item name="android:navigationBarColor">@color/md_theme_dark_primaryContainer</item>
+        <item name="android:statusBarColor">@color/toolbar_color</item>
+        <item name="android:navigationBarColor">@color/md_theme_dark_surfaceContainerLow</item>
         <item name="android:windowLightStatusBar">false</item>
+        <item name="android:windowTranslucentStatus">false</item>
     </style>
 
     <!-- Tema customizado para o modo escuro da MainActivity2 -->
     <style name="Theme.IORITv.MainActivity2.Dark" parent="Base.Theme.IORITv.Dark">
-        <item name="android:statusBarColor">@color/md_theme_dark_surfaceContainer</item>
+        <item name="android:statusBarColor">@color/toolbar_color</item>
         <item name="android:windowLightStatusBar">false</item>
+        <item name="android:windowTranslucentStatus">false</item>
+    </style>
+    
+    <!-- Tema para Splash Screen no modo escuro -->
+    <style name="SplashTheme" parent="Theme.SplashScreen">
+        <item name="windowSplashScreenBackground">@android:color/black</item>
+        <item name="windowSplashScreenAnimatedIcon">@drawable/ic_logo</item>
+        <item name="postSplashScreenTheme">@style/Base.Theme.IORITv.Dark</item>
+        <item name="android:statusBarColor">@android:color/transparent</item>
+        <item name="android:navigationBarColor">@android:color/transparent</item>
+        <item name="android:windowLightStatusBar">false</item>
+        <item name="android:windowDrawsSystemBarBackgrounds">true</item>
+        <item name="android:enforceStatusBarContrast">false</item>
+        <item name="android:enforceNavigationBarContrast">false</item>
+        <item name="android:windowFullscreen">true</item>
+        <item name="android:windowContentOverlay">@null</item>
+        <item name="android:windowTranslucentStatus">false</item>
+        <item name="android:windowTranslucentNavigation">false</item>
     </style>
 </resources>

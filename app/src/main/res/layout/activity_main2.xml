@@ -5,38 +5,39 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:padding="0dp"
+    android:fitsSystemWindows="true"
     tools:context=".MainActivity2">
 
-    <!-- StatusBar -->
-    <TextView
-        android:id="@+id/statusBar"
+    <!-- Toolbar estilo WhatsApp -->
+    <com.google.android.material.appbar.MaterialToolbar
+        android:id="@+id/toolbar"
+        style="@style/WhatsAppToolbar"
         android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:padding="8dp"
-        android:text="Meu IoriTv"
-        android:textColor="@color/greenlight"
-        android:textSize="24sp"
-        android:textStyle="bold"
+        android:layout_height="?attr/actionBarSize"
+        android:title="Meu IoriTv"
+        android:titleTextAppearance="@style/TextAppearance.Material3.HeadlineSmall"
+        android:titleTextColor="?attr/colorOnPrimary"
+        android:elevation="0dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <!-- Barra de Pesquisa -->
+    <!-- Barra de Pesquisa estilo WhatsApp -->
     <androidx.appcompat.widget.SearchView
         android:id="@+id/searchView"
         style="@style/CustomSearchView"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
-        android:layout_marginEnd="8dp"
-        android:background="@drawable/button_rounded"
-        android:backgroundTint="@color/searchview_background"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="16dp"
+        android:background="@drawable/search_view_background"
+        android:elevation="0dp"
         app:iconifiedByDefault="false"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/statusBar"
-        app:queryHint="Pesquisar..." />
+        app:layout_constraintTop_toBottomOf="@id/toolbar"
+        app:queryHint="Pesquisar clientes..." />
 
     <!-- HorizontalScrollView para organizar os botões em carrossel -->
     <HorizontalScrollView
@@ -62,52 +63,52 @@
                 android:id="@+id/buttonAtivo"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginEnd="5dp"
+                android:layout_marginEnd="8dp"
                 android:minWidth="90dp"
                 android:minHeight="40dp"
-                android:paddingLeft="0dp"
-                android:paddingRight="0dp"
                 android:text="ATIVO"
                 android:textSize="13sp"
-                app:backgroundTint="@drawable/button_state_selector"
-                app:cornerRadius="100dp"
+                android:textStyle="bold"
+                android:backgroundTint="@color/md_theme_light_primary"
+                android:textColor="?attr/colorOnPrimary"
+                app:cornerRadius="20dp"
                 app:iconGravity="textStart"
                 app:iconPadding="8dp"
-                app:iconTint="@color/white" />
+                app:iconTint="@color/md_theme_light_onPrimary" />
 
             <com.google.android.material.button.MaterialButton
                 android:id="@+id/buttonAVencer"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginEnd="5dp"
+                android:layout_marginEnd="8dp"
                 android:minWidth="100dp"
                 android:minHeight="40dp"
-                android:paddingLeft="0dp"
-                android:paddingRight="0dp"
                 android:text="A VENCER"
                 android:textSize="13sp"
-                app:backgroundTint="@drawable/button_state_selector"
-                app:cornerRadius="100dp"
+                android:textStyle="bold"
+                android:backgroundTint="@color/md_theme_light_secondary"
+                android:textColor="?attr/colorOnPrimary"
+                app:cornerRadius="20dp"
                 app:iconGravity="textStart"
                 app:iconPadding="8dp"
-                app:iconTint="@color/white" />
+                app:iconTint="@color/md_theme_light_onPrimary" />
 
             <com.google.android.material.button.MaterialButton
                 android:id="@+id/buttonVencido"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginEnd="5dp"
+                android:layout_marginEnd="8dp"
                 android:minWidth="90dp"
                 android:minHeight="40dp"
-                android:paddingLeft="8dp"
-                android:paddingRight="8dp"
                 android:text="VENCIDO"
                 android:textSize="13sp"
-                app:backgroundTint="@drawable/button_state_selector"
-                app:cornerRadius="100dp"
+                android:textStyle="bold"
+                android:backgroundTint="@color/md_theme_light_secondary"
+                android:textColor="?attr/colorOnPrimary"
+                app:cornerRadius="20dp"
                 app:iconGravity="textStart"
                 app:iconPadding="8dp"
-                app:iconTint="@color/white" />
+                app:iconTint="@color/md_theme_light_onPrimary" />
 
             <com.google.android.material.button.MaterialButton
                 android:id="@+id/buttonStandby"
@@ -116,15 +117,15 @@
                 android:layout_marginEnd="0dp"
                 android:minWidth="90dp"
                 android:minHeight="40dp"
-                android:paddingLeft="8dp"
-                android:paddingRight="8dp"
                 android:text="INATIVO"
                 android:textSize="13sp"
-                app:backgroundTint="@drawable/button_state_selector"
-                app:cornerRadius="100dp"
+                android:textStyle="bold"
+                android:backgroundTint="@color/md_theme_light_secondary"
+                android:textColor="?attr/colorOnPrimary"
+                app:cornerRadius="20dp"
                 app:iconGravity="textStart"
                 app:iconPadding="8dp"
-                app:iconTint="@color/white" />
+                app:iconTint="@color/md_theme_light_onPrimary" />
 
             <!-- Botão ATUALIZAR -->
             <Button
@@ -166,29 +167,37 @@
 
     </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
 
-    <!-- FAB principal -->
+    <!-- FAB principal estilo WhatsApp -->
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/fabMenu"
-        android:layout_width="64dp"
-        android:layout_height="58dp"
+        style="@style/WhatsAppFAB"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:layout_margin="16dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginBottom="8dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginBottom="16dp"
         android:src="@drawable/adduser"
-        app:backgroundTint="@color/greenlight"
+        android:backgroundTint="@color/md_theme_light_primary"
+        android:tint="@color/md_theme_light_onPrimary"
         app:fabSize="normal"
+        app:elevation="0dp"
         app:layout_constraintBottom_toTopOf="@+id/bottom_navigation"
         app:layout_constraintEnd_toEndOf="parent" />
 
-    <!-- Bottom Navigation -->
+    <!-- Bottom Navigation estilo WhatsApp -->
     <com.google.android.material.bottomnavigation.BottomNavigationView
         android:id="@+id/bottom_navigation"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@color/darkBackground"
+        android:background="?attr/colorSurface"
+        android:elevation="0dp"
+        app:itemIconTint="?attr/colorOnSurfaceVariant"
+        app:itemTextColor="?attr/colorOnSurfaceVariant"
+        app:itemActiveIndicatorStyle="@style/ActiveIndicator"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:menu="@menu/bottom_nav_menu" />
+        app:menu="@menu/bottom_nav_menu"
+        app:itemRippleColor="?attr/colorPrimary" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

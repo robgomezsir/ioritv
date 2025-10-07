@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <selector xmlns:android="http://schemas.android.com/apk/res/android">
-    <item android:state_selected="true" android:color="@color/greenlight" />
-    <item android:state_pressed="true" android:color="@color/greenmedium" />
-    <item android:color="@color/greendark" />
+    <item android:state_selected="true" android:color="@color/md_theme_light_primary" />
+    <item android:state_pressed="true" android:color="@color/md_theme_light_secondary" />
+    <item android:color="@color/md_theme_light_onSurface" />
 </selector>

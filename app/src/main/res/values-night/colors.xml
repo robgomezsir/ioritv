@@ -1,57 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <!-- Cores base para compatibilidade -->
-    <color name="darkCardBackground">#14211F</color>
-    <color name="darkBackground">#00100E</color>
-    <color name="searchview_background">#14211F</color>
-    <color name="purple">#2F1A51</color>
-    <color name="white">#FFFFFF</color>
-    <color name="textColorLightTheme">#FFFFFF</color>
-    <color name="bar_color_active">#4FDBCA</color>
-    <color name="bar_color_due">#70F7E8</color>
-    <color name="bar_color_overdue">#4FDBCA</color>
-    <color name="bar_color_standby">#6F7977</color>
-    <color name="focus_color">#4FDBCA</color>
-    <color name="splash_background">#00100E</color>
-
-    <!-- Material Design 3 - Cores do Tema Escuro -->
-    <color name="md_theme_dark_primary">#4FDBCA</color>
-    <color name="md_theme_dark_onPrimary">#003731</color>
-    <color name="md_theme_dark_primaryContainer">#005049</color>
-    <color name="md_theme_dark_onPrimaryContainer">#70F7E8</color>
-    <color name="md_theme_dark_secondary">#B1CCC5</color>
-    <color name="md_theme_dark_onSecondary">#1C352F</color>
-    <color name="md_theme_dark_secondaryContainer">#334B45</color>
-    <color name="md_theme_dark_onSecondaryContainer">#CCE8E1</color>
-    <color name="md_theme_dark_tertiary">#AEC9E7</color>
-    <color name="md_theme_dark_onTertiary">#1A3240</color>
-    <color name="md_theme_dark_tertiaryContainer">#2F4757</color>
-    <color name="md_theme_dark_onTertiaryContainer">#CAE5FF</color>
-    <color name="md_theme_dark_error">#FFB4AB</color>
+    <!-- Cores básicas -->
+    <color name="black">#FF000000</color>
+    <color name="white">#FFFFFFFF</color>
+    <color name="gray">#FF808080</color>
+    <color name="toolbar_color">#141218</color>
+    
+    <!-- Cores para gráficos -->
+    <color name="bar_color_active">#64B5F6</color>
+    <color name="bar_color_due">#81C784</color>
+    <color name="bar_color_overdue">#FFB74D</color>
+    <color name="bar_color_standby">#BDBDBD</color>
+    
+    <!-- Material Design 3 - Tema Escuro (Toolbar Branca) -->
+    <color name="md_theme_dark_primary">#FFFFFF</color>
+    <color name="md_theme_dark_onPrimary">#000000</color>
+    <color name="md_theme_dark_primaryContainer">#F5F5F5</color>
+    <color name="md_theme_dark_onPrimaryContainer">#212121</color>
+    <color name="md_theme_dark_secondary">#BDBDBD</color>
+    <color name="md_theme_dark_onSecondary">#424242</color>
+    <color name="md_theme_dark_secondaryContainer">#616161</color>
+    <color name="md_theme_dark_onSecondaryContainer">#FFFFFF</color>
+    <color name="md_theme_dark_tertiary">#9E9E9E</color>
+    <color name="md_theme_dark_onTertiary">#424242</color>
+    <color name="md_theme_dark_tertiaryContainer">#757575</color>
+    <color name="md_theme_dark_onTertiaryContainer">#FFFFFF</color>
+    <color name="md_theme_dark_error">#F44336</color>
     <color name="md_theme_dark_onError">#690005</color>
     <color name="md_theme_dark_errorContainer">#93000A</color>
     <color name="md_theme_dark_onErrorContainer">#FFDAD6</color>
-    <color name="md_theme_dark_outline">#899390</color>
-    <color name="md_theme_dark_background">#0F1514</color>
-    <color name="md_theme_dark_onBackground">#E1E3E1</color>
-    <color name="md_theme_dark_surface">#0F1514</color>
-    <color name="md_theme_dark_onSurface">#E1E3E1</color>
-    <color name="md_theme_dark_surfaceVariant">#3F4946</color>
-    <color name="md_theme_dark_onSurfaceVariant">#BEC9C5</color>
-    <color name="md_theme_dark_inverseSurface">#E1E3E1</color>
-    <color name="md_theme_dark_inverseOnSurface">#2B322F</color>
-    <color name="md_theme_dark_inversePrimary">#006A60</color>
+    <color name="md_theme_dark_outline">#949494</color>
+    <color name="md_theme_dark_background">#141218</color>
+    <color name="md_theme_dark_onBackground">#FFFFFF</color>
+    <color name="md_theme_dark_surface">#141218</color>
+    <color name="md_theme_dark_onSurface">#FFFFFF</color>
+    <color name="md_theme_dark_surfaceVariant">#1E1B24</color>
+    <color name="md_theme_dark_onSurfaceVariant">#FFFFFF</color>
+    <color name="md_theme_dark_inverseSurface">#FFFFFF</color>
+    <color name="md_theme_dark_inverseOnSurface">#2F2F2F</color>
+    <color name="md_theme_dark_inversePrimary">#BDBDBD</color>
     <color name="md_theme_dark_shadow">#000000</color>
-    <color name="md_theme_dark_surfaceTint">#4FDBCA</color>
-    <color name="md_theme_dark_outlineVariant">#3F4946</color>
+    <color name="md_theme_dark_surfaceTint">#FFFFFF</color>
+    <color name="md_theme_dark_outlineVariant">#2D2A33</color>
     <color name="md_theme_dark_scrim">#000000</color>
-
-    <!-- Material Design 3 - Cores Secundárias do Tema Escuro -->
-    <color name="md_theme_dark_surfaceDim">#0F1514</color>
-    <color name="md_theme_dark_surfaceBright">#353B39</color>
-    <color name="md_theme_dark_surfaceContainerLowest">#0A100F</color>
-    <color name="md_theme_dark_surfaceContainerLow">#171D1C</color>
-    <color name="md_theme_dark_surfaceContainer">#1B211F</color>
-    <color name="md_theme_dark_surfaceContainerHigh">#252B29</color>
-    <color name="md_theme_dark_surfaceContainerHighest">#2F3533</color>
-    <color name="md_theme_dark_onSurfaceContainer">#E1E3E1</color>
+    <color name="md_theme_dark_surfaceDim">#0C0A10</color>
+    <color name="md_theme_dark_surfaceBright">#2D2A33</color>
+    <color name="md_theme_dark_surfaceContainerLowest">#0F0D13</color>
+    <color name="md_theme_dark_surfaceContainerLow">#141218</color>
+    <color name="md_theme_dark_surfaceContainer">#1A1820</color>
+    <color name="md_theme_dark_surfaceContainerHigh">#201D26</color>
+    <color name="md_theme_dark_surfaceContainerHighest">#2B282F</color>
+    <color name="md_theme_dark_onSurfaceContainer">#FFFFFF</color>
 </resources>

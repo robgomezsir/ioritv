@@ -5,6 +5,7 @@ import android.util.Patterns
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.elevadorcom.ioritv.databinding.ActivityForgotPasswordBinding
+import com.elevadorcom.ioritv.utils.ThemeUtils
 import com.google.firebase.auth.FirebaseAuth
 
 class ForgotPasswordActivity : AppCompatActivity() {
@@ -13,8 +14,10 @@ class ForgotPasswordActivity : AppCompatActivity() {
     private lateinit var auth: FirebaseAuth
 
     override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
+        // Aplica o tema apropriado usando ThemeUtils
+        ThemeUtils.applyTheme(this)
 
+        super.onCreate(savedInstanceState)
         binding = ActivityForgotPasswordBinding.inflate(layoutInflater)
         setContentView(binding.root)
 

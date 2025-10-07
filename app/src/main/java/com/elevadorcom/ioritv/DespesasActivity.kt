@@ -9,6 +9,7 @@ import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.google.firebase.Timestamp
 import com.google.firebase.firestore.FirebaseFirestore
+import com.elevadorcom.ioritv.utils.ThemeUtils
 import java.text.NumberFormat
 import java.text.SimpleDateFormat
 import java.util.Locale
@@ -23,13 +24,8 @@ class DespesasActivity : AppCompatActivity() {
     private var despesaId: String? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
-        // Aplicar o tema apropriado com base no modo da noite
-        val isDarkMode = true
-        if (isDarkMode) {
-            setTheme(R.style.Theme_IORITv_MainActivity2_Dark)
-        } else {
-            setTheme(R.style.Base_Theme_IORITv_Dark)
-        }
+        // Aplica o tema apropriado usando ThemeUtils
+        ThemeUtils.applyTheme(this)
 
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_despesas)

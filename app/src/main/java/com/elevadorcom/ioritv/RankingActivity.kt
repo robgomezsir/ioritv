@@ -15,6 +15,7 @@ import android.widget.PopupMenu
 import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import androidx.appcompat.app.AppCompatDelegate
 import androidx.core.content.ContextCompat
 import com.elevadorcom.ioritv.databinding.ActivityRankingWithNavBinding
 import com.google.firebase.firestore.FirebaseFirestore
@@ -44,6 +45,7 @@ import com.google.android.material.appbar.MaterialToolbar
 import com.elevadorcom.ioritv.utils.AnimationUtils
 import com.elevadorcom.ioritv.utils.AccessibilityUtils
 import com.elevadorcom.ioritv.utils.PerformanceUtils
+import com.elevadorcom.ioritv.utils.ThemeUtils
 import android.view.ViewGroup
 import android.view.LayoutInflater
 import android.widget.FrameLayout
@@ -61,14 +63,8 @@ class RankingActivity : AppCompatActivity() {
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
-        // Verifica o tema atual do sistema
-        val isDarkMode = resources.configuration.uiMode and android.content.res.Configuration.UI_MODE_NIGHT_MASK == android.content.res.Configuration.UI_MODE_NIGHT_YES
-
-        if (isDarkMode) {
-            setTheme(R.style.Theme_IORITv_MainActivity2_Dark)
-        } else {
-            setTheme(R.style.Base_Theme_IORITv_Dark)
-        }
+        // Aplica o tema apropriado usando ThemeUtils
+        ThemeUtils.applyTheme(this)
 
         super.onCreate(savedInstanceState)
         // Inicializando o binding corretamente
@@ -156,7 +152,7 @@ class RankingActivity : AppCompatActivity() {
         updateProgressAndClientes()
 
         // Inicializa o gráfico de barras
-        setupBarChart(isDarkMode)
+        setupBarChart(isDarkMode())
 
         //CREDITOS
         updateTotalCredit()
@@ -393,10 +389,9 @@ class RankingActivity : AppCompatActivity() {
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         return when (item.itemId) {
-            R.id.menu_settings -> {
-                // Ação para "Configurações" - Abre a SettingsActivity
-                val intent = Intent(this, SettingsActivity::class.java)
-                startActivity(intent)
+            R.id.menu_theme -> {
+                // Ação para "Tema" - Alterna entre tema claro e escuro
+                toggleTheme()
                 true
             }
 
@@ -413,6 +408,46 @@ class RankingActivity : AppCompatActivity() {
             }
             else -> super.onOptionsItemSelected(item)
         }
+    }
+
+    private fun toggleTheme() {
+        showThemeMenu()
+    }
+
+    private fun showThemeMenu() {
+        val popupMenu = PopupMenu(this, binding.toolbar)
+        popupMenu.menuInflater.inflate(R.menu.theme_menu, popupMenu.menu)
+        
+        // Marcar o tema atual como selecionado
+        val currentTheme = ThemeUtils.getSavedThemeMode(this)
+        when (currentTheme) {
+            AppCompatDelegate.MODE_NIGHT_FOLLOW_SYSTEM -> popupMenu.menu.findItem(R.id.menu_theme_auto)?.isChecked = true
+            AppCompatDelegate.MODE_NIGHT_NO -> popupMenu.menu.findItem(R.id.menu_theme_light)?.isChecked = true
+            AppCompatDelegate.MODE_NIGHT_YES -> popupMenu.menu.findItem(R.id.menu_theme_dark)?.isChecked = true
+        }
+        
+        popupMenu.setOnMenuItemClickListener { item ->
+            when (item.itemId) {
+                R.id.menu_theme_auto -> {
+                    ThemeUtils.saveThemeMode(this, AppCompatDelegate.MODE_NIGHT_FOLLOW_SYSTEM)
+                    recreate()
+                    true
+                }
+                R.id.menu_theme_light -> {
+                    ThemeUtils.saveThemeMode(this, AppCompatDelegate.MODE_NIGHT_NO)
+                    recreate()
+                    true
+                }
+                R.id.menu_theme_dark -> {
+                    ThemeUtils.saveThemeMode(this, AppCompatDelegate.MODE_NIGHT_YES)
+                    recreate()
+                    true
+                }
+                else -> false
+            }
+        }
+        
+        popupMenu.show()
     }
 
     private fun logout() {

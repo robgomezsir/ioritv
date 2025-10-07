@@ -2,7 +2,7 @@
 <resources>
     <!-- Estilo para indicador ativo da Bottom Navigation -->
     <style name="ActiveIndicator" parent="Widget.Material3.BottomNavigationView.ActiveIndicator">
-        <item name="android:color">?attr/colorPrimary</item>
+        <item name="android:color">?attr/colorPrimaryContainer</item>
         <item name="android:width">64dp</item>
         <item name="android:height">32dp</item>
         <item name="shapeAppearance">@style/ShapeAppearanceOverlay.Material3.BottomNavigationView.ActiveIndicator</item>
@@ -14,18 +14,59 @@
         <item name="cornerSize">16dp</item>
     </style>
 
-    <!-- Estilo para ProgressBar customizada -->
+    <!-- Estilo para ProgressBar -->
     <style name="Widget.IORITv.ProgressBar.Horizontal" parent="Widget.Material3.LinearProgressIndicator">
         <item name="android:progressTint">?attr/colorPrimary</item>
-        <item name="android:progressBackgroundTint">?attr/colorSurfaceVariant</item>
+        <item name="android:progressBackgroundTint">?attr/colorSurfaceContainer</item>
+        <item name="android:height">4dp</item>
     </style>
 
-    <!-- Estilo para SearchView customizada -->
+    <!-- Estilo para SearchView -->
     <style name="CustomSearchView" parent="Widget.AppCompat.SearchView">
-        <item name="android:background">@drawable/button_rounded</item>
+        <item name="android:background">@drawable/search_view_background</item>
         <item name="android:textColor">?attr/colorOnSurface</item>
         <item name="android:textColorHint">?attr/colorOnSurfaceVariant</item>
-        <item name="android:hint">Pesquisar clientes...</item>
-        <item name="queryHint">Pesquisar clientes...</item>
+        <item name="android:hint">Pesquisar...</item>
+        <item name="queryHint">Pesquisar...</item>
+        <item name="android:layout_margin">16dp</item>
+        <item name="android:elevation">0dp</item>
+    </style>
+
+    <!-- Estilo para Cards -->
+    <style name="WhatsAppCard" parent="Widget.Material3.CardView.Elevated">
+        <item name="cardCornerRadius">12dp</item>
+        <item name="cardElevation">0dp</item>
+        <item name="android:layout_margin">8dp</item>
+        <item name="android:background">?attr/colorSurfaceContainer</item>
+    </style>
+
+    <!-- Estilo para botões primários -->
+    <style name="WhatsAppButton" parent="Widget.Material3.Button">
+        <item name="android:backgroundTint">?attr/colorPrimary</item>
+        <item name="android:textColor">?attr/colorOnPrimary</item>
+        <item name="cornerRadius">24dp</item>
+        <item name="android:textSize">16sp</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:paddingTop">12dp</item>
+        <item name="android:paddingBottom">12dp</item>
+        <item name="android:paddingStart">24dp</item>
+        <item name="android:paddingEnd">24dp</item>
+    </style>
+
+    <!-- Estilo para FloatingActionButton -->
+    <style name="WhatsAppFAB" parent="Widget.Material3.FloatingActionButton.Primary">
+        <item name="backgroundTint">?attr/colorPrimary</item>
+        <item name="tint">?attr/colorOnPrimary</item>
+        <item name="elevation">0dp</item>
+        <item name="pressedTranslationZ">0dp</item>
+    </style>
+
+    <!-- Estilo para Toolbar -->
+    <style name="WhatsAppToolbar" parent="Widget.Material3.Toolbar">
+        <item name="android:background">?attr/colorPrimary</item>
+        <item name="titleTextColor">?attr/colorOnPrimary</item>
+        <item name="subtitleTextColor">?attr/colorOnPrimary</item>
+        <item name="navigationIconTint">?attr/colorOnPrimary</item>
+        <item name="android:elevation">0dp</item>
     </style>
 </resources>

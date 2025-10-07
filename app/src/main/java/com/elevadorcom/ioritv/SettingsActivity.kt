@@ -16,6 +16,7 @@ import com.google.firebase.auth.UserProfileChangeRequest
 import com.google.firebase.storage.FirebaseStorage
 import com.google.firebase.storage.StorageReference
 import com.squareup.picasso.Picasso
+import com.elevadorcom.ioritv.utils.ThemeUtils
 
 class SettingsActivity : AppCompatActivity() {
 
@@ -25,14 +26,8 @@ class SettingsActivity : AppCompatActivity() {
     private val PICK_IMAGE_REQUEST = 1
 
     override fun onCreate(savedInstanceState: Bundle?) {
-        // Verifica o tema atual do sistema
-        val isDarkMode = resources.configuration.uiMode and android.content.res.Configuration.UI_MODE_NIGHT_MASK == android.content.res.Configuration.UI_MODE_NIGHT_YES
-
-        if (isDarkMode) {
-            setTheme(R.style.Theme_IORITv_MainActivity2_Dark)
-        } else {
-            setTheme(R.style.Base_Theme_IORITv_Dark)
-        }
+        // Aplica o tema apropriado usando ThemeUtils
+        ThemeUtils.applyTheme(this)
 
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_settings)
@@ -69,7 +64,7 @@ class SettingsActivity : AppCompatActivity() {
     // Mostra o AlertDialog para escolher o tema
     private fun showThemeDialog() {
         val themes = arrayOf("Automático", "Claro", "Escuro")
-        val currentTheme = getSavedTheme()
+        val currentTheme = ThemeUtils.getCurrentThemeIndex(this)
 
         val builder = AlertDialog.Builder(this)
         builder.setTitle("Escolha o Tema")
@@ -92,19 +87,10 @@ class SettingsActivity : AppCompatActivity() {
 
     // Método para salvar o tema escolhido
     private fun setThemeMode(mode: Int) {
-        AppCompatDelegate.setDefaultNightMode(mode)
-
-        // Salva a escolha do tema nas preferências
-        val sharedPreferences: SharedPreferences = getSharedPreferences("AppSettings", MODE_PRIVATE)
-        val editor = sharedPreferences.edit()
-        editor.putInt("theme_mode", mode)
-        editor.apply()
-    }
-
-    // Método para recuperar o tema salvo
-    private fun getSavedTheme(): Int {
-        val sharedPreferences: SharedPreferences = getSharedPreferences("AppSettings", MODE_PRIVATE)
-        return sharedPreferences.getInt("theme_mode", AppCompatDelegate.MODE_NIGHT_FOLLOW_SYSTEM)
+        ThemeUtils.saveThemeMode(this, mode)
+        
+        // Reinicia a Activity para aplicar o novo tema
+        recreate()
     }
 
     // Carrega a imagem do Firebase Storage

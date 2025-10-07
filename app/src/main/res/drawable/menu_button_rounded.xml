@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <shape xmlns:android="http://schemas.android.com/apk/res/android">
     <!-- Definindo a cor de fundo -->
-    <solid android:color="@color/darkBackground" /> <!-- Cor cinza claro -->
+    <solid android:color="@color/md_theme_light_surface" /> <!-- Cor branca -->
 
     <!-- Definindo os cantos arredondados -->
     <corners android:radius="16dp" />
@@ -16,5 +16,5 @@
     <!-- Definindo a borda (opcional) -->
     <stroke
         android:width="0dp"
-        android:color="@color/greendark" /> <!-- Cor cinza escuro -->
+        android:color="@color/md_theme_light_outline" /> <!-- Cor outline -->
 </shape>

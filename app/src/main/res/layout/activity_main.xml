@@ -6,20 +6,22 @@
     android:layout_height="match_parent"
     android:fitsSystemWindows="true">
 
-    <!-- App Bar -->
+    <!-- App Bar estilo WhatsApp -->
     <com.google.android.material.appbar.AppBarLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:fitsSystemWindows="true">
+        android:fitsSystemWindows="true"
+        android:background="?attr/colorPrimary"
+        android:elevation="0dp">
 
         <com.google.android.material.appbar.MaterialToolbar
             android:id="@+id/toolbar"
+            style="@style/WhatsAppToolbar"
             android:layout_width="match_parent"
             android:layout_height="?attr/actionBarSize"
-            android:background="?attr/colorSurfaceContainer"
             app:title="Adicionar Cadastro"
-            app:titleTextAppearance="@style/TextAppearance.IORITv.TitleLarge"
-            app:titleTextColor="?attr/colorOnSurface" />
+            app:titleTextAppearance="@style/TextAppearance.Material3.HeadlineSmall"
+            app:titleTextColor="?attr/colorOnPrimary" />
 
     </com.google.android.material.appbar.AppBarLayout>
 
@@ -28,21 +30,22 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:fillViewport="true"
-        app:layout_behavior="@string/appbar_scrolling_view_behavior">
+        app:layout_behavior="@string/appbar_scrolling_view_behavior"
+        android:fitsSystemWindows="true">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:padding="24dp">
 
-            <!-- Card de Informações Pessoais -->
+            <!-- Card de Informações Pessoais estilo WhatsApp -->
             <com.google.android.material.card.MaterialCardView
                 android:id="@+id/personalInfoCard"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="16dp"
-                app:cardCornerRadius="16dp"
-                app:cardElevation="4dp"
+                app:cardCornerRadius="12dp"
+                app:cardElevation="2dp"
                 app:strokeWidth="0dp"
                 app:cardBackgroundColor="?attr/colorSurfaceContainer"
                 app:layout_constraintTop_toTopOf="parent">
@@ -57,9 +60,10 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:text="Informações Pessoais"
-                        android:textAppearance="@style/TextAppearance.IORITv.TitleMedium"
+                        android:textAppearance="@style/TextAppearance.Material3.TitleMedium"
                         android:textColor="?attr/colorOnSurface"
-                        android:layout_marginBottom="16dp" />
+                        android:layout_marginBottom="16dp"
+                        android:textStyle="bold" />
 
                     <!-- Nome -->
                     <com.google.android.material.textfield.TextInputLayout
@@ -69,18 +73,23 @@
                         android:layout_height="wrap_content"
                         android:layout_marginBottom="12dp"
                         android:hint="Nome Completo"
-                        app:boxCornerRadiusTopStart="12dp"
-                        app:boxCornerRadiusTopEnd="12dp"
-                        app:boxCornerRadiusBottomStart="12dp"
-                        app:boxCornerRadiusBottomEnd="12dp"
-                        app:startIconDrawable="@drawable/ic_baseline_person_24">
+                        app:boxCornerRadiusTopStart="8dp"
+                        app:boxCornerRadiusTopEnd="8dp"
+                        app:boxCornerRadiusBottomStart="8dp"
+                        app:boxCornerRadiusBottomEnd="8dp"
+                        app:boxStrokeColor="@color/md_theme_light_outline"
+                        app:boxStrokeWidth="1dp"
+                        app:boxStrokeWidthFocused="2dp"
+                        app:startIconDrawable="@drawable/ic_baseline_person_24"
+                        app:startIconTint="@color/md_theme_light_outline">
 
                         <com.google.android.material.textfield.TextInputEditText
                             android:id="@+id/editTextNome"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:inputType="textPersonName"
-                            android:textAppearance="@style/TextAppearance.IORITv.BodyLarge" />
+                            android:textAppearance="@style/TextAppearance.Material3.BodyLarge"
+                            android:textColor="?attr/colorOnSurface" />
 
                     </com.google.android.material.textfield.TextInputLayout>
 
@@ -92,18 +101,23 @@
                         android:layout_height="wrap_content"
                         android:layout_marginBottom="12dp"
                         android:hint="Nome de Usuário"
-                        app:boxCornerRadiusTopStart="12dp"
-                        app:boxCornerRadiusTopEnd="12dp"
-                        app:boxCornerRadiusBottomStart="12dp"
-                        app:boxCornerRadiusBottomEnd="12dp"
-                        app:startIconDrawable="@drawable/ic_baseline_account_circle_24">
+                        app:boxCornerRadiusTopStart="8dp"
+                        app:boxCornerRadiusTopEnd="8dp"
+                        app:boxCornerRadiusBottomStart="8dp"
+                        app:boxCornerRadiusBottomEnd="8dp"
+                        app:boxStrokeColor="@color/md_theme_light_outline"
+                        app:boxStrokeWidth="1dp"
+                        app:boxStrokeWidthFocused="2dp"
+                        app:startIconDrawable="@drawable/ic_baseline_account_circle_24"
+                        app:startIconTint="@color/md_theme_light_outline">
 
                         <com.google.android.material.textfield.TextInputEditText
                             android:id="@+id/editTextUsuario"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:inputType="text"
-                            android:textAppearance="@style/TextAppearance.IORITv.BodyLarge" />
+                            android:textAppearance="@style/TextAppearance.Material3.BodyLarge"
+                            android:textColor="?attr/colorOnSurface" />
 
                     </com.google.android.material.textfield.TextInputLayout>
 
@@ -114,19 +128,25 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:hint="Senha"
-                        app:boxCornerRadiusTopStart="12dp"
-                        app:boxCornerRadiusTopEnd="12dp"
-                        app:boxCornerRadiusBottomStart="12dp"
-                        app:boxCornerRadiusBottomEnd="12dp"
+                        app:boxCornerRadiusTopStart="8dp"
+                        app:boxCornerRadiusTopEnd="8dp"
+                        app:boxCornerRadiusBottomStart="8dp"
+                        app:boxCornerRadiusBottomEnd="8dp"
+                        app:boxStrokeColor="@color/md_theme_light_outline"
+                        app:boxStrokeWidth="1dp"
+                        app:boxStrokeWidthFocused="2dp"
                         app:endIconMode="password_toggle"
-                        app:startIconDrawable="@drawable/ic_baseline_lock_24">
+                        app:endIconTint="@color/md_theme_light_outline"
+                        app:startIconDrawable="@drawable/ic_baseline_lock_24"
+                        app:startIconTint="@color/md_theme_light_outline">
 
                         <com.google.android.material.textfield.TextInputEditText
                             android:id="@+id/editTextSenha"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:inputType="textPassword"
-                            android:textAppearance="@style/TextAppearance.IORITv.BodyLarge" />
+                            android:textAppearance="@style/TextAppearance.Material3.BodyLarge"
+                            android:textColor="?attr/colorOnSurface" />
 
                     </com.google.android.material.textfield.TextInputLayout>
 
@@ -502,20 +522,22 @@
 
             </com.google.android.material.card.MaterialCardView>
 
-            <!-- Botão Salvar -->
+            <!-- Botão Salvar estilo WhatsApp -->
             <com.google.android.material.button.MaterialButton
                 android:id="@+id/buttonSalvar"
-                style="@style/Widget.Material3.Button"
+                style="@style/WhatsAppButton"
                 android:layout_width="match_parent"
                 android:layout_height="56dp"
                 android:text="Salvar Cliente"
-                android:textAppearance="@style/TextAppearance.IORITv.LabelLarge"
-                app:backgroundTint="?attr/colorPrimary"
-                app:cornerRadius="16dp"
+                android:textSize="16sp"
+                android:textStyle="bold"
+                android:backgroundTint="@color/md_theme_light_primary"
+                android:textColor="?attr/colorOnPrimary"
+                app:cornerRadius="28dp"
                 app:icon="@drawable/ic_baseline_save_24"
                 app:iconGravity="textStart"
                 app:iconPadding="8dp"
-                app:iconTint="?attr/colorOnPrimary"
+                app:iconTint="@color/md_theme_light_onPrimary"
                 app:layout_constraintTop_toBottomOf="@+id/financialCard"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintEnd_toEndOf="parent" />

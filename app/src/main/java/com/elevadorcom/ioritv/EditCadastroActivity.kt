@@ -14,6 +14,7 @@ import java.util.Calendar
 import java.util.Date
 import java.util.Locale
 import com.elevadorcom.ioritv.utils.SituacaoUtil
+import com.elevadorcom.ioritv.utils.ThemeUtils
 
 class EditCadastroActivity : AppCompatActivity() {
 
@@ -28,9 +29,10 @@ class EditCadastroActivity : AppCompatActivity() {
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        setTheme(R.style.Theme_IORITv_MainActivity2_Dark) // Define o tema da atividade
+        // Aplica o tema apropriado usando ThemeUtils
+        ThemeUtils.applyTheme(this)
 
+        super.onCreate(savedInstanceState)
         binding = ActivityEditCadastroBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
