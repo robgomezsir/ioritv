@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<shape xmlns:android="http://schemas.android.com/apk/res/android">
+    <!-- Definindo a cor de fundo -->
+    <solid android:color="@color/md_theme_dark_surfaceContainer" />
+
+    <!-- Definindo os cantos arredondados -->
+    <corners android:radius="16dp" />
+
+    <!-- Definindo o padding interno (opcional) -->
+    <padding
+        android:left="10dp"
+        android:top="10dp"
+        android:right="10dp"
+        android:bottom="10dp" />
+
+    <!-- Definindo a borda (opcional) -->
+    <stroke
+        android:width="1dp"
+        android:color="@color/md_theme_dark_outline" />
+</shape>
+

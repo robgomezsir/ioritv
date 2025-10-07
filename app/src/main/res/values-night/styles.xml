@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Estilo para indicador ativo da Bottom Navigation - Dark -->
+    <style name="ActiveIndicator" parent="Widget.Material3.BottomNavigationView.ActiveIndicator">
+        <item name="android:color">@color/md_theme_dark_primaryContainer</item>
+        <item name="android:width">64dp</item>
+        <item name="android:height">32dp</item>
+        <item name="shapeAppearance">@style/ShapeAppearanceOverlay.Material3.BottomNavigationView.ActiveIndicator</item>
+    </style>
+
+    <!-- Estilo para cantos arredondados do indicador ativo -->
+    <style name="ShapeAppearanceOverlay.Material3.BottomNavigationView.ActiveIndicator" parent="">
+        <item name="cornerFamily">rounded</item>
+        <item name="cornerSize">16dp</item>
+    </style>
+
+    <!-- Estilo para ProgressBar - Dark -->
+    <style name="Widget.IORITv.ProgressBar.Horizontal" parent="Widget.Material3.LinearProgressIndicator">
+        <item name="android:progressTint">@color/md_theme_dark_primary</item>
+        <item name="android:progressBackgroundTint">@color/md_theme_dark_surfaceContainer</item>
+        <item name="android:height">4dp</item>
+    </style>
+
+    <!-- Estilo para SearchView - Dark -->
+    <style name="CustomSearchView" parent="Widget.AppCompat.SearchView">
+        <item name="android:background">@drawable/search_view_background</item>
+        <item name="android:textColor">@color/md_theme_dark_onSurface</item>
+        <item name="android:textColorHint">@color/md_theme_dark_onSurfaceVariant</item>
+        <item name="android:hint">Pesquisar...</item>
+        <item name="queryHint">Pesquisar...</item>
+        <item name="android:layout_margin">16dp</item>
+        <item name="android:elevation">0dp</item>
+    </style>
+
+    <!-- Estilo para Cards - Dark -->
+    <style name="WhatsAppCard" parent="Widget.Material3.CardView.Elevated">
+        <item name="cardCornerRadius">12dp</item>
+        <item name="cardElevation">0dp</item>
+        <item name="android:layout_margin">8dp</item>
+        <item name="android:background">@color/md_theme_dark_surfaceContainer</item>
+    </style>
+
+    <!-- Estilo para botões primários - Dark -->
+    <style name="WhatsAppButton" parent="Widget.Material3.Button">
+        <item name="android:backgroundTint">@color/md_theme_dark_primaryContainer</item>
+        <item name="android:textColor">@color/md_theme_dark_onPrimaryContainer</item>
+        <item name="cornerRadius">24dp</item>
+        <item name="android:textSize">16sp</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:paddingTop">12dp</item>
+        <item name="android:paddingBottom">12dp</item>
+        <item name="android:paddingStart">24dp</item>
+        <item name="android:paddingEnd">24dp</item>
+    </style>
+
+    <!-- Estilo para FloatingActionButton - Dark -->
+    <style name="WhatsAppFAB" parent="Widget.Material3.FloatingActionButton.Primary">
+        <item name="backgroundTint">@color/md_theme_dark_primaryContainer</item>
+        <item name="tint">@color/md_theme_dark_onPrimaryContainer</item>
+        <item name="elevation">0dp</item>
+        <item name="pressedTranslationZ">0dp</item>
+    </style>
+
+    <!-- Estilo para Toolbar - Dark -->
+    <style name="WhatsAppToolbar" parent="Widget.Material3.Toolbar">
+        <item name="android:background">@color/md_theme_dark_surface</item>
+        <item name="titleTextColor">@color/md_theme_dark_onSurface</item>
+        <item name="subtitleTextColor">@color/md_theme_dark_onSurfaceVariant</item>
+        <item name="navigationIconTint">@color/md_theme_dark_onSurface</item>
+        <item name="android:elevation">0dp</item>
+    </style>
+</resources>
+

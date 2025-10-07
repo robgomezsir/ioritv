@@ -1,0 +1,283 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="16dp">
+
+    <!-- Shimmer para Card de Ranking -->
+    <com.facebook.shimmer.ShimmerFrameLayout
+        android:id="@+id/shimmerRankingCard"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="16dp"
+        app:shimmer_duration="1500"
+        app:shimmer_auto_start="true"
+        app:shimmer_base_color="?attr/colorSurfaceVariant"
+        app:shimmer_highlight_color="?attr/colorSurface"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <com.google.android.material.card.MaterialCardView
+            android:layout_width="match_parent"
+            android:layout_height="200dp"
+            app:cardCornerRadius="20dp"
+            app:cardElevation="6dp"
+            app:cardBackgroundColor="?attr/colorSurfaceContainer">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical"
+                android:padding="24dp"
+                android:gravity="center">
+
+                <!-- Placeholder para título -->
+                <View
+                    android:layout_width="200dp"
+                    android:layout_height="24dp"
+                    android:background="@drawable/shimmer_placeholder"
+                    android:layout_marginBottom="20dp" />
+
+                <!-- Placeholder para imagens do ranking -->
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:gravity="center">
+
+                    <View
+                        android:layout_width="80dp"
+                        android:layout_height="80dp"
+                        android:background="@drawable/shimmer_placeholder_circle"
+                        android:layout_marginEnd="16dp" />
+
+                    <View
+                        android:layout_width="90dp"
+                        android:layout_height="90dp"
+                        android:background="@drawable/shimmer_placeholder_circle"
+                        android:layout_marginHorizontal="12dp" />
+
+                    <View
+                        android:layout_width="80dp"
+                        android:layout_height="80dp"
+                        android:background="@drawable/shimmer_placeholder_circle"
+                        android:layout_marginStart="16dp" />
+
+                </LinearLayout>
+
+            </LinearLayout>
+
+        </com.google.android.material.card.MaterialCardView>
+
+    </com.facebook.shimmer.ShimmerFrameLayout>
+
+    <!-- Shimmer para Card de Progresso -->
+    <com.facebook.shimmer.ShimmerFrameLayout
+        android:id="@+id/shimmerProgressCard"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="16dp"
+        app:shimmer_duration="1500"
+        app:shimmer_auto_start="true"
+        app:shimmer_base_color="?attr/colorSurfaceVariant"
+        app:shimmer_highlight_color="?attr/colorSurface"
+        app:layout_constraintTop_toBottomOf="@+id/shimmerRankingCard">
+
+        <com.google.android.material.card.MaterialCardView
+            android:layout_width="match_parent"
+            android:layout_height="120dp"
+            app:cardCornerRadius="20dp"
+            app:cardElevation="6dp"
+            app:cardBackgroundColor="?attr/colorSurfaceContainer">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical"
+                android:padding="24dp">
+
+                <!-- Placeholder para título -->
+                <View
+                    android:layout_width="180dp"
+                    android:layout_height="20dp"
+                    android:background="@drawable/shimmer_placeholder"
+                    android:layout_marginBottom="16dp" />
+
+                <!-- Placeholder para descrição -->
+                <View
+                    android:layout_width="120dp"
+                    android:layout_height="16dp"
+                    android:background="@drawable/shimmer_placeholder"
+                    android:layout_marginBottom="16dp" />
+
+                <!-- Placeholder para progress bar -->
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="8dp"
+                    android:background="@drawable/shimmer_placeholder_rounded"
+                    android:layout_marginTop="8dp" />
+
+            </LinearLayout>
+
+        </com.google.android.material.card.MaterialCardView>
+
+    </com.facebook.shimmer.ShimmerFrameLayout>
+
+    <!-- Shimmer para Cards de Créditos e Iorinho -->
+    <LinearLayout
+        android:id="@+id/shimmerCardsRow"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_marginBottom="16dp"
+        app:layout_constraintTop_toBottomOf="@+id/shimmerProgressCard">
+
+        <!-- Shimmer Card Créditos -->
+        <com.facebook.shimmer.ShimmerFrameLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:layout_marginEnd="8dp"
+            app:shimmer_duration="1500"
+            app:shimmer_auto_start="true"
+            app:shimmer_base_color="?attr/colorSurfaceVariant"
+            app:shimmer_highlight_color="?attr/colorSurface">
+
+            <com.google.android.material.card.MaterialCardView
+                android:layout_width="match_parent"
+                android:layout_height="120dp"
+                app:cardCornerRadius="20dp"
+                app:cardElevation="6dp"
+                app:cardBackgroundColor="?attr/colorPrimaryContainer">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="vertical"
+                    android:padding="20dp"
+                    android:gravity="center">
+
+                    <!-- Placeholder para emoji -->
+                    <View
+                        android:layout_width="24dp"
+                        android:layout_height="24dp"
+                        android:background="@drawable/shimmer_placeholder_circle"
+                        android:layout_marginBottom="8dp" />
+
+                    <!-- Placeholder para título -->
+                    <View
+                        android:layout_width="80dp"
+                        android:layout_height="16dp"
+                        android:background="@drawable/shimmer_placeholder"
+                        android:layout_marginBottom="8dp" />
+
+                    <!-- Placeholder para valor -->
+                    <View
+                        android:layout_width="40dp"
+                        android:layout_height="32dp"
+                        android:background="@drawable/shimmer_placeholder" />
+
+                </LinearLayout>
+
+            </com.google.android.material.card.MaterialCardView>
+
+        </com.facebook.shimmer.ShimmerFrameLayout>
+
+        <!-- Shimmer Card Iorinho -->
+        <com.facebook.shimmer.ShimmerFrameLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:layout_marginStart="8dp"
+            app:shimmer_duration="1500"
+            app:shimmer_auto_start="true"
+            app:shimmer_base_color="?attr/colorSurfaceVariant"
+            app:shimmer_highlight_color="?attr/colorSurface">
+
+            <com.google.android.material.card.MaterialCardView
+                android:layout_width="match_parent"
+                android:layout_height="120dp"
+                app:cardCornerRadius="20dp"
+                app:cardElevation="6dp"
+                app:cardBackgroundColor="?attr/colorSecondaryContainer">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="vertical"
+                    android:padding="16dp"
+                    android:gravity="center">
+
+                    <!-- Placeholder para emoji -->
+                    <View
+                        android:layout_width="20dp"
+                        android:layout_height="20dp"
+                        android:background="@drawable/shimmer_placeholder_circle"
+                        android:layout_marginBottom="8dp" />
+
+                    <!-- Placeholder para título -->
+                    <View
+                        android:layout_width="60dp"
+                        android:layout_height="16dp"
+                        android:background="@drawable/shimmer_placeholder"
+                        android:layout_marginBottom="8dp" />
+
+                    <!-- Placeholder para imagem -->
+                    <View
+                        android:layout_width="60dp"
+                        android:layout_height="60dp"
+                        android:background="@drawable/shimmer_placeholder_circle" />
+
+                </LinearLayout>
+
+            </com.google.android.material.card.MaterialCardView>
+
+        </com.facebook.shimmer.ShimmerFrameLayout>
+
+    </LinearLayout>
+
+    <!-- Shimmer para Card do Gráfico -->
+    <com.facebook.shimmer.ShimmerFrameLayout
+        android:id="@+id/shimmerChartCard"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="24dp"
+        app:shimmer_duration="1500"
+        app:shimmer_auto_start="true"
+        app:shimmer_base_color="?attr/colorSurfaceVariant"
+        app:shimmer_highlight_color="?attr/colorSurface"
+        app:layout_constraintTop_toBottomOf="@+id/shimmerCardsRow">
+
+        <com.google.android.material.card.MaterialCardView
+            android:layout_width="match_parent"
+            android:layout_height="280dp"
+            app:cardCornerRadius="20dp"
+            app:cardElevation="6dp"
+            app:cardBackgroundColor="?attr/colorSurfaceContainer">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical"
+                android:padding="24dp">
+
+                <!-- Placeholder para título -->
+                <View
+                    android:layout_width="160dp"
+                    android:layout_height="20dp"
+                    android:background="@drawable/shimmer_placeholder"
+                    android:layout_marginBottom="16dp" />
+
+                <!-- Placeholder para gráfico -->
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="200dp"
+                    android:background="@drawable/shimmer_placeholder_rounded" />
+
+            </LinearLayout>
+
+        </com.google.android.material.card.MaterialCardView>
+
+    </com.facebook.shimmer.ShimmerFrameLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

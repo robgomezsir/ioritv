@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Tema de Alto Contraste -->
+    <style name="Base.Theme.IORITv.HighContrast" parent="Base.Theme.IORITv">
+        <!-- Cores de Alto Contraste -->
+        <item name="colorPrimary">@android:color/black</item>
+        <item name="colorOnPrimary">@android:color/white</item>
+        <item name="colorPrimaryContainer">@android:color/white</item>
+        <item name="colorOnPrimaryContainer">@android:color/black</item>
+        
+        <item name="colorSecondary">@android:color/black</item>
+        <item name="colorOnSecondary">@android:color/white</item>
+        <item name="colorSecondaryContainer">@android:color/white</item>
+        <item name="colorOnSecondaryContainer">@android:color/black</item>
+        
+        <item name="colorSurface">@android:color/white</item>
+        <item name="colorOnSurface">@android:color/black</item>
+        <item name="colorSurfaceContainer">@android:color/white</item>
+        
+        <item name="colorOutline">@android:color/black</item>
+        <item name="colorOutlineVariant">@android:color/black</item>
+        
+        <!-- Status Bar -->
+        <item name="android:statusBarColor">@android:color/white</item>
+        <item name="android:navigationBarColor">@android:color/white</item>
+        <item name="android:windowLightStatusBar">false</item>
+        <item name="android:windowLightNavigationBar">false</item>
+        
+        <!-- Bordas mais espessas para melhor visibilidade -->
+        <item name="android:windowDrawsSystemBarBackgrounds">true</item>
+    </style>
+
+    <style name="Base.Theme.IORITv.HighContrast.Dark" parent="Base.Theme.IORITv.HighContrast">
+        <!-- Alto contraste escuro -->
+        <item name="colorPrimary">@android:color/white</item>
+        <item name="colorOnPrimary">@android:color/black</item>
+        <item name="colorPrimaryContainer">@android:color/black</item>
+        <item name="colorOnPrimaryContainer">@android:color/white</item>
+        
+        <item name="colorSecondary">@android:color/white</item>
+        <item name="colorOnSecondary">@android:color/black</item>
+        <item name="colorSecondaryContainer">@android:color/black</item>
+        <item name="colorOnSecondaryContainer">@android:color/white</item>
+        
+        <item name="colorSurface">@android:color/black</item>
+        <item name="colorOnSurface">@android:color/white</item>
+        <item name="colorSurfaceContainer">@android:color/black</item>
+        
+        <item name="colorOutline">@android:color/white</item>
+        <item name="colorOutlineVariant">@android:color/white</item>
+        
+        <!-- Status Bar -->
+        <item name="android:statusBarColor">@android:color/black</item>
+        <item name="android:navigationBarColor">@android:color/black</item>
+        <item name="android:windowLightStatusBar">true</item>
+        <item name="android:windowLightNavigationBar">true</item>
+    </style>
+</resources>
