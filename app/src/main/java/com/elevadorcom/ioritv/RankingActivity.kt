@@ -61,6 +61,7 @@ class RankingActivity : AppCompatActivity() {
     private val sharedPreferences by lazy {
         getSharedPreferences("AppPreferences", Context.MODE_PRIVATE)
     }
+    private var loadingTasksCount = 0
 
     override fun onCreate(savedInstanceState: Bundle?) {
         // Aplica o tema apropriado usando ThemeUtils
@@ -83,15 +84,14 @@ class RankingActivity : AppCompatActivity() {
 
         totalCredit = findViewById(R.id.totalCredit)
 
-        // Inicializa suas Views usando o binding
+        // Mostra loading inicial
+        showLoading()
+        
+        // Inicializa suas Views usando o binding e carrega dados
         setupViews()
 
-        // Mostra loading inicial e carrega dados
-        showLoading()
-        updateUIWithData()
-
         // Configuração da Barra de Navegação
-        binding.bottomNavigation.setOnNavigationItemSelectedListener { item ->
+        binding.bottomNavigation.setOnItemSelectedListener { item ->
             handleNavigationItemSelected(item.itemId)
         }
 
@@ -223,6 +223,7 @@ class RankingActivity : AppCompatActivity() {
     }
 
     private fun updateProgressAndClientes() {
+        startLoadingTask()
         db.collection("clientes")
             .get()
             .addOnSuccessListener { result ->
@@ -242,10 +243,12 @@ class RankingActivity : AppCompatActivity() {
                     else -> ""
                 }
                 binding.sloganTextView4.text = slogan
+                finishLoadingTask()
             }
             .addOnFailureListener {
                 binding.textTotalClientes.text = "Erro ao contar clientes"
                 binding.textProgressPercent.text = "Erro ao carregar"
+                finishLoadingTask()
             }
     }
 
@@ -291,6 +294,7 @@ class RankingActivity : AppCompatActivity() {
         barChart.renderer = RoundedBarChartRenderer(barChart, barChart.animator, barChart.viewPortHandler)
 
         // Recuperar dados do Firestore
+        startLoadingTask()
         db.collection("clientes")
             .get()
             .addOnSuccessListener { result ->
@@ -338,9 +342,11 @@ class RankingActivity : AppCompatActivity() {
                 // Definir os rótulos do eixo X (situação dos clientes)
                 barChart.xAxis.valueFormatter = IndexAxisValueFormatter(listOf("Ativo", "A Vencer", "Vencido", "Standby"))
                 barChart.invalidate() // Atualiza o gráfico com os novos dados
+                finishLoadingTask()
             }
             .addOnFailureListener { e ->
                 Toast.makeText(this, "Erro ao carregar dados: ${e.message}", Toast.LENGTH_LONG).show()
+                finishLoadingTask()
             }
     }
 
@@ -586,6 +592,21 @@ class RankingActivity : AppCompatActivity() {
     /**
      * Mostra o estado de loading
      */
+    private fun startLoadingTask() {
+        loadingTasksCount++
+        if (!isLoading) {
+            showLoading()
+        }
+    }
+    
+    private fun finishLoadingTask() {
+        loadingTasksCount--
+        if (loadingTasksCount <= 0) {
+            loadingTasksCount = 0
+            hideLoading()
+        }
+    }
+    
     private fun showLoading() {
         isLoading = true
         loadingView.visibility = View.VISIBLE
@@ -596,6 +617,8 @@ class RankingActivity : AppCompatActivity() {
      * Esconde o estado de loading e mostra o conteúdo com animação
      */
     private fun hideLoading() {
+        if (!isLoading) return
+        
         isLoading = false
         AnimationUtils.transitionFromLoadingToContent(loadingView, binding.root)
         
@@ -611,19 +634,6 @@ class RankingActivity : AppCompatActivity() {
         AnimationUtils.animateCardsEnter(cards, 100)
     }
 
-    /**
-     * Atualiza a interface com dados carregados
-     */
-    private fun updateUIWithData() {
-        // Simula carregamento de dados (substitua pela lógica real)
-        Thread {
-            Thread.sleep(2000) // Simula delay de carregamento
-            
-            runOnUiThread {
-                hideLoading()
-            }
-        }.start()
-    }
 
     /**
      * Configura acessibilidade para todos os elementos

@@ -1,21 +1,27 @@
 package com.elevadorcom.ioritv
 
 import android.content.Intent
-import android.content.SharedPreferences
 import android.os.Bundle
+import android.util.Log
 import android.util.Patterns
 import android.widget.Button
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.elevadorcom.ioritv.databinding.ActivityLoginBinding
+import com.elevadorcom.ioritv.utils.SessionManager
 import com.elevadorcom.ioritv.utils.ThemeUtils
+import com.elevadorcom.ioritv.utils.VersionUtils
 import com.google.firebase.auth.FirebaseAuth
 
 class LoginActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityLoginBinding
     private lateinit var auth: FirebaseAuth
-    private lateinit var sharedPreferences: SharedPreferences
+    private lateinit var sessionManager: SessionManager
+    
+    companion object {
+        private const val TAG = "LoginActivity"
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         // Aplica o tema apropriado usando ThemeUtils
@@ -26,10 +32,19 @@ class LoginActivity : AppCompatActivity() {
         setContentView(binding.root)
 
         auth = FirebaseAuth.getInstance()
-        sharedPreferences = getSharedPreferences("login_prefs", MODE_PRIVATE)
+        sessionManager = SessionManager.getInstance(this)
+        
+        // Configura a versão do app no rodapé
+        setupVersionInfo()
+        
+        // Configura o estado do checkbox baseado na preferência salva
+        setupKeepLoggedInCheckbox()
 
         // Verifica se o usuário já está logado
-        if (!checkIfLoggedIn()) {
+        if (sessionManager.isUserLoggedIn()) {
+            // Se já estiver logado, navega para a tela principal
+            navigateToMainScreen()
+        } else {
             // Se não estiver logado, exibe o pop-up de biometria
             showBiometricPrompt()
         }
@@ -100,14 +115,27 @@ class LoginActivity : AppCompatActivity() {
                 if (task.isSuccessful) {
                     val user = auth.currentUser
                     if (user != null && user.isEmailVerified) {
-                        saveLoginStatus() // Salva o estado de login
-                        startActivity(Intent(this, RankingActivity::class.java))
-                        finish()
-                    } else {
+                        // Verifica se o checkbox "Manter-me conectado" está marcado
+                        if (binding.keepLoggedInCheckbox.isChecked) {
+                            // Salva o estado de login para persistência
+                            sessionManager.saveLoginStatus()
+                            Log.d(TAG, "Login successful with persistent session for user: ${user.email}")
+                        } else {
+                            // Não salva a sessão - usuário será deslogado ao fechar o app
+                            sessionManager.clearLoginStatus()
+                            Log.d(TAG, "Login successful without persistent session for user: ${user.email}")
+                        }
+                        
+                        // Navega para a tela principal
+                        navigateToMainScreen()
+                    } else if (user != null && !user.isEmailVerified) {
                         Toast.makeText(this, "Verifique seu email para continuar", Toast.LENGTH_SHORT).show()
+                        auth.signOut() // Faz logout se email não verificado
                     }
                 } else {
-                    Toast.makeText(this, "Falha ao fazer login", Toast.LENGTH_SHORT).show()
+                    val errorMessage = task.exception?.message ?: "Falha ao fazer login"
+                    Toast.makeText(this, errorMessage, Toast.LENGTH_SHORT).show()
+                    Log.e(TAG, "Login failed: $errorMessage")
                 }
             }
     }
@@ -118,22 +146,32 @@ class LoginActivity : AppCompatActivity() {
         biometricFragment.show(supportFragmentManager, "BiometricPromptFragment")
     }
 
-    // Função para salvar o estado de login
-    private fun saveLoginStatus() {
-        val editor = sharedPreferences.edit()
-        editor.putBoolean("is_logged_in", true)
-        editor.apply()
+    // Função para navegar para a tela principal
+    private fun navigateToMainScreen() {
+        startActivity(Intent(this, RankingActivity::class.java))
+        finish()
     }
-
-    // Função para verificar se o usuário já está logado
-    private fun checkIfLoggedIn(): Boolean {
-        val isLoggedIn = sharedPreferences.getBoolean("is_logged_in", false)
-        if (isLoggedIn && auth.currentUser != null) {
-            // Se o usuário já estiver logado, navega diretamente para a RankingActivity
-            startActivity(Intent(this, RankingActivity::class.java))
-            finish()
-            return true
+    
+    // Função para configurar a versão do app no rodapé
+    private fun setupVersionInfo() {
+        try {
+            binding.textView2.text = VersionUtils.getFooterText(this)
+        } catch (e: Exception) {
+            // Mantém o texto padrão em caso de erro
+            e.printStackTrace()
         }
-        return false
+    }
+    
+    // Função para configurar o checkbox "Manter-me conectado"
+    private fun setupKeepLoggedInCheckbox() {
+        // Restaura a preferência salva (padrão: true)
+        val keepLoggedIn = sessionManager.getKeepLoggedInPreference()
+        binding.keepLoggedInCheckbox.isChecked = keepLoggedIn
+        
+        // Salva a preferência quando o checkbox é alterado
+        binding.keepLoggedInCheckbox.setOnCheckedChangeListener { _, isChecked ->
+            sessionManager.setKeepLoggedInPreference(isChecked)
+            Log.d(TAG, "Keep logged in preference set to: $isChecked")
+        }
     }
 }

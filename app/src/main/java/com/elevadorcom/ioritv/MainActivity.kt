@@ -63,11 +63,6 @@ class MainActivity : AppCompatActivity() {
 
         // Definir ação do botão "Salvar"
         binding.buttonSalvar.setOnClickListener {
-            val intent = Intent(this, RankingActivity::class.java)
-            // Passa os créditos inseridos pelo usuário para a RankingActivity
-            intent.putExtra("creditosASubtrair", editTextCreditos.text.toString().toIntOrNull() ?: 0)
-            startActivity(intent)
-
             // Salvar cliente no Firebase
             salvarCliente()
         }
@@ -77,6 +72,19 @@ class MainActivity : AppCompatActivity() {
 
         // Executa o UpdateWorker ao abrir o aplicativo
         executarUpdateWorkerAoAbrir()
+    }
+
+    override fun onOptionsItemSelected(item: android.view.MenuItem): Boolean {
+        return when (item.itemId) {
+            android.R.id.home -> {
+                // Redireciona para a aba Cadastros (MainActivity2)
+                val intent = Intent(this, MainActivity2::class.java)
+                startActivity(intent)
+                finish()
+                true
+            }
+            else -> super.onOptionsItemSelected(item)
+        }
     }
 
     private fun verificarIntent() {
@@ -171,6 +179,11 @@ class MainActivity : AppCompatActivity() {
             .addOnSuccessListener {
                 Toast.makeText(this, "Cliente salvo com sucesso!", Toast.LENGTH_SHORT).show()
                 limparCampos()
+                
+                // Redireciona para a aba Cadastros após salvar
+                val intent = Intent(this, MainActivity2::class.java)
+                startActivity(intent)
+                finish()
             }
             .addOnFailureListener { e ->
                 Toast.makeText(this, "Erro ao salvar cliente: ${e.message}", Toast.LENGTH_LONG).show()

@@ -3,8 +3,15 @@
     <string name="status_icon_description" />
     <string name="title_activity_main3">Main3Activity</string>
     <string name="title_home">Home</string>
-    <string name="title_dashboard">Dashboard</string>
+    <string name="title_dashboard">Home</string>
     <string name="title_notifications">Notifications</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    
+    <!-- Versionamento -->
+    <string name="app_version">v%s</string>
+    <string name="footer_text">elevadorcom® - Todos os direitos reservados - 2025/26 - v%s</string>
+    
+    <!-- Login -->
+    <string name="keep_logged_in">Manter-me conectado</string>
 </resources>

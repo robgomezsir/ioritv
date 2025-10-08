@@ -12,6 +12,16 @@
     <color name="bar_color_overdue">#FFB74D</color>
     <color name="bar_color_standby">#BDBDBD</color>
     
+    <!-- Cores para botões de filtro -->
+    <color name="filter_button_active_light">#22202a</color>
+    <color name="filter_button_inactive_light">#2D2A33</color>
+    
+    <!-- Cores para TextInputLayout -->
+    <color name="text_input_stroke_light">#949494</color>
+    <color name="text_input_stroke_focused_light">#64B5F6</color>
+    <color name="text_input_label_light">#BDBDBD</color>
+    <color name="text_input_label_focused_light">#64B5F6</color>
+    
     <!-- Material Design 3 - Tema Escuro (Toolbar Branca) -->
     <color name="md_theme_dark_primary">#FFFFFF</color>
     <color name="md_theme_dark_onPrimary">#000000</color>
@@ -47,7 +57,7 @@
     <color name="md_theme_dark_surfaceBright">#2D2A33</color>
     <color name="md_theme_dark_surfaceContainerLowest">#0F0D13</color>
     <color name="md_theme_dark_surfaceContainerLow">#141218</color>
-    <color name="md_theme_dark_surfaceContainer">#1A1820</color>
+    <color name="md_theme_dark_surfaceContainer">#22202a</color>
     <color name="md_theme_dark_surfaceContainerHigh">#201D26</color>
     <color name="md_theme_dark_surfaceContainerHighest">#2B282F</color>
     <color name="md_theme_dark_onSurfaceContainer">#FFFFFF</color>

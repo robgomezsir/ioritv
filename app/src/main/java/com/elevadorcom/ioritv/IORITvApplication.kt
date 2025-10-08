@@ -36,9 +36,12 @@ class IORITvApplication : Application() {
      * Configurações iniciais de acessibilidade
      */
     private fun setupAccessibilitySettings() {
-        // Verifica se alto contraste está ativo e aplica tema se necessário
+        // Verifica se alto contraste está ativo
+        // Nota: Não aplicamos tema aqui para evitar conflitos com ThemeUtils
+        // O tema deve ser aplicado apenas nas Activities através do ThemeUtils
         if (AccessibilityUtils.isHighContrastEnabled(this)) {
-            AccessibilityUtils.applyHighContrastTheme(this, true)
+            // Apenas registra que alto contraste está ativo
+            // O tema será aplicado nas Activities quando necessário
         }
     }
 

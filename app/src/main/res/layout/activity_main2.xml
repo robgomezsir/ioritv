@@ -14,7 +14,7 @@
         style="@style/WhatsAppToolbar"
         android:layout_width="0dp"
         android:layout_height="?attr/actionBarSize"
-        android:title="Meu IoriTv"
+        android:title="Meu Ioritv"
         android:titleTextAppearance="@style/TextAppearance.Material3.HeadlineSmall"
         android:titleTextColor="?attr/colorOnPrimary"
         android:elevation="0dp"
@@ -69,12 +69,12 @@
                 android:text="ATIVO"
                 android:textSize="13sp"
                 android:textStyle="bold"
-                android:backgroundTint="@color/md_theme_light_primary"
-                android:textColor="?attr/colorOnPrimary"
+                android:textColor="@color/filter_button_text_color"
+                app:backgroundTint="@color/filter_button_background_tint"
                 app:cornerRadius="20dp"
                 app:iconGravity="textStart"
                 app:iconPadding="8dp"
-                app:iconTint="@color/md_theme_light_onPrimary" />
+                app:iconTint="@color/filter_button_text_color" />
 
             <com.google.android.material.button.MaterialButton
                 android:id="@+id/buttonAVencer"
@@ -86,12 +86,12 @@
                 android:text="A VENCER"
                 android:textSize="13sp"
                 android:textStyle="bold"
-                android:backgroundTint="@color/md_theme_light_secondary"
-                android:textColor="?attr/colorOnPrimary"
+                android:textColor="@color/filter_button_text_color"
+                app:backgroundTint="@color/filter_button_background_tint"
                 app:cornerRadius="20dp"
                 app:iconGravity="textStart"
                 app:iconPadding="8dp"
-                app:iconTint="@color/md_theme_light_onPrimary" />
+                app:iconTint="@color/filter_button_text_color" />
 
             <com.google.android.material.button.MaterialButton
                 android:id="@+id/buttonVencido"
@@ -103,12 +103,12 @@
                 android:text="VENCIDO"
                 android:textSize="13sp"
                 android:textStyle="bold"
-                android:backgroundTint="@color/md_theme_light_secondary"
-                android:textColor="?attr/colorOnPrimary"
+                android:textColor="@color/filter_button_text_color"
+                app:backgroundTint="@color/filter_button_background_tint"
                 app:cornerRadius="20dp"
                 app:iconGravity="textStart"
                 app:iconPadding="8dp"
-                app:iconTint="@color/md_theme_light_onPrimary" />
+                app:iconTint="@color/filter_button_text_color" />
 
             <com.google.android.material.button.MaterialButton
                 android:id="@+id/buttonStandby"
@@ -120,12 +120,12 @@
                 android:text="INATIVO"
                 android:textSize="13sp"
                 android:textStyle="bold"
-                android:backgroundTint="@color/md_theme_light_secondary"
-                android:textColor="?attr/colorOnPrimary"
+                android:textColor="@color/filter_button_text_color"
+                app:backgroundTint="@color/filter_button_background_tint"
                 app:cornerRadius="20dp"
                 app:iconGravity="textStart"
                 app:iconPadding="8dp"
-                app:iconTint="@color/md_theme_light_onPrimary" />
+                app:iconTint="@color/filter_button_text_color" />
 
             <!-- Botão ATUALIZAR -->
             <Button
@@ -177,8 +177,8 @@
         android:layout_marginEnd="16dp"
         android:layout_marginBottom="16dp"
         android:src="@drawable/adduser"
-        android:backgroundTint="@color/md_theme_light_primary"
-        android:tint="@color/md_theme_light_onPrimary"
+        android:backgroundTint="#2196F3"
+        android:tint="#FFFFFF"
         app:fabSize="normal"
         app:elevation="0dp"
         app:layout_constraintBottom_toTopOf="@+id/bottom_navigation"

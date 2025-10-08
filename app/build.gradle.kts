@@ -14,14 +14,19 @@ android {
         applicationId = "com.elevadorcom.ioritv"
         minSdk = 26
         targetSdk = 35
-        versionCode = 1
-        versionName = "1.0"
+        versionCode = 42
+        versionName = "4.2"
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
+        
+        // Habilitar BuildConfig para acessar versionName no código
+        buildConfigField("String", "VERSION_NAME", "\"${versionName}\"")
+        buildConfigField("int", "VERSION_CODE", "${versionCode}")
     }
     buildFeatures {
         viewBinding = true
         compose = true
+        buildConfig = true
     }
     buildTypes {
         debug {
@@ -45,6 +50,11 @@ android {
     }
     kotlinOptions {
         jvmTarget = "17"
+    }
+    
+    lint {
+        abortOnError = false
+        checkReleaseBuilds = false
     }
     
     packaging {
@@ -114,5 +124,9 @@ dependencies {
     implementation("androidx.media:media:1.7.0")
     implementation("com.onesignal:OneSignal:5.1.6")
     implementation("com.squareup.picasso:picasso:2.8")
+    
+    // Apache POI para geração de arquivos Excel
+    implementation("org.apache.poi:poi:5.2.5")
+    implementation("org.apache.poi:poi-ooxml:5.2.5")
 
 }

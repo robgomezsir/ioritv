@@ -41,6 +41,10 @@ class MainActivity2 : AppCompatActivity() {
         binding = ActivityMain2Binding.inflate(layoutInflater)
         setContentView(binding.root)
 
+        // Configura a toolbar
+        setSupportActionBar(binding.toolbar)
+        supportActionBar?.title = "Meu Ioritv"
+
         // Inicializa o estado dos filtros
         filterStates["ATIVO"] = false
         filterStates["A VENCER"] = false
@@ -70,7 +74,7 @@ class MainActivity2 : AppCompatActivity() {
         }
 
         // Configuração da Bottom Navigation
-        binding.bottomNavigation.setOnNavigationItemSelectedListener { menuItem ->
+        binding.bottomNavigation.setOnItemSelectedListener { menuItem ->
             when (menuItem.itemId) {
                 R.id.nav_home -> {
                     // Navegação para a Activity de Ranking

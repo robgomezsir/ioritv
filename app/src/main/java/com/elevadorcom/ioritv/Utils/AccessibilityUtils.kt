@@ -128,7 +128,8 @@ object AccessibilityUtils {
         } else {
             com.elevadorcom.ioritv.R.style.Base_Theme_IORITv
         }
-        context.setTheme(theme)
+        // Não aplicar tema aqui pois pode causar conflitos com ThemeUtils
+        // O tema deve ser aplicado apenas no ThemeUtils
     }
 
     /**

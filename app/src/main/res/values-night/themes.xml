@@ -59,6 +59,9 @@
         <item name="textAppearanceLabelLarge">@style/TextAppearance.IORITv.LabelLarge</item>
         <item name="textAppearanceLabelMedium">@style/TextAppearance.IORITv.LabelMedium</item>
         <item name="textAppearanceLabelSmall">@style/TextAppearance.IORITv.LabelSmall</item>
+        
+        <!-- TextInputLayout -->
+        <item name="textInputStyle">@style/CustomTextInputLayout</item>
     </style>
 
     <!-- Tema customizado para o modo escuro da LoginActivity -->
