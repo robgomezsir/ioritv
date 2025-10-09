@@ -6,22 +6,21 @@
     android:layout_height="match_parent"
     android:fitsSystemWindows="true">
 
-    <!-- App Bar estilo WhatsApp -->
+    <!-- App Bar Material 3 -->
     <com.google.android.material.appbar.AppBarLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:fitsSystemWindows="true"
-        android:background="?attr/colorPrimary"
+        android:background="@android:color/transparent"
         android:elevation="0dp">
 
         <com.google.android.material.appbar.MaterialToolbar
             android:id="@+id/toolbar"
-            style="@style/WhatsAppToolbar"
             android:layout_width="match_parent"
             android:layout_height="?attr/actionBarSize"
             app:title="Adicionar Cadastro"
             app:titleTextAppearance="@style/TextAppearance.Material3.HeadlineSmall"
-            app:titleTextColor="?attr/colorOnPrimary" />
+            app:titleTextColor="?attr/colorOnSurface" />
 
     </com.google.android.material.appbar.AppBarLayout>
 
@@ -36,18 +35,19 @@
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:padding="24dp"
+            android:padding="16dp"
             android:paddingBottom="32dp">
 
-            <!-- Card de Informações Pessoais estilo WhatsApp -->
+            <!-- Card de Informações Pessoais -->
             <com.google.android.material.card.MaterialCardView
                 android:id="@+id/personalInfoCard"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginBottom="15dp"
-                app:cardCornerRadius="12dp"
-                app:cardElevation="2dp"
-                app:strokeWidth="0dp"
+                android:layout_marginBottom="20dp"
+                app:cardCornerRadius="16dp"
+                app:cardElevation="0dp"
+                app:strokeWidth="1dp"
+                app:strokeColor="?attr/colorOutline"
                 app:cardBackgroundColor="?attr/colorSurfaceContainer"
                 app:layout_constraintTop_toTopOf="parent">
 
@@ -69,13 +69,21 @@
                     <!-- Nome -->
                     <com.google.android.material.textfield.TextInputLayout
                         android:id="@+id/nomeInputLayout"
-                        style="@style/CustomTextInputLayout"
+                        style="@style/Widget.Material3.TextInputLayout.OutlinedBox"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginBottom="12dp"
+                        android:layout_marginBottom="16dp"
                         android:hint="Nome Completo"
+                        app:boxCornerRadiusTopStart="12dp"
+                        app:boxCornerRadiusTopEnd="12dp"
+                        app:boxCornerRadiusBottomStart="12dp"
+                        app:boxCornerRadiusBottomEnd="12dp"
+                        app:boxStrokeColor="?attr/colorOutline"
+                        app:boxStrokeWidth="1dp"
+                        app:boxStrokeWidthFocused="2dp"
+                        app:hintTextColor="?attr/colorOnSurfaceVariant"
                         app:startIconDrawable="@drawable/ic_baseline_person_24"
-                        app:startIconTint="@color/text_input_label_light">
+                        app:startIconTint="?attr/colorOnSurfaceVariant">
 
                         <com.google.android.material.textfield.TextInputEditText
                             android:id="@+id/editTextNome"
@@ -93,17 +101,18 @@
                         style="@style/Widget.Material3.TextInputLayout.OutlinedBox"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginBottom="12dp"
+                        android:layout_marginBottom="16dp"
                         android:hint="Nome de Usuário"
-                        app:boxCornerRadiusTopStart="8dp"
-                        app:boxCornerRadiusTopEnd="8dp"
-                        app:boxCornerRadiusBottomStart="8dp"
-                        app:boxCornerRadiusBottomEnd="8dp"
-                        app:boxStrokeColor="@color/md_theme_light_outline"
+                        app:boxCornerRadiusTopStart="12dp"
+                        app:boxCornerRadiusTopEnd="12dp"
+                        app:boxCornerRadiusBottomStart="12dp"
+                        app:boxCornerRadiusBottomEnd="12dp"
+                        app:boxStrokeColor="?attr/colorOutline"
                         app:boxStrokeWidth="1dp"
                         app:boxStrokeWidthFocused="2dp"
+                        app:hintTextColor="?attr/colorOnSurfaceVariant"
                         app:startIconDrawable="@drawable/ic_baseline_account_circle_24"
-                        app:startIconTint="@color/md_theme_light_outline">
+                        app:startIconTint="?attr/colorOnSurfaceVariant">
 
                         <com.google.android.material.textfield.TextInputEditText
                             android:id="@+id/editTextUsuario"
@@ -122,17 +131,18 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:hint="Senha"
-                        app:boxCornerRadiusTopStart="8dp"
-                        app:boxCornerRadiusTopEnd="8dp"
-                        app:boxCornerRadiusBottomStart="8dp"
-                        app:boxCornerRadiusBottomEnd="8dp"
-                        app:boxStrokeColor="@color/md_theme_light_outline"
+                        app:boxCornerRadiusTopStart="12dp"
+                        app:boxCornerRadiusTopEnd="12dp"
+                        app:boxCornerRadiusBottomStart="12dp"
+                        app:boxCornerRadiusBottomEnd="12dp"
+                        app:boxStrokeColor="?attr/colorOutline"
                         app:boxStrokeWidth="1dp"
                         app:boxStrokeWidthFocused="2dp"
+                        app:hintTextColor="?attr/colorOnSurfaceVariant"
                         app:endIconMode="password_toggle"
-                        app:endIconTint="@color/md_theme_light_outline"
+                        app:endIconTint="?attr/colorOnSurfaceVariant"
                         app:startIconDrawable="@drawable/ic_baseline_lock_24"
-                        app:startIconTint="@color/md_theme_light_outline">
+                        app:startIconTint="?attr/colorOnSurfaceVariant">
 
                         <com.google.android.material.textfield.TextInputEditText
                             android:id="@+id/editTextSenha"
@@ -153,10 +163,11 @@
                 android:id="@+id/contactCard"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginBottom="15dp"
+                android:layout_marginBottom="20dp"
                 app:cardCornerRadius="16dp"
-                app:cardElevation="4dp"
-                app:strokeWidth="0dp"
+                app:cardElevation="0dp"
+                app:strokeWidth="1dp"
+                app:strokeColor="?attr/colorOutline"
                 app:cardBackgroundColor="?attr/colorSurfaceContainer"
                 app:layout_constraintTop_toBottomOf="@+id/personalInfoCard">
 
@@ -170,9 +181,10 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:text="Contato e Dispositivo"
-                        android:textAppearance="@style/TextAppearance.IORITv.TitleMedium"
+                        android:textAppearance="@style/TextAppearance.Material3.TitleMedium"
                         android:textColor="?attr/colorOnSurface"
-                        android:layout_marginBottom="16dp" />
+                        android:layout_marginBottom="16dp"
+                        android:textStyle="bold" />
 
                     <!-- WhatsApp -->
                     <com.google.android.material.textfield.TextInputLayout
@@ -180,20 +192,26 @@
                         style="@style/Widget.Material3.TextInputLayout.OutlinedBox"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginBottom="12dp"
+                        android:layout_marginBottom="16dp"
                         android:hint="WhatsApp"
                         app:boxCornerRadiusTopStart="12dp"
                         app:boxCornerRadiusTopEnd="12dp"
                         app:boxCornerRadiusBottomStart="12dp"
                         app:boxCornerRadiusBottomEnd="12dp"
-                        app:startIconDrawable="@drawable/ic_baseline_phone_24">
+                        app:boxStrokeColor="?attr/colorOutline"
+                        app:boxStrokeWidth="1dp"
+                        app:boxStrokeWidthFocused="2dp"
+                        app:hintTextColor="?attr/colorOnSurfaceVariant"
+                        app:startIconDrawable="@drawable/ic_baseline_phone_24"
+                        app:startIconTint="?attr/colorOnSurfaceVariant">
 
                         <com.google.android.material.textfield.TextInputEditText
                             android:id="@+id/editTextWhatsapp"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:inputType="phone"
-                            android:textAppearance="@style/TextAppearance.IORITv.BodyLarge" />
+                            android:textAppearance="@style/TextAppearance.Material3.BodyLarge"
+                            android:textColor="?attr/colorOnSurface" />
 
                     </com.google.android.material.textfield.TextInputLayout>
 
@@ -208,14 +226,20 @@
                         app:boxCornerRadiusTopEnd="12dp"
                         app:boxCornerRadiusBottomStart="12dp"
                         app:boxCornerRadiusBottomEnd="12dp"
-                        app:startIconDrawable="@drawable/ic_baseline_devices_24">
+                        app:boxStrokeColor="?attr/colorOutline"
+                        app:boxStrokeWidth="1dp"
+                        app:boxStrokeWidthFocused="2dp"
+                        app:hintTextColor="?attr/colorOnSurfaceVariant"
+                        app:startIconDrawable="@drawable/ic_baseline_devices_24"
+                        app:startIconTint="?attr/colorOnSurfaceVariant">
 
                         <com.google.android.material.textfield.TextInputEditText
                             android:id="@+id/editTextModelo"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:inputType="text"
-                            android:textAppearance="@style/TextAppearance.IORITv.BodyLarge" />
+                            android:textAppearance="@style/TextAppearance.Material3.BodyLarge"
+                            android:textColor="?attr/colorOnSurface" />
 
                     </com.google.android.material.textfield.TextInputLayout>
 
@@ -228,10 +252,11 @@
                 android:id="@+id/configCard"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginBottom="15dp"
+                android:layout_marginBottom="20dp"
                 app:cardCornerRadius="16dp"
-                app:cardElevation="4dp"
-                app:strokeWidth="0dp"
+                app:cardElevation="0dp"
+                app:strokeWidth="1dp"
+                app:strokeColor="?attr/colorOutline"
                 app:cardBackgroundColor="?attr/colorSurfaceContainer"
                 app:layout_constraintTop_toBottomOf="@+id/contactCard">
 
@@ -245,9 +270,10 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:text="Configurações do Serviço"
-                        android:textAppearance="@style/TextAppearance.IORITv.TitleMedium"
+                        android:textAppearance="@style/TextAppearance.Material3.TitleMedium"
                         android:textColor="?attr/colorOnSurface"
-                        android:layout_marginBottom="16dp" />
+                        android:layout_marginBottom="16dp"
+                        android:textStyle="bold" />
 
                     <!-- Data Início -->
                     <com.google.android.material.textfield.TextInputLayout
@@ -255,20 +281,26 @@
                         style="@style/Widget.Material3.TextInputLayout.OutlinedBox"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginBottom="12dp"
+                        android:layout_marginBottom="16dp"
                         android:hint="Data Início"
                         app:boxCornerRadiusTopStart="12dp"
                         app:boxCornerRadiusTopEnd="12dp"
                         app:boxCornerRadiusBottomStart="12dp"
                         app:boxCornerRadiusBottomEnd="12dp"
-                        app:startIconDrawable="@drawable/ic_baseline_calendar_today_24">
+                        app:boxStrokeColor="?attr/colorOutline"
+                        app:boxStrokeWidth="1dp"
+                        app:boxStrokeWidthFocused="2dp"
+                        app:hintTextColor="?attr/colorOnSurfaceVariant"
+                        app:startIconDrawable="@drawable/ic_baseline_calendar_today_24"
+                        app:startIconTint="?attr/colorOnSurfaceVariant">
 
                         <com.google.android.material.textfield.TextInputEditText
                             android:id="@+id/editTextInicio"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:inputType="date"
-                            android:textAppearance="@style/TextAppearance.IORITv.BodyLarge" />
+                            android:textAppearance="@style/TextAppearance.Material3.BodyLarge"
+                            android:textColor="?attr/colorOnSurface" />
 
                     </com.google.android.material.textfield.TextInputLayout>
 
@@ -278,20 +310,26 @@
                         style="@style/Widget.Material3.TextInputLayout.OutlinedBox"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginBottom="12dp"
+                        android:layout_marginBottom="16dp"
                         android:hint="Créditos"
                         app:boxCornerRadiusTopStart="12dp"
                         app:boxCornerRadiusTopEnd="12dp"
                         app:boxCornerRadiusBottomStart="12dp"
                         app:boxCornerRadiusBottomEnd="12dp"
-                        app:startIconDrawable="@drawable/ic_baseline_stars_24">
+                        app:boxStrokeColor="?attr/colorOutline"
+                        app:boxStrokeWidth="1dp"
+                        app:boxStrokeWidthFocused="2dp"
+                        app:hintTextColor="?attr/colorOnSurfaceVariant"
+                        app:startIconDrawable="@drawable/ic_baseline_stars_24"
+                        app:startIconTint="?attr/colorOnSurfaceVariant">
 
                         <com.google.android.material.textfield.TextInputEditText
                             android:id="@+id/editTextCreditos"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:inputType="numberDecimal"
-                            android:textAppearance="@style/TextAppearance.IORITv.BodyLarge" />
+                            android:textAppearance="@style/TextAppearance.Material3.BodyLarge"
+                            android:textColor="?attr/colorOnSurface" />
 
                     </com.google.android.material.textfield.TextInputLayout>
 
@@ -301,20 +339,26 @@
                         style="@style/Widget.Material3.TextInputLayout.OutlinedBox"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginBottom="12dp"
+                        android:layout_marginBottom="16dp"
                         android:hint="MAC Address"
                         app:boxCornerRadiusTopStart="12dp"
                         app:boxCornerRadiusTopEnd="12dp"
                         app:boxCornerRadiusBottomStart="12dp"
                         app:boxCornerRadiusBottomEnd="12dp"
-                        app:startIconDrawable="@drawable/ic_baseline_router_24">
+                        app:boxStrokeColor="?attr/colorOutline"
+                        app:boxStrokeWidth="1dp"
+                        app:boxStrokeWidthFocused="2dp"
+                        app:hintTextColor="?attr/colorOnSurfaceVariant"
+                        app:startIconDrawable="@drawable/ic_baseline_router_24"
+                        app:startIconTint="?attr/colorOnSurfaceVariant">
 
                         <com.google.android.material.textfield.TextInputEditText
                             android:id="@+id/editTextMAC"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:inputType="textCapCharacters"
-                            android:textAppearance="@style/TextAppearance.IORITv.BodyLarge" />
+                            android:textAppearance="@style/TextAppearance.Material3.BodyLarge"
+                            android:textColor="?attr/colorOnSurface" />
 
                     </com.google.android.material.textfield.TextInputLayout>
 
@@ -324,20 +368,26 @@
                         style="@style/Widget.Material3.TextInputLayout.OutlinedBox"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginBottom="12dp"
+                        android:layout_marginBottom="16dp"
                         android:hint="OTP"
                         app:boxCornerRadiusTopStart="12dp"
                         app:boxCornerRadiusTopEnd="12dp"
                         app:boxCornerRadiusBottomStart="12dp"
                         app:boxCornerRadiusBottomEnd="12dp"
-                        app:startIconDrawable="@drawable/ic_baseline_security_24">
+                        app:boxStrokeColor="?attr/colorOutline"
+                        app:boxStrokeWidth="1dp"
+                        app:boxStrokeWidthFocused="2dp"
+                        app:hintTextColor="?attr/colorOnSurfaceVariant"
+                        app:startIconDrawable="@drawable/ic_baseline_security_24"
+                        app:startIconTint="?attr/colorOnSurfaceVariant">
 
                         <com.google.android.material.textfield.TextInputEditText
                             android:id="@+id/editTextOTP"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:inputType="text"
-                            android:textAppearance="@style/TextAppearance.IORITv.BodyLarge" />
+                            android:textAppearance="@style/TextAppearance.Material3.BodyLarge"
+                            android:textColor="?attr/colorOnSurface" />
 
                     </com.google.android.material.textfield.TextInputLayout>
 
@@ -347,20 +397,26 @@
                         style="@style/Widget.Material3.TextInputLayout.OutlinedBox"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginBottom="12dp"
+                        android:layout_marginBottom="16dp"
                         android:hint="Device ID"
                         app:boxCornerRadiusTopStart="12dp"
                         app:boxCornerRadiusTopEnd="12dp"
                         app:boxCornerRadiusBottomStart="12dp"
                         app:boxCornerRadiusBottomEnd="12dp"
-                        app:startIconDrawable="@drawable/ic_baseline_phone_android_24">
+                        app:boxStrokeColor="?attr/colorOutline"
+                        app:boxStrokeWidth="1dp"
+                        app:boxStrokeWidthFocused="2dp"
+                        app:hintTextColor="?attr/colorOnSurfaceVariant"
+                        app:startIconDrawable="@drawable/ic_baseline_phone_android_24"
+                        app:startIconTint="?attr/colorOnSurfaceVariant">
 
                         <com.google.android.material.textfield.TextInputEditText
                             android:id="@+id/editTextDevice"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:inputType="text"
-                            android:textAppearance="@style/TextAppearance.IORITv.BodyLarge" />
+                            android:textAppearance="@style/TextAppearance.Material3.BodyLarge"
+                            android:textColor="?attr/colorOnSurface" />
 
                     </com.google.android.material.textfield.TextInputLayout>
 
@@ -375,14 +431,20 @@
                         app:boxCornerRadiusTopEnd="12dp"
                         app:boxCornerRadiusBottomStart="12dp"
                         app:boxCornerRadiusBottomEnd="12dp"
-                        app:startIconDrawable="@drawable/ic_baseline_dns_24">
+                        app:boxStrokeColor="?attr/colorOutline"
+                        app:boxStrokeWidth="1dp"
+                        app:boxStrokeWidthFocused="2dp"
+                        app:hintTextColor="?attr/colorOnSurfaceVariant"
+                        app:startIconDrawable="@drawable/ic_baseline_dns_24"
+                        app:startIconTint="?attr/colorOnSurfaceVariant">
 
                         <com.google.android.material.textfield.TextInputEditText
                             android:id="@+id/editTextServidor"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:inputType="textUri"
-                            android:textAppearance="@style/TextAppearance.IORITv.BodyLarge" />
+                            android:textAppearance="@style/TextAppearance.Material3.BodyLarge"
+                            android:textColor="?attr/colorOnSurface" />
 
                     </com.google.android.material.textfield.TextInputLayout>
 
@@ -395,10 +457,11 @@
                 android:id="@+id/financialCard"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginBottom="15dp"
+                android:layout_marginBottom="20dp"
                 app:cardCornerRadius="16dp"
-                app:cardElevation="4dp"
-                app:strokeWidth="0dp"
+                app:cardElevation="0dp"
+                app:strokeWidth="1dp"
+                app:strokeColor="?attr/colorOutline"
                 app:cardBackgroundColor="?attr/colorSurfaceContainer"
                 app:layout_constraintTop_toBottomOf="@+id/configCard">
 
@@ -412,9 +475,10 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:text="Informações Financeiras"
-                        android:textAppearance="@style/TextAppearance.IORITv.TitleMedium"
+                        android:textAppearance="@style/TextAppearance.Material3.TitleMedium"
                         android:textColor="?attr/colorOnSurface"
-                        android:layout_marginBottom="16dp" />
+                        android:layout_marginBottom="16dp"
+                        android:textStyle="bold" />
 
                     <!-- Valor -->
                     <com.google.android.material.textfield.TextInputLayout
@@ -422,20 +486,26 @@
                         style="@style/Widget.Material3.TextInputLayout.OutlinedBox"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginBottom="12dp"
+                        android:layout_marginBottom="16dp"
                         android:hint="Valor"
                         app:boxCornerRadiusTopStart="12dp"
                         app:boxCornerRadiusTopEnd="12dp"
                         app:boxCornerRadiusBottomStart="12dp"
                         app:boxCornerRadiusBottomEnd="12dp"
-                        app:startIconDrawable="@drawable/ic_baseline_attach_money_24">
+                        app:boxStrokeColor="?attr/colorOutline"
+                        app:boxStrokeWidth="1dp"
+                        app:boxStrokeWidthFocused="2dp"
+                        app:hintTextColor="?attr/colorOnSurfaceVariant"
+                        app:startIconDrawable="@drawable/ic_baseline_attach_money_24"
+                        app:startIconTint="?attr/colorOnSurfaceVariant">
 
                         <com.google.android.material.textfield.TextInputEditText
                             android:id="@+id/editTextValor"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:inputType="numberDecimal"
-                            android:textAppearance="@style/TextAppearance.IORITv.BodyLarge" />
+                            android:textAppearance="@style/TextAppearance.Material3.BodyLarge"
+                            android:textColor="?attr/colorOnSurface" />
 
                     </com.google.android.material.textfield.TextInputLayout>
 
@@ -445,20 +515,26 @@
                         style="@style/Widget.Material3.TextInputLayout.OutlinedBox"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginBottom="12dp"
+                        android:layout_marginBottom="16dp"
                         android:hint="Custo"
                         app:boxCornerRadiusTopStart="12dp"
                         app:boxCornerRadiusTopEnd="12dp"
                         app:boxCornerRadiusBottomStart="12dp"
                         app:boxCornerRadiusBottomEnd="12dp"
-                        app:startIconDrawable="@drawable/ic_baseline_trending_down_24">
+                        app:boxStrokeColor="?attr/colorOutline"
+                        app:boxStrokeWidth="1dp"
+                        app:boxStrokeWidthFocused="2dp"
+                        app:hintTextColor="?attr/colorOnSurfaceVariant"
+                        app:startIconDrawable="@drawable/ic_baseline_trending_down_24"
+                        app:startIconTint="?attr/colorOnSurfaceVariant">
 
                         <com.google.android.material.textfield.TextInputEditText
                             android:id="@+id/editTextCusto"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:inputType="numberDecimal"
-                            android:textAppearance="@style/TextAppearance.IORITv.BodyLarge" />
+                            android:textAppearance="@style/TextAppearance.Material3.BodyLarge"
+                            android:textColor="?attr/colorOnSurface" />
 
                     </com.google.android.material.textfield.TextInputLayout>
 
@@ -473,14 +549,20 @@
                         app:boxCornerRadiusTopEnd="12dp"
                         app:boxCornerRadiusBottomStart="12dp"
                         app:boxCornerRadiusBottomEnd="12dp"
-                        app:startIconDrawable="@drawable/ic_baseline_percent_24">
+                        app:boxStrokeColor="?attr/colorOutline"
+                        app:boxStrokeWidth="1dp"
+                        app:boxStrokeWidthFocused="2dp"
+                        app:hintTextColor="?attr/colorOnSurfaceVariant"
+                        app:startIconDrawable="@drawable/ic_baseline_percent_24"
+                        app:startIconTint="?attr/colorOnSurfaceVariant">
 
                         <com.google.android.material.textfield.TextInputEditText
                             android:id="@+id/editTextDesconto"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:inputType="numberDecimal"
-                            android:textAppearance="@style/TextAppearance.IORITv.BodyLarge" />
+                            android:textAppearance="@style/TextAppearance.Material3.BodyLarge"
+                            android:textColor="?attr/colorOnSurface" />
 
                     </com.google.android.material.textfield.TextInputLayout>
 
@@ -488,10 +570,9 @@
 
             </com.google.android.material.card.MaterialCardView>
 
-            <!-- Botão Salvar estilo WhatsApp -->
+            <!-- Botão Salvar Material 3 -->
             <com.google.android.material.button.MaterialButton
                 android:id="@+id/buttonSalvar"
-                style="@style/WhatsAppButton"
                 android:layout_width="match_parent"
                 android:layout_height="56dp"
                 android:layout_marginTop="16dp"
@@ -499,13 +580,15 @@
                 android:text="Salvar Cliente"
                 android:textSize="16sp"
                 android:textStyle="bold"
-                android:backgroundTint="@color/button_salvar_background"
-                android:textColor="@android:color/white"
+                app:backgroundTint="?attr/colorPrimary"
+                android:textColor="?attr/colorOnPrimary"
                 app:cornerRadius="28dp"
                 app:icon="@drawable/ic_baseline_save_24"
                 app:iconGravity="textStart"
                 app:iconPadding="8dp"
-                app:iconTint="@android:color/white"
+                app:iconTint="?attr/colorOnPrimary"
+                app:strokeWidth="0dp"
+                app:elevation="0dp"
                 app:layout_constraintTop_toBottomOf="@+id/financialCard"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"

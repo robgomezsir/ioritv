@@ -4,11 +4,17 @@ import ClienteAdapter
 import UpdateWorker
 
 import android.content.Intent
+import android.graphics.Typeface
 import android.os.Bundle
+import android.text.SpannableString
+import android.text.style.StyleSpan
+import android.view.MenuItem
 import android.view.View
+import android.widget.PopupMenu
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
+import androidx.appcompat.app.AppCompatDelegate
 import androidx.appcompat.widget.SearchView
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.work.Constraints
@@ -22,6 +28,7 @@ import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.QuerySnapshot
 import com.elevadorcom.ioritv.databinding.ActivityMain2Binding
 import com.google.firebase.firestore.Query
+// import com.elevadorcom.ioritv.utils.DialogUtils
 import com.elevadorcom.ioritv.utils.ThemeUtils
 import java.util.Calendar
 import java.util.concurrent.TimeUnit
@@ -43,7 +50,9 @@ class MainActivity2 : AppCompatActivity() {
 
         // Configura a toolbar
         setSupportActionBar(binding.toolbar)
-        supportActionBar?.title = "Meu Ioritv"
+        val title = SpannableString("Meu Ioritv")
+        title.setSpan(StyleSpan(Typeface.BOLD), 0, title.length, 0)
+        supportActionBar?.title = title
 
         // Inicializa o estado dos filtros
         filterStates["ATIVO"] = false
@@ -186,7 +195,7 @@ class MainActivity2 : AppCompatActivity() {
 
     private fun showDeleteConfirmationDialog(cliente: DocumentSnapshot) {
         // Criação do diálogo de confirmação
-        AlertDialog.Builder(this)
+        val dialog = AlertDialog.Builder(this)
             .setTitle("Confirmação de Exclusão")
             .setMessage("Você tem certeza de que deseja excluir este cliente?")
             .setPositiveButton("Sim") { dialog, _ ->
@@ -197,7 +206,9 @@ class MainActivity2 : AppCompatActivity() {
                 dialog.dismiss()
             }
             .create()
-            .show()
+        
+        // DialogUtils.styleAlertDialogButtons(dialog, this)
+        dialog.show()
     }
 
     private fun deleteCliente(cliente: DocumentSnapshot) {
@@ -267,5 +278,77 @@ class MainActivity2 : AppCompatActivity() {
 
         // Calcula a diferença em milissegundos e converte para segundos
         return (midnight - now) / 1000
+    }
+
+    override fun onCreateOptionsMenu(menu: android.view.Menu?): Boolean {
+        menuInflater.inflate(R.menu.toolbar_menu, menu)
+        return true
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        return when (item.itemId) {
+            R.id.menu_theme -> {
+                toggleTheme()
+                true
+            }
+            R.id.menu_logout -> {
+                logout()
+                true
+            }
+            else -> super.onOptionsItemSelected(item)
+        }
+    }
+
+    private fun toggleTheme() {
+        showThemeMenu()
+    }
+
+    private fun showThemeMenu() {
+        // Criar âncora para o popup (usar o botão de menu na toolbar)
+        val anchor = binding.toolbar.findViewById<View>(R.id.menu_theme) ?: binding.toolbar
+        
+        val popupMenu = PopupMenu(this, anchor, android.view.Gravity.END)
+        popupMenu.menuInflater.inflate(R.menu.theme_menu, popupMenu.menu)
+        
+        // Marcar o tema atual como selecionado
+        val currentTheme = ThemeUtils.getSavedThemeMode(this)
+        when (currentTheme) {
+            AppCompatDelegate.MODE_NIGHT_FOLLOW_SYSTEM -> popupMenu.menu.findItem(R.id.menu_theme_auto)?.isChecked = true
+            AppCompatDelegate.MODE_NIGHT_NO -> popupMenu.menu.findItem(R.id.menu_theme_light)?.isChecked = true
+            AppCompatDelegate.MODE_NIGHT_YES -> popupMenu.menu.findItem(R.id.menu_theme_dark)?.isChecked = true
+        }
+        
+        popupMenu.setOnMenuItemClickListener { item ->
+            when (item.itemId) {
+                R.id.menu_theme_auto -> {
+                    ThemeUtils.saveThemeMode(this, AppCompatDelegate.MODE_NIGHT_FOLLOW_SYSTEM)
+                    recreate()
+                    true
+                }
+                R.id.menu_theme_light -> {
+                    ThemeUtils.saveThemeMode(this, AppCompatDelegate.MODE_NIGHT_NO)
+                    recreate()
+                    true
+                }
+                R.id.menu_theme_dark -> {
+                    ThemeUtils.saveThemeMode(this, AppCompatDelegate.MODE_NIGHT_YES)
+                    recreate()
+                    true
+                }
+                else -> false
+            }
+        }
+
+        popupMenu.show()
+    }
+
+    private fun logout() {
+        val sharedPreferences = getSharedPreferences("login_prefs", MODE_PRIVATE)
+        val editor = sharedPreferences.edit()
+        editor.clear()
+        editor.apply()
+
+        startActivity(Intent(this, LoginActivity::class.java))
+        finish()
     }
 }

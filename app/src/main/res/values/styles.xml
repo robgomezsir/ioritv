@@ -1,49 +1,65 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <!-- Estilo para indicador ativo da Bottom Navigation -->
-    <style name="ActiveIndicator" parent="Widget.Material3.BottomNavigationView.ActiveIndicator">
-        <item name="android:color">?attr/colorPrimaryContainer</item>
-        <item name="android:width">64dp</item>
-        <item name="android:height">32dp</item>
-        <item name="shapeAppearance">@style/ShapeAppearanceOverlay.Material3.BottomNavigationView.ActiveIndicator</item>
+    <!-- Estilos existentes mantidos -->
+    
+    <!-- Estilo personalizado para AlertDialog com contraste adequado -->
+    <style name="AlertDialogCustom" parent="ThemeOverlay.Material3.Dialog.Alert">
+        <item name="colorPrimary">?attr/colorPrimary</item>
+        <item name="colorOnPrimary">?attr/colorOnPrimary</item>
+        <item name="colorSecondary">?attr/colorSecondary</item>
+        <item name="colorOnSecondary">?attr/colorOnSecondary</item>
+        <item name="android:textColorPrimary">?attr/colorOnSurface</item>
+        <item name="android:textColorSecondary">?attr/colorOnSurfaceVariant</item>
+        <item name="android:windowBackground">?attr/colorSurface</item>
+        <item name="buttonBarPositiveButtonStyle">@style/AlertDialogButtonPositive</item>
+        <item name="buttonBarNegativeButtonStyle">@style/AlertDialogButton</item>
     </style>
-
-    <!-- Estilo para cantos arredondados do indicador ativo -->
-    <style name="ShapeAppearanceOverlay.Material3.BottomNavigationView.ActiveIndicator" parent="">
-        <item name="cornerFamily">rounded</item>
-        <item name="cornerSize">16dp</item>
+    
+    <!-- Estilo para botões do AlertDialog -->
+    <style name="AlertDialogButton" parent="Widget.Material3.Button.TextButton">
+        <item name="android:textColor">@color/md_theme_light_primary</item>
+        <item name="rippleColor">@color/md_theme_light_primary</item>
+        <item name="android:textSize">16sp</item>
+        <item name="android:textStyle">normal</item>
     </style>
-
-    <!-- Estilo para ProgressBar -->
-    <style name="Widget.IORITv.ProgressBar.Horizontal" parent="Widget.Material3.LinearProgressIndicator">
-        <item name="android:progressTint">?attr/colorPrimary</item>
-        <item name="android:progressBackgroundTint">?attr/colorSurfaceContainer</item>
-        <item name="android:height">4dp</item>
+    
+    <!-- Estilo para botão positivo (Salvar) -->
+    <style name="AlertDialogButtonPositive" parent="Widget.Material3.Button">
+        <item name="android:textColor">@color/md_theme_light_onPrimary</item>
+        <item name="backgroundTint">@color/md_theme_light_primary</item>
+        <item name="rippleColor">@color/md_theme_light_onPrimary</item>
+        <item name="android:textSize">16sp</item>
+        <item name="android:textStyle">bold</item>
+        <item name="cornerRadius">8dp</item>
     </style>
-
-    <!-- Estilo para SearchView -->
-    <style name="CustomSearchView" parent="Widget.AppCompat.SearchView">
-        <item name="android:background">@drawable/search_view_background</item>
-        <item name="android:textColor">?attr/colorOnSurface</item>
+    
+    <!-- Estilo personalizado para TextInputLayout -->
+    <style name="CustomTextInputLayout" parent="Widget.Material3.TextInputLayout.OutlinedBox">
+        <item name="hintTextColor">?attr/colorOnSurfaceVariant</item>
+        <item name="boxStrokeColor">@color/text_input_stroke_light</item>
+        <item name="boxBackgroundColor">?attr/colorSurface</item>
         <item name="android:textColorHint">?attr/colorOnSurfaceVariant</item>
-        <item name="android:hint">Pesquisar...</item>
-        <item name="queryHint">Pesquisar...</item>
-        <item name="android:layout_margin">16dp</item>
-        <item name="android:elevation">0dp</item>
+        <item name="android:textColor">?attr/colorOnSurface</item>
+        <item name="helperTextTextColor">?attr/colorOnSurfaceVariant</item>
+        <item name="errorTextColor">?attr/colorError</item>
+        <item name="boxCornerRadiusTopStart">12dp</item>
+        <item name="boxCornerRadiusTopEnd">12dp</item>
+        <item name="boxCornerRadiusBottomStart">12dp</item>
+        <item name="boxCornerRadiusBottomEnd">12dp</item>
     </style>
 
-    <!-- Estilo para Cards -->
+    <!-- Estilo para Cards - Light -->
     <style name="WhatsAppCard" parent="Widget.Material3.CardView.Elevated">
         <item name="cardCornerRadius">12dp</item>
-        <item name="cardElevation">0dp</item>
+        <item name="cardElevation">2dp</item>
         <item name="android:layout_margin">8dp</item>
-        <item name="android:background">?attr/colorSurfaceContainer</item>
+        <item name="cardBackgroundColor">@color/md_theme_light_surfaceContainer</item>
     </style>
 
-    <!-- Estilo para botões primários -->
+    <!-- Estilo para botões primários - Light -->
     <style name="WhatsAppButton" parent="Widget.Material3.Button">
-        <item name="android:backgroundTint">?attr/colorPrimary</item>
-        <item name="android:textColor">?attr/colorOnPrimary</item>
+        <item name="android:backgroundTint">@color/md_theme_light_primaryContainer</item>
+        <item name="android:textColor">@color/md_theme_light_onPrimaryContainer</item>
         <item name="cornerRadius">24dp</item>
         <item name="android:textSize">16sp</item>
         <item name="android:textStyle">bold</item>
@@ -51,35 +67,30 @@
         <item name="android:paddingBottom">12dp</item>
         <item name="android:paddingStart">24dp</item>
         <item name="android:paddingEnd">24dp</item>
+        <item name="strokeWidth">1dp</item>
+        <item name="strokeColor">@color/md_theme_light_outline</item>
     </style>
 
-    <!-- Estilo para FloatingActionButton -->
+    <!-- Estilo para FloatingActionButton - Light -->
     <style name="WhatsAppFAB" parent="Widget.Material3.FloatingActionButton.Primary">
-        <item name="backgroundTint">?attr/colorPrimary</item>
-        <item name="tint">?attr/colorOnPrimary</item>
-        <item name="elevation">0dp</item>
-        <item name="pressedTranslationZ">0dp</item>
+        <item name="backgroundTint">@color/md_theme_light_primaryContainer</item>
+        <item name="tint">@color/md_theme_light_onPrimaryContainer</item>
+        <item name="elevation">4dp</item>
+        <item name="pressedTranslationZ">8dp</item>
     </style>
 
-    <!-- Estilo para Toolbar -->
+    <!-- Estilo para Toolbar - Light -->
     <style name="WhatsAppToolbar" parent="Widget.Material3.Toolbar">
-        <item name="android:background">?attr/colorPrimary</item>
-        <item name="titleTextColor">?attr/colorOnPrimary</item>
-        <item name="subtitleTextColor">?attr/colorOnPrimary</item>
-        <item name="navigationIconTint">?attr/colorOnPrimary</item>
+        <item name="android:background">@android:color/transparent</item>
+        <item name="titleTextColor">@color/md_theme_light_onSurface</item>
+        <item name="subtitleTextColor">@color/md_theme_light_onSurfaceVariant</item>
+        <item name="navigationIconTint">@color/md_theme_light_onSurface</item>
         <item name="android:elevation">0dp</item>
     </style>
 
-    <!-- Estilo para TextInputLayout com contraste adequado -->
-    <style name="CustomTextInputLayout" parent="Widget.Material3.TextInputLayout.OutlinedBox">
-        <item name="boxStrokeColor">@color/text_input_stroke_light</item>
-        <item name="boxStrokeWidth">1dp</item>
-        <item name="boxStrokeWidthFocused">2dp</item>
-        <item name="hintTextColor">@color/text_input_label_focused_light</item>
-        <item name="android:textColorHint">@color/text_input_label_light</item>
-        <item name="boxCornerRadiusTopStart">12dp</item>
-        <item name="boxCornerRadiusTopEnd">12dp</item>
-        <item name="boxCornerRadiusBottomStart">12dp</item>
-        <item name="boxCornerRadiusBottomEnd">12dp</item>
+    <!-- Estilo para PopupMenu com cantos arredondados -->
+    <style name="PopupMenuStyle" parent="Widget.Material3.PopupMenu">
+        <item name="android:popupBackground">@drawable/popup_menu_background</item>
+        <item name="android:popupElevation">4dp</item>
     </style>
 </resources>

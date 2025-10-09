@@ -7,6 +7,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
 import com.elevadorcom.ioritv.databinding.ActivityDespesaBinding
 import com.elevadorcom.ioritv.utils.ThemeUtils
+import com.elevadorcom.ioritv.utils.MoneyTextWatcher
 import com.google.firebase.firestore.FirebaseFirestore
 import java.text.SimpleDateFormat
 import java.util.*
@@ -36,6 +37,9 @@ class DespesaActivity : AppCompatActivity() {
     }
 
     private fun setupViews() {
+        // Aplicar formatação monetária automática no campo de valor
+        MoneyTextWatcher.apply(binding.inputValor)
+        
         // Pré-preencher data atual
         val currentDate = SimpleDateFormat("dd/MM/yyyy", Locale.getDefault()).format(Date())
         binding.inputData.setText(currentDate)
@@ -55,8 +59,8 @@ class DespesaActivity : AppCompatActivity() {
             return
         }
 
-        val valor = valorStr.toDoubleOrNull()
-        if (valor == null || valor <= 0) {
+        val valor = MoneyTextWatcher.getNumericValue(valorStr)
+        if (valor <= 0) {
             Toast.makeText(this, "Por favor, insira um valor válido", Toast.LENGTH_SHORT).show()
             return
         }

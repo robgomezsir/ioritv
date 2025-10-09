@@ -15,8 +15,8 @@
         android:layout_width="0dp"
         android:layout_height="?attr/actionBarSize"
         android:title="Meu Ioritv"
-        android:titleTextAppearance="@style/TextAppearance.Material3.HeadlineSmall"
-        android:titleTextColor="?attr/colorOnPrimary"
+        android:titleTextAppearance="@style/TextAppearance.IORITv.Toolbar.HeadlineSmall"
+        android:titleTextColor="?attr/colorOnSurface"
         android:elevation="0dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -322,15 +322,15 @@
 
                 <LinearLayout
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
+                    android:layout_height="233dp"
                     android:orientation="vertical"
                     android:padding="24dp">
 
                     <LinearLayout
-                        android:layout_width="match_parent"
+                        android:layout_width="378dp"
                         android:layout_height="wrap_content"
-                        android:orientation="horizontal"
-                        android:layout_marginBottom="20dp">
+                        android:layout_marginBottom="2dp"
+                        android:orientation="horizontal">
 
                         <ImageView
                             android:layout_width="24dp"
@@ -352,7 +352,7 @@
                     <com.github.mikephil.charting.charts.BarChart
                         android:id="@+id/barChart"
                         android:layout_width="match_parent"
-                        android:layout_height="200dp"
+                        android:layout_height="150dp"
                         android:layout_marginTop="8dp" />
 
                 </LinearLayout>

@@ -112,4 +112,26 @@
         <item name="android:letterSpacing">0.0</item>
     </style>
 
+    <!-- Toolbar Title Styles (Bold) -->
+    <style name="TextAppearance.IORITv.Toolbar.Title" parent="TextAppearance.Material3.TitleLarge">
+        <item name="android:textSize">20sp</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:fontFamily">sans-serif-medium</item>
+        <item name="android:letterSpacing">0.0</item>
+    </style>
+
+    <style name="TextAppearance.IORITv.Toolbar.TitleLarge" parent="TextAppearance.Material3.TitleLarge">
+        <item name="android:textSize">22sp</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:fontFamily">sans-serif-medium</item>
+        <item name="android:letterSpacing">0.0</item>
+    </style>
+
+    <style name="TextAppearance.IORITv.Toolbar.HeadlineSmall" parent="TextAppearance.Material3.HeadlineSmall">
+        <item name="android:textSize">24sp</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:fontFamily">sans-serif-medium</item>
+        <item name="android:letterSpacing">0.0</item>
+    </style>
+
 </resources>

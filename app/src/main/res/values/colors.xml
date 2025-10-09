@@ -4,62 +4,62 @@
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
     <color name="gray">#FF808080</color>
-    <color name="toolbar_color">#141218</color>
-    <color name="toolbar_color_light">#fef7ff</color>
+    <color name="toolbar_color">#4F63A2</color>
+    <color name="toolbar_color_light">#4F63A2</color>
     
     <!-- Cores para gráficos -->
-    <color name="bar_color_active">#2196F3</color>
+    <color name="bar_color_active">#4F63A2</color>
     <color name="bar_color_due">#4CAF50</color>
     <color name="bar_color_overdue">#FF9800</color>
     <color name="bar_color_standby">#9E9E9E</color>
     
     <!-- Cores para botões de filtro -->
-    <color name="filter_button_active_light">#E8EAED</color>
-    <color name="filter_button_inactive_light">#E0E0E0</color>
+    <color name="filter_button_active_light">#E8F0FF</color>
+    <color name="filter_button_inactive_light">#E3E1EC</color>
     
     <!-- Cores para TextInputLayout -->
-    <color name="text_input_stroke_light">#616161</color>
-    <color name="text_input_stroke_focused_light">#2196F3</color>
-    <color name="text_input_label_light">#616161</color>
-    <color name="text_input_label_focused_light">#2196F3</color>
+    <color name="text_input_stroke_light">#757680</color>
+    <color name="text_input_stroke_focused_light">#4F63A2</color>
+    <color name="text_input_label_light">#757680</color>
+    <color name="text_input_label_focused_light">#4F63A2</color>
     
-    <!-- Material Design 3 - Tema Claro (Toolbar Branca) -->
-    <color name="md_theme_light_primary">#FFFFFF</color>
-    <color name="md_theme_light_onPrimary">#000000</color>
-    <color name="md_theme_light_primaryContainer">#F5F5F5</color>
-    <color name="md_theme_light_onPrimaryContainer">#212121</color>
-    <color name="md_theme_light_secondary">#616161</color>
+    <!-- Material Design 3 - Tema Claro (Harmônico com Azul) -->
+    <color name="md_theme_light_primary">#4F63A2</color>
+    <color name="md_theme_light_onPrimary">#FFFFFF</color>
+    <color name="md_theme_light_primaryContainer">#E8F0FF</color>
+    <color name="md_theme_light_onPrimaryContainer">#0A0E27</color>
+    <color name="md_theme_light_secondary">#586070</color>
     <color name="md_theme_light_onSecondary">#FFFFFF</color>
-    <color name="md_theme_light_secondaryContainer">#F5F5F5</color>
-    <color name="md_theme_light_onSecondaryContainer">#424242</color>
-    <color name="md_theme_light_tertiary">#757575</color>
+    <color name="md_theme_light_secondaryContainer">#E8F0FF</color>
+    <color name="md_theme_light_onSecondaryContainer">#233047</color>
+    <color name="md_theme_light_tertiary">#4F63A2</color>
     <color name="md_theme_light_onTertiary">#FFFFFF</color>
-    <color name="md_theme_light_tertiaryContainer">#FAFAFA</color>
-    <color name="md_theme_light_onTertiaryContainer">#424242</color>
-    <color name="md_theme_light_error">#F44336</color>
+    <color name="md_theme_light_tertiaryContainer">#E8F0FF</color>
+    <color name="md_theme_light_onTertiaryContainer">#0F2A4A</color>
+    <color name="md_theme_light_error">#BA1A1A</color>
     <color name="md_theme_light_onError">#FFFFFF</color>
-    <color name="md_theme_light_errorContainer">#FFCDD2</color>
-    <color name="md_theme_light_onErrorContainer">#B71C1C</color>
-    <color name="md_theme_light_outline">#757575</color>
-    <color name="md_theme_light_background">#FAFAFA</color>
-    <color name="md_theme_light_onBackground">#212121</color>
-    <color name="md_theme_light_surface">#FFFFFF</color>
-    <color name="md_theme_light_onSurface">#212121</color>
-    <color name="md_theme_light_surfaceVariant">#F5F5F5</color>
-    <color name="md_theme_light_onSurfaceVariant">#424242</color>
-    <color name="md_theme_light_inverseSurface">#303030</color>
-    <color name="md_theme_light_inverseOnSurface">#FAFAFA</color>
-    <color name="md_theme_light_inversePrimary">#BDBDBD</color>
+    <color name="md_theme_light_errorContainer">#FFDAD6</color>
+    <color name="md_theme_light_onErrorContainer">#410002</color>
+    <color name="md_theme_light_outline">#757680</color>
+    <color name="md_theme_light_background">#FEFBFF</color>
+    <color name="md_theme_light_onBackground">#1B1B1F</color>
+    <color name="md_theme_light_surface">#FEFBFF</color>
+    <color name="md_theme_light_onSurface">#1B1B1F</color>
+    <color name="md_theme_light_surfaceVariant">#E3E1EC</color>
+    <color name="md_theme_light_onSurfaceVariant">#46464F</color>
+    <color name="md_theme_light_inverseSurface">#2F3033</color>
+    <color name="md_theme_light_inverseOnSurface">#F2F0F4</color>
+    <color name="md_theme_light_inversePrimary">#B8C6EA</color>
     <color name="md_theme_light_shadow">#000000</color>
-    <color name="md_theme_light_surfaceTint">#FFFFFF</color>
-    <color name="md_theme_light_outlineVariant">#BDBDBD</color>
+    <color name="md_theme_light_surfaceTint">#4F63A2</color>
+    <color name="md_theme_light_outlineVariant">#C7C5D0</color>
     <color name="md_theme_light_scrim">#000000</color>
-    <color name="md_theme_light_surfaceDim">#F0F0F0</color>
-    <color name="md_theme_light_surfaceBright">#FFFFFF</color>
+    <color name="md_theme_light_surfaceDim">#DDD9E0</color>
+    <color name="md_theme_light_surfaceBright">#FEFBFF</color>
     <color name="md_theme_light_surfaceContainerLowest">#FFFFFF</color>
-    <color name="md_theme_light_surfaceContainerLow">#F8F9FA</color>
-    <color name="md_theme_light_surfaceContainer">#F1F3F4</color>
-    <color name="md_theme_light_surfaceContainerHigh">#E8EAED</color>
-    <color name="md_theme_light_surfaceContainerHighest">#DADCE0</color>
-    <color name="md_theme_light_onSurfaceContainer">#212121</color>
+    <color name="md_theme_light_surfaceContainerLow">#F7F5FA</color>
+    <color name="md_theme_light_surfaceContainer">#F1EFF4</color>
+    <color name="md_theme_light_surfaceContainerHigh">#EBE9EE</color>
+    <color name="md_theme_light_surfaceContainerHighest">#E5E3E8</color>
+    <color name="md_theme_light_onSurfaceContainer">#1B1B1F</color>
 </resources>

@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/telalogin2">
+    android:background="@drawable/backlog">
 
     <!-- ScrollView para garantir que o conteúdo seja visível mesmo com teclado -->
     <ScrollView
@@ -67,7 +67,7 @@
                 android:id="@+id/titleTextView"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Bem-vindo ao IORI.TV"
+                android:text="Oi, Sinho! Bem-vindo de volta!"
                 android:textAlignment="center"
                 android:textAppearance="@style/TextAppearance.Material3.HeadlineMedium"
                 android:textColor="?attr/colorOnSurface"
@@ -88,13 +88,13 @@
                 android:id="@+id/emailInputLayout"
                 style="@style/Widget.Material3.TextInputLayout.OutlinedBox"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="16dp"
+                android:layout_height="66dp"
+                android:layout_marginBottom="1dp"
                 android:hint="Email"
-                app:boxCornerRadiusTopStart="12dp"
-                app:boxCornerRadiusTopEnd="12dp"
-                app:boxCornerRadiusBottomStart="12dp"
                 app:boxCornerRadiusBottomEnd="12dp"
+                app:boxCornerRadiusBottomStart="12dp"
+                app:boxCornerRadiusTopEnd="12dp"
+                app:boxCornerRadiusTopStart="12dp"
                 app:boxStrokeColor="@color/md_theme_light_outline"
                 app:boxStrokeWidth="1dp"
                 app:boxStrokeWidthFocused="2dp"
@@ -119,13 +119,13 @@
                 android:id="@+id/passwordInputLayout"
                 style="@style/Widget.Material3.TextInputLayout.OutlinedBox"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="24dp"
+                android:layout_height="67dp"
+                android:layout_marginBottom="0dp"
                 android:hint="Senha"
-                app:boxCornerRadiusTopStart="12dp"
-                app:boxCornerRadiusTopEnd="12dp"
-                app:boxCornerRadiusBottomStart="12dp"
                 app:boxCornerRadiusBottomEnd="12dp"
+                app:boxCornerRadiusBottomStart="12dp"
+                app:boxCornerRadiusTopEnd="12dp"
+                app:boxCornerRadiusTopStart="12dp"
                 app:boxStrokeColor="@color/md_theme_light_outline"
                 app:boxStrokeWidth="1dp"
                 app:boxStrokeWidthFocused="2dp"
@@ -158,7 +158,10 @@
                 android:text="@string/keep_logged_in"
                 android:textAppearance="@style/TextAppearance.Material3.BodyMedium"
                 android:textColor="?attr/colorOnSurface"
-                app:buttonTint="@color/bar_color_active" />
+                app:buttonTint="@color/bar_color_active"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/passwordEditText" />
 
             <!-- Botão de Login estilo WhatsApp -->
             <com.google.android.material.button.MaterialButton
@@ -231,7 +234,7 @@
         android:layout_marginStart="16dp"
         android:layout_marginEnd="16dp"
         android:layout_marginBottom="16dp"
-        android:text="elevadorcom® - Todos os direitos reservados - 2025/26 - v4.2"
+        android:text="elevadorcom® - Todos os direitos reservados - 2025/26 - v5.0"
         android:textAlignment="center"
         android:textAppearance="@style/TextAppearance.IORITv.LabelSmall"
         android:textColor="@color/white"

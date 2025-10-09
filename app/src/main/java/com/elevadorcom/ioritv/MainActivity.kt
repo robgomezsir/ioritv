@@ -21,6 +21,7 @@ import java.util.concurrent.TimeUnit
 import com.elevadorcom.ioritv.utils.SituacaoUtil
 import com.elevadorcom.ioritv.utils.SituacaoConstants
 import com.elevadorcom.ioritv.utils.ThemeUtils
+import com.elevadorcom.ioritv.utils.MoneyTextWatcher
 import com.google.android.material.appbar.MaterialToolbar
 
 class MainActivity : AppCompatActivity() {
@@ -104,9 +105,9 @@ class MainActivity : AppCompatActivity() {
             binding.editTextMAC.setText(intent.getStringExtra("MAC"))
             binding.editTextOTP.setText(intent.getStringExtra("OTP"))
             binding.editTextDevice.setText(intent.getStringExtra("DEVICE"))
-            binding.editTextValor.setText(intent.getDoubleExtra("VALOR", 0.0).toString())
-            binding.editTextDesconto.setText(intent.getDoubleExtra("DESCONTO", 0.0).toString())
-            binding.editTextCusto.setText(intent.getDoubleExtra("CUSTO", 0.0).toString())
+            binding.editTextValor.setText(MoneyTextWatcher.formatCurrency(intent.getDoubleExtra("VALOR", 0.0)))
+            binding.editTextDesconto.setText(MoneyTextWatcher.formatCurrency(intent.getDoubleExtra("DESCONTO", 0.0)))
+            binding.editTextCusto.setText(MoneyTextWatcher.formatCurrency(intent.getDoubleExtra("CUSTO", 0.0)))
             binding.editTextServidor.setText(intent.getStringExtra("SERVIDOR"))
         }
     }
@@ -122,9 +123,9 @@ class MainActivity : AppCompatActivity() {
         val mac = binding.editTextMAC.text.toString()
         val otp = binding.editTextOTP.text.toString()
         val device = binding.editTextDevice.text.toString()
-        val valor = binding.editTextValor.text.toString().toDoubleOrNull() ?: 0.0
-        val custo = binding.editTextCusto.text.toString().toDoubleOrNull() ?: 0.0
-        val desconto = binding.editTextDesconto.text.toString().toDoubleOrNull() ?: 0.0
+        val valor = MoneyTextWatcher.getNumericValue(binding.editTextValor.text.toString())
+        val custo = MoneyTextWatcher.getNumericValue(binding.editTextCusto.text.toString())
+        val desconto = MoneyTextWatcher.getNumericValue(binding.editTextDesconto.text.toString())
         val servidor = binding.editTextServidor.text.toString()
 
         // Conversão da data de INICIO para Timestamp
@@ -250,30 +251,10 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun setupInputRestrictions() {
-        // Função para aplicar o TextWatcher nos campos de EditText
-        val inputWatcher = object : TextWatcher {
-            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
-
-            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {}
-
-            override fun afterTextChanged(s: Editable?) {
-                s?.let {
-                    val cleanString = it.toString().filter { char ->
-                        char.isDigit() || char == '.'
-                    }
-
-                    // Se a string foi alterada (continha caracteres inválidos), atualize o texto
-                    if (cleanString != it.toString()) {
-                        it.replace(0, it.length, cleanString)
-                    }
-                }
-            }
-        }
-
-        // Adicionar o TextWatcher aos campos de VALOR, CUSTO e DESCONTO
-        binding.editTextValor.addTextChangedListener(inputWatcher)
-        binding.editTextCusto.addTextChangedListener(inputWatcher)
-        binding.editTextDesconto.addTextChangedListener(inputWatcher)
+        // Aplicar formatação monetária automática aos campos de VALOR, CUSTO e DESCONTO
+        MoneyTextWatcher.apply(binding.editTextValor)
+        MoneyTextWatcher.apply(binding.editTextCusto)
+        MoneyTextWatcher.apply(binding.editTextDesconto)
     }
 
     private fun configurarWorkManager() {

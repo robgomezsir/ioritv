@@ -1,8 +1,6 @@
 package com.elevadorcom.ioritv
 
 import android.os.Bundle
-import android.text.Editable
-import android.text.TextWatcher
 import android.widget.Button
 import android.widget.EditText
 import android.widget.Toast
@@ -10,7 +8,7 @@ import androidx.appcompat.app.AppCompatActivity
 import com.google.firebase.Timestamp
 import com.google.firebase.firestore.FirebaseFirestore
 import com.elevadorcom.ioritv.utils.ThemeUtils
-import java.text.NumberFormat
+import com.elevadorcom.ioritv.utils.MoneyTextWatcher
 import java.text.SimpleDateFormat
 import java.util.Locale
 
@@ -36,29 +34,8 @@ class DespesasActivity : AppCompatActivity() {
         editTextValor = findViewById(R.id.editTextValor)
         buttonSalvar = findViewById(R.id.buttonSalvar)
 
-        // Configurar TextWatcher para o campo de valor
-        editTextValor.addTextChangedListener(object : TextWatcher {
-            private var isEditing = false
-
-            override fun beforeTextChanged(s: CharSequence, start: Int, count: Int, after: Int) {}
-
-            override fun onTextChanged(s: CharSequence, start: Int, before: Int, count: Int) {}
-
-            override fun afterTextChanged(s: Editable) {
-                if (isEditing) return
-
-                isEditing = true
-
-                val cleanString = s.toString().replace("[R$,.\\s]".toRegex(), "")
-                val parsed = cleanString.toDoubleOrNull() ?: 0.0
-                val formatted = NumberFormat.getCurrencyInstance(Locale("pt", "BR")).format(parsed / 100)
-
-                editTextValor.setText(formatted)
-                editTextValor.setSelection(formatted.length)
-
-                isEditing = false
-            }
-        })
+        // Aplicar formatação monetária automática
+        MoneyTextWatcher.apply(editTextValor)
 
         // Verificar se estamos editando uma despesa existente
         val intent = intent
@@ -88,7 +65,7 @@ class DespesasActivity : AppCompatActivity() {
 
                     editTextData.setText(dataString)
                     editTextDespesa.setText(despesa)
-                    editTextValor.setText(NumberFormat.getCurrencyInstance(Locale("pt", "BR")).format(valor))
+                    editTextValor.setText(MoneyTextWatcher.formatCurrency(valor))
                 } else {
                     Toast.makeText(this, "Despesa não encontrada", Toast.LENGTH_SHORT).show()
                 }
@@ -101,12 +78,11 @@ class DespesasActivity : AppCompatActivity() {
     private fun saveExpense() {
         val dataString = editTextData.text.toString()
         val despesa = editTextDespesa.text.toString()
-        val valorString = editTextValor.text.toString().replace("[R$,.\\s]".toRegex(), "")
-        val valor = valorString.toDoubleOrNull()?.div(100)
+        val valor = MoneyTextWatcher.getNumericValue(editTextValor.text.toString())
 
         // Verifica se todos os campos foram preenchidos
-        if (dataString.isEmpty() || despesa.isEmpty() || valor == null) {
-            Toast.makeText(this, "Por favor, preencha todos os campos", Toast.LENGTH_SHORT).show()
+        if (dataString.isEmpty() || despesa.isEmpty() || valor <= 0) {
+            Toast.makeText(this, "Por favor, preencha todos os campos corretamente", Toast.LENGTH_SHORT).show()
             return
         }
 

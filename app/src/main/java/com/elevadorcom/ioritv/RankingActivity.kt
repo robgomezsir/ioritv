@@ -7,7 +7,10 @@ import android.content.res.Configuration
 import android.graphics.Canvas
 import android.graphics.Color
 import android.graphics.RectF
+import android.graphics.Typeface
 import android.os.Bundle
+import android.text.SpannableString
+import android.text.style.StyleSpan
 import android.util.TypedValue
 import android.widget.ImageButton
 import android.widget.ImageView
@@ -45,6 +48,7 @@ import com.google.android.material.appbar.MaterialToolbar
 import com.elevadorcom.ioritv.utils.AnimationUtils
 import com.elevadorcom.ioritv.utils.AccessibilityUtils
 import com.elevadorcom.ioritv.utils.PerformanceUtils
+// import com.elevadorcom.ioritv.utils.DialogUtils
 import com.elevadorcom.ioritv.utils.ThemeUtils
 import android.view.ViewGroup
 import android.view.LayoutInflater
@@ -74,7 +78,9 @@ class RankingActivity : AppCompatActivity() {
 
         // Configurar a Toolbar
         setSupportActionBar(binding.toolbar)
-        supportActionBar?.title = "Meu Ioritv"
+        val title = SpannableString("Meu Ioritv")
+        title.setSpan(StyleSpan(Typeface.BOLD), 0, title.length, 0)
+        supportActionBar?.title = title
 
                 // Configurar acessibilidade
                 setupAccessibility()
@@ -139,14 +145,7 @@ class RankingActivity : AppCompatActivity() {
         val progressBarClientes = findViewById<ProgressBar>(R.id.progressBarClientes)
         val totalCredit = findViewById<TextView>(R.id.totalCredit)
 
-        // Verificar se o tutorial já foi exibido antes usando SharedPreferences
-        val sharedPref = getSharedPreferences("appPreferences", MODE_PRIVATE)
-        val tutorialShown = sharedPref.getBoolean("tutorialShown", false)
-
-        if (!tutorialShown) {
-            // Exibir o tutorial usando TapTargetSequence
-            iniciarTutorial(sharedPref)
-        }
+        // Tutorial removido
 
         // Atualiza ProgressBar e clientes
         updateProgressAndClientes()
@@ -401,12 +400,6 @@ class RankingActivity : AppCompatActivity() {
                 true
             }
 
-            R.id.menu_tutorial -> {
-                // Ação para Iniciar Tutorial
-                iniciarTutorial(sharedPreferences)
-                true
-            }
-
             R.id.menu_logout -> {
                 // Ação para "sair"
                 logout()
@@ -421,7 +414,10 @@ class RankingActivity : AppCompatActivity() {
     }
 
     private fun showThemeMenu() {
-        val popupMenu = PopupMenu(this, binding.toolbar)
+        // Criar âncora para o popup (usar o botão de menu na toolbar)
+        val anchor = binding.toolbar.findViewById<View>(R.id.menu_theme) ?: binding.toolbar
+        
+        val popupMenu = PopupMenu(this, anchor, android.view.Gravity.END)
         popupMenu.menuInflater.inflate(R.menu.theme_menu, popupMenu.menu)
         
         // Marcar o tema atual como selecionado
@@ -478,7 +474,7 @@ class RankingActivity : AppCompatActivity() {
         editText.setText(sharedPreferences.getInt("totalCredit", 1).toString())
 
         // Cria e exibe a AlertDialog com o layout personalizado
-        AlertDialog.Builder(this)
+        val dialog = AlertDialog.Builder(this)
             .setView(dialogView) // Define o layout personalizado
             .setPositiveButton("Salvar") { _, _ ->
                 val newCredits = editText.text.toString().toIntOrNull() ?: return@setPositiveButton
@@ -488,7 +484,9 @@ class RankingActivity : AppCompatActivity() {
             }
             .setNegativeButton("Cancelar", null) // Botão de cancelar
             .create()
-            .show()
+        
+        // DialogUtils.styleAlertDialogButtons(dialog, this)
+        dialog.show()
     }
 
     private fun atualizarCreditos(totalCredits: Int, creditosASubtrair: Int) {
@@ -507,69 +505,6 @@ class RankingActivity : AppCompatActivity() {
         Toast.makeText(this, "Créditos atualizados: $novosCreditos", Toast.LENGTH_SHORT).show()
     }
 
-    private fun iniciarTutorial(sharedPref: SharedPreferences) {
-        TapTargetSequence(this)
-            .targets(
-                // Destaque da toolbar
-                TapTarget.forView(binding.toolbar, "Suas configurações gerais", "Acesse aqui as configurações gerais do aplicativo através do menu.")
-                    .outerCircleColor(R.color.md_theme_light_primary)
-                    .targetCircleColor(R.color.md_theme_light_primaryContainer)
-                    .titleTextSize(20)
-                    .descriptionTextSize(15)
-                    .cancelable(false),
-
-                // Destaque do card de ranking
-                TapTarget.forView(binding.rankingCard, "Ranking de Performance", "Aqui você pode ver seu ranking baseado no número de clientes.")
-                    .outerCircleColor(R.color.md_theme_light_primary)
-                    .targetCircleColor(R.color.md_theme_light_primaryContainer)
-                    .titleTextSize(20)
-                    .descriptionTextSize(15)
-                    .cancelable(false),
-
-                // Destaque da barra de progresso de clientes
-                TapTarget.forView(binding.progressBarClientes, "Alcance de sua meta", "Acompanhe aqui o progresso para alcançar sua meta de clientes.")
-                    .outerCircleColor(R.color.md_theme_light_primary)
-                    .targetCircleColor(R.color.md_theme_light_primaryContainer)
-                    .titleTextSize(20)
-                    .descriptionTextSize(15)
-                    .cancelable(false),
-
-                // Destaque do campo de créditos
-                TapTarget.forView(binding.totalCredit, "Adicione ou altere seus créditos", "Gerencie os créditos diretamente por aqui.")
-                    .outerCircleColor(R.color.md_theme_light_primary)
-                    .targetCircleColor(R.color.md_theme_light_primaryContainer)
-                    .titleTextSize(20)
-                    .descriptionTextSize(15)
-                    .cancelable(false),
-
-                // Destaque do Iorinho
-                TapTarget.forView(binding.iorinhoImageView, "Seu mascote Iorinho está aqui!", "O Iorinho muda sua pose a cada abertura do aplicativo.")
-                    .outerCircleColor(R.color.md_theme_light_primary)
-                    .targetCircleColor(R.color.md_theme_light_primaryContainer)
-                    .titleTextSize(20)
-                    .descriptionTextSize(15)
-                    .cancelable(false),
-
-                // Destaque do gráfico
-                TapTarget.forView(binding.barChart, "Status dos Clientes", "Visualize o status de todos os seus clientes em um gráfico.")
-                    .outerCircleColor(R.color.md_theme_light_primary)
-                    .targetCircleColor(R.color.md_theme_light_primaryContainer)
-                    .titleTextSize(20)
-                    .descriptionTextSize(15)
-                    .cancelable(false)
-
-            )
-            .listener(object : TapTargetSequence.Listener {
-                override fun onSequenceFinish() {
-                    // Salvar no SharedPreferences que o tutorial foi exibido
-                    sharedPref.edit().putBoolean("tutorialShown", true).apply()
-                }
-
-                override fun onSequenceStep(lastTarget: TapTarget, targetClicked: Boolean) {}
-                override fun onSequenceCanceled(lastTarget: TapTarget) {}
-            })
-            .start()
-    }
 
     /**
      * Inicializa a view de loading

@@ -13,6 +13,7 @@ import androidx.core.animation.addListener
 import androidx.recyclerview.widget.RecyclerView
 import com.elevadorcom.ioritv.EditCadastroActivity
 import com.elevadorcom.ioritv.R
+// import com.elevadorcom.ioritv.utils.DialogUtils
 import com.elevadorcom.ioritv.utils.SituacaoUtil
 import com.elevadorcom.ioritv.utils.SituacaoConstants
 import com.google.firebase.Timestamp
@@ -68,9 +69,8 @@ class ClienteAdapter(
         private var isExpanded = false
 
         fun bind(cliente: DocumentSnapshot) {
-            // Preencher os campos com rótulos
-            textNome.text = "Nome: ${cliente.getString("NOME") ?: ""}"
-            textSituacao.text = "Situação: ${cliente.getString("SITUACAO") ?: ""}"
+            // Preencher os campos sem rótulos (visíveis quando contraído)
+            textNome.text = cliente.getString("NOME") ?: ""
             textUsuario.text = "Usuário: ${cliente.getString("USUARIO") ?: ""}"
             textWhatsapp.text = "WhatsApp: ${cliente.getString("WHATSAPP") ?: ""}"
             textSenha.text = "Senha: ${cliente.getString("SENHA") ?: ""}"
@@ -109,7 +109,7 @@ class ClienteAdapter(
 
             // Atualizar ícone de status com base na situação
             val situacao = terminoTimestamp?.toDate()?.let { SituacaoUtil.calcularSituacao(it) } ?: "N/A"
-            textSituacao.text = "Situação: $situacao"
+            textSituacao.text = situacao
 
             updateStatusIcon(situacao)
 
@@ -241,14 +241,17 @@ class ClienteAdapter(
 
         private fun showDeleteConfirmationDialog(cliente: DocumentSnapshot) {
             val context = itemView.context
-            AlertDialog.Builder(context)
+            val dialog = AlertDialog.Builder(context)
                 .setTitle("Confirmar Exclusão")
                 .setMessage("Você tem certeza realmente que deseja excluir este cliente?")
                 .setPositiveButton("Sim") { _, _ ->
                     onDeleteClick(cliente)
                 }
                 .setNegativeButton("Não", null)
-                .show()
+                .create()
+            
+            // DialogUtils.styleAlertDialogButtons(dialog, context)
+            dialog.show()
         }
 
         private fun formatCurrency(value: Double): String {

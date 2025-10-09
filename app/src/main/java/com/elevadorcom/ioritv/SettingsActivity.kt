@@ -16,6 +16,7 @@ import com.google.firebase.auth.UserProfileChangeRequest
 import com.google.firebase.storage.FirebaseStorage
 import com.google.firebase.storage.StorageReference
 import com.squareup.picasso.Picasso
+// import com.elevadorcom.ioritv.utils.DialogUtils
 import com.elevadorcom.ioritv.utils.ThemeUtils
 
 class SettingsActivity : AppCompatActivity() {
@@ -66,23 +67,23 @@ class SettingsActivity : AppCompatActivity() {
         val themes = arrayOf("Automático", "Claro", "Escuro")
         val currentTheme = ThemeUtils.getCurrentThemeIndex(this)
 
-        val builder = AlertDialog.Builder(this)
-        builder.setTitle("Escolha o Tema")
-
-        builder.setSingleChoiceItems(themes, currentTheme) { dialog, which ->
-            when (which) {
-                0 -> setThemeMode(AppCompatDelegate.MODE_NIGHT_FOLLOW_SYSTEM)
-                1 -> setThemeMode(AppCompatDelegate.MODE_NIGHT_NO)
-                2 -> setThemeMode(AppCompatDelegate.MODE_NIGHT_YES)
+        val dialog = AlertDialog.Builder(this)
+            .setTitle("Escolha o Tema")
+            .setSingleChoiceItems(themes, currentTheme) { dialog, which ->
+                when (which) {
+                    0 -> setThemeMode(AppCompatDelegate.MODE_NIGHT_FOLLOW_SYSTEM)
+                    1 -> setThemeMode(AppCompatDelegate.MODE_NIGHT_NO)
+                    2 -> setThemeMode(AppCompatDelegate.MODE_NIGHT_YES)
+                }
+                dialog.dismiss()
             }
-            dialog.dismiss()
-        }
-
-        builder.setNegativeButton("Cancelar") { dialog, _ ->
-            dialog.dismiss()
-        }
-
-        builder.create().show()
+            .setNegativeButton("Cancelar") { dialog, _ ->
+                dialog.dismiss()
+            }
+            .create()
+        
+        // DialogUtils.styleAlertDialogButtons(dialog, this)
+        dialog.show()
     }
 
     // Método para salvar o tema escolhido

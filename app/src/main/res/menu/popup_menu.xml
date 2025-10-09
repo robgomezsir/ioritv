@@ -4,9 +4,6 @@
         android:id="@+id/menu_configuracoes"
         android:title="Configurações" />
     <item
-        android:id="@+id/menu_tutorial"
-        android:title="Tutorial" />
-    <item
         android:id="@+id/menu_sair"
         android:title="Sair" />
 </menu>

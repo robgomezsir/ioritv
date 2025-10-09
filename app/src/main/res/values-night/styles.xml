@@ -51,6 +51,8 @@
         <item name="android:paddingBottom">12dp</item>
         <item name="android:paddingStart">24dp</item>
         <item name="android:paddingEnd">24dp</item>
+        <item name="strokeWidth">1dp</item>
+        <item name="strokeColor">@color/md_theme_dark_outline</item>
     </style>
 
     <!-- Estilo para FloatingActionButton - Dark -->
@@ -63,11 +65,48 @@
 
     <!-- Estilo para Toolbar - Dark -->
     <style name="WhatsAppToolbar" parent="Widget.Material3.Toolbar">
-        <item name="android:background">@color/md_theme_dark_surface</item>
+        <item name="android:background">@android:color/transparent</item>
         <item name="titleTextColor">@color/md_theme_dark_onSurface</item>
         <item name="subtitleTextColor">@color/md_theme_dark_onSurfaceVariant</item>
         <item name="navigationIconTint">@color/md_theme_dark_onSurface</item>
         <item name="android:elevation">0dp</item>
+    </style>
+
+    <!-- Estilo para botões do AlertDialog - Dark -->
+    <style name="AlertDialogButton" parent="Widget.Material3.Button.TextButton">
+        <item name="android:textColor">@color/md_theme_dark_primary</item>
+        <item name="rippleColor">@color/md_theme_dark_primary</item>
+        <item name="android:textSize">16sp</item>
+        <item name="android:textStyle">normal</item>
+    </style>
+    
+    <!-- Estilo para botão positivo (Salvar) - Dark -->
+    <style name="AlertDialogButtonPositive" parent="Widget.Material3.Button">
+        <item name="android:textColor">@color/md_theme_dark_onPrimary</item>
+        <item name="backgroundTint">@color/md_theme_dark_primary</item>
+        <item name="rippleColor">@color/md_theme_dark_onPrimary</item>
+        <item name="android:textSize">16sp</item>
+        <item name="android:textStyle">bold</item>
+        <item name="cornerRadius">8dp</item>
+    </style>
+
+    <!-- Estilo personalizado para AlertDialog com contraste adequado - Dark -->
+    <style name="AlertDialogCustom" parent="ThemeOverlay.Material3.Dialog.Alert">
+        <item name="colorPrimary">?attr/colorPrimary</item>
+        <item name="colorOnPrimary">?attr/colorOnPrimary</item>
+        <item name="colorSecondary">?attr/colorSecondary</item>
+        <item name="colorOnSecondary">?attr/colorOnSecondary</item>
+        <item name="android:textColorPrimary">?attr/colorOnSurface</item>
+        <item name="android:textColorSecondary">?attr/colorOnSurfaceVariant</item>
+        <item name="android:windowBackground">?attr/colorSurface</item>
+        <item name="buttonBarPositiveButtonStyle">@style/AlertDialogButtonPositive</item>
+        <item name="buttonBarNegativeButtonStyle">@style/AlertDialogButton</item>
+    </style>
+
+    <!-- Estilo para PopupMenu com cantos arredondados - Dark -->
+    <style name="PopupMenuStyle" parent="Widget.Material3.PopupMenu">
+        <item name="android:popupBackground">@drawable/popup_menu_background</item>
+        <item name="android:popupElevation">4dp</item>
     </style>
 </resources>
 

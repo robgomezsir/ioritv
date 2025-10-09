@@ -98,4 +98,11 @@ object ThemeUtils {
             }
         }
     }
+
+    /**
+     * Verifica se o tema atual é claro
+     */
+    fun isLightTheme(context: Context): Boolean {
+        return !isDarkTheme(context)
+    }
 }

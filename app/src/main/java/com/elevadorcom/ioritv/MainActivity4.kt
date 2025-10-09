@@ -9,15 +9,21 @@ import android.os.Build
 import android.os.Bundle
 import android.os.Environment
 import android.provider.Settings
+import android.graphics.Typeface
+import android.text.SpannableString
+import android.text.style.StyleSpan
 import android.view.LayoutInflater
+import android.view.MenuItem
 import android.view.View
 import android.view.animation.AccelerateDecelerateInterpolator
 import android.widget.EditText
+import android.widget.PopupMenu
 import android.widget.TextView
 import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
+import androidx.appcompat.app.AppCompatDelegate
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
@@ -29,7 +35,10 @@ import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.elevadorcom.ioritv.utils.AccessibilityUtils
 import com.elevadorcom.ioritv.utils.AnimationUtils
+// import com.elevadorcom.ioritv.utils.DialogUtils
+import com.elevadorcom.ioritv.utils.DialogUtils
 import com.elevadorcom.ioritv.utils.ThemeUtils
+import com.elevadorcom.ioritv.utils.MoneyTextWatcher
 import com.google.firebase.firestore.FirebaseFirestore
 import java.text.NumberFormat
 import java.text.SimpleDateFormat
@@ -137,7 +146,9 @@ class MainActivity4 : AppCompatActivity() {
     
     private fun setupToolbar() {
         setSupportActionBar(toolbar)
-        supportActionBar?.title = "Meu Ioritv"
+        val title = SpannableString("Meu Ioritv")
+        title.setSpan(StyleSpan(Typeface.BOLD), 0, title.length, 0)
+        supportActionBar?.title = title
     }
     
     private fun setupFloatingActionButtons() {
@@ -318,12 +329,15 @@ class MainActivity4 : AppCompatActivity() {
     
     private fun showEditCustoTotalDialog() {
         val input = EditText(this)
-        input.hint = "Digite o custo total (ex: 1000.50)"
+        input.hint = "Digite o custo total"
         input.inputType = android.text.InputType.TYPE_CLASS_NUMBER or android.text.InputType.TYPE_NUMBER_FLAG_DECIMAL
+        
+        // Aplicar formatação monetária automática
+        MoneyTextWatcher.apply(input)
         
         // Pré-preencher com valor atual
         if (custoTotalFixo > 0) {
-            input.setText(String.format(Locale.getDefault(), "%.2f", custoTotalFixo))
+            input.setText(MoneyTextWatcher.formatCurrency(custoTotalFixo))
         }
         
         val dialog = AlertDialog.Builder(this)
@@ -331,10 +345,9 @@ class MainActivity4 : AppCompatActivity() {
             .setMessage("Informe o custo operacional mensal fixo:")
             .setView(input)
             .setPositiveButton("Salvar") { _, _ ->
-                val valorStr = input.text.toString()
-                val valor = valorStr.toDoubleOrNull()
+                val valor = MoneyTextWatcher.getNumericValue(input.text.toString())
                 
-                if (valor != null && valor >= 0) {
+                if (valor >= 0) {
                     saveCustoTotalToFirebase(valor)
                 } else {
                     Toast.makeText(this, "Por favor, insira um valor válido", Toast.LENGTH_SHORT).show()
@@ -343,6 +356,11 @@ class MainActivity4 : AppCompatActivity() {
             .setNegativeButton("Cancelar", null)
             .create()
         
+        if (ThemeUtils.isDarkTheme(this)) {
+            DialogUtils.styleAlertDialogButtonsDark(dialog, this)
+        } else {
+            DialogUtils.styleAlertDialogButtons(dialog, this)
+        }
         dialog.show()
     }
     
@@ -361,6 +379,7 @@ class MainActivity4 : AppCompatActivity() {
                     totalClientes++
                     val situacao = document.getString("SITUACAO") ?: ""
                     val terminoTimestamp = document.getTimestamp("TERMINO")
+                    val valor = document.getDouble("VALOR") ?: 0.0
                     
                     // Calcular dias até vencimento
                     val diasParaVencimento = if (terminoTimestamp != null) {
@@ -375,14 +394,16 @@ class MainActivity4 : AppCompatActivity() {
                     when {
                         situacao == "STANDBY" || diasParaVencimento <= -30 -> contasInativas++
                         situacao == "VENCIDO" || (diasParaVencimento <= -15 && diasParaVencimento > -30) -> contasVencidas++
-                        situacao == "A VENCER" || (diasParaVencimento >= 0 && diasParaVencimento <= 3) -> contasAVencer++
-                        situacao == "ATIVO" || diasParaVencimento > 3 -> contasAtivas++
-                    }
-                    
-                    // Calcular total de vendas apenas de clientes ativos
-                    if (situacao == "ATIVO") {
-                        val valor = document.getDouble("VALOR") ?: 0.0
-                        totalVendas += valor
+                        situacao == "A VENCER" || (diasParaVencimento >= 0 && diasParaVencimento <= 3) -> {
+                            contasAVencer++
+                            // Incluir no total de vendas
+                            totalVendas += valor
+                        }
+                        situacao == "ATIVO" || diasParaVencimento > 3 -> {
+                            contasAtivas++
+                            // Incluir no total de vendas
+                            totalVendas += valor
+                        }
                     }
                 }
                 
@@ -616,6 +637,9 @@ class MainActivity4 : AppCompatActivity() {
         val inputDespesa = dialogView.findViewById<EditText>(R.id.inputDespesa)
         val inputValor = dialogView.findViewById<EditText>(R.id.inputValor)
         
+        // Aplicar formatação monetária automática no campo de valor
+        MoneyTextWatcher.apply(inputValor)
+        
         // Pré-preencher data atual
         val currentDate = SimpleDateFormat("dd/MM/yyyy", Locale.getDefault()).format(Date())
         inputData.setText(currentDate)
@@ -633,8 +657,8 @@ class MainActivity4 : AppCompatActivity() {
                     return@setPositiveButton
                 }
                 
-                val valor = valorStr.toDoubleOrNull()
-                if (valor == null || valor <= 0) {
+                val valor = MoneyTextWatcher.getNumericValue(valorStr)
+                if (valor <= 0) {
                     Toast.makeText(this, "Por favor, insira um valor válido", Toast.LENGTH_SHORT).show()
                     return@setPositiveButton
                 }
@@ -644,6 +668,7 @@ class MainActivity4 : AppCompatActivity() {
             .setNegativeButton("Cancelar", null)
             .create()
         
+        // DialogUtils.styleAlertDialogButtons(dialog, this)
         dialog.show()
     }
     
@@ -695,14 +720,17 @@ class MainActivity4 : AppCompatActivity() {
             // Android 11 e superior - solicitar MANAGE_EXTERNAL_STORAGE
             try {
                 val intent = Intent(Settings.ACTION_MANAGE_ALL_FILES_ACCESS_PERMISSION)
-                AlertDialog.Builder(this)
+                val dialog = AlertDialog.Builder(this)
                     .setTitle("Permissão Necessária")
                     .setMessage("Para salvar o arquivo Excel, é necessário permitir o acesso aos arquivos.")
                     .setPositiveButton("Conceder") { _, _ ->
                         startActivity(intent)
                     }
                     .setNegativeButton("Cancelar", null)
-                    .show()
+                    .create()
+                
+                // DialogUtils.styleAlertDialogButtons(dialog, this)
+                dialog.show()
             } catch (e: Exception) {
                 Toast.makeText(this, "Erro ao solicitar permissão", Toast.LENGTH_SHORT).show()
             }
@@ -731,7 +759,7 @@ class MainActivity4 : AppCompatActivity() {
             
             if (success && file != null) {
                 // Mostrar opções ao usuário
-                android.app.AlertDialog.Builder(this)
+                val dialog = android.app.AlertDialog.Builder(this)
                     .setTitle("Excel Criado com Sucesso!")
                     .setMessage("Arquivo salvo em: ${file.absolutePath}\n\nDeseja abrir o arquivo?")
                     .setPositiveButton("Abrir") { _, _ ->
@@ -741,7 +769,10 @@ class MainActivity4 : AppCompatActivity() {
                         dialog.dismiss()
                         Toast.makeText(this, "Arquivo salvo na pasta Downloads", Toast.LENGTH_LONG).show()
                     }
-                    .show()
+                    .create()
+                
+                // DialogUtils.styleAlertDialogButtons(dialog, this)
+                dialog.show()
             } else {
                 Toast.makeText(this, message, Toast.LENGTH_LONG).show()
             }
@@ -751,7 +782,7 @@ class MainActivity4 : AppCompatActivity() {
     private fun showDespesaOptionsDialog(despesa: DespesaItem) {
         val options = arrayOf("Editar", "Deletar")
         
-        AlertDialog.Builder(this)
+        val dialog = AlertDialog.Builder(this)
             .setTitle("Opções da Despesa")
             .setItems(options) { dialog, which ->
                 when (which) {
@@ -760,7 +791,10 @@ class MainActivity4 : AppCompatActivity() {
                 }
             }
             .setNegativeButton("Cancelar", null)
-            .show()
+            .create()
+        
+        // DialogUtils.styleAlertDialogButtons(dialog, this)
+        dialog.show()
     }
     
     private fun showEditDespesaDialog(despesa: DespesaItem) {
@@ -771,10 +805,13 @@ class MainActivity4 : AppCompatActivity() {
         val inputDespesa = dialogView.findViewById<EditText>(R.id.inputDespesa)
         val inputValor = dialogView.findViewById<EditText>(R.id.inputValor)
         
+        // Aplicar formatação monetária automática no campo de valor
+        MoneyTextWatcher.apply(inputValor)
+        
         // Pré-preencher com dados existentes
         inputData.setText(despesa.data)
         inputDespesa.setText(despesa.descricao)
-        inputValor.setText(String.format(Locale.getDefault(), "%.2f", despesa.valor))
+        inputValor.setText(MoneyTextWatcher.formatCurrency(despesa.valor))
         
         val dialog = AlertDialog.Builder(this)
             .setTitle("Editar Despesa")
@@ -789,8 +826,8 @@ class MainActivity4 : AppCompatActivity() {
                     return@setPositiveButton
                 }
                 
-                val valor = valorStr.replace(",", ".").toDoubleOrNull()
-                if (valor == null || valor <= 0) {
+                val valor = MoneyTextWatcher.getNumericValue(valorStr)
+                if (valor <= 0) {
                     Toast.makeText(this, "Por favor, insira um valor válido", Toast.LENGTH_SHORT).show()
                     return@setPositiveButton
                 }
@@ -800,6 +837,7 @@ class MainActivity4 : AppCompatActivity() {
             .setNegativeButton("Cancelar", null)
             .create()
         
+        // DialogUtils.styleAlertDialogButtons(dialog, this)
         dialog.show()
     }
     
@@ -825,14 +863,17 @@ class MainActivity4 : AppCompatActivity() {
     }
     
     private fun showDeleteDespesaConfirmation(despesa: DespesaItem) {
-        AlertDialog.Builder(this)
+        val dialog = AlertDialog.Builder(this)
             .setTitle("Confirmar Exclusão")
             .setMessage("Deseja realmente excluir a despesa \"${despesa.descricao}\"?")
             .setPositiveButton("Sim") { _, _ ->
                 deleteDespesa(despesa.id)
             }
             .setNegativeButton("Não", null)
-            .show()
+            .create()
+        
+        // DialogUtils.styleAlertDialogButtons(dialog, this)
+        dialog.show()
     }
     
     private fun deleteDespesa(despesaId: String) {
@@ -929,5 +970,76 @@ class MainActivity4 : AppCompatActivity() {
             findViewById(R.id.margemLucroCard)
         )
         AnimationUtils.animateCardsEnter(cards, 100)
+    }
+
+    override fun onCreateOptionsMenu(menu: android.view.Menu?): Boolean {
+        menuInflater.inflate(R.menu.toolbar_menu, menu)
+        return true
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        return when (item.itemId) {
+            R.id.menu_theme -> {
+                toggleTheme()
+                true
+            }
+            R.id.menu_logout -> {
+                logout()
+                true
+            }
+            else -> super.onOptionsItemSelected(item)
+        }
+    }
+
+    private fun toggleTheme() {
+        showThemeMenu()
+    }
+
+    private fun showThemeMenu() {
+        // Criar âncora para o popup (usar o botão de menu na toolbar)
+        val anchor = toolbar.findViewById<View>(R.id.menu_theme) ?: toolbar
+        
+        val popupMenu = PopupMenu(this, anchor, android.view.Gravity.END)
+        popupMenu.menuInflater.inflate(R.menu.theme_menu, popupMenu.menu)
+        
+        val currentTheme = ThemeUtils.getSavedThemeMode(this)
+        when (currentTheme) {
+            AppCompatDelegate.MODE_NIGHT_FOLLOW_SYSTEM -> popupMenu.menu.findItem(R.id.menu_theme_auto)?.isChecked = true
+            AppCompatDelegate.MODE_NIGHT_NO -> popupMenu.menu.findItem(R.id.menu_theme_light)?.isChecked = true
+            AppCompatDelegate.MODE_NIGHT_YES -> popupMenu.menu.findItem(R.id.menu_theme_dark)?.isChecked = true
+        }
+        
+        popupMenu.setOnMenuItemClickListener { item ->
+            when (item.itemId) {
+                R.id.menu_theme_auto -> {
+                    ThemeUtils.saveThemeMode(this, AppCompatDelegate.MODE_NIGHT_FOLLOW_SYSTEM)
+                    recreate()
+                    true
+                }
+                R.id.menu_theme_light -> {
+                    ThemeUtils.saveThemeMode(this, AppCompatDelegate.MODE_NIGHT_NO)
+                    recreate()
+                    true
+                }
+                R.id.menu_theme_dark -> {
+                    ThemeUtils.saveThemeMode(this, AppCompatDelegate.MODE_NIGHT_YES)
+                    recreate()
+                    true
+                }
+                else -> false
+            }
+        }
+        
+        popupMenu.show()
+    }
+
+    private fun logout() {
+        val sharedPreferences = getSharedPreferences("login_prefs", MODE_PRIVATE)
+        val editor = sharedPreferences.edit()
+        editor.clear()
+        editor.apply()
+
+        startActivity(Intent(this, LoginActivity::class.java))
+        finish()
     }
 }
