@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<selector xmlns:android="http://schemas.android.com/apk/res/android">
+    <!-- Tema escuro: texto branco quando selecionado para contrastar com fundo escuro -->
+    <item android:state_selected="true" android:color="#FFFFFF" />
+    <!-- Tema escuro: texto claro quando não selecionado -->
+    <item android:color="#E0E0E0" />
+</selector>
+
