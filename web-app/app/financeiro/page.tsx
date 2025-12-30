@@ -8,6 +8,8 @@ import { auth } from "@/firebase/config";
 import { useRouter } from "next/navigation";
 import DespesaModal from "@/components/DespesaModal";
 
+import { Timestamp } from "firebase/firestore";
+
 interface Despesa {
     id: string;
     data: string;
@@ -19,7 +21,7 @@ interface Cliente {
     SITUACAO: string;
     VENCIMENTO: string;
     VALOR: number;
-    TERMINO?: any; // Timestamp
+    TERMINO?: Timestamp;
 }
 
 export default function FinanceiroPage() {
@@ -68,9 +70,11 @@ export default function FinanceiroPage() {
                 setCustoTotalFixo(snap.data().valor || 0);
             }
         };
-        loadCusto();
-
-        setLoading(false);
+        const loadData = async () => {
+            await loadCusto();
+            setLoading(false);
+        };
+        loadData();
 
         return () => {
             unsubscribeAuth();
@@ -279,7 +283,15 @@ export default function FinanceiroPage() {
     );
 }
 
-function MetricCard({ title, value, color, borderColor, icon }: any) {
+interface MetricCardProps {
+    title: string;
+    value: string | number;
+    color: string;
+    borderColor: string;
+    icon?: React.ReactNode;
+}
+
+function MetricCard({ title, value, color, borderColor, icon }: MetricCardProps) {
     return (
         <div className={`bg-white dark:bg-gray-800 p-6 rounded-xl border ${borderColor} shadow-lg relative overflow-hidden transition-all duration-300`}>
             <p className="text-gray-500 dark:text-gray-400 text-xs font-bold uppercase tracking-wider">{title}</p>

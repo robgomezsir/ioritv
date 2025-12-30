@@ -17,7 +17,7 @@ interface Cliente {
     VENCIMENTO: string; // Cloud Function calculated string
     TERMINO?: Timestamp;
     CREDITOS: number;
-    [key: string]: any;
+    [key: string]: string | number | boolean | Timestamp | null | undefined;
 }
 
 export default function ClientesPage() {
@@ -129,10 +129,13 @@ export default function ClientesPage() {
             bValue = b.TERMINO ? b.TERMINO.seconds : 0;
         }
 
-        if (aValue < bValue) {
+        const safeAValue = aValue ?? '';
+        const safeBValue = bValue ?? '';
+
+        if (safeAValue < safeBValue) {
             return sortConfig.direction === 'asc' ? -1 : 1;
         }
-        if (aValue > bValue) {
+        if (safeAValue > safeBValue) {
             return sortConfig.direction === 'asc' ? 1 : -1;
         }
         return 0;

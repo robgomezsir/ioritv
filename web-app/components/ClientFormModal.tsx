@@ -11,7 +11,7 @@ interface Cliente {
     SENHA?: string;
     WHATSAPP?: string;
     MODELO?: string;
-    INICIO?: any; // Timestamp or null
+    INICIO?: Timestamp | null;
     CREDITOS: number;
     MAC?: string;
     OTP?: string;
@@ -23,7 +23,7 @@ interface Cliente {
     // Computed fields (readonly in form usually)
     SITUACAO?: string;
     VENCIMENTO?: string;
-    TERMINO?: any;
+    TERMINO?: Timestamp | null;
 }
 
 interface Props {
@@ -102,7 +102,8 @@ export default function ClientFormModal({ isOpen, onClose, clienteToEdit }: Prop
             if (clienteToEdit?.id) {
                 // Update
                 const docRef = doc(db, "clientes", clienteToEdit.id);
-                const { id, ...updateData } = dataToSave as any; // Remove id from data
+                const { id: _id, ...updateData } = dataToSave as Cliente; // Remove id from data
+                void _id;
                 await updateDoc(docRef, updateData);
             } else {
                 // Create

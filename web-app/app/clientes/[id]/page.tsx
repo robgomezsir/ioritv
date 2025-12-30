@@ -97,7 +97,7 @@ export default function ClienteDetailPage() {
         setSaving(true);
 
         try {
-            const updateData: any = { ...formData };
+            const updateData: Partial<ClienteData> = { ...formData };
 
             if (inicioDate) {
                 const [year, month, day] = inicioDate.split('-').map(Number);
@@ -145,9 +145,9 @@ export default function ClienteDetailPage() {
                 <div className="text-right">
                     <div className="text-sm text-gray-500 dark:text-gray-400">Status</div>
                     <div className={`inline-block px-3 py-1 rounded-full text-xs font-semibold mt-1 ${formData.SITUACAO === "ATIVO" ? "bg-green-500/10 text-green-600 dark:text-green-400 border border-green-500/20" :
-                            formData.SITUACAO === "A VENCER" ? "bg-yellow-500/10 text-yellow-600 dark:text-yellow-400 border border-yellow-500/20" :
-                                formData.SITUACAO === "VENCIDO" ? "bg-red-500/10 text-red-600 dark:text-red-400 border border-red-500/20" :
-                                    "bg-gray-500/10 text-gray-600 dark:text-gray-400 border border-gray-500/20"
+                        formData.SITUACAO === "A VENCER" ? "bg-yellow-500/10 text-yellow-600 dark:text-yellow-400 border border-yellow-500/20" :
+                            formData.SITUACAO === "VENCIDO" ? "bg-red-500/10 text-red-600 dark:text-red-400 border border-red-500/20" :
+                                "bg-gray-500/10 text-gray-600 dark:text-gray-400 border border-gray-500/20"
                         }`}>
                         {formData.SITUACAO || "N/A"}
                     </div>

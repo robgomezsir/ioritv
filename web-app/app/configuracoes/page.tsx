@@ -5,12 +5,15 @@ import { onAuthStateChanged } from "firebase/auth";
 import { auth } from "@/firebase/config";
 import { useRouter } from "next/navigation";
 import { useTheme } from "next-themes";
+import { User } from "firebase/auth";
 
 function ThemeToggle() {
     const { theme, setTheme } = useTheme();
     const [mounted, setMounted] = useState(false);
 
-    useEffect(() => setMounted(true), []);
+    useEffect(() => {
+        setMounted(true);
+    }, []);
 
     if (!mounted) return null;
 
@@ -39,7 +42,7 @@ function ThemeToggle() {
 }
 
 export default function ConfiguracoesPage() {
-    const [user, setUser] = useState<any>(null);
+    const [user, setUser] = useState<User | null>(null);
     const router = useRouter();
 
     useEffect(() => {

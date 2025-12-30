@@ -10,9 +10,7 @@ import {
     YAxis,
     Tooltip,
     ResponsiveContainer,
-    Cell,
-    PieChart,
-    Pie
+    Cell
 } from "recharts";
 import { onAuthStateChanged } from "firebase/auth";
 import { auth } from "@/firebase/config";
@@ -70,8 +68,11 @@ export default function DashboardHome() {
                 setCustoTotalFixo(snap.data().valor || 0);
             }
         };
-        loadCusto();
-        setLoading(false);
+        const loadData = async () => {
+            await loadCusto();
+            setLoading(false);
+        };
+        loadData();
 
         return () => {
             unsubscribeAuth();

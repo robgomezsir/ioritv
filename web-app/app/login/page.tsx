@@ -47,7 +47,7 @@ export default function LoginPage() {
             }
 
             router.push("/dashboard");
-        } catch (err: any) {
+        } catch (err) {
             setError("Falha ao fazer login. Verifique suas credenciais.");
             console.error(err);
         } finally {
@@ -69,7 +69,7 @@ export default function LoginPage() {
                 setResetEmail("");
                 setSuccessMessage("");
             }, 3000);
-        } catch (err: any) {
+        } catch (err) {
             setError("Erro ao enviar email de recuperação. Verifique o endereço.");
             console.error(err);
         } finally {
@@ -101,8 +101,8 @@ export default function LoginPage() {
             setTimeout(() => {
                 router.push("/dashboard");
             }, 1500);
-        } catch (err: any) {
-            if (err.code === "auth/email-already-in-use") {
+        } catch (err) {
+            if (err && typeof err === 'object' && 'code' in err && err.code === "auth/email-already-in-use") {
                 setError("Este email já está em uso.");
             } else {
                 setError("Erro ao criar conta. Tente novamente.");
