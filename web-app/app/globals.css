@@ -1,0 +1,26 @@
+@import "tailwindcss";
+
+/* 
+  Tailwind v4 / Next.js setup might handle dark mode differently.
+  Since we use generic Tailwind classes (bg-gray-950), we rely on next-themes adding 'dark' class to html.
+  We define CSS vars for cases where we rely on them, ensuring they flip.
+*/
+
+:root {
+  --background: #f9fafb;
+  /* gray-50 */
+  --foreground: #111827;
+  /* gray-900 */
+}
+
+/* Specific overrides when .dark class is present on html/body */
+.dark {
+  --background: #030712;
+  /* gray-950 */
+  --foreground: #ededed;
+}
+
+body {
+  background: var(--background);
+  color: var(--foreground);
+}
