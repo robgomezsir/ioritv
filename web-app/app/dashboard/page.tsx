@@ -17,9 +17,13 @@ import { auth } from "@/firebase/config";
 import { useRouter } from "next/navigation";
 import DespesaModal from "@/components/DespesaModal";
 
+import { getSmartStatus } from "@/utils/clientStatus";
+import { Timestamp } from "firebase/firestore";
+
 interface Cliente {
     SITUACAO: string;
     VALOR: number;
+    TERMINO?: Timestamp;
 }
 
 interface Despesa {
@@ -91,15 +95,17 @@ export default function DashboardHome() {
     };
 
     clientes.forEach(c => {
-        if (situacaoCounts.hasOwnProperty(c.SITUACAO)) {
-            situacaoCounts[c.SITUACAO as keyof typeof situacaoCounts]++;
+        const smartStatus = getSmartStatus(c);
+        if (situacaoCounts.hasOwnProperty(smartStatus)) {
+            situacaoCounts[smartStatus as keyof typeof situacaoCounts]++;
         }
     });
 
     // Financial metrics
     let totalVendas = 0;
     clientes.forEach(c => {
-        if (c.SITUACAO === "ATIVO" || c.SITUACAO === "A VENCER") {
+        const smartStatus = getSmartStatus(c);
+        if (smartStatus === "ATIVO" || smartStatus === "A VENCER") {
             totalVendas += c.VALOR || 0;
         }
     });

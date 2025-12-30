@@ -9,6 +9,7 @@ import { useRouter } from "next/navigation";
 import DespesaModal from "@/components/DespesaModal";
 
 import { Timestamp } from "firebase/firestore";
+import { getSmartStatus } from "@/utils/clientStatus";
 
 interface Despesa {
     id: string;
@@ -94,7 +95,8 @@ export default function FinanceiroPage() {
 
     let totalVendas = 0;
     clientes.forEach(c => {
-        if (c.SITUACAO === "ATIVO" || c.SITUACAO === "A VENCER") {
+        const smartStatus = getSmartStatus(c);
+        if (smartStatus === "ATIVO" || smartStatus === "A VENCER") {
             totalVendas += c.VALOR || 0;
         }
     });

@@ -7,6 +7,7 @@ import { useRouter } from "next/navigation";
 import { onAuthStateChanged } from "firebase/auth";
 import { auth } from "@/firebase/config";
 import ClientFormModal from "@/components/ClientFormModal";
+import { getSmartStatus } from "@/utils/clientStatus";
 
 // Type definition matches Android model somewhat
 interface Cliente {
@@ -111,10 +112,11 @@ export default function ClientesPage() {
     if (loading) return <div className="min-h-screen bg-gray-900 flex items-center justify-center text-white">Carregando...</div>;
 
     const filteredClientes = clientes.filter(cliente => {
+        const smartStatus = getSmartStatus(cliente);
         const matchesSearch =
             cliente.NOME.toLowerCase().includes(searchTerm.toLowerCase()) ||
             cliente.USUARIO?.toLowerCase().includes(searchTerm.toLowerCase());
-        const matchesStatus = filterStatus === "TODOS" || cliente.SITUACAO === filterStatus;
+        const matchesStatus = filterStatus === "TODOS" || smartStatus === filterStatus;
         return matchesSearch && matchesStatus;
     }).sort((a, b) => {
         if (!sortConfig) return 0;
@@ -233,8 +235,8 @@ export default function ClientesPage() {
                                             <td className="px-6 py-4 font-medium text-gray-900 dark:text-white">{cliente.NOME}</td>
                                             <td className="px-6 py-4 text-gray-600 dark:text-gray-300">{cliente.USUARIO}</td>
                                             <td className="px-6 py-4">
-                                                <span className={`px-3 py-1 rounded-full text-xs font-semibold border ${getStatusColor(cliente.SITUACAO)}`}>
-                                                    {cliente.SITUACAO}
+                                                <span className={`px-3 py-1 rounded-full text-xs font-semibold border ${getStatusColor(getSmartStatus(cliente))}`}>
+                                                    {getSmartStatus(cliente)}
                                                 </span>
                                             </td>
                                             <td className="px-6 py-4 text-gray-600 dark:text-gray-300">{cliente.VENCIMENTO}</td>
