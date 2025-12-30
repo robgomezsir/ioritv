@@ -2,10 +2,12 @@
 
 import { useEffect, useState } from "react";
 import { onAuthStateChanged } from "firebase/auth";
-import { auth } from "@/firebase/config";
+import { collection, getDocs, query, orderBy } from "firebase/firestore";
+import { auth, db } from "@/firebase/config";
 import { useRouter } from "next/navigation";
 import { useTheme } from "next-themes";
 import { User } from "firebase/auth";
+import { ArrowDownTrayIcon } from "@heroicons/react/24/outline";
 
 function ThemeToggle() {
     const { theme, setTheme } = useTheme();
@@ -57,6 +59,55 @@ export default function ConfiguracoesPage() {
         return () => unsubscribe();
     }, [router]);
 
+    const handleExportCSV = async () => {
+        try {
+            const q = query(collection(db, "clientes"), orderBy("NOME"));
+            const snapshot = await getDocs(q);
+            const data = snapshot.docs.map(doc => doc.data());
+
+            const headers = [
+                "Nome", "Usuário", "Senha", "Situação", "Vencimento", "Créditos",
+                "WhatsApp", "Valor", "Custo", "Desconto", "Servidor", "MAC",
+                "Modelo", "Data de Início"
+            ];
+
+            const rows = data.map(item => [
+                item.NOME || "",
+                item.USUARIO || "",
+                item.SENHA || "",
+                item.SITUACAO || "",
+                item.VENCIMENTO || "",
+                item.CREDITOS || 0,
+                item.WHATSAPP || "",
+                item.VALOR || 0,
+                item.CUSTO || 0,
+                item.DESCONTO || 0,
+                item.SERVIDOR || "",
+                item.MAC || "",
+                item.MODELO || "",
+                item.INICIO ? (item.INICIO.toDate ? item.INICIO.toDate().toLocaleDateString('pt-BR') : "") : ""
+            ]);
+
+            const csvContent = [
+                headers.join(","),
+                ...rows.map(row => row.map(val => `"${String(val).replace(/"/g, '""')}"`).join(","))
+            ].join("\n");
+
+            const blob = new Blob(["\uFEFF" + csvContent], { type: 'text/csv;charset=utf-8;' });
+            const url = URL.createObjectURL(blob);
+            const link = document.createElement("a");
+            link.setAttribute("href", url);
+            link.setAttribute("download", `clientes_ioritv_${new Date().toISOString().split('T')[0]}.csv`);
+            link.style.visibility = 'hidden';
+            document.body.appendChild(link);
+            link.click();
+            document.body.removeChild(link);
+        } catch (error) {
+            console.error("Erro ao exportar CSV:", error);
+            alert("Erro ao exportar clientes.");
+        }
+    };
+
     if (!user) return <div className="p-8 text-center text-white">Carregando...</div>;
 
     return (
@@ -83,6 +134,23 @@ export default function ConfiguracoesPage() {
                 </div>
 
                 <div className="mt-8 pt-8 border-t border-gray-700">
+                    <h3 className="text-lg font-semibold text-gray-800 dark:text-gray-300 mb-4">Dados e Backup</h3>
+                    <div className="flex items-center justify-between p-4 bg-gray-100 dark:bg-gray-900/50 rounded-lg border border-gray-200 dark:border-gray-700">
+                        <div>
+                            <p className="text-gray-900 dark:text-white font-medium">Exportar Clientes</p>
+                            <p className="text-gray-500 dark:text-gray-400 text-sm">Baixe a lista completa em formato CSV.</p>
+                        </div>
+                        <button
+                            onClick={handleExportCSV}
+                            className="flex items-center gap-2 px-4 py-2 bg-blue-600 hover:bg-blue-500 text-white rounded-lg font-medium transition-all shadow-lg shadow-blue-500/20"
+                        >
+                            <ArrowDownTrayIcon className="w-5 h-5" />
+                            <span>Exportar (.csv)</span>
+                        </button>
+                    </div>
+                </div>
+
+                <div className="mt-6 pt-6 border-t border-gray-700">
                     <h3 className="text-lg font-semibold text-gray-800 dark:text-gray-300 mb-4">Preferências</h3>
                     <div className="flex items-center justify-between p-4 bg-gray-100 dark:bg-gray-900/50 rounded-lg border border-gray-200 dark:border-gray-700">
                         <div>
