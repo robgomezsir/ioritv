@@ -5,6 +5,7 @@ import { usePathname } from "next/navigation";
 import { useState } from "react";
 import Image from "next/image";
 import { useSidebar } from "@/contexts/SidebarContext";
+import InstallPWA from "./InstallPWA";
 
 export default function Sidebar() {
     const pathname = usePathname();
@@ -107,14 +108,15 @@ export default function Sidebar() {
                         })}
                     </nav>
 
-                    {/* Version - Only show when expanded */}
-                    {!isCollapsed && (
-                        <div className="p-4 border-t border-[#1e293b] flex-shrink-0">
-                            <div className="text-xs text-center text-gray-500">
-                                v1.0.0
+                    {/* Bottom Section: Install Button & Version */}
+                    <div className="p-4 border-t border-[#1e293b] space-y-2">
+                        <InstallPWA isCollapsed={isCollapsed} />
+                        {!isCollapsed && (
+                            <div className="text-[10px] text-center text-gray-500 font-medium tracking-wider uppercase opacity-50">
+                                v4.2.0 • PWA Ready
                             </div>
-                        </div>
-                    )}
+                        )}
+                    </div>
                 </div>
             </aside>
 

@@ -1,5 +1,6 @@
 "use client";
 
+import { useEffect } from "react";
 import { Geist, Geist_Mono } from "next/font/google";
 import Sidebar from "@/components/Sidebar";
 import "./globals.css";
@@ -22,6 +23,21 @@ function LayoutContent({ children }: { children: React.ReactNode }) {
   const isLoginPage = pathname === "/login";
   const { isCollapsed } = useSidebar();
 
+  useEffect(() => {
+    if ('serviceWorker' in navigator && window.location.protocol === 'https:') {
+      window.addEventListener('load', () => {
+        navigator.serviceWorker.register('/sw.js').then(
+          (registration) => {
+            console.log('SW registered: ', registration);
+          },
+          (registrationError) => {
+            console.log('SW registration failed: ', registrationError);
+          }
+        );
+      });
+    }
+  }, []);
+
   return (
     <body
       className={`${geistSans.variable} ${geistMono.variable} antialiased bg-gray-50 dark:bg-gray-950 text-gray-900 dark:text-gray-100 ${!isLoginPage ? 'flex min-h-screen' : ''} transition-colors duration-300`}
@@ -43,6 +59,14 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="pt-BR" suppressHydrationWarning>
+      <head>
+        <link rel="manifest" href="/manifest.json" />
+        <meta name="theme-color" content="#141b2d" />
+        <meta name="apple-mobile-web-app-capable" content="yes" />
+        <meta name="apple-mobile-web-app-status-bar-style" content="default" />
+        <meta name="apple-mobile-web-app-title" content="IoriTV" />
+        <link rel="apple-touch-icon" href="/logom.png" />
+      </head>
       <SidebarProvider>
         <LayoutContent>{children}</LayoutContent>
       </SidebarProvider>
