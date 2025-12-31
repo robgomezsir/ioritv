@@ -1,6 +1,5 @@
-const CACHE_NAME = 'ioritv-v1';
+const CACHE_NAME = 'ioritv-v2';
 const ASSETS_TO_CACHE = [
-    '/',
     '/manifest.json',
     '/logo.png',
     '/logom.png',
