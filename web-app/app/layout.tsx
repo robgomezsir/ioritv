@@ -24,11 +24,35 @@ function LayoutContent({ children }: { children: React.ReactNode }) {
   const { isCollapsed } = useSidebar();
 
   useEffect(() => {
+    // Handle ChunkLoadError globally
+    const handleError = (e: ErrorEvent) => {
+      if (e.message.includes('Loading chunk') || e.message.includes('CSS chunk')) {
+        console.warn('ChunkLoadError detected, forcing reload...', e);
+        window.location.reload();
+      }
+    };
+
+    window.addEventListener('error', handleError);
+
     if ('serviceWorker' in navigator && window.location.protocol === 'https:') {
       window.addEventListener('load', () => {
         navigator.serviceWorker.register('/sw.js').then(
           (registration) => {
             console.log('SW registered: ', registration);
+            // Check for updates
+            registration.onupdatefound = () => {
+              const installingWorker = registration.installing;
+              if (installingWorker) {
+                installingWorker.onstatechange = () => {
+                  if (installingWorker.state === 'installed') {
+                    if (navigator.serviceWorker.controller) {
+                      console.log('New content available; please refresh.');
+                      window.location.reload();
+                    }
+                  }
+                };
+              }
+            };
           },
           (registrationError) => {
             console.log('SW registration failed: ', registrationError);
@@ -36,6 +60,8 @@ function LayoutContent({ children }: { children: React.ReactNode }) {
         );
       });
     }
+
+    return () => window.removeEventListener('error', handleError);
   }, []);
 
   return (
