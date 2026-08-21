@@ -3,20 +3,23 @@
 import { useEffect, useState } from "react";
 import { ArrowDownTrayIcon } from "@heroicons/react/24/outline";
 
+interface BeforeInstallPromptEvent extends Event {
+    prompt(): Promise<void>;
+    userChoice: Promise<{ outcome: 'accepted' | 'dismissed' }>;
+}
+
 export default function InstallPWA({ isCollapsed }: { isCollapsed: boolean }) {
-    const [deferredPrompt, setDeferredPrompt] = useState<any>(null);
+    const [deferredPrompt, setDeferredPrompt] = useState<BeforeInstallPromptEvent | null>(null);
     const [isVisible, setIsVisible] = useState(false);
 
     useEffect(() => {
-        const handler = (e: any) => {
-            // Prevent the mini-infobar from appearing on mobile
+        const handler = (e: Event) => {
             e.preventDefault();
-            // Stash the event so it can be triggered later.
-            setDeferredPrompt(e);
+            setDeferredPrompt(e as BeforeInstallPromptEvent);
             setIsVisible(true);
         };
 
-        window.addEventListener("beforeinstallprompt", handler);
+        window.addEventListener("beforeinstallprompt", handler as EventListener);
 
         // Check if app is already installed
         if (window.matchMedia("(display-mode: standalone)").matches) {

@@ -229,7 +229,7 @@ export default function ClientesPage() {
                                     {filteredClientes.map((cliente) => (
                                         <tr
                                             key={cliente.id}
-                                            onClick={() => router.push(`/clientes/${cliente.id}`)}
+                                            onClick={() => openEditClient(cliente)}
                                             className="hover:bg-gray-50 dark:hover:bg-gray-700/30 transition-colors cursor-pointer"
                                         >
                                             <td className="px-6 py-4 font-medium text-gray-900 dark:text-white">{cliente.NOME}</td>
