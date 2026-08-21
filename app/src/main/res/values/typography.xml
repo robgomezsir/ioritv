@@ -1,8 +1,30 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <!-- Material Design 3 Typography Scale -->
-    
-    <!-- Headline Styles -->
+    <!-- Material Design 3 Typography - Conforme PRD Section 4 -->
+
+    <!-- Display -->
+    <style name="TextAppearance.IORITv.DisplayLarge" parent="TextAppearance.Material3.DisplayLarge">
+        <item name="android:textColor">?attr/colorOnSurface</item>
+        <item name="android:textSize">57sp</item>
+        <item name="android:lineHeight">64sp</item>
+        <item name="android:letterSpacing">-0.0025</item>
+    </style>
+
+    <style name="TextAppearance.IORITv.DisplayMedium" parent="TextAppearance.Material3.DisplayMedium">
+        <item name="android:textColor">?attr/colorOnSurface</item>
+        <item name="android:textSize">45sp</item>
+        <item name="android:lineHeight">52sp</item>
+        <item name="android:letterSpacing">0.0</item>
+    </style>
+
+    <style name="TextAppearance.IORITv.DisplaySmall" parent="TextAppearance.Material3.DisplaySmall">
+        <item name="android:textColor">?attr/colorOnSurface</item>
+        <item name="android:textSize">36sp</item>
+        <item name="android:lineHeight">44sp</item>
+        <item name="android:letterSpacing">0.0</item>
+    </style>
+
+    <!-- Headline -->
     <style name="TextAppearance.IORITv.HeadlineLarge" parent="TextAppearance.Material3.HeadlineLarge">
         <item name="android:textColor">?attr/colorOnSurface</item>
         <item name="android:textSize">32sp</item>
@@ -24,7 +46,7 @@
         <item name="android:letterSpacing">0.0</item>
     </style>
 
-    <!-- Title Styles -->
+    <!-- Title -->
     <style name="TextAppearance.IORITv.TitleLarge" parent="TextAppearance.Material3.TitleLarge">
         <item name="android:textColor">?attr/colorOnSurface</item>
         <item name="android:textSize">22sp</item>
@@ -37,6 +59,7 @@
         <item name="android:textSize">16sp</item>
         <item name="android:lineHeight">24sp</item>
         <item name="android:letterSpacing">0.015</item>
+        <item name="android:textStyle">bold</item>
     </style>
 
     <style name="TextAppearance.IORITv.TitleSmall" parent="TextAppearance.Material3.TitleSmall">
@@ -44,9 +67,10 @@
         <item name="android:textSize">14sp</item>
         <item name="android:lineHeight">20sp</item>
         <item name="android:letterSpacing">0.01</item>
+        <item name="android:textStyle">bold</item>
     </style>
 
-    <!-- Body Styles -->
+    <!-- Body -->
     <style name="TextAppearance.IORITv.BodyLarge" parent="TextAppearance.Material3.BodyLarge">
         <item name="android:textColor">?attr/colorOnSurface</item>
         <item name="android:textSize">16sp</item>
@@ -68,12 +92,13 @@
         <item name="android:letterSpacing">0.04</item>
     </style>
 
-    <!-- Label Styles -->
+    <!-- Label -->
     <style name="TextAppearance.IORITv.LabelLarge" parent="TextAppearance.Material3.LabelLarge">
         <item name="android:textColor">?attr/colorOnSurface</item>
         <item name="android:textSize">14sp</item>
         <item name="android:lineHeight">20sp</item>
         <item name="android:letterSpacing">0.01</item>
+        <item name="android:textStyle">bold</item>
     </style>
 
     <style name="TextAppearance.IORITv.LabelMedium" parent="TextAppearance.Material3.LabelMedium">
@@ -81,6 +106,7 @@
         <item name="android:textSize">12sp</item>
         <item name="android:lineHeight">16sp</item>
         <item name="android:letterSpacing">0.05</item>
+        <item name="android:textStyle">bold</item>
     </style>
 
     <style name="TextAppearance.IORITv.LabelSmall" parent="TextAppearance.Material3.LabelSmall">
@@ -88,36 +114,15 @@
         <item name="android:textSize">11sp</item>
         <item name="android:lineHeight">16sp</item>
         <item name="android:letterSpacing">0.05</item>
+        <item name="android:textStyle">bold</item>
     </style>
 
-    <!-- Display Styles -->
-    <style name="TextAppearance.IORITv.DisplayLarge" parent="TextAppearance.Material3.DisplayLarge">
-        <item name="android:textColor">?attr/colorOnSurface</item>
-        <item name="android:textSize">57sp</item>
-        <item name="android:lineHeight">64sp</item>
-        <item name="android:letterSpacing">-0.025</item>
-    </style>
-
-    <style name="TextAppearance.IORITv.DisplayMedium" parent="TextAppearance.Material3.DisplayMedium">
-        <item name="android:textColor">?attr/colorOnSurface</item>
-        <item name="android:textSize">45sp</item>
-        <item name="android:lineHeight">52sp</item>
-        <item name="android:letterSpacing">0.0</item>
-    </style>
-
-    <style name="TextAppearance.IORITv.DisplaySmall" parent="TextAppearance.Material3.DisplaySmall">
-        <item name="android:textColor">?attr/colorOnSurface</item>
-        <item name="android:textSize">36sp</item>
-        <item name="android:lineHeight">44sp</item>
-        <item name="android:letterSpacing">0.0</item>
-    </style>
-
-    <!-- Toolbar Title Styles (Bold) -->
+    <!-- Toolbar Title Styles (Bold - PRD 4.2) -->
     <style name="TextAppearance.IORITv.Toolbar.Title" parent="TextAppearance.Material3.TitleLarge">
         <item name="android:textSize">20sp</item>
         <item name="android:textStyle">bold</item>
         <item name="android:fontFamily">sans-serif-medium</item>
-        <item name="android:letterSpacing">0.0</item>
+        <item name="android:letterSpacing">-0.005</item>
     </style>
 
     <style name="TextAppearance.IORITv.Toolbar.TitleLarge" parent="TextAppearance.Material3.TitleLarge">
@@ -134,4 +139,33 @@
         <item name="android:letterSpacing">0.0</item>
     </style>
 
+    <!-- Valor monetario principal (dashboard) -->
+    <style name="TextAppearance.IORITv.ValueDashboard" parent="TextAppearance.Material3.DisplayMedium">
+        <item name="android:textSize">32sp</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:fontFamily">sans-serif-black</item>
+        <item name="android:textColor">?attr/colorPrimary</item>
+        <item name="android:letterSpacing">0.0</item>
+    </style>
+
+    <!-- Secao / Label de titulo de secao -->
+    <style name="TextAppearance.IORITv.SectionTitle" parent="TextAppearance.Material3.LabelSmall">
+        <item name="android:textSize">10sp</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:letterSpacing">0.1</item>
+        <item name="android:textColor">?attr/colorOnBackground</item>
+    </style>
+
+    <!-- Badge / Pill -->
+    <style name="TextAppearance.IORITv.Badge" parent="TextAppearance.Material3.LabelSmall">
+        <item name="android:textSize">9sp</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:letterSpacing">0.0</item>
+    </style>
+
+    <!-- Placeholder / Hint -->
+    <style name="TextAppearance.IORITv.Placeholder" parent="TextAppearance.Material3.BodySmall">
+        <item name="android:textSize">12sp</item>
+        <item name="android:letterSpacing">0.0</item>
+    </style>
 </resources>

@@ -87,6 +87,9 @@ class HomeFragment : Fragment() {
 
         // CREDITOS
         updateTotalCredit()
+
+        // PRD 6.3.2: Trail animation na barra de progresso
+        startProgressTrailAnimation()
     }
 
     override fun onResume() {
@@ -396,6 +399,92 @@ class HomeFragment : Fragment() {
     /**
      * Configura acessibilidade para todos os elementos
      */
+    /**
+     * PRD 6.3.2: Animação de flash na barra de progresso.
+     * Um brilho horizontal percorre a extensão da porcentagem completada,
+     * semelhante a um reflexo de luz sobre a barra colorida.
+     * Loop infinito com delay entre ciclos.
+     */
+    private fun startProgressTrailAnimation() {
+        val progressBar = binding.progressBarClientes
+        progressBar.post {
+            if (_binding == null) return@post
+
+            val barHeight = progressBar.height
+            val flashWidth = barHeight * 3  // Largura do flash proporcional à barra
+
+            // View do flash: gradiente branco translúcido, ocupa toda a altura da barra
+            val flashView = android.view.View(requireContext()).apply {
+                background = android.graphics.drawable.GradientDrawable().apply {
+                    shape = android.graphics.drawable.GradientDrawable.RECTANGLE
+                    cornerRadius = 8f  // canto arredondado sutil
+                    gradientType = android.graphics.drawable.GradientDrawable.LINEAR_GRADIENT
+                    orientation = android.graphics.drawable.GradientDrawable.Orientation.LEFT_RIGHT
+                    colors = intArrayOf(
+                        0x00000000.toInt(),   // transparente
+                        0x40FFFFFF.toInt(),   // branco 25%
+                        0x80FFFFFF.toInt(),   // branco 50%
+                        0x40FFFFFF.toInt(),   // branco 25%
+                        0x00000000.toInt()    // transparente
+                    )
+                }
+                layoutParams = android.widget.FrameLayout.LayoutParams(
+                    flashWidth,
+                    android.widget.FrameLayout.LayoutParams.MATCH_PARENT
+                ).apply {
+                    gravity = android.view.Gravity.NO_GRAVITY
+                }
+                alpha = 0f
+            }
+
+            val parent = progressBar.parent
+            if (parent is android.widget.FrameLayout) {
+                parent.clipChildren = false
+                parent.addView(flashView)
+
+                // Posiciona e dimensiona o flash para ocupar toda a altura da barra
+                flashView.y = 0f
+                flashView.x = progressBar.x
+                val flashLp = flashView.layoutParams
+                flashLp.height = barHeight
+                flashView.layoutParams = flashLp
+
+                fun animateFlash() {
+                    if (_binding == null) return@animateFlash
+
+                    // Flash percorre horizontalmente apenas a porcentagem completada
+                    // Flash tem a altura total da barra (cima a baixo)
+                    val progressFraction = progressBar.progress / 100f
+                    val filledWidth = progressBar.width * progressFraction
+
+                    flashView.x = progressBar.x - flashWidth.toFloat()  // começa antes da barra
+                    flashView.animate()
+                        .x(progressBar.x + filledWidth - flashWidth.toFloat())  // para na ponta do progresso
+                        .alpha(1f)
+                        .setDuration(800)
+                        .setInterpolator(android.view.animation.LinearInterpolator())
+                        .setUpdateListener { anim ->
+                            val frac = anim.animatedFraction
+                            flashView.alpha = when {
+                                frac < 0.15f -> frac / 0.15f * 0.8f
+                                frac > 0.85f -> (1f - frac) / 0.15f * 0.8f
+                                else -> 0.8f
+                            }
+                        }
+                        .withEndAction {
+                            if (_binding != null) {
+                                flashView.postDelayed({ animateFlash() }, 500)
+                            }
+                        }
+                        .start()
+                }
+
+                // Inicia após um breve delay
+                flashView.postDelayed({ animateFlash() }, 500)
+            }
+        }
+    }
+
     private fun setupAccessibility() {
         // Configurar cards
         AccessibilityUtils.setupCardAccessibility(

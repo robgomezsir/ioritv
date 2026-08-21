@@ -151,12 +151,12 @@ class HomeActivity : AppCompatActivity() {
         when {
             isGlass -> {
                 // Glass: fundo translúcido escuro igual aos cards
-                bg?.setColor(0xCC282D32.toInt()) // #282D32 com 80% alpha
-                textColor = 0xFFF0F1F8.toInt() // glass_on_surface
-                textSecondaryColor = 0xFFB0B4CC.toInt() // glass_on_surface_variant
-                iconTint = 0xFFB0B4CC.toInt()
-                radioTint = 0xFF8B9CF0.toInt() // glass_primary
-                dividerColor = 0x33FFFFFF.toInt() // glass_outline_variant
+                bg?.setColor(0xCC252B2C.toInt()) // surfaceContainerHigh translucido
+                textColor = 0xFFDEE3E5.toInt() // glass_on_surface (PRD dark)
+                textSecondaryColor = 0xFFBFC8CA.toInt() // glass_on_surface_variant (PRD dark)
+                iconTint = 0xFFBFC8CA.toInt() // glass_on_surface_variant
+                radioTint = 0xFF82D3E0.toInt() // glass_primary (PRD dark)
+                dividerColor = 0x45FFFFFF.toInt() // glass_outline_variant (PRD dark, 27%)
             }
             isDark -> {
                 // Escuro: fundo sólido escuro

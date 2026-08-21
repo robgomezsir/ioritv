@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- PRD 6.3.2: Trail animada - brilho que se move ao longo da barra
+     36dp largura, White×0.65 → transparent, 700ms -->
+<shape xmlns:android="http://schemas.android.com/apk/res/android"
+    android:shape="rectangle">
+    <gradient
+        android:angle="0"
+        android:startColor="#00FFFFFF"
+        android:centerColor="#A6FFFFFF"
+        android:endColor="#00FFFFFF"
+        android:type="linear" />
+    <corners android:radius="999dp" />
+    <size android:width="36dp" android:height="8dp" />
+</shape>

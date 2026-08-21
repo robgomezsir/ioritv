@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
+<!-- Badge Pendente - PRD semantic color -->
 <shape xmlns:android="http://schemas.android.com/apk/res/android"
     android:shape="rectangle">
     <solid android:color="@color/badge_bg_pending" />
-    <corners android:radius="@dimen/shape_medium" />
+    <corners android:radius="999dp" />
 </shape>

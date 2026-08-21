@@ -23,8 +23,8 @@
                 android:id="@+id/cardView2"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginBottom="10dp"
-                app:cardCornerRadius="12dp"
+                android:layout_marginBottom="@dimen/spacing_small"
+                app:cardCornerRadius="@dimen/shape_medium"
                 app:cardElevation="0dp"
                 app:strokeWidth="0dp"
                 app:cardBackgroundColor="?attr/colorSurfaceContainer"
@@ -34,13 +34,13 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="vertical"
-                    android:padding="28dp">
+                    android:padding="@dimen/spacing_large">
 
                     <TextView
                         android:id="@+id/textCarteira"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginBottom="20dp"
+                        android:layout_marginBottom="@dimen/spacing_medium"
                         android:text="Carteira de Clientes"
                         android:textAppearance="@style/TextAppearance.Material3.TitleLarge"
                         android:textColor="?attr/colorOnSurface"
@@ -50,7 +50,7 @@
                         android:id="@+id/textTotalClientes"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginBottom="20dp"
+                        android:layout_marginBottom="@dimen/spacing_medium"
                         android:text="Carregando..."
                         android:textAppearance="@style/TextAppearance.Material3.BodyLarge"
                         android:textColor="?attr/colorOnSurfaceVariant" />
@@ -61,14 +61,22 @@
                         android:gravity="center_vertical"
                         android:orientation="horizontal">
 
-                        <ProgressBar
-                            android:id="@+id/progressBarClientes"
-                            style="@style/Widget.AppCompat.ProgressBar.Horizontal"
+                        <FrameLayout
                             android:layout_width="0dp"
-                            android:layout_height="wrap_content"
-                            android:layout_marginEnd="16dp"
+                            android:layout_height="16dp"
+                            android:layout_marginEnd="@dimen/spacing_medium"
                             android:layout_weight="1"
-                            android:progressDrawable="@drawable/custom_progress_bar" />
+                            android:clipChildren="false"
+                            android:clipToPadding="false">
+
+                            <ProgressBar
+                                android:id="@+id/progressBarClientes"
+                                style="@android:style/Widget.ProgressBar.Horizontal"
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:progressDrawable="@drawable/custom_progress_bar" />
+
+                        </FrameLayout>
 
                         <TextView
                             android:id="@+id/textProgressPercent"
@@ -90,8 +98,8 @@
                 android:id="@+id/statusSummaryRow"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="10dp"
-                android:layout_marginBottom="4dp"
+                android:layout_marginTop="@dimen/spacing_small"
+                android:layout_marginBottom="@dimen/spacing_extra_small"
                 android:orientation="horizontal"
                 app:layout_constraintTop_toBottomOf="@+id/cardView2">
 
@@ -101,11 +109,11 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:layout_marginEnd="4dp"
+                    android:layout_marginEnd="@dimen/spacing_extra_small"
                     android:background="@drawable/bg_badge_ativo"
                     android:gravity="center"
                     android:orientation="vertical"
-                    android:paddingVertical="12dp"
+                    android:paddingVertical="@dimen/spacing_small"
                     android:clickable="true"
                     android:focusable="true">
 
@@ -115,7 +123,7 @@
                         android:layout_height="wrap_content"
                         android:text="--"
                         android:textAppearance="@style/TextAppearance.Material3.DisplaySmall"
-                        android:textColor="#2E7D32"
+                        android:textColor="@color/status_paid_color"
                         android:textStyle="bold" />
 
                     <TextView
@@ -123,7 +131,7 @@
                         android:layout_height="wrap_content"
                         android:text="Ativo"
                         android:textAppearance="@style/TextAppearance.Material3.LabelSmall"
-                        android:textColor="#2E7D32" />
+                        android:textColor="@color/status_paid_color" />
 
                 </LinearLayout>
 
@@ -133,11 +141,11 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:layout_marginHorizontal="4dp"
+                    android:layout_marginHorizontal="@dimen/spacing_extra_small"
                     android:background="@drawable/bg_badge_avencer"
                     android:gravity="center"
                     android:orientation="vertical"
-                    android:paddingVertical="12dp"
+                    android:paddingVertical="@dimen/spacing_small"
                     android:clickable="true"
                     android:focusable="true">
 
@@ -147,7 +155,7 @@
                         android:layout_height="wrap_content"
                         android:text="--"
                         android:textAppearance="@style/TextAppearance.Material3.DisplaySmall"
-                        android:textColor="#E65100"
+                        android:textColor="@color/status_pending_color"
                         android:textStyle="bold" />
 
                     <TextView
@@ -155,7 +163,7 @@
                         android:layout_height="wrap_content"
                         android:text="A Vencer"
                         android:textAppearance="@style/TextAppearance.Material3.LabelSmall"
-                        android:textColor="#E65100" />
+                        android:textColor="@color/status_pending_color" />
 
                 </LinearLayout>
 
@@ -165,11 +173,11 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:layout_marginHorizontal="4dp"
+                    android:layout_marginHorizontal="@dimen/spacing_extra_small"
                     android:background="@drawable/bg_badge_vencido"
                     android:gravity="center"
                     android:orientation="vertical"
-                    android:paddingVertical="12dp"
+                    android:paddingVertical="@dimen/spacing_small"
                     android:clickable="true"
                     android:focusable="true">
 
@@ -179,7 +187,7 @@
                         android:layout_height="wrap_content"
                         android:text="--"
                         android:textAppearance="@style/TextAppearance.Material3.DisplaySmall"
-                        android:textColor="#C62828"
+                        android:textColor="@color/red_accent"
                         android:textStyle="bold" />
 
                     <TextView
@@ -187,7 +195,7 @@
                         android:layout_height="wrap_content"
                         android:text="Vencido"
                         android:textAppearance="@style/TextAppearance.Material3.LabelSmall"
-                        android:textColor="#C62828" />
+                        android:textColor="@color/red_accent" />
 
                 </LinearLayout>
 
@@ -197,11 +205,11 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:layout_marginStart="4dp"
+                    android:layout_marginStart="@dimen/spacing_extra_small"
                     android:background="@drawable/bg_badge_standby"
                     android:gravity="center"
                     android:orientation="vertical"
-                    android:paddingVertical="12dp"
+                    android:paddingVertical="@dimen/spacing_small"
                     android:clickable="true"
                     android:focusable="true">
 
@@ -211,7 +219,7 @@
                         android:layout_height="wrap_content"
                         android:text="--"
                         android:textAppearance="@style/TextAppearance.Material3.DisplaySmall"
-                        android:textColor="#757575"
+                        android:textColor="@color/bar_color_standby"
                         android:textStyle="bold" />
 
                     <TextView
@@ -219,7 +227,7 @@
                         android:layout_height="wrap_content"
                         android:text="Standby"
                         android:textAppearance="@style/TextAppearance.Material3.LabelSmall"
-                        android:textColor="#757575" />
+                        android:textColor="@color/bar_color_standby" />
 
                 </LinearLayout>
 
@@ -230,11 +238,11 @@
                 android:id="@+id/pulseCard"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="10dp"
+                android:layout_marginTop="@dimen/spacing_small"
                 android:contentDescription="Card de saúde financeira com anel de pontuação"
                 android:importantForAccessibility="yes"
                 app:cardBackgroundColor="?attr/colorSurfaceContainer"
-                app:cardCornerRadius="12dp"
+                app:cardCornerRadius="@dimen/shape_medium"
                 app:cardElevation="0dp"
                 app:strokeWidth="0dp"
                 app:layout_constraintTop_toBottomOf="@+id/statusSummaryRow">
@@ -244,7 +252,7 @@
                     android:layout_height="wrap_content"
                     android:gravity="center_vertical"
                     android:orientation="horizontal"
-                    android:padding="20dp">
+                    android:padding="@dimen/spacing_medium">
 
                     <!-- Anel de pontuação (score 0-100) -->
                     <FrameLayout
@@ -257,10 +265,10 @@
                             android:layout_height="120dp"
                             android:layout_gravity="center"
                             android:max="100"
-                            app:indicatorColor="@color/bar_color_due"
+                            app:indicatorColor="@color/status_pending_color"
                             app:indicatorSize="120dp"
-                            app:trackColor="@color/bar_color_standby"
-                            app:trackThickness="10dp" />
+                            app:trackColor="?attr/colorSurfaceContainerHigh"
+                            app:trackThickness="@dimen/elevation_level3" />
 
                         <TextView
                             android:id="@+id/textPulseScore"
@@ -285,7 +293,7 @@
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:layout_marginBottom="6dp"
+                            android:layout_marginBottom="@dimen/spacing_small"
                             android:text="Saúde Financeira"
                             android:textAppearance="@style/TextAppearance.Material3.TitleMedium"
                             android:textColor="?attr/colorOnSurface"
@@ -295,7 +303,7 @@
                             android:id="@+id/textPulseLabel"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:layout_marginBottom="10dp"
+                            android:layout_marginBottom="@dimen/spacing_small"
                             android:text="Calculando..."
                             android:textAppearance="@style/TextAppearance.Material3.BodyMedium"
                             android:textColor="?attr/colorPrimary"
@@ -336,11 +344,11 @@
                 android:id="@+id/renewalsCard"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="10dp"
+                android:layout_marginTop="@dimen/spacing_small"
                 android:contentDescription="Card de vencimentos próximos com opção de renovar"
                 android:importantForAccessibility="yes"
                 app:cardBackgroundColor="?attr/colorSurfaceContainer"
-                app:cardCornerRadius="12dp"
+                app:cardCornerRadius="@dimen/shape_medium"
                 app:cardElevation="0dp"
                 app:strokeWidth="0dp"
                 app:layout_constraintTop_toBottomOf="@+id/pulseCard">
@@ -349,13 +357,13 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="vertical"
-                    android:padding="16dp">
+                    android:padding="@dimen/spacing_medium">
 
                     <!-- Cabeçalho -->
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginBottom="4dp"
+                        android:layout_marginBottom="@dimen/spacing_extra_small"
                         android:gravity="center_vertical"
                         android:orientation="horizontal">
 
@@ -402,7 +410,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:gravity="center"
-                        android:padding="12dp"
+                        android:padding="@dimen/spacing_small"
                         android:text="Nenhum vencimento nos próximos 7 dias"
                         android:textAppearance="@style/TextAppearance.Material3.BodyMedium"
                         android:textColor="?attr/colorOnSurfaceVariant"
@@ -417,10 +425,10 @@
                 android:id="@+id/meus_creditos"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="10dp"
-                android:layout_marginBottom="4dp"
+                android:layout_marginTop="@dimen/spacing_small"
+                android:layout_marginBottom="@dimen/spacing_extra_small"
                 app:cardBackgroundColor="?attr/colorSurfaceContainer"
-                app:cardCornerRadius="12dp"
+                app:cardCornerRadius="@dimen/shape_medium"
                 app:cardElevation="0dp"
                 app:strokeWidth="0dp"
                 app:layout_constraintTop_toBottomOf="@+id/renewalsCard">

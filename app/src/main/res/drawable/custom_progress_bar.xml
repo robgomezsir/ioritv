@@ -1,16 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- PRD 6.3.2: Barra de progresso com gradiente horizontal
+     PapeconLime (#A4FF2D) → PapeconPrimary (#006874) → PapeconCyan (#00E5FF)
+     Height: 6dp + 2px (densidade) = 8dp
+     Radius: full (9999dp) -->
 <layer-list xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <!-- Background track (trail) -->
     <item android:id="@android:id/background">
-        <shape>
-            <corners android:radius="8dp"/>
-            <solid android:color="#E0E0E0"/>
+        <shape android:shape="rectangle">
+            <corners android:radius="999dp" />
+            <solid android:color="#33FFFFFF" />
         </shape>
     </item>
-    <item android:id="@android:id/progress">
+
+    <!-- Secondary progress (indeterminate buffer) -->
+    <item android:id="@android:id/secondaryProgress">
         <clip>
-            <shape>
-                <corners android:radius="8dp"/>
-                <solid android:color="#00BCD4"/>
+            <shape android:shape="rectangle">
+                <corners android:radius="999dp" />
+                <gradient
+                    android:angle="0"
+                    android:startColor="#FF9100"
+                    android:centerColor="#006874"
+                    android:endColor="#00E5FF"
+                    android:type="linear" />
             </shape>
         </clip>
     </item>
+
+    <!-- Primary progress with gradient -->
+    <item android:id="@android:id/progress">
+        <clip>
+            <shape android:shape="rectangle">
+                <corners android:radius="999dp" />
+                <gradient
+                    android:angle="0"
+                    android:startColor="#FF9100"
+                    android:centerColor="#006874"
+                    android:endColor="#00E5FF"
+                    android:type="linear" />
+            </shape>
+        </clip>
+    </item>
+
 </layer-list>

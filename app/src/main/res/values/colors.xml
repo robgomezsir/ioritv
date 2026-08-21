@@ -1,115 +1,143 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <!-- Cores básicas -->
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
     <color name="gray">#FF808080</color>
-    <color name="toolbar_color">#4F63A2</color>
-    <color name="toolbar_color_light">#4F63A2</color>
-    
-    <!-- Cores para gráficos -->
-    <color name="bar_color_active">#4F63A2</color>
-    <color name="bar_color_due">#4CAF50</color>
-    <color name="bar_color_overdue">#FF9800</color>
-    <color name="bar_color_standby">#9E9E9E</color>
-    
-    <!-- Cores para botões de filtro -->
-    <color name="filter_button_active_light">#E8F0FF</color>
-    <color name="filter_button_inactive_light">#E3E1EC</color>
-    
-    <!-- Cores para TextInputLayout -->
-    <color name="text_input_stroke_light">#757680</color>
-    <color name="text_input_stroke_focused_light">#4F63A2</color>
-    <color name="text_input_label_light">#757680</color>
-    <color name="text_input_label_focused_light">#4F63A2</color>
-    
-    <!-- Material Design 3 - Tema Claro (Harmônico com Azul) -->
-    <color name="md_theme_light_primary">#4F63A2</color>
+
+    <!-- Material Design 3 - Seed #026D79 (Teal) - Light Theme (PRD v1.0) -->
+    <color name="md_theme_light_primary">#006874</color>
     <color name="md_theme_light_onPrimary">#FFFFFF</color>
-    <color name="md_theme_light_primaryContainer">#E8F0FF</color>
-    <color name="md_theme_light_onPrimaryContainer">#0A0E27</color>
-    <color name="md_theme_light_secondary">#586070</color>
+    <color name="md_theme_light_primaryContainer">#9EEFFD</color>
+    <color name="md_theme_light_onPrimaryContainer">#004F58</color>
+    <color name="md_theme_light_secondary">#4A6267</color>
     <color name="md_theme_light_onSecondary">#FFFFFF</color>
-    <color name="md_theme_light_secondaryContainer">#E8F0FF</color>
-    <color name="md_theme_light_onSecondaryContainer">#233047</color>
-    <color name="md_theme_light_tertiary">#4F63A2</color>
+    <color name="md_theme_light_secondaryContainer">#CDE7EC</color>
+    <color name="md_theme_light_onSecondaryContainer">#334B4F</color>
+    <color name="md_theme_light_tertiary">#525E7D</color>
     <color name="md_theme_light_onTertiary">#FFFFFF</color>
-    <color name="md_theme_light_tertiaryContainer">#E8F0FF</color>
-    <color name="md_theme_light_onTertiaryContainer">#0F2A4A</color>
+    <color name="md_theme_light_tertiaryContainer">#DAE2FF</color>
+    <color name="md_theme_light_onTertiaryContainer">#3B4664</color>
     <color name="md_theme_light_error">#BA1A1A</color>
     <color name="md_theme_light_onError">#FFFFFF</color>
     <color name="md_theme_light_errorContainer">#FFDAD6</color>
-    <color name="md_theme_light_onErrorContainer">#410002</color>
-    <color name="md_theme_light_outline">#757680</color>
-    <color name="md_theme_light_background">#FEFBFF</color>
-    <color name="md_theme_light_onBackground">#1B1B1F</color>
-    <color name="md_theme_light_surface">#FEFBFF</color>
-    <color name="md_theme_light_onSurface">#1B1B1F</color>
-    <color name="md_theme_light_surfaceVariant">#E3E1EC</color>
-    <color name="md_theme_light_onSurfaceVariant">#46464F</color>
-    <color name="md_theme_light_inverseSurface">#2F3033</color>
-    <color name="md_theme_light_inverseOnSurface">#F2F0F4</color>
-    <color name="md_theme_light_inversePrimary">#B8C6EA</color>
+    <color name="md_theme_light_onErrorContainer">#93000A</color>
+    <color name="md_theme_light_background">#FFFFFF</color>
+    <color name="md_theme_light_onBackground">#171D1E</color>
+    <color name="md_theme_light_surface">#FFFFFF</color>
+    <color name="md_theme_light_onSurface">#171D1E</color>
+    <color name="md_theme_light_surfaceVariant">#DBE4E6</color>
+    <color name="md_theme_light_onSurfaceVariant">#3F484A</color>
+    <color name="md_theme_light_outline">#6F797B</color>
+    <color name="md_theme_light_outlineVariant">#BFC8CA</color>
+    <color name="md_theme_light_inverseSurface">#2B3133</color>
+    <color name="md_theme_light_inverseOnSurface">#ECF2F3</color>
+    <color name="md_theme_light_inversePrimary">#82D3E0</color>
     <color name="md_theme_light_shadow">#000000</color>
-    <color name="md_theme_light_surfaceTint">#4F63A2</color>
-    <color name="md_theme_light_outlineVariant">#C7C5D0</color>
+    <color name="md_theme_light_surfaceTint">#006874</color>
     <color name="md_theme_light_scrim">#000000</color>
-    <color name="md_theme_light_surfaceDim">#DDD9E0</color>
-    <color name="md_theme_light_surfaceBright">#FEFBFF</color>
+    <color name="md_theme_light_surfaceDim">#D5DBDC</color>
+    <color name="md_theme_light_surfaceBright">#FFFFFF</color>
     <color name="md_theme_light_surfaceContainerLowest">#FFFFFF</color>
-    <color name="md_theme_light_surfaceContainerLow">#F7F5FA</color>
-    <color name="md_theme_light_surfaceContainer">#F1EFF4</color>
-    <color name="md_theme_light_surfaceContainerHigh">#EBE9EE</color>
-    <color name="md_theme_light_surfaceContainerHighest">#E5E3E8</color>
-    <color name="md_theme_light_onSurfaceContainer">#1B1B1F</color>
+    <color name="md_theme_light_surfaceContainerLow">#EFF5F6</color>
+    <color name="md_theme_light_surfaceContainer">#E9EFF0</color>
+    <color name="md_theme_light_surfaceContainerHigh">#E3E9EA</color>
+    <color name="md_theme_light_surfaceContainerHighest">#DEE3E5</color>
+    <color name="onSurfaceContainer">#171D1E</color>
 
-    <!-- Filtros de cliente: texto para botões de seleção -->
-    <color name="filter_button_text_selected">#212121</color>
-    <color name="filter_button_text_unselected">#616161</color>
+    <!-- Semantic Colors (theme-independent) -->
+    <color name="status_paid_color">#2E9E5A</color>
+    <color name="status_pending_color">#E8913A</color>
+    <color name="red_accent">#BA1A1A</color>
 
-    <!-- SearchView: cores para o campo de busca -->
+    <!-- Toolbar -->
+    <color name="toolbar_color_light">#006874</color>
+    <color name="toolbar_color">#006874</color>
+
+    <!-- Chart Colors -->
+    <color name="bar_color_active">#006874</color>
+    <color name="bar_color_due">#2E9E5A</color>
+    <color name="bar_color_overdue">#E8913A</color>
+    <color name="bar_color_standby">#BFC8CA</color>
+
+    <!-- Filter Buttons -->
+    <color name="filter_button_active_light">#CDE7EC</color>
+    <color name="filter_button_inactive_light">#DBE4E6</color>
+    <color name="filter_button_text_selected">#171D1E</color>
+    <color name="filter_button_text_unselected">#3F484A</color>
+
+    <!-- TextInputLayout -->
+    <color name="text_input_stroke_light">#6F797B</color>
+    <color name="text_input_stroke_focused_light">#006874</color>
+    <color name="text_input_label_light">#6F797B</color>
+    <color name="text_input_label_focused_light">#006874</color>
+
+    <!-- SearchView -->
     <color name="search_view_bg_fill">#FFFFFF</color>
-    <color name="search_view_stroke">#757575</color>
-    <color name="search_view_text">#212121</color>
-    <color name="search_view_hint">#757680</color>
+    <color name="search_view_stroke">#6F797B</color>
+    <color name="search_view_text">#171D1E</color>
+    <color name="search_view_hint">#6F797B</color>
 
-    <!-- Seção expansível do card: fundo opaco para legibilidade -->
+    <!-- Expandable Section -->
     <color name="expanded_section_bg">#00000000</color>
 
-    <!-- ===== Tema Glass (Glassmorphism) ===== -->
-    <!-- Gradiente escuro refinado usado como fundo da janela Glass -->
-    <color name="glass_gradient_start">#1B1D2F</color>
-    <color name="glass_gradient_mid">#22253D</color>
-    <color name="glass_gradient_end">#191B2C</color>
+    <!-- Glass Aurora Frost - Light -->
+    <color name="glass_gradient_start">#E0F4F7</color>
+    <color name="glass_gradient_mid">#C6ECF2</color>
+    <color name="glass_gradient_end">#E0F4F7</color>
+    <color name="glass_surface">#BFFFFFFF</color>
+    <color name="glass_surface_container_low">#DFFFFFFF</color>
+    <color name="glass_surface_container">#E6FFFFFF</color>
+    <color name="glass_surface_container_high">#E6FFFFFF</color>
+    <color name="glass_surface_container_highest">#E6FFFFFF</color>
+    <color name="glass_surface_variant">#DFFFFFFF</color>
+    <color name="glass_on_surface">#171D1E</color>
+    <color name="glass_on_surface_variant">#3F484A</color>
+    <color name="glass_outline_variant">#E6FFFFFF</color>
+    <color name="glass_primary">#006874</color>
 
-    <!-- Superfícies translúcidas (vidro fosco) sobre o fundo escuro -->
-    <!-- Opacidade MUITO reduzida: o fundo escuro com blobs de luz é o protagonista;
-         as superfícies criam apenas uma leve camada de névoa sobre o gradiente. -->
-    <!-- A toolbar, bottom nav e barras de sistema usam glass_surface_container -->
-    <color name="glass_surface">#33FFFFFF</color>
-    <color name="glass_surface_container_low">#1AFFFFFF</color>
-    <color name="glass_surface_container">#26FFFFFF</color>
-    <color name="glass_surface_container_high">#3DFFFFFF</color>
-    <color name="glass_surface_container_highest">#4DFFFFFF</color>
-    <color name="glass_surface_variant">#20FFFFFF</color>
-
-    <!-- Texto e contornos sobre o vidro (claro, sobre fundo escuro) -->
-    <color name="glass_on_surface">#F0F1F8</color>
-    <color name="glass_on_surface_variant">#B0B4CC</color>
-    <color name="glass_outline_variant">#33FFFFFF</color>
-    <color name="glass_primary">#8B9CF0</color>
-
-    <!-- Cores pastéis para números na aba Finanças (legíveis em todos os temas) -->
+    <!-- Pastel Colors -->
     <color name="pastel_red">#E57373</color>
     <color name="pastel_coral">#F4845F</color>
     <color name="pastel_rose">#F28B82</color>
 
-    <!-- Bottom Sheet: fundo sólido opaco para legibilidade em todos os temas -->
-    <color name="bottom_sheet_bg">#F5F3F8</color>
-    <color name="bottom_sheet_handle">#C0C0C8</color>
-    <color name="bottom_sheet_divider">#E0E0E4</color>
+    <!-- Bottom Sheet -->
+    <color name="bottom_sheet_bg">#FFFFFF</color>
+    <color name="bottom_sheet_handle">#BFC8CA</color>
+    <color name="bottom_sheet_divider">#DBE4E6</color>
 
-    <!-- Menu WhatsApp-style -->
-    <color name="menu_bg">#F5F3F8</color>
-    <color name="menu_divider">#E0E0E4</color>
+    <!-- Menu -->
+    <color name="menu_bg">#FFFFFF</color>
+    <color name="menu_divider">#DBE4E6</color>
+
+    <!-- Badge Palette (7 rotating colors) -->
+    <color name="badge_0_bg">#9EEFFD</color>
+    <color name="badge_0_fg">#006874</color>
+    <color name="badge_1_bg">#CDE7EC</color>
+    <color name="badge_1_fg">#4A6267</color>
+    <color name="badge_2_bg">#DAE2FF</color>
+    <color name="badge_2_fg">#525E7D</color>
+    <color name="badge_3_bg">#004F58</color>
+    <color name="badge_3_fg">#82D3E0</color>
+    <color name="badge_4_bg">#334B4F</color>
+    <color name="badge_4_fg">#B1CBD0</color>
+    <color name="badge_5_bg">#3B4664</color>
+    <color name="badge_5_fg">#BAC6EA</color>
+    <color name="badge_6_bg">#FFDAD6</color>
+    <color name="badge_6_fg">#BA1A1A</color>
+
+    <!-- Progress Bar Gradient -->
+    <color name="progress_start">#FF9100</color>
+    <color name="progress_mid">#006874</color>
+    <color name="progress_end">#00E5FF</color>
+
+    <!-- Badge backgrounds with alpha (10% = 0x1A, 15% = 0x26) -->
+    <color name="badge_bg_paid">#1A2E9E5A</color>
+    <color name="badge_bg_pending">#1AE8913A</color>
+    <color name="badge_bg_alert">#1ABA1A1A</color>
+    <color name="badge_bg_standby">#1ABFC8CA</color>
+
+    <!-- Translucent surfaces (90% alpha) -->
+    <color name="surface_container_translucent">#E6E9EFF0</color>
+    <!-- 10% translucent surface for cards -->
+    <color name="surface_translucent">#1AFFFFFF</color>
 </resources>

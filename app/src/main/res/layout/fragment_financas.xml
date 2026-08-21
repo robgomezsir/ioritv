@@ -21,15 +21,15 @@
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:padding="16dp">
+            android:padding="@dimen/spacing_medium">
 
             <!-- Header: Divisão Cadastros -->
             <TextView
                 android:id="@+id/headerCadastros"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:padding="16dp"
-                android:paddingBottom="8dp"
+                android:padding="@dimen/spacing_medium"
+                android:paddingBottom="@dimen/spacing_small"
                 android:text="Divisão: Cadastros"
                 android:textAppearance="@style/TextAppearance.Material3.HeadlineSmall"
                 android:textColor="?attr/colorOnSurface"
@@ -41,10 +41,10 @@
                 android:id="@+id/totalClientesCard"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="10dp"
-                android:layout_marginBottom="20dp"
+                android:layout_marginTop="@dimen/spacing_small"
+                android:layout_marginBottom="@dimen/spacing_medium"
                 app:cardBackgroundColor="?attr/colorSurfaceContainer"
-                app:cardCornerRadius="12dp"
+                app:cardCornerRadius="@dimen/shape_medium"
                 app:cardElevation="0dp"
                 app:strokeWidth="0dp"
                 app:layout_constraintTop_toBottomOf="@+id/headerCadastros">
@@ -53,12 +53,12 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="vertical"
-                    android:padding="18dp">
+                    android:padding="@dimen/spacing_medium">
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginBottom="8dp"
+                        android:layout_marginBottom="@dimen/spacing_small"
                         android:text="Total de Clientes"
                         android:textAppearance="@style/TextAppearance.Material3.LabelMedium"
                         android:textColor="?attr/colorOnSurfaceVariant"
@@ -77,7 +77,7 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="4dp"
+                        android:layout_marginTop="@dimen/spacing_extra_small"
                         android:text="Quantidade total de clientes cadastrados"
                         android:textAppearance="@style/TextAppearance.Material3.BodySmall"
                         android:textColor="?attr/colorOnSurfaceVariant" />
@@ -90,10 +90,10 @@
                 android:id="@+id/contasAtivasCard"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="10dp"
-                android:layout_marginBottom="20dp"
+                android:layout_marginTop="@dimen/spacing_small"
+                android:layout_marginBottom="@dimen/spacing_medium"
                 app:cardBackgroundColor="?attr/colorSurfaceContainer"
-                app:cardCornerRadius="12dp"
+                app:cardCornerRadius="@dimen/shape_medium"
                 app:cardElevation="0dp"
                 app:strokeWidth="0dp"
                 app:layout_constraintTop_toBottomOf="@+id/totalClientesCard">
@@ -102,12 +102,12 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="vertical"
-                    android:padding="18dp">
+                    android:padding="@dimen/spacing_medium">
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginBottom="8dp"
+                        android:layout_marginBottom="@dimen/spacing_small"
                         android:text="Contas Ativas"
                         android:textAppearance="@style/TextAppearance.Material3.LabelMedium"
                         android:textColor="?attr/colorOnSurfaceVariant"
@@ -126,7 +126,7 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="4dp"
+                        android:layout_marginTop="@dimen/spacing_extra_small"
                         android:text="Clientes com créditos ativos adimplentes"
                         android:textAppearance="@style/TextAppearance.Material3.BodySmall"
                         android:textColor="?attr/colorOnSurfaceVariant" />
@@ -139,10 +139,10 @@
                 android:id="@+id/contasVencidasCard"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="10dp"
-                android:layout_marginBottom="20dp"
+                android:layout_marginTop="@dimen/spacing_small"
+                android:layout_marginBottom="@dimen/spacing_medium"
                 app:cardBackgroundColor="?attr/colorSurfaceContainer"
-                app:cardCornerRadius="12dp"
+                app:cardCornerRadius="@dimen/shape_medium"
                 app:cardElevation="0dp"
                 app:strokeWidth="0dp"
                 app:layout_constraintTop_toBottomOf="@+id/contasAtivasCard">
@@ -151,12 +151,12 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="vertical"
-                    android:padding="18dp">
+                    android:padding="@dimen/spacing_medium">
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginBottom="8dp"
+                        android:layout_marginBottom="@dimen/spacing_small"
                         android:text="Contas Vencidas"
                         android:textAppearance="@style/TextAppearance.Material3.LabelMedium"
                         android:textColor="?attr/colorOnSurfaceVariant"
@@ -175,7 +175,7 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="4dp"
+                        android:layout_marginTop="@dimen/spacing_extra_small"
                         android:text="Clientes com créditos vencidos entre 1 e 14 dias"
                         android:textAppearance="@style/TextAppearance.Material3.BodySmall"
                         android:textColor="?attr/colorOnSurfaceVariant" />
@@ -188,10 +188,10 @@
                 android:id="@+id/contasAVencerCard"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="10dp"
-                android:layout_marginBottom="20dp"
+                android:layout_marginTop="@dimen/spacing_small"
+                android:layout_marginBottom="@dimen/spacing_medium"
                 app:cardBackgroundColor="?attr/colorSurfaceContainer"
-                app:cardCornerRadius="12dp"
+                app:cardCornerRadius="@dimen/shape_medium"
                 app:cardElevation="0dp"
                 app:strokeWidth="0dp"
                 app:layout_constraintTop_toBottomOf="@+id/contasVencidasCard">
@@ -200,12 +200,12 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="vertical"
-                    android:padding="18dp">
+                    android:padding="@dimen/spacing_medium">
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginBottom="8dp"
+                        android:layout_marginBottom="@dimen/spacing_small"
                         android:text="Contas a Vencer"
                         android:textAppearance="@style/TextAppearance.Material3.LabelMedium"
                         android:textColor="?attr/colorOnSurfaceVariant"
@@ -224,7 +224,7 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="4dp"
+                        android:layout_marginTop="@dimen/spacing_extra_small"
                         android:text="Clientes com créditos a 2 dias do vencimento"
                         android:textAppearance="@style/TextAppearance.Material3.BodySmall"
                         android:textColor="?attr/colorOnSurfaceVariant" />
@@ -237,10 +237,10 @@
                 android:id="@+id/contasInativasCard"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="10dp"
-                android:layout_marginBottom="20dp"
+                android:layout_marginTop="@dimen/spacing_small"
+                android:layout_marginBottom="@dimen/spacing_medium"
                 app:cardBackgroundColor="?attr/colorSurfaceContainer"
-                app:cardCornerRadius="12dp"
+                app:cardCornerRadius="@dimen/shape_medium"
                 app:cardElevation="0dp"
                 app:strokeWidth="0dp"
                 app:layout_constraintTop_toBottomOf="@+id/contasAVencerCard">
@@ -249,12 +249,12 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="vertical"
-                    android:padding="18dp">
+                    android:padding="@dimen/spacing_medium">
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginBottom="8dp"
+                        android:layout_marginBottom="@dimen/spacing_small"
                         android:text="Contas Inativas"
                         android:textAppearance="@style/TextAppearance.Material3.LabelMedium"
                         android:textColor="?attr/colorOnSurfaceVariant"
@@ -273,7 +273,7 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="4dp"
+                        android:layout_marginTop="@dimen/spacing_extra_small"
                         android:text="Clientes com créditos vencidos há 15 dias ou mais"
                         android:textAppearance="@style/TextAppearance.Material3.BodySmall"
                         android:textColor="?attr/colorOnSurfaceVariant" />
@@ -286,10 +286,10 @@
                 android:id="@+id/clientesGerandoReceitaCard"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="10dp"
-                android:layout_marginBottom="30dp"
+                android:layout_marginTop="@dimen/spacing_small"
+                android:layout_marginBottom="@dimen/spacing_large"
                 app:cardBackgroundColor="?attr/colorSurfaceContainer"
-                app:cardCornerRadius="12dp"
+                app:cardCornerRadius="@dimen/shape_medium"
                 app:cardElevation="0dp"
                 app:strokeWidth="0dp"
                 app:layout_constraintTop_toBottomOf="@+id/contasInativasCard">
@@ -298,12 +298,12 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="vertical"
-                    android:padding="18dp">
+                    android:padding="@dimen/spacing_medium">
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginBottom="8dp"
+                        android:layout_marginBottom="@dimen/spacing_small"
                         android:text="Clientes Gerando Receita"
                         android:textAppearance="@style/TextAppearance.Material3.LabelMedium"
                         android:textColor="?attr/colorOnSurfaceVariant"
@@ -322,7 +322,7 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="4dp"
+                        android:layout_marginTop="@dimen/spacing_extra_small"
                         android:text="Total de clientes ativos e a vencer"
                         android:textAppearance="@style/TextAppearance.Material3.BodySmall"
                         android:textColor="?attr/colorOnSurfaceVariant" />
@@ -335,8 +335,8 @@
                 android:id="@+id/headerFinancas"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:padding="16dp"
-                android:paddingBottom="8dp"
+                android:padding="@dimen/spacing_medium"
+                android:paddingBottom="@dimen/spacing_small"
                 android:text="Divisão: Finanças"
                 android:textAppearance="@style/TextAppearance.Material3.HeadlineSmall"
                 android:textColor="?attr/colorOnSurface"
@@ -348,10 +348,10 @@
                 android:id="@+id/totalVendasCard"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="10dp"
-                android:layout_marginBottom="20dp"
+                android:layout_marginTop="@dimen/spacing_small"
+                android:layout_marginBottom="@dimen/spacing_medium"
                 app:cardBackgroundColor="?attr/colorSurfaceContainer"
-                app:cardCornerRadius="12dp"
+                app:cardCornerRadius="@dimen/shape_medium"
                 app:cardElevation="0dp"
                 app:strokeWidth="0dp"
                 app:layout_constraintTop_toBottomOf="@+id/headerFinancas">
@@ -360,12 +360,12 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="vertical"
-                    android:padding="18dp">
+                    android:padding="@dimen/spacing_medium">
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginBottom="8dp"
+                        android:layout_marginBottom="@dimen/spacing_small"
                         android:text="Total de Vendas"
                         android:textAppearance="@style/TextAppearance.Material3.LabelMedium"
                         android:textColor="?attr/colorOnSurfaceVariant"
@@ -384,7 +384,7 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="4dp"
+                        android:layout_marginTop="@dimen/spacing_extra_small"
                         android:text="Soma dos valores de contas ativas e a vencer"
                         android:textAppearance="@style/TextAppearance.Material3.BodySmall"
                         android:textColor="?attr/colorOnSurfaceVariant" />
@@ -397,13 +397,13 @@
                 android:id="@+id/custoTotalCard"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="10dp"
-                android:layout_marginBottom="20dp"
+                android:layout_marginTop="@dimen/spacing_small"
+                android:layout_marginBottom="@dimen/spacing_medium"
                 android:clickable="true"
                 android:focusable="true"
                 android:foreground="?attr/selectableItemBackground"
                 app:cardBackgroundColor="?attr/colorSurfaceContainer"
-                app:cardCornerRadius="12dp"
+                app:cardCornerRadius="@dimen/shape_medium"
                 app:cardElevation="0dp"
                 app:strokeWidth="0dp"
                 app:layout_constraintTop_toBottomOf="@+id/totalVendasCard">
@@ -412,12 +412,12 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="vertical"
-                    android:padding="18dp">
+                    android:padding="@dimen/spacing_medium">
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginBottom="8dp"
+                        android:layout_marginBottom="@dimen/spacing_small"
                         android:text="Custo Total (Fixo)"
                         android:textAppearance="@style/TextAppearance.Material3.LabelMedium"
                         android:textColor="?attr/colorOnSurfaceVariant"
@@ -436,7 +436,7 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="4dp"
+                        android:layout_marginTop="@dimen/spacing_extra_small"
                         android:text="Toque para definir o custo operacional mensal"
                         android:textAppearance="@style/TextAppearance.Material3.BodySmall"
                         android:textColor="?attr/colorOnSurfaceVariant" />
@@ -449,10 +449,10 @@
                 android:id="@+id/lucroLiquidoCard"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="10dp"
-                android:layout_marginBottom="20dp"
+                android:layout_marginTop="@dimen/spacing_small"
+                android:layout_marginBottom="@dimen/spacing_medium"
                 app:cardBackgroundColor="?attr/colorSurfaceContainer"
-                app:cardCornerRadius="12dp"
+                app:cardCornerRadius="@dimen/shape_medium"
                 app:cardElevation="0dp"
                 app:strokeWidth="0dp"
                 app:layout_constraintTop_toBottomOf="@+id/custoTotalCard">
@@ -461,12 +461,12 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="vertical"
-                    android:padding="18dp">
+                    android:padding="@dimen/spacing_medium">
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginBottom="8dp"
+                        android:layout_marginBottom="@dimen/spacing_small"
                         android:text="Lucro Líquido Total"
                         android:textAppearance="@style/TextAppearance.Material3.LabelMedium"
                         android:textColor="?attr/colorOnSurfaceVariant"
@@ -485,7 +485,7 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="4dp"
+                        android:layout_marginTop="@dimen/spacing_extra_small"
                         android:text="Total de Vendas - Custo Total"
                         android:textAppearance="@style/TextAppearance.Material3.BodySmall"
                         android:textColor="?attr/colorOnSurfaceVariant" />
@@ -498,10 +498,10 @@
                 android:id="@+id/despesasCard"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="10dp"
-                android:layout_marginBottom="20dp"
+                android:layout_marginTop="@dimen/spacing_small"
+                android:layout_marginBottom="@dimen/spacing_medium"
                 app:cardBackgroundColor="?attr/colorSurfaceContainer"
-                app:cardCornerRadius="12dp"
+                app:cardCornerRadius="@dimen/shape_medium"
                 app:cardElevation="0dp"
                 app:strokeWidth="0dp"
                 app:layout_constraintTop_toBottomOf="@+id/lucroLiquidoCard">
@@ -510,12 +510,12 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="vertical"
-                    android:padding="18dp">
+                    android:padding="@dimen/spacing_medium">
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginBottom="8dp"
+                        android:layout_marginBottom="@dimen/spacing_small"
                         android:text="Despesas"
                         android:textAppearance="@style/TextAppearance.Material3.LabelMedium"
                         android:textColor="?attr/colorOnSurfaceVariant"
@@ -534,7 +534,7 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="4dp"
+                        android:layout_marginTop="@dimen/spacing_extra_small"
                         android:text="Total de despesas operacionais"
                         android:textAppearance="@style/TextAppearance.Material3.BodySmall"
                         android:textColor="?attr/colorOnSurfaceVariant" />
@@ -547,10 +547,10 @@
                 android:id="@+id/lucroLiquidoFinalCard"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="10dp"
-                android:layout_marginBottom="20dp"
+                android:layout_marginTop="@dimen/spacing_small"
+                android:layout_marginBottom="@dimen/spacing_medium"
                 app:cardBackgroundColor="?attr/colorSurfaceContainer"
-                app:cardCornerRadius="12dp"
+                app:cardCornerRadius="@dimen/shape_medium"
                 app:cardElevation="0dp"
                 app:strokeWidth="0dp"
                 app:layout_constraintTop_toBottomOf="@+id/despesasCard">
@@ -559,12 +559,12 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="vertical"
-                    android:padding="18dp">
+                    android:padding="@dimen/spacing_medium">
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginBottom="8dp"
+                        android:layout_marginBottom="@dimen/spacing_small"
                         android:text="Lucro Líquido Final"
                         android:textAppearance="@style/TextAppearance.Material3.LabelMedium"
                         android:textColor="?attr/colorOnSurfaceVariant"
@@ -583,7 +583,7 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="4dp"
+                        android:layout_marginTop="@dimen/spacing_extra_small"
                         android:text="Lucro Líquido Total - Despesas"
                         android:textAppearance="@style/TextAppearance.Material3.BodySmall"
                         android:textColor="?attr/colorOnSurfaceVariant" />
@@ -596,10 +596,10 @@
                 android:id="@+id/margemLucroCard"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="10dp"
-                android:layout_marginBottom="20dp"
+                android:layout_marginTop="@dimen/spacing_small"
+                android:layout_marginBottom="@dimen/spacing_medium"
                 app:cardBackgroundColor="?attr/colorSurfaceContainer"
-                app:cardCornerRadius="12dp"
+                app:cardCornerRadius="@dimen/shape_medium"
                 app:cardElevation="0dp"
                 app:strokeWidth="0dp"
                 app:layout_constraintTop_toBottomOf="@+id/lucroLiquidoFinalCard">
@@ -608,12 +608,12 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="vertical"
-                    android:padding="18dp">
+                    android:padding="@dimen/spacing_medium">
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginBottom="8dp"
+                        android:layout_marginBottom="@dimen/spacing_small"
                         android:text="Margem de Lucro"
                         android:textAppearance="@style/TextAppearance.Material3.LabelMedium"
                         android:textColor="?attr/colorOnSurfaceVariant"
@@ -632,7 +632,7 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="4dp"
+                        android:layout_marginTop="@dimen/spacing_extra_small"
                         android:text="Percentual de lucro sobre vendas"
                         android:textAppearance="@style/TextAppearance.Material3.BodySmall"
                         android:textColor="?attr/colorOnSurfaceVariant" />
@@ -645,8 +645,8 @@
                 android:id="@+id/headerDespesas"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:padding="16dp"
-                android:paddingBottom="8dp"
+                android:padding="@dimen/spacing_medium"
+                android:paddingBottom="@dimen/spacing_small"
                 android:text="Despesas"
                 android:textAppearance="@style/TextAppearance.Material3.HeadlineSmall"
                 android:textColor="?attr/colorOnSurface"
@@ -658,8 +658,8 @@
                 android:id="@+id/recyclerViewDespesas"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="10dp"
-                android:layout_marginBottom="20dp"
+                android:layout_marginTop="@dimen/spacing_small"
+                android:layout_marginBottom="@dimen/spacing_medium"
                 android:nestedScrollingEnabled="false"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
@@ -674,51 +674,51 @@
         android:id="@+id/fabMenu"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_margin="16dp"
-        android:layout_marginEnd="16dp"
-        android:layout_marginBottom="16dp"
-        android:backgroundTint="@color/button_salvar_background"
+        android:layout_margin="@dimen/spacing_medium"
+        android:layout_marginEnd="@dimen/spacing_medium"
+        android:layout_marginBottom="@dimen/spacing_medium"
+        android:backgroundTint="?attr/colorPrimary"
         android:src="@drawable/ic_baseline_add_24"
-        android:tint="#FFFFFF"
-        app:elevation="6dp"
+        android:tint="?attr/colorOnPrimary"
+        app:elevation="@dimen/elevation_level3"
         app:fabSize="normal"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent" />
 
-    <!-- Sub-FAB para Nova Despesa -->
+    <!-- Sub-FAB para Nova Despesa: 72dp (main FAB) + 16dp gap = 88dp from bottom -->
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/fabNovaDespesa"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="16dp"
-        android:layout_marginBottom="72dp"
+        android:layout_marginEnd="@dimen/spacing_medium"
+        android:layout_marginBottom="88dp"
         android:alpha="0"
-        android:backgroundTint="#4CAF50"
+        android:backgroundTint="@color/status_paid_color"
         android:scaleX="0"
         android:scaleY="0"
         android:src="@drawable/ic_baseline_add_24"
-        android:tint="#FFFFFF"
+        android:tint="?attr/colorOnPrimary"
         android:visibility="gone"
-        app:elevation="6dp"
+        app:elevation="@dimen/elevation_level3"
         app:fabSize="mini"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent" />
 
-    <!-- Sub-FAB para Download -->
+    <!-- Sub-FAB para Download: 88dp + 40dp (sub-FAB 1) + 16dp gap = 144dp from bottom -->
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/fabDownload"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="16dp"
-        android:layout_marginBottom="136dp"
+        android:layout_marginEnd="@dimen/spacing_medium"
+        android:layout_marginBottom="144dp"
         android:alpha="0"
-        android:backgroundTint="#FF9800"
+        android:backgroundTint="@color/status_pending_color"
         android:scaleX="0"
         android:scaleY="0"
         android:src="@drawable/ic_baseline_download_24"
-        android:tint="#FFFFFF"
+        android:tint="?attr/colorOnPrimary"
         android:visibility="gone"
-        app:elevation="6dp"
+        app:elevation="@dimen/elevation_level3"
         app:fabSize="mini"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent" />

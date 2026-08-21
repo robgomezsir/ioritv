@@ -13,6 +13,7 @@ import com.elevadorcom.ioritv.utils.MoneyTextWatcher
 import com.elevadorcom.ioritv.utils.SituacaoUtil
 import com.google.firebase.Timestamp
 import com.google.firebase.firestore.FirebaseFirestore
+import com.google.android.material.datepicker.MaterialDatePicker
 import java.text.SimpleDateFormat
 import java.util.Calendar
 import java.util.Date
@@ -52,6 +53,13 @@ class ClienteFormFragment : Fragment() {
 
         setupInputRestrictions()
 
+        // DatePicker para o campo Data Início
+        binding.editTextInicio.isFocusable = false
+        binding.editTextInicio.isClickable = true
+        binding.editTextInicio.setOnClickListener {
+            showMaterialDatePicker()
+        }
+
         // Modo edição: carrega os dados do cliente
         cadastroId?.let { loadCadastroData(it) }
 
@@ -67,6 +75,44 @@ class ClienteFormFragment : Fragment() {
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null
+    }
+
+    private fun showMaterialDatePicker() {
+        val sdf = SimpleDateFormat("dd/MM/yyyy", Locale("pt", "BR"))
+
+        // Tenta parsear a data existente para selecionar no picker
+        val currentDate = binding.editTextInicio.text.toString()
+        val initialSelection = if (currentDate.isNotEmpty()) {
+            try {
+                sdf.parse(currentDate)?.time ?: MaterialDatePicker.todayInUtcMilliseconds()
+            } catch (_: Exception) {
+                MaterialDatePicker.todayInUtcMilliseconds()
+            }
+        } else {
+            MaterialDatePicker.todayInUtcMilliseconds()
+        }
+
+        val datePicker = MaterialDatePicker.Builder.datePicker()
+            .setTitleText("Selecione a data de início")
+            .setSelection(initialSelection)
+            .setTheme(R.style.Theme_IORITv_MaterialDatePicker)
+            .build()
+
+        datePicker.addOnPositiveButtonClickListener { selection ->
+            // MaterialDatePicker retorna UTC midnight — usar timezone UTC para evitar deslocamento de -1 dia
+            val utc = java.util.TimeZone.getTimeZone("UTC")
+            val calendar = Calendar.getInstance(utc).apply { timeInMillis = selection }
+            val formatted = String.format(
+                Locale("pt", "BR"),
+                "%02d/%02d/%04d",
+                calendar.get(Calendar.DAY_OF_MONTH),
+                calendar.get(Calendar.MONTH) + 1,
+                calendar.get(Calendar.YEAR)
+            )
+            binding.editTextInicio.setText(formatted)
+        }
+
+        datePicker.show(parentFragmentManager, "DATE_PICKER")
     }
 
     private fun loadCadastroData(cadastroId: String) {

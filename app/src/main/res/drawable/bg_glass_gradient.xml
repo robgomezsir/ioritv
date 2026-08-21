@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
-<!-- Fundo Glass refinado: gradiente escuro profundo com subtom quente suave.
-     A base escura permite que as superfícies translúcidas (vidro fosco) se destaquem
-     com elegância, criando profundidade e dimensão. -->
+<!-- Gradiente base da Aurora Frost — fundo com subtom teal profundo.
+     No tema claro usa os tons claros do PRD; no escuro, os tons escuros.
+     Este drawable é referenciado via bg_glass_paint.xml. -->
 <shape xmlns:android="http://schemas.android.com/apk/res/android">
     <gradient
         android:angle="160"
-        android:startColor="#1B1D2F"
-        android:centerColor="#22253D"
-        android:endColor="#191B2C"
+        android:startColor="@color/glass_gradient_start"
+        android:centerColor="@color/glass_gradient_mid"
+        android:endColor="@color/glass_gradient_end"
         android:type="linear" />
 </shape>

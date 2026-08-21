@@ -4,88 +4,176 @@
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
     <color name="gray">#FF808080</color>
-    <color name="toolbar_color">#141018</color>
-    
-    <!-- Cores para gráficos -->
-    <color name="bar_color_active">#7C9AFF</color>
-    <color name="bar_color_due">#81C784</color>
-    <color name="bar_color_overdue">#FFB74D</color>
-    <color name="bar_color_standby">#BDBDBD</color>
-    
-    <!-- Cores para botões de filtro -->
-    <color name="filter_button_active_light">#2D3F73</color>
-    <color name="filter_button_inactive_light">#44474E</color>
-    
-    <!-- Cores para TextInputLayout -->
-    <color name="text_input_stroke_light">#8C9199</color>
-    <color name="text_input_stroke_focused_light">#7C9AFF</color>
-    <color name="text_input_label_light">#C4C6CF</color>
-    <color name="text_input_label_focused_light">#7C9AFF</color>
-    
-    <!-- Material Design 3 - Tema Escuro (Azul-Escuro Harmônico) -->
-    <color name="md_theme_dark_primary">#7C9AFF</color>
-    <color name="md_theme_dark_onPrimary">#0A0E27</color>
-    <color name="md_theme_dark_primaryContainer">#2D3F73</color>
-    <color name="md_theme_dark_onPrimaryContainer">#E8F0FF</color>
-    <color name="md_theme_dark_secondary">#B8C6EA</color>
-    <color name="md_theme_dark_onSecondary">#233047</color>
-    <color name="md_theme_dark_secondaryContainer">#394661</color>
-    <color name="md_theme_dark_onSecondaryContainer">#E8F0FF</color>
-    <color name="md_theme_dark_tertiary">#A0C4FF</color>
-    <color name="md_theme_dark_onTertiary">#0F2A4A</color>
-    <color name="md_theme_dark_tertiaryContainer">#2F4A6E</color>
-    <color name="md_theme_dark_onTertiaryContainer">#E8F0FF</color>
+
+    <!-- ═══════════════════════════════════════════════════════════════
+         Material Design 3 — Seed #026D79 (Teal) — Tema Escuro
+         Gerado a partir do Papecon Office PRD v1.0
+         ═══════════════════════════════════════════════════════════════ -->
+
+    <!-- Core Brand -->
+    <color name="md_theme_dark_primary">#82D3E0</color>
+    <color name="md_theme_dark_onPrimary">#00363D</color>
+    <color name="md_theme_dark_primaryContainer">#004F58</color>
+    <color name="md_theme_dark_onPrimaryContainer">#9EEFFD</color>
+
+    <!-- Secondary -->
+    <color name="md_theme_dark_secondary">#B1CBD0</color>
+    <color name="md_theme_dark_onSecondary">#1C3438</color>
+    <color name="md_theme_dark_secondaryContainer">#334B4F</color>
+    <color name="md_theme_dark_onSecondaryContainer">#CDE7EC</color>
+
+    <!-- Tertiary -->
+    <color name="md_theme_dark_tertiary">#BAC6EA</color>
+    <color name="md_theme_dark_onTertiary">#24304D</color>
+    <color name="md_theme_dark_tertiaryContainer">#3B4664</color>
+    <color name="md_theme_dark_onTertiaryContainer">#DAE2FF</color>
+
+    <!-- Error -->
     <color name="md_theme_dark_error">#FFB4AB</color>
     <color name="md_theme_dark_onError">#690005</color>
-    <color name="md_theme_dark_errorContainer">#D56670</color>
+    <color name="md_theme_dark_errorContainer">#93000A</color>
     <color name="md_theme_dark_onErrorContainer">#FFDAD6</color>
-    <color name="md_theme_dark_outline">#8C9199</color>
-    <color name="md_theme_dark_background">#0f1418</color>
-    <color name="md_theme_dark_onBackground">#E6EBF0</color>
-    <color name="md_theme_dark_surface">#0f1418</color>
-    <color name="md_theme_dark_onSurface">#E6EBF0</color>
-    <color name="md_theme_dark_surfaceVariant">#44474E</color>
-    <color name="md_theme_dark_onSurfaceVariant">#C4C6CF</color>
-    <color name="md_theme_dark_inverseSurface">#E6EBF0</color>
-    <color name="md_theme_dark_inverseOnSurface">#2F3033</color>
-    <color name="md_theme_dark_inversePrimary">#4F63A2</color>
+
+    <!-- Background & Surface -->
+    <color name="md_theme_dark_background">#0E1415</color>
+    <color name="md_theme_dark_onBackground">#DEE3E5</color>
+    <color name="md_theme_dark_surface">#0E1415</color>
+    <color name="md_theme_dark_onSurface">#DEE3E5</color>
+
+    <!-- Surface Variant -->
+    <color name="md_theme_dark_surfaceVariant">#3F484A</color>
+    <color name="md_theme_dark_onSurfaceVariant">#BFC8CA</color>
+
+    <!-- Outline -->
+    <color name="md_theme_dark_outline">#899294</color>
+    <color name="md_theme_dark_outlineVariant">#3F484A</color>
+
+    <!-- Inverse -->
+    <color name="md_theme_dark_inverseSurface">#DEE3E5</color>
+    <color name="md_theme_dark_inverseOnSurface">#2B3133</color>
+    <color name="md_theme_dark_inversePrimary">#006874</color>
+
+    <!-- Shadow / Tint / Scrim -->
     <color name="md_theme_dark_shadow">#000000</color>
-    <color name="md_theme_dark_surfaceTint">#7C9AFF</color>
-    <color name="md_theme_dark_outlineVariant">#44474E</color>
+    <color name="md_theme_dark_surfaceTint">#82D3E0</color>
     <color name="md_theme_dark_scrim">#000000</color>
-    <color name="md_theme_dark_surfaceDim">#0f1418</color>
-    <color name="md_theme_dark_surfaceBright">#353A40</color>
-    <color name="md_theme_dark_surfaceContainerLowest">#0A0E13</color>
-    <color name="md_theme_dark_surfaceContainerLow">#1A1F24</color>
-    <color name="md_theme_dark_surfaceContainer">#1E2328</color>
-    <color name="md_theme_dark_surfaceContainerHigh">#282D32</color>
-    <color name="md_theme_dark_surfaceContainerHighest">#33383D</color>
-    <color name="md_theme_dark_onSurfaceContainer">#E6EBF0</color>
 
-    <!-- Filtros de cliente: texto para botões de seleção (tema escuro) -->
-    <color name="filter_button_text_selected">#E6EBF0</color>
-    <color name="filter_button_text_unselected">#8C9199</color>
+    <!-- Surface Tonal Scale -->
+    <color name="md_theme_dark_surfaceDim">#0E1415</color>
+    <color name="md_theme_dark_surfaceBright">#343A3B</color>
+    <color name="md_theme_dark_surfaceContainerLowest">#090F10</color>
+    <color name="md_theme_dark_surfaceContainerLow">#171D1E</color>
+    <color name="md_theme_dark_surfaceContainer">#1B2122</color>
+    <color name="md_theme_dark_surfaceContainerHigh">#252B2C</color>
+    <color name="md_theme_dark_surfaceContainerHighest">#303637</color>
 
-    <!-- SearchView: cores para o campo de busca (tema escuro) -->
-    <color name="search_view_bg_fill">#282D32</color>
-    <color name="search_view_stroke">#8C9199</color>
-    <color name="search_view_text">#E6EBF0</color>
-    <color name="search_view_hint">#8C9199</color>
+    <!-- Alias mantido -->
+    <color name="onSurfaceContainer">#DEE3E5</color>
 
-    <!-- Seção expansível do card (tema escuro) -->
+    <!-- ═══════════════════════════════════════════════════════════════
+         Cores Funcionais / Semânticas (mesmas do tema claro)
+         ═══════════════════════════════════════════════════════════════ -->
+    <color name="status_paid_color">#2E9E5A</color>
+    <color name="status_pending_color">#E8913A</color>
+    <color name="red_accent">#BA1A1A</color>
+
+    <!-- ═══════════════════════════════════════════════════════════════
+         Toolbar & App Bar (escuro)
+         ═══════════════════════════════════════════════════════════════ -->
+    <color name="toolbar_color">#0E1415</color>
+
+    <!-- ═══════════════════════════════════════════════════════════════
+         Cores para gráficos
+         ═══════════════════════════════════════════════════════════════ -->
+    <color name="bar_color_active">#82D3E0</color>
+    <color name="bar_color_due">#2E9E5A</color>
+    <color name="bar_color_overdue">#E8913A</color>
+    <color name="bar_color_standby">#3F484A</color>
+
+    <!-- ═══════════════════════════════════════════════════════════════
+         Botões de filtro
+         ═══════════════════════════════════════════════════════════════ -->
+    <color name="filter_button_active_light">#004F58</color>
+    <color name="filter_button_inactive_light">#3F484A</color>
+    <color name="filter_button_text_selected">#DEE3E5</color>
+    <color name="filter_button_text_unselected">#899294</color>
+
+    <!-- ═══════════════════════════════════════════════════════════════
+         TextInputLayout
+         ═══════════════════════════════════════════════════════════════ -->
+    <color name="text_input_stroke_light">#899294</color>
+    <color name="text_input_stroke_focused_light">#82D3E0</color>
+    <color name="text_input_label_light">#BFC8CA</color>
+    <color name="text_input_label_focused_light">#82D3E0</color>
+
+    <!-- ═══════════════════════════════════════════════════════════════
+         SearchView
+         ═══════════════════════════════════════════════════════════════ -->
+    <color name="search_view_bg_fill">#252B2C</color>
+    <color name="search_view_stroke">#899294</color>
+    <color name="search_view_text">#DEE3E5</color>
+    <color name="search_view_hint">#899294</color>
+
+    <!-- Seção expansível -->
     <color name="expanded_section_bg">#00000000</color>
 
-    <!-- Cores pastéis para números na aba Finanças (tema escuro) -->
+    <!-- ═══════════════════════════════════════════════════════════════
+         Glass (Aurora Frost — vidro escuro)
+         ═══════════════════════════════════════════════════════════════ -->
+    <!-- Gradiente aurora escuro -->
+    <color name="glass_gradient_start">#07181D</color>
+    <color name="glass_gradient_mid">#0B2A33</color>
+    <color name="glass_gradient_end">#07181D</color>
+
+    <!-- Superfícies translúcidas — vidro escuro -->
+    <color name="glass_surface">#26FFFFFF</color>
+    <color name="glass_surface_container_low">#1AFFFFFF</color>
+    <color name="glass_surface_container">#26FFFFFF</color>
+    <color name="glass_surface_container_high">#3DFFFFFF</color>
+    <color name="glass_surface_container_highest">#4DFFFFFF</color>
+    <color name="glass_surface_variant">#20FFFFFF</color>
+
+    <!-- Texto e contornos sobre o vidro escuro -->
+    <color name="glass_on_surface">#DEE3E5</color>
+    <color name="glass_on_surface_variant">#BFC8CA</color>
+    <color name="glass_outline_variant">#45FFFFFF</color>
+    <color name="glass_primary">#82D3E0</color>
+
+    <!-- ═══════════════════════════════════════════════════════════════
+         Cores pastéis
+         ═══════════════════════════════════════════════════════════════ -->
     <color name="pastel_red">#EF9A9A</color>
     <color name="pastel_coral">#FFAB91</color>
     <color name="pastel_rose">#F48FB1</color>
 
-    <!-- Bottom Sheet: fundo sólido opaco para legibilidade no tema escuro -->
-    <color name="bottom_sheet_bg">#2A2D38</color>
-    <color name="bottom_sheet_handle">#5A5D68</color>
-    <color name="bottom_sheet_divider">#3A3D48</color>
+    <!-- ═══════════════════════════════════════════════════════════════
+         Bottom Sheet
+         ═══════════════════════════════════════════════════════════════ -->
+    <color name="bottom_sheet_bg">#1B2122</color>
+    <color name="bottom_sheet_handle">#3F484A</color>
+    <color name="bottom_sheet_divider">#252B2C</color>
 
-    <!-- Menu WhatsApp-style (tema escuro) -->
-    <color name="menu_bg">#2A2D38</color>
-    <color name="menu_divider">#3A3D48</color>
+    <!-- ═══════════════════════════════════════════════════════════════
+         Menu WhatsApp-style
+         ═══════════════════════════════════════════════════════════════ -->
+    <color name="menu_bg">#1B2122</color>
+    <color name="menu_divider">#252B2C</color>
+
+    <!-- ═══════════════════════════════════════════════════════════════
+         Progress bar gradient
+         ═══════════════════════════════════════════════════════════════ -->
+    <color name="progress_start">#FF9100</color>
+    <color name="progress_mid">#82D3E0</color>
+    <color name="progress_end">#00E5FF</color>
+
+    <!-- Badge backgrounds with alpha (10% = 0x1A, 15% = 0x26) -->
+    <color name="badge_bg_paid">#1A2E9E5A</color>
+    <color name="badge_bg_pending">#1AE8913A</color>
+    <color name="badge_bg_alert">#1ABA1A1A</color>
+    <color name="badge_bg_standby">#1A3F484A</color>
+
+    <!-- Translucent surfaces (90% alpha) -->
+    <color name="surface_container_translucent">#E61B2122</color>
+    <!-- 10% translucent surface for cards -->
+    <color name="surface_translucent">#1AFFFFFF</color>
 </resources>
