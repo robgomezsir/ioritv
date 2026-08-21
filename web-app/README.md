@@ -1,36 +1,61 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# IORITv Web App
 
-## Getting Started
+Aplicação web para gestão de clientes e finanças do IORITv, construída com Next.js 15, React 19 e Firebase.
 
-First, run the development server:
+## Funcionalidades
+
+- **Dashboard** - Visão geral com métricas e gráficos
+- **Gestão de Clientes** - Cadastro, edição e acompanhamento de clientes
+- **Financeiro** - Controle de pagamentos e créditos
+- **Configurações** - Gerenciamento de temas e preferências
+- **PWA** - Instalável como aplicativo no dispositivo
+
+## Stack
+
+- **Frontend:** Next.js 15, React 19, TypeScript
+- **Estilização:** Tailwind CSS 4
+- **Backend:** Firebase (Firestore, Auth)
+- **Deploy:** Vercel (automático a cada push)
+
+## Desenvolvimento
 
 ```bash
+# Instalar dependências
+npm install
+
+# Rodar em desenvolvimento
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+
+# Build para produção
+npm run build
+
+# Iniciar servidor de produção
+npm start
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## Estrutura
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+```
+web-app/
+├── app/
+│   ├── clientes/        # Gestão de clientes
+│   │   └── [id]/        # Detalhes do cliente (rota dinâmica)
+│   ├── configuracoes/   # Configurações do sistema
+│   ├── dashboard/       # Painel principal
+│   ├── financeiro/      # Gestão financeira
+│   └── login/           # Autenticação
+├── components/          # Componentes reutilizáveis
+├── firebase/            # Configuração do Firebase
+└── utils/               # Utilitários e helpers
+```
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+## Deploy
 
-## Learn More
+O deploy é feito automaticamente via Vercel a cada push na branch `main`.
 
-To learn more about Next.js, take a look at the following resources:
+- **Produção:** [https://ioritv-70318.web.app](https://ioritv-70318.web.app)
+- **Preview:** Gerado automaticamente em Pull Requests
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## Licença
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+Projeto privado - Elevador Com
