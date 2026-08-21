@@ -73,8 +73,9 @@ class HomeActivity : AppCompatActivity() {
 
         when {
             isGlass -> {
-                statusBarColor = Color.TRANSPARENT
-                navBarColor = Color.TRANSPARENT
+                // Cor da toolbar glass — sincronizada com applyToolbarAndNavColors
+                statusBarColor = getColor(R.color.glass_surface_container_high)
+                navBarColor = getColor(R.color.glass_surface_container_high)
                 lightBars = false
             }
             isDark -> {
@@ -214,6 +215,9 @@ class HomeActivity : AppCompatActivity() {
             binding.toolbar.background = null
             binding.toolbar.backgroundTintList = null
             binding.toolbar.background = android.graphics.drawable.ColorDrawable(toolbarColor)
+
+            // Sincronizar barra de notificação com a cor da toolbar
+            window.statusBarColor = toolbarColor
         }, 200)
 
         if (!isGlass) {
