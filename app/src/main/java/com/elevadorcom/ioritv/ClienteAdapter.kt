@@ -39,6 +39,31 @@ class ClienteAdapter(
     override fun onBindViewHolder(holder: ClienteViewHolder, position: Int) {
         val cliente = clientes[position]
         holder.bind(cliente)
+
+        // Skin Glass: aplicar efeitos glass no card do item
+        if (isGlassTheme) {
+            applyGlassToItem(holder.itemView)
+        }
+    }
+
+    /**
+     * Aplica glassmorphism no CardView do item do adapter.
+     */
+    private fun applyGlassToItem(itemView: View) {
+        val context = itemView.context
+        val density = context.resources.displayMetrics.density
+
+        // Root CardView: background glass translúcido
+        if (itemView is androidx.cardview.widget.CardView) {
+            itemView.setCardBackgroundColor(context.getColor(R.color.glass_surface))
+            itemView.cardElevation = 0f
+        }
+
+        // Expanded section: background glass mais opaco
+        val expandedSection = itemView.findViewById<View>(R.id.expandedLayout)
+        if (expandedSection != null) {
+            expandedSection.setBackgroundColor(context.getColor(R.color.glass_surface_container))
+        }
     }
 
     override fun getItemCount(): Int = clientes.size
@@ -238,7 +263,7 @@ class ClienteAdapter(
 
         private fun showDeleteConfirmationDialog(cliente: DocumentSnapshot) {
             val context = itemView.context
-            val dialog = AlertDialog.Builder(context)
+            val dialog = com.elevadorcom.ioritv.utils.DialogUtils.materialDialog(context)
                 .setTitle("Confirmar Exclusão")
                 .setMessage("Você tem certeza realmente que deseja excluir este cliente?")
                 .setPositiveButton("Sim") { _, _ ->
@@ -246,8 +271,7 @@ class ClienteAdapter(
                 }
                 .setNegativeButton("Não", null)
                 .create()
-            
-            // DialogUtils.styleAlertDialogButtons(dialog, context)
+            com.elevadorcom.ioritv.utils.DialogUtils.styleAlertDialogButtons(dialog, context)
             dialog.show()
         }
 

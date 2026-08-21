@@ -63,6 +63,11 @@ class HomeFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        // Skin Glass: aplicar efeitos glassmorphism nos cards
+        if (com.elevadorcom.ioritv.utils.ThemeUtils.isGlassEnabled(requireContext())) {
+            com.elevadorcom.ioritv.utils.GlassUtils.applyGlassToFragment(view)
+        }
+
         // Configurar acessibilidade
         setupAccessibility()
 
@@ -380,17 +385,17 @@ class HomeFragment : Fragment() {
         editText.setText(sharedPreferences.getInt("totalCredit", 1).toString())
 
         // Cria e exibe a AlertDialog com o layout personalizado
-        val dialog = AlertDialog.Builder(requireContext())
-            .setView(dialogView) // Define o layout personalizado
+        val dialog = com.elevadorcom.ioritv.utils.DialogUtils.materialDialog(requireContext())
+            .setView(dialogView)
             .setPositiveButton("Salvar") { _, _ ->
                 val newCredits = editText.text.toString().toIntOrNull() ?: return@setPositiveButton
                 sharedPreferences.edit().putInt("totalCredit", newCredits).apply()
                 binding.totalCredit.text = newCredits.toString()
                 Toast.makeText(requireContext(), "Créditos atualizados para $newCredits", Toast.LENGTH_SHORT).show()
             }
-            .setNegativeButton("Cancelar", null) // Botão de cancelar
+            .setNegativeButton("Cancelar", null)
             .create()
-
+        com.elevadorcom.ioritv.utils.DialogUtils.styleAlertDialogButtons(dialog, requireContext())
         dialog.show()
     }
 

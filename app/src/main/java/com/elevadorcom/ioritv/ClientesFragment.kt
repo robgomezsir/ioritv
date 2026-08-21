@@ -49,6 +49,11 @@ class ClientesFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        // Skin Glass: aplicar efeitos glassmorphism nos cards
+        if (com.elevadorcom.ioritv.utils.ThemeUtils.isGlassEnabled(requireContext())) {
+            com.elevadorcom.ioritv.utils.GlassUtils.applyGlassToFragment(view)
+        }
+
         // Inicializa o estado dos filtros
         filterStates["ATIVO"] = false
         filterStates["A VENCER"] = false
@@ -110,7 +115,7 @@ class ClientesFragment : Fragment() {
      * de fundos semi-transparentes e texto escuro para contraste adequado.
      */
     private fun applyGlassThemeFixes() {
-        isGlassTheme = ThemeUtils.getSavedThemeMode(requireContext()) == ThemeUtils.MODE_GLASS
+        isGlassTheme = ThemeUtils.isGlassEnabled(requireContext())
         if (!isGlassTheme) return
 
         // SearchView: fundo semi-opaco, texto e hint escuros (sem borda)
@@ -259,8 +264,7 @@ class ClientesFragment : Fragment() {
     }
 
     private fun showDeleteConfirmationDialog(cliente: DocumentSnapshot) {
-        // Criação do diálogo de confirmação
-        val dialog = AlertDialog.Builder(requireContext())
+        val dialog = com.elevadorcom.ioritv.utils.DialogUtils.materialDialog(requireContext())
             .setTitle("Confirmação de Exclusão")
             .setMessage("Você tem certeza de que deseja excluir este cliente?")
             .setPositiveButton("Sim") { dialog, _ ->
@@ -271,7 +275,7 @@ class ClientesFragment : Fragment() {
                 dialog.dismiss()
             }
             .create()
-
+        com.elevadorcom.ioritv.utils.DialogUtils.styleAlertDialogButtons(dialog, requireContext())
         dialog.show()
     }
 

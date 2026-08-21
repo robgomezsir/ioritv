@@ -23,6 +23,12 @@ class ForgotPasswordActivity : AppCompatActivity() {
         binding = ActivityForgotPasswordBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
+        // Skin Glass: barras de sistema transparentes
+        if (ThemeUtils.isGlassEnabled(this)) {
+            window.statusBarColor = android.graphics.Color.TRANSPARENT
+            window.navigationBarColor = android.graphics.Color.TRANSPARENT
+        }
+
         auth = FirebaseAuth.getInstance()
 
         // Executar diagnóstico para debug

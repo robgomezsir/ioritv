@@ -1,10 +1,28 @@
 <?xml version="1.0" encoding="utf-8"?>
-<!-- GlassOutlinedButton background -->
-<shape xmlns:android="http://schemas.android.com/apk/res/android"
-    android:shape="rectangle">
-    <solid android:color="@color/glass_surface" />
-    <corners android:radius="@dimen/shape_medium" />
-    <stroke
-        android:width="@dimen/glass_border_width"
-        android:color="@color/glass_outline_variant" />
-</shape>
+<!-- GlassOutlinedButton PREMIUM (PRD 9.2 + screenshot):
+     containerColor: glass.surface (20% branco)
+     border: 1.5dp glass.border (luminosa)
+     sheen premium no topo -->
+<layer-list xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <!-- Camada 1: Superfície translúvida premium -->
+    <item>
+        <shape android:shape="rectangle">
+            <solid android:color="@color/glass_surface" />
+            <corners android:radius="@dimen/shape_medium" />
+        </shape>
+    </item>
+
+    <!-- Camada 2: Sheen premium sutil -->
+    <item>
+        <shape android:shape="rectangle">
+            <gradient
+                android:angle="270"
+                android:startColor="@color/glass_sheen_start"
+                android:endColor="@color/glass_sheen_end"
+                android:type="linear" />
+            <corners android:radius="@dimen/shape_medium" />
+        </shape>
+    </item>
+
+</layer-list>

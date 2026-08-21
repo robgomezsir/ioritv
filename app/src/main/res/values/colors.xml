@@ -80,20 +80,44 @@
     <!-- Expandable Section -->
     <color name="expanded_section_bg">#00000000</color>
 
-    <!-- Glass Aurora Frost - Light -->
+    <!-- ═══════════════════════════════════════════════════════════════
+         Glass Aurora Frost — Vidro Claro (PRD 3.7)
+         ═══════════════════════════════════════════════════════════════ -->
+    <!-- Aurora gradient (5 cores conforme PRD) -->
     <color name="glass_gradient_start">#E0F4F7</color>
     <color name="glass_gradient_mid">#C6ECF2</color>
     <color name="glass_gradient_end">#E0F4F7</color>
-    <color name="glass_surface">#BFFFFFFF</color>
-    <color name="glass_surface_container_low">#DFFFFFFF</color>
-    <color name="glass_surface_container">#E6FFFFFF</color>
+    <color name="glass_aurora_2">#DCE6F8</color>
+    <color name="glass_aurora_3">#E2F5EA</color>
+
+    <!-- Superfícies translúcidas — vidro claro premium (PRD 3.7 + screenshot) -->
+    <!-- glass_surface: 80% branco (frosted premium claro) -->
+    <color name="glass_surface">#CCFFFFFF</color>
+    <color name="glass_surface_container_low">#B3FFFFFF</color>
+    <color name="glass_surface_container">#CCFFFFFF</color>
+    <!-- glass_surface_container_high: 90% branco (dialogs) -->
     <color name="glass_surface_container_high">#E6FFFFFF</color>
-    <color name="glass_surface_container_highest">#E6FFFFFF</color>
-    <color name="glass_surface_variant">#DFFFFFFF</color>
+    <color name="glass_surface_container_highest">#F0FFFFFF</color>
+    <color name="glass_surface_variant">#B3FFFFFF</color>
+
+    <!-- Texto e contornos -->
     <color name="glass_on_surface">#171D1E</color>
     <color name="glass_on_surface_variant">#3F484A</color>
+    <!-- glass_outline_variant: borda luminosa 90% branco -->
     <color name="glass_outline_variant">#E6FFFFFF</color>
     <color name="glass_primary">#006874</color>
+
+    <!-- Sheen (brilho especular) e sombra -->
+    <!-- sheen: 50% branco no topo → transparente (premium) -->
+    <color name="glass_sheen_start">#80FFFFFF</color>
+    <color name="glass_sheen_end">#00FFFFFF</color>
+    <!-- shadow: sombra projetada com tom teal -->
+    <color name="glass_shadow">#3D0B4F5C</color>
+
+    <!-- Manchas radiais (blobs) -->
+    <color name="glass_blob_1">#9BE7F2</color>
+    <color name="glass_blob_2">#B9C6F0</color>
+    <color name="glass_blob_3">#A8E8D4</color>
 
     <!-- Pastel Colors -->
     <color name="pastel_red">#E57373</color>
@@ -138,6 +162,8 @@
 
     <!-- Translucent surfaces (90% alpha) -->
     <color name="surface_container_translucent">#E6E9EFF0</color>
-    <!-- 10% translucent surface for cards -->
-    <color name="surface_translucent">#1AFFFFFF</color>
+
+    <!-- Card surface: claro = surfaceContainer (#E9EFF0), escuro = #171D1E -->
+    <color name="surface_translucent">#E9EFF0</color>
+
 </resources>

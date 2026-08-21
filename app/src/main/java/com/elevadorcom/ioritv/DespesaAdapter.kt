@@ -11,7 +11,8 @@ import java.util.*
 
 class DespesaAdapter(
     private var despesas: List<DespesaItem>,
-    private val onItemClick: (DespesaItem) -> Unit
+    private val onItemClick: (DespesaItem) -> Unit,
+    private val isGlassTheme: Boolean = false
 ) : RecyclerView.Adapter<DespesaAdapter.DespesaViewHolder>() {
 
     private val currencyFormat = NumberFormat.getCurrencyInstance(Locale("pt", "BR"))
@@ -44,6 +45,24 @@ class DespesaAdapter(
         // Adicionar feedback visual de clique
         holder.cardView.isClickable = true
         holder.cardView.isFocusable = true
+
+        // Skin Glass: aplicar efeitos glass no card do item
+        if (isGlassTheme) {
+            applyGlassToItem(holder.cardView)
+        }
+    }
+
+    /**
+     * Aplica glassmorphism no MaterialCardView do item.
+     */
+    private fun applyGlassToItem(card: MaterialCardView) {
+        val context = card.context
+        val density = context.resources.displayMetrics.density
+
+        card.setBackgroundResource(R.drawable.bg_glass_card)
+        card.strokeWidth = (1 * density).toInt()
+        card.strokeColor = context.getColor(R.color.glass_outline_variant)
+        card.cardElevation = 0f
     }
 
     override fun getItemCount(): Int = despesas.size

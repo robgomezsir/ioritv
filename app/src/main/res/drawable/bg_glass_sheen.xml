@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Glass Sheen (PRD 9.1): brilho especular vertical no topo de cada painel.
+     Light: #80FFFFFF → transparent (50% alpha)
+     Dark:  #33FFFFFF → transparent (20% alpha)
+     Aplicado como overlay no card, acima do glass_surface, abaixo do conteúdo. -->
+<shape xmlns:android="http://schemas.android.com/apk/res/android"
+    android:shape="rectangle">
+    <gradient
+        android:angle="270"
+        android:startColor="@color/glass_sheen_start"
+        android:endColor="@color/glass_sheen_end"
+        android:type="linear" />
+    <corners android:radius="@dimen/shape_large" />
+</shape>

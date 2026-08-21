@@ -86,7 +86,7 @@
         android:paddingEnd="20dp"
         android:paddingBottom="4dp">
 
-        <!-- Radio Group para temas -->
+        <!-- Radio Group para temas (apenas 3 opções: Auto, Claro, Escuro) -->
         <RadioGroup
             android:id="@+id/themeRadioGroup"
             android:layout_width="match_parent"
@@ -123,17 +123,51 @@
                 android:textColor="?attr/colorOnSurface"
                 android:buttonTint="?attr/colorPrimary" />
 
-            <RadioButton
-                android:id="@+id/radio_theme_glass"
-                android:layout_width="match_parent"
-                android:layout_height="48dp"
-                android:gravity="center_vertical"
-                android:text="Vidro (Glass)"
-                android:textAppearance="@style/TextAppearance.Material3.BodyMedium"
-                android:textColor="?attr/colorOnSurface"
-                android:buttonTint="?attr/colorPrimary" />
-
         </RadioGroup>
+
+        <!-- Divisor sutil entre tema e glass -->
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_marginTop="4dp"
+            android:layout_marginBottom="4dp"
+            android:background="@color/menu_divider" />
+
+        <!-- Toggle: Skin Glass (overlay sobre tema base) -->
+        <LinearLayout
+            android:id="@+id/glassToggleRow"
+            android:layout_width="match_parent"
+            android:layout_height="48dp"
+            android:gravity="center_vertical"
+            android:orientation="horizontal"
+            android:background="?attr/selectableItemBackground"
+            android:clickable="true"
+            android:focusable="true">
+
+            <ImageView
+                android:layout_width="24dp"
+                android:layout_height="24dp"
+                android:src="@drawable/ic_baseline_auto_awesome_24"
+                android:layout_marginEnd="20dp"
+                android:tint="?attr/colorOnSurfaceVariant" />
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="Skin Vidro (Glass)"
+                android:textAppearance="@style/TextAppearance.Material3.BodyMedium"
+                android:textColor="?attr/colorOnSurface" />
+
+            <com.google.android.material.switchmaterial.SwitchMaterial
+                android:id="@+id/switchGlass"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:checked="false"
+                app:thumbTint="?attr/colorPrimary"
+                app:trackTint="?attr/colorSurfaceVariant" />
+
+        </LinearLayout>
 
     </LinearLayout>
 

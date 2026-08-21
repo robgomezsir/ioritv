@@ -1,12 +1,29 @@
 <?xml version="1.0" encoding="utf-8"?>
-<!-- GlassCard background: superfície translúcida com borda sutil.
-     Quando glass está ativado: vidro translúcido.
-     Quando desativado: card Material padrão com surfaceContainerLow. -->
-<shape xmlns:android="http://schemas.android.com/apk/res/android"
-    android:shape="rectangle">
-    <solid android:color="@color/glass_surface" />
-    <corners android:radius="@dimen/shape_large" />
-    <stroke
-        android:width="@dimen/glass_border_width"
-        android:color="@color/glass_outline_variant" />
-</shape>
+<!-- GlassCard premium (conforme screenshot Papecon Office):
+     Estrutura: Glass Surface (tint translúcido) + Sheen (brilho especular visível)
+     Shadow e border são tratados pelo MaterialCardView + elevation + strokeColor. -->
+<layer-list xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <!-- Camada 1: Superfície translúvida do vidro (tint premium 20% → 33% branco) -->
+    <item>
+        <shape android:shape="rectangle">
+            <solid android:color="@color/glass_surface" />
+            <corners android:radius="@dimen/shape_large" />
+        </shape>
+    </item>
+
+    <!-- Camada 2: Sheen — brilho especular vertical premium
+         Mais visível que antes: 25% branco no topo, fade suave até transparente
+         Creates the "frosted glass light catching" effect from the screenshot -->
+    <item>
+        <shape android:shape="rectangle">
+            <gradient
+                android:angle="270"
+                android:startColor="@color/glass_sheen_start"
+                android:endColor="@color/glass_sheen_end"
+                android:type="linear" />
+            <corners android:radius="@dimen/shape_large" />
+        </shape>
+    </item>
+
+</layer-list>

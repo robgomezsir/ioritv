@@ -1,7 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
-<!-- Gradiente base da Aurora Frost — fundo com subtom teal profundo.
-     No tema claro usa os tons claros do PRD; no escuro, os tons escuros.
-     Este drawable é referenciado via bg_glass_paint.xml. -->
+<!-- Gradiente base da Aurora Frost (PRD 3.7):
+     5 cores dispostas diagonalmente (angle 160°).
+     Light: #E0F4F7 → #C6ECF2 → #DCE6F8 → #E2F5EA → #E0F4F7
+     Dark:  #07181D → #0B2A33 → #12434E → #0D3345 → #07181D
+     Como XML gradient só suporta 3 cores, usamos start/center/end
+     e adicionamos aurora_2 e aurora_3 via overlay no bg_glass_paint.xml -->
 <shape xmlns:android="http://schemas.android.com/apk/res/android">
     <gradient
         android:angle="160"

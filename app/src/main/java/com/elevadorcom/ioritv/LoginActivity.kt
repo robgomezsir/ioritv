@@ -31,9 +31,12 @@ class LoginActivity : AppCompatActivity() {
         binding = ActivityLoginBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        // No tema Glass, o backdrop vibrante (gradiente + aurora) substitui o fundo fixo do login
-        if (ThemeUtils.getSavedThemeMode(this) == ThemeUtils.MODE_GLASS) {
+        // Skin Glass ativa: backdrop vibrante + barras transparentes
+        if (ThemeUtils.isGlassEnabled(this)) {
             binding.root.setBackgroundResource(R.drawable.bg_glass_paint)
+            // Barras de sistema transparentes para o aurora brilhar
+            window.statusBarColor = android.graphics.Color.TRANSPARENT
+            window.navigationBarColor = android.graphics.Color.TRANSPARENT
         }
 
         auth = FirebaseAuth.getInstance()

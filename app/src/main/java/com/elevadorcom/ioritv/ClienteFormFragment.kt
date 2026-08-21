@@ -49,6 +49,11 @@ class ClienteFormFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        // Skin Glass: aplicar efeitos glassmorphism nos cards
+        if (com.elevadorcom.ioritv.utils.ThemeUtils.isGlassEnabled(requireContext())) {
+            com.elevadorcom.ioritv.utils.GlassUtils.applyGlassToFragment(view)
+        }
+
         cadastroId = arguments?.getString("clienteId")
 
         setupInputRestrictions()

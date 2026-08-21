@@ -79,6 +79,11 @@ class FinancasFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        // Skin Glass: aplicar efeitos glassmorphism nos cards
+        if (com.elevadorcom.ioritv.utils.ThemeUtils.isGlassEnabled(requireContext())) {
+            com.elevadorcom.ioritv.utils.GlassUtils.applyGlassToFragment(view)
+        }
+
         setupFloatingActionButtons()
         setupCustoTotalCard()
         setupDespesaRecyclerView()
@@ -304,7 +309,7 @@ class FinancasFragment : Fragment() {
             input.setText(MoneyTextWatcher.formatCurrency(custoTotalFixo))
         }
 
-        val dialog = AlertDialog.Builder(requireContext())
+        val dialog = com.elevadorcom.ioritv.utils.DialogUtils.materialDialog(requireContext())
             .setTitle("Definir Custo Total")
             .setMessage("Informe o custo operacional mensal fixo:")
             .setView(input)
@@ -549,9 +554,10 @@ class FinancasFragment : Fragment() {
     }
 
     private fun setupDespesaRecyclerView() {
-        despesaAdapter = DespesaAdapter(emptyList()) { despesa ->
+        val isGlass = com.elevadorcom.ioritv.utils.ThemeUtils.isGlassEnabled(requireContext())
+        despesaAdapter = DespesaAdapter(emptyList(), { despesa ->
             showDespesaOptionsDialog(despesa)
-        }
+        }, isGlass)
         binding.recyclerViewDespesas.layoutManager = LinearLayoutManager(requireContext())
         binding.recyclerViewDespesas.adapter = despesaAdapter
     }
@@ -599,7 +605,7 @@ class FinancasFragment : Fragment() {
         val currentDate = SimpleDateFormat("dd/MM/yyyy", Locale.getDefault()).format(Date())
         inputData.setText(currentDate)
 
-        val dialog = AlertDialog.Builder(requireContext())
+        val dialog = com.elevadorcom.ioritv.utils.DialogUtils.materialDialog(requireContext())
             .setTitle("Adicionar Despesa")
             .setView(dialogView)
             .setPositiveButton("Salvar") { _, _ ->
@@ -676,7 +682,7 @@ class FinancasFragment : Fragment() {
             // Android 11 e superior - solicitar MANAGE_EXTERNAL_STORAGE
             try {
                 val intent = Intent(Settings.ACTION_MANAGE_ALL_FILES_ACCESS_PERMISSION)
-                val dialog = AlertDialog.Builder(requireContext())
+                val dialog = com.elevadorcom.ioritv.utils.DialogUtils.materialDialog(requireContext())
                     .setTitle("Permissão Necessária")
                     .setMessage("Para salvar o arquivo Excel, é necessário permitir o acesso aos arquivos.")
                     .setPositiveButton("Conceder") { _, _ ->
@@ -715,7 +721,7 @@ class FinancasFragment : Fragment() {
 
             if (success && file != null) {
                 // Mostrar opções ao usuário
-                val dialog = android.app.AlertDialog.Builder(requireContext())
+                val dialog = com.elevadorcom.ioritv.utils.DialogUtils.materialDialog(requireContext())
                     .setTitle("Excel Criado com Sucesso!")
                     .setMessage("Arquivo salvo em: ${file.absolutePath}\n\nDeseja abrir o arquivo?")
                     .setPositiveButton("Abrir") { _, _ ->
@@ -737,7 +743,7 @@ class FinancasFragment : Fragment() {
     private fun showDespesaOptionsDialog(despesa: DespesaItem) {
         val options = arrayOf("Editar", "Deletar")
 
-        val dialog = AlertDialog.Builder(requireContext())
+        val dialog = com.elevadorcom.ioritv.utils.DialogUtils.materialDialog(requireContext())
             .setTitle("Opções da Despesa")
             .setItems(options) { dialog, which ->
                 when (which) {
@@ -767,7 +773,7 @@ class FinancasFragment : Fragment() {
         inputDespesa.setText(despesa.descricao)
         inputValor.setText(MoneyTextWatcher.formatCurrency(despesa.valor))
 
-        val dialog = AlertDialog.Builder(requireContext())
+        val dialog = com.elevadorcom.ioritv.utils.DialogUtils.materialDialog(requireContext())
             .setTitle("Editar Despesa")
             .setView(dialogView)
             .setPositiveButton("Salvar") { _, _ ->
@@ -818,7 +824,7 @@ class FinancasFragment : Fragment() {
     }
 
     private fun showDeleteDespesaConfirmation(despesa: DespesaItem) {
-        val dialog = AlertDialog.Builder(requireContext())
+        val dialog = com.elevadorcom.ioritv.utils.DialogUtils.materialDialog(requireContext())
             .setTitle("Confirmar Exclusão")
             .setMessage("Deseja realmente excluir a despesa \"${despesa.descricao}\"?")
             .setPositiveButton("Sim") { _, _ ->

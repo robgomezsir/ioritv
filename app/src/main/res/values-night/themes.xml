@@ -41,8 +41,8 @@
         <!-- No Android 15+ o edge-to-edge é obrigatório e ignora statusBarColor/navigationBarColor;
              a saída explícita garante que as barras usem a cor definida aqui em qualquer versão -->
         <item name="android:windowOptOutEdgeToEdgeEnforcement">true</item>
-        <item name="android:statusBarColor">?attr/colorSurfaceContainer</item>
-        <item name="android:navigationBarColor">?attr/colorSurfaceContainer</item>
+        <item name="android:statusBarColor">@color/md_theme_dark_background</item>
+        <item name="android:navigationBarColor">@color/md_theme_dark_background</item>
         <item name="android:windowLightStatusBar">false</item>
         <item name="android:windowLightNavigationBar">false</item>
         <item name="android:windowTranslucentStatus">false</item>
@@ -72,8 +72,8 @@
 
     <!-- Tema customizado para o modo escuro da LoginActivity -->
     <style name="Theme.IORITv.LoginActivity.Dark" parent="Base.Theme.IORITv.Dark">
-        <item name="android:statusBarColor">@color/toolbar_color</item>
-        <item name="android:navigationBarColor">@color/md_theme_dark_surfaceContainerLow</item>
+        <item name="android:statusBarColor">@color/md_theme_dark_background</item>
+        <item name="android:navigationBarColor">@color/md_theme_dark_background</item>
         <item name="android:windowLightStatusBar">false</item>
         <item name="android:windowTranslucentStatus">false</item>
     </style>

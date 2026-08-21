@@ -1,91 +1,105 @@
 <?xml version="1.0" encoding="utf-8"?>
-<!-- Aurora Frost backdrop: blobs difusos suaves em tons teal/azul.
-     No Android 12+ (API 31+) o HomeActivity aplica RenderEffect blur,
-     gerando vidro fosco REAL atrás dos cards translúcidos.
-     Em versões anteriores, fallback automático para vidro translúcido.
-
-     Paleta: blobs teal (#1B7A8C / #1E8C7A), índigo (#4B5E9E),
-     luminância branca do topo, todos semitransparentes. -->
+<!-- Aurora Frost backdrop PREMIUM (conforme screenshot Papecon Office):
+     Gradiente diagonal + manchas radiais (blobs) vibrantes em tons teal/azul.
+     Os blobs são mais intensos e coloridos que a versão anterior,
+     criando a profundidade visual premium vista no screenshot.
+     No Android 12+ o HomeActivity aplica RenderEffect blur (24dp). -->
 <layer-list xmlns:android="http://schemas.android.com/apk/res/android">
 
-    <!-- Camada 1: Gradiente base aurora -->
+    <!-- Camada 1: Gradiente base aurora (5 cores diagonais) -->
     <item android:drawable="@drawable/bg_glass_gradient" />
 
-    <!-- Camada 2: Luz indireta — glow suave do topo-central -->
+    <!-- Camada 2: Glow central — luz ambiente suave do topo -->
     <item
-        android:width="600dp"
-        android:height="500dp"
+        android:width="700dp"
+        android:height="600dp"
         android:gravity="top|center_horizontal"
-        android:top="-200dp">
+        android:top="-250dp">
         <shape android:shape="oval">
             <gradient
                 android:endColor="#00FFFFFF"
-                android:gradientRadius="300dp"
-                android:startColor="#12FFFFFF"
+                android:gradientRadius="350dp"
+                android:startColor="#18FFFFFF"
                 android:type="radial" />
         </shape>
     </item>
 
-    <!-- Camada 3: Blob teal claro (canto superior esquerdo) -->
+    <!-- Camada 3: Blob teal vibrante (canto superior esquerdo) — mais intenso -->
+    <item
+        android:width="420dp"
+        android:height="420dp"
+        android:gravity="top|left"
+        android:left="-120dp"
+        android:top="-100dp">
+        <shape android:shape="oval">
+            <gradient
+                android:endColor="#001B7A8C"
+                android:gradientRadius="210dp"
+                android:startColor="#509BE7F2"
+                android:type="radial" />
+        </shape>
+    </item>
+
+    <!-- Camada 4: Blob índigo profundo (canto superior direito) -->
     <item
         android:width="380dp"
         android:height="380dp"
-        android:gravity="top|left"
-        android:left="-140dp"
-        android:top="-120dp">
-        <shape android:shape="oval">
-            <gradient
-                android:endColor="#009BE7F2"
-                android:gradientRadius="190dp"
-                android:startColor="#309BE7F2"
-                android:type="radial" />
-        </shape>
-    </item>
-
-    <!-- Camada 4: Blob índigo suave (canto superior direito) -->
-    <item
-        android:width="340dp"
-        android:height="340dp"
         android:gravity="top|right"
-        android:right="-100dp"
-        android:top="80dp">
+        android:right="-80dp"
+        android:top="60dp">
         <shape android:shape="oval">
             <gradient
-                android:endColor="#00B9C6F0"
-                android:gradientRadius="170dp"
-                android:startColor="#28B9C6F0"
+                android:endColor="#004B5E9E"
+                android:gradientRadius="190dp"
+                android:startColor="#40B9C6F0"
                 android:type="radial" />
         </shape>
     </item>
 
-    <!-- Camada 5: Blob teal-verde (canto inferior esquerdo) -->
+    <!-- Camada 5: Blob teal-verde vibrante (centro-esquerda) -->
+    <item
+        android:width="440dp"
+        android:height="440dp"
+        android:gravity="center|left"
+        android:left="-180dp"
+        android:top="200dp">
+        <shape android:shape="oval">
+            <gradient
+                android:endColor="#00A8E8D4"
+                android:gradientRadius="220dp"
+                android:startColor="#35A8E8D4"
+                android:type="radial" />
+        </shape>
+    </item>
+
+    <!-- Camada 6: Blob teal profundo (canto inferior esquerdo) -->
     <item
         android:width="400dp"
         android:height="400dp"
         android:gravity="bottom|left"
-        android:left="-160dp"
-        android:bottom="-220dp">
+        android:left="-140dp"
+        android:bottom="-180dp">
         <shape android:shape="oval">
             <gradient
-                android:endColor="#00A8E8D4"
+                android:endColor="#001E8C7A"
                 android:gradientRadius="200dp"
-                android:startColor="#20A8E8D4"
+                android:startColor="#281E8C7A"
                 android:type="radial" />
         </shape>
     </item>
 
-    <!-- Camada 6: Blob teal profundo (canto inferior direito) -->
+    <!-- Camada 7: Blob ciano brilhante (centro-direita) — destaque visual -->
     <item
-        android:width="360dp"
-        android:height="360dp"
-        android:gravity="bottom|right"
-        android:right="-120dp"
-        android:bottom="-160dp">
+        android:width="350dp"
+        android:height="350dp"
+        android:gravity="center|right"
+        android:right="-100dp"
+        android:top="400dp">
         <shape android:shape="oval">
             <gradient
-                android:endColor="#001E8C7A"
-                android:gradientRadius="180dp"
-                android:startColor="#181E8C7A"
+                android:endColor="#0082D3E0"
+                android:gradientRadius="175dp"
+                android:startColor="#3082D3E0"
                 android:type="radial" />
         </shape>
     </item>

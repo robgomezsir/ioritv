@@ -76,21 +76,20 @@
         <item name="android:paddingBottom">12dp</item>
         <item name="android:paddingStart">24dp</item>
         <item name="android:paddingEnd">24dp</item>
-        <item name="strokeWidth">1dp</item>
-        <item name="strokeColor">@color/md_theme_light_outline</item>
+        <item name="strokeWidth">0dp</item>
     </style>
 
     <!-- Estilo para FloatingActionButton - Light -->
     <style name="WhatsAppFAB" parent="Widget.Material3.FloatingActionButton.Primary">
         <item name="backgroundTint">@color/md_theme_light_primaryContainer</item>
-        <item name="tint">@color/md_theme_light_onPrimaryContainer</item>
+        <item name="tint">@color/white</item>
         <item name="elevation">@dimen/elevation_level4</item>
         <item name="pressedTranslationZ">@dimen/elevation_level5</item>
     </style>
 
     <!-- Estilo para Toolbar - Light -->
+    <!-- NOTA: android:background NÃO deve estar aqui — é setado programaticamente no HomeActivity -->
     <style name="WhatsAppToolbar" parent="Widget.Material3.Toolbar">
-        <item name="android:background">@android:color/transparent</item>
         <item name="titleTextColor">@color/md_theme_light_onSurface</item>
         <item name="subtitleTextColor">@color/md_theme_light_onSurfaceVariant</item>
         <item name="navigationIconTint">@color/md_theme_light_onSurface</item>
@@ -184,6 +183,25 @@
         <item name="android:textStyle">bold</item>
         <item name="android:letterSpacing">0.1</item>
         <item name="android:textColor">?attr/colorOnBackground</item>
+    </style>
+
+    <!-- ═══════════════════════════════════════════════════════════════
+         Material3 Dialog Theme (PRD 6.7)
+         Fundo surfaceContainerHigh, cantos extraLarge, sem bordas
+         ═══════════════════════════════════════════════════════════════ -->
+    <style name="Theme.IORITv.MaterialDialog" parent="ThemeOverlay.Material3.MaterialAlertDialog">
+        <item name="colorSurface">?attr/colorSurfaceContainerHigh</item>
+        <item name="colorOnSurface">?attr/colorOnSurface</item>
+        <item name="colorPrimary">?attr/colorPrimary</item>
+        <item name="colorOnPrimary">?attr/colorOnPrimary</item>
+        <item name="android:textColorPrimary">?attr/colorOnSurface</item>
+        <item name="android:textColorSecondary">?attr/colorOnSurfaceVariant</item>
+        <item name="shapeAppearanceMediumComponent">@style/ShapeAppearance.IORITv.Dialog</item>
+    </style>
+
+    <style name="ShapeAppearance.IORITv.Dialog" parent="ShapeAppearance.Material3.Corner.ExtraLarge">
+        <item name="cornerFamily">rounded</item>
+        <item name="cornerSize">28dp</item>
     </style>
 
     <!-- MaterialDatePicker Theme - título bold -->

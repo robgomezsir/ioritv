@@ -11,14 +11,16 @@ import com.google.android.material.color.DynamicColors
 /**
  * Utilitario para gerenciar temas da aplicacao de forma centralizada.
  *
- * Suporta 4 modos:
+ * Suporta 3 modos de tema base:
  *   - MODE_FOLLOW_SYSTEM (0): segue o tema do dispositivo
  *   - MODE_LIGHT (1): tema claro
  *   - MODE_DARK (2): tema escuro
- *   - MODE_GLASS (4): glassmorphism (Aurora Frost)
+ *
+ * E 1 skin overlay opcional:
+ *   - glass_enabled (boolean): efeito Glassmorphism (Aurora Frost)
+ *     aplicado SOBRE o tema base (claro ou escuro).
  *
  * Dynamic Color (Material You): desativado por padrao.
- * Para ativar, chame DynamicColors.applyToActivitiesIfAvailable() no Application.
  *
  * Conforme PRD Papecon Office v1.0 Secao 2.
  */
@@ -26,18 +28,21 @@ object ThemeUtils {
 
     private const val PREFERENCES_NAME = "AppSettings"
     private const val THEME_MODE_KEY = "theme_mode"
+    private const val GLASS_ENABLED_KEY = "glass_enabled"
 
     /**
-     * Modo de tema Glassmorphism (valor proprio - nao e um modo do AppCompatDelegate).
-     * Nao deve ser passado para AppCompatDelegate.setDefaultNightMode().
+     * Valor antigo do modo Glass (legado). Usado apenas para migração.
      */
     const val MODE_GLASS = 4
 
     /**
-     * Aplica o tema apropriado para a Activity baseado nas preferencias do usuario.
-     * Fluxo conforme PRD Secao 10: tema salvo -> resolucao -> MaterialTheme.
+     * Aplica o tema base apropriado para a Activity.
+     * A skin Glass (se ativa) e aplicada separadamente nas Activities.
      */
     fun applyTheme(activity: AppCompatActivity) {
+        // Migração: theme_mode antigo (4 = Glass) → theme_mode=1 + glass_enabled=true
+        migrateLegacyGlass(activity)
+
         val sharedPreferences = activity.getSharedPreferences(PREFERENCES_NAME, Context.MODE_PRIVATE)
         val themeMode = sharedPreferences.getInt(THEME_MODE_KEY, AppCompatDelegate.MODE_NIGHT_FOLLOW_SYSTEM)
 
@@ -47,9 +52,6 @@ object ThemeUtils {
             }
             AppCompatDelegate.MODE_NIGHT_YES -> {
                 activity.setTheme(R.style.Base_Theme_IORITv_Dark)
-            }
-            MODE_GLASS -> {
-                activity.setTheme(R.style.Base_Theme_IORITv_Glass)
             }
             else -> {
                 // Modo automatico - segue o sistema
@@ -67,85 +69,98 @@ object ThemeUtils {
     }
 
     /**
-     * Salva o modo de tema selecionado pelo usuario
+     * Migra theme_mode antigo (4 = Glass) para a nova estrutura:
+     * theme_mode = 1 (LIGHT) + glass_enabled = true
      */
-    fun saveThemeMode(context: Context, mode: Int) {
-        val sharedPreferences = context.getSharedPreferences(PREFERENCES_NAME, Context.MODE_PRIVATE)
-        val editor = sharedPreferences.edit()
-        editor.putInt(THEME_MODE_KEY, mode)
-        editor.apply()
-
-        // Glass e um tema proprio, nao um modo noite do AppCompat
-        if (mode != MODE_GLASS) {
-            AppCompatDelegate.setDefaultNightMode(mode)
+    private fun migrateLegacyGlass(context: Context) {
+        val prefs = context.getSharedPreferences(PREFERENCES_NAME, Context.MODE_PRIVATE)
+        val currentMode = prefs.getInt(THEME_MODE_KEY, AppCompatDelegate.MODE_NIGHT_FOLLOW_SYSTEM)
+        if (currentMode == MODE_GLASS) {
+            prefs.edit()
+                .putInt(THEME_MODE_KEY, AppCompatDelegate.MODE_NIGHT_NO) // base = claro
+                .putBoolean(GLASS_ENABLED_KEY, true)
+                .apply()
         }
     }
 
     /**
-     * Recupera o modo de tema salvo nas preferencias
+     * Salva o modo de tema base selecionado pelo usuario.
+     * Nao altera o estado do glass_enabled.
+     */
+    fun saveThemeMode(context: Context, mode: Int) {
+        val sharedPreferences = context.getSharedPreferences(PREFERENCES_NAME, Context.MODE_PRIVATE)
+        sharedPreferences.edit().putInt(THEME_MODE_KEY, mode).apply()
+
+        // Glass e uma skin overlay, nao um modo noite do AppCompat
+        AppCompatDelegate.setDefaultNightMode(mode)
+    }
+
+    /**
+     * Recupera o modo de tema base salvo
      */
     fun getSavedThemeMode(context: Context): Int {
         val sharedPreferences = context.getSharedPreferences(PREFERENCES_NAME, Context.MODE_PRIVATE)
         return sharedPreferences.getInt(THEME_MODE_KEY, AppCompatDelegate.MODE_NIGHT_FOLLOW_SYSTEM)
     }
 
+    // ═══════════════════════════════════════════════════════════════
+    // Glass — Skin overlay (ligar/desligar sobre o tema base)
+    // ═══════════════════════════════════════════════════════════════
+
     /**
-     * Retorna o indice do tema atual para uso em dialogs
+     * Retorna true se a skin Glass esta ativada.
      */
-    fun getCurrentThemeIndex(context: Context): Int {
-        return when (getSavedThemeMode(context)) {
-            AppCompatDelegate.MODE_NIGHT_FOLLOW_SYSTEM -> 0
-            AppCompatDelegate.MODE_NIGHT_NO -> 1
-            AppCompatDelegate.MODE_NIGHT_YES -> 2
-            MODE_GLASS -> 3
-            else -> 0
-        }
+    fun isGlassEnabled(context: Context): Boolean {
+        val sharedPreferences = context.getSharedPreferences(PREFERENCES_NAME, Context.MODE_PRIVATE)
+        return sharedPreferences.getBoolean(GLASS_ENABLED_KEY, false)
     }
 
     /**
-     * Verifica se o tema atual e escuro.
-     * No modo Glass, retorna false (usado para decidir a paleta de glass).
+     * Liga ou desliga a skin Glass.
+     * Chame recreate() na Activity apos alterar.
+     */
+    fun setGlassEnabled(context: Context, enabled: Boolean) {
+        val sharedPreferences = context.getSharedPreferences(PREFERENCES_NAME, Context.MODE_PRIVATE)
+        sharedPreferences.edit().putBoolean(GLASS_ENABLED_KEY, enabled).apply()
+    }
+
+    /**
+     * Verifica se o tema atual e escuro (base, ignorando glass).
      */
     fun isDarkTheme(context: Context): Boolean {
-        val sharedPreferences = context.getSharedPreferences(PREFERENCES_NAME, Context.MODE_PRIVATE)
-        val themeMode = sharedPreferences.getInt(THEME_MODE_KEY, AppCompatDelegate.MODE_NIGHT_FOLLOW_SYSTEM)
-
+        val themeMode = getSavedThemeMode(context)
         return when (themeMode) {
             AppCompatDelegate.MODE_NIGHT_YES -> true
             AppCompatDelegate.MODE_NIGHT_NO -> false
-            MODE_GLASS -> false
             else -> {
-                val isSystemDarkMode = context.resources.configuration.uiMode and
+                context.resources.configuration.uiMode and
                     android.content.res.Configuration.UI_MODE_NIGHT_MASK ==
                     android.content.res.Configuration.UI_MODE_NIGHT_YES
-                isSystemDarkMode
             }
         }
     }
 
     /**
-     * Verifica se o tema atual e claro
+     * Verifica se o tema atual e claro (base, ignorando glass).
      */
     fun isLightTheme(context: Context): Boolean {
         return !isDarkTheme(context)
     }
 
     /**
-     * Verifica se o modo Glass esta ativado
+     * Retorna o indice do tema atual para uso em dialogs (0=auto, 1=light, 2=dark).
      */
-    fun isGlassMode(context: Context): Boolean {
-        return getSavedThemeMode(context) == MODE_GLASS
+    fun getCurrentThemeIndex(context: Context): Int {
+        return when (getSavedThemeMode(context)) {
+            AppCompatDelegate.MODE_NIGHT_FOLLOW_SYSTEM -> 0
+            AppCompatDelegate.MODE_NIGHT_NO -> 1
+            AppCompatDelegate.MODE_NIGHT_YES -> 2
+            else -> 0
+        }
     }
 
     /**
      * Aplica Dynamic Colors (Material You) se disponivel (Android 12+).
-     * Chamado no onCreate de Activities apos applyTheme().
-     *
-     * No PRD, Dynamic Color esta desativado por padrao (dynamicColor = false).
-     * Esta funcionalidade pode ser habilitada via settings futuras.
-     *
-     * @param activity A Activity onde aplicar
-     * @param enabled Se true, aplica dynamic colors quando disponivel
      */
     fun applyDynamicColorsIfAvailable(activity: AppCompatActivity, enabled: Boolean = false) {
         if (!enabled) return
@@ -155,7 +170,7 @@ object ThemeUtils {
     }
 
     /**
-     * Retorna a cor primaria resolvida para o tema atual (util para logs/debug).
+     * Retorna a cor primaria resolvida para o tema atual.
      */
     fun getPrimaryColor(context: Context): Int {
         val typedValue = android.util.TypedValue()

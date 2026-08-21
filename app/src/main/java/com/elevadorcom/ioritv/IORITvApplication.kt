@@ -43,11 +43,8 @@ class IORITvApplication : Application() {
     private fun setupThemeSettings() {
         val sharedPreferences = getSharedPreferences("AppSettings", MODE_PRIVATE)
         val themeMode = sharedPreferences.getInt("theme_mode", AppCompatDelegate.MODE_NIGHT_FOLLOW_SYSTEM)
-        // O tema Glass é um tema próprio e não é um modo noite do AppCompat — nunca deve ser
-        // passado para setDefaultNightMode (valor inválido).
-        if (themeMode != ThemeUtils.MODE_GLASS) {
-            AppCompatDelegate.setDefaultNightMode(themeMode)
-        }
+        // Glass é uma skin overlay, não um modo noite — sempre aplicamos o tema base.
+        AppCompatDelegate.setDefaultNightMode(themeMode)
     }
 
     /**
