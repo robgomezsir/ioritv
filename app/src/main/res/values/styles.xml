@@ -2,6 +2,15 @@
 <resources>
     <!-- Estilos existentes mantidos -->
     
+    <!-- Estilo para SearchView -->
+    <style name="CustomSearchView" parent="Widget.AppCompat.SearchView">
+        <item name="android:background">@drawable/search_view_background</item>
+        <item name="android:textColor">?attr/colorOnSurface</item>
+        <item name="android:textColorHint">?attr/colorOnSurfaceVariant</item>
+        <item name="queryBackground">@null</item>
+        <item name="searchHintIcon">@null</item>
+    </style>
+
     <!-- Estilo personalizado para AlertDialog com contraste adequado -->
     <style name="AlertDialogCustom" parent="ThemeOverlay.Material3.Dialog.Alert">
         <item name="colorPrimary">?attr/colorPrimary</item>
@@ -86,6 +95,12 @@
         <item name="subtitleTextColor">@color/md_theme_light_onSurfaceVariant</item>
         <item name="navigationIconTint">@color/md_theme_light_onSurface</item>
         <item name="android:elevation">0dp</item>
+    </style>
+
+    <!-- Estilo para abas da BottomNavigationView -->
+    <style name="BottomNavTabStyle" parent="TextAppearance.Material3.LabelMedium">
+        <item name="android:textSize">13sp</item>
+        <item name="android:textStyle">bold</item>
     </style>
 
     <!-- Estilo para PopupMenu com cantos arredondados -->

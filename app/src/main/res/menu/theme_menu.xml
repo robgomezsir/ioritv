@@ -20,4 +20,10 @@
         android:checkable="true"
         app:showAsAction="never" />
 
+    <item
+        android:id="@+id/menu_theme_glass"
+        android:title="Vidro (Glass)"
+        android:checkable="true"
+        app:showAsAction="never" />
+
 </menu>

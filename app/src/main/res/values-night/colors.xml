@@ -61,4 +61,31 @@
     <color name="md_theme_dark_surfaceContainerHigh">#282D32</color>
     <color name="md_theme_dark_surfaceContainerHighest">#33383D</color>
     <color name="md_theme_dark_onSurfaceContainer">#E6EBF0</color>
+
+    <!-- Filtros de cliente: texto para botões de seleção (tema escuro) -->
+    <color name="filter_button_text_selected">#E6EBF0</color>
+    <color name="filter_button_text_unselected">#8C9199</color>
+
+    <!-- SearchView: cores para o campo de busca (tema escuro) -->
+    <color name="search_view_bg_fill">#282D32</color>
+    <color name="search_view_stroke">#8C9199</color>
+    <color name="search_view_text">#E6EBF0</color>
+    <color name="search_view_hint">#8C9199</color>
+
+    <!-- Seção expansível do card (tema escuro) -->
+    <color name="expanded_section_bg">#00000000</color>
+
+    <!-- Cores pastéis para números na aba Finanças (tema escuro) -->
+    <color name="pastel_red">#EF9A9A</color>
+    <color name="pastel_coral">#FFAB91</color>
+    <color name="pastel_rose">#F48FB1</color>
+
+    <!-- Bottom Sheet: fundo sólido opaco para legibilidade no tema escuro -->
+    <color name="bottom_sheet_bg">#2A2D38</color>
+    <color name="bottom_sheet_handle">#5A5D68</color>
+    <color name="bottom_sheet_divider">#3A3D48</color>
+
+    <!-- Menu WhatsApp-style (tema escuro) -->
+    <color name="menu_bg">#2A2D38</color>
+    <color name="menu_divider">#3A3D48</color>
 </resources>

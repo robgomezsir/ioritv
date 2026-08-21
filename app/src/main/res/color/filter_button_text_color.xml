@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <selector xmlns:android="http://schemas.android.com/apk/res/android">
     <!-- Tema claro: texto escuro quando selecionado para contrastar com fundo claro -->
-    <item android:state_selected="true" android:color="#212121" />
+    <item android:state_selected="true" android:color="@color/filter_button_text_selected" />
     <!-- Tema claro: texto médio quando não selecionado -->
-    <item android:color="#616161" />
+    <item android:color="@color/filter_button_text_unselected" />
 </selector>

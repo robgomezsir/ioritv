@@ -1,0 +1,149 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:paddingTop="12dp"
+    android:paddingBottom="4dp"
+    android:background="@drawable/bg_bottom_sheet_whatsapp">
+
+    <!-- Header -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:paddingHorizontal="20dp"
+        android:paddingBottom="12dp">
+
+        <TextView
+            android:id="@+id/menuTitle"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="Configurações"
+            android:textAppearance="@style/TextAppearance.Material3.TitleMedium"
+            android:textColor="?attr/colorOnSurface"
+            android:textStyle="bold" />
+
+    </LinearLayout>
+
+    <!-- Divisor -->
+    <View
+        android:id="@+id/menuDividerTop"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_marginHorizontal="20dp"
+        android:background="@color/menu_divider" />
+
+    <!-- Item 1: Aparência (submenu expansível) -->
+    <LinearLayout
+        android:id="@+id/menuItemTheme"
+        android:layout_width="match_parent"
+        android:layout_height="56dp"
+        android:gravity="center_vertical"
+        android:orientation="horizontal"
+        android:paddingHorizontal="20dp"
+        android:background="?attr/selectableItemBackground"
+        android:clickable="true"
+        android:focusable="true">
+
+        <ImageView
+            android:id="@+id/iconTheme"
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:src="@drawable/ic_baseline_palette_24"
+            android:layout_marginEnd="20dp"
+            android:tint="?attr/colorOnSurfaceVariant" />
+
+        <TextView
+            android:id="@+id/labelTheme"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="Aparência"
+            android:textAppearance="@style/TextAppearance.Material3.BodyLarge"
+            android:textColor="?attr/colorOnSurface" />
+
+        <ImageView
+            android:id="@+id/arrowTheme"
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:src="@drawable/ic_baseline_keyboard_arrow_right_24"
+            android:tint="?attr/colorOnSurfaceVariant"
+            android:rotation="0" />
+
+    </LinearLayout>
+
+    <!-- Submenu: Aparência (expansível com animação) -->
+    <LinearLayout
+        android:id="@+id/submenuTheme"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:visibility="gone"
+        android:paddingStart="64dp"
+        android:paddingEnd="20dp"
+        android:paddingBottom="4dp">
+
+        <!-- Radio Group para temas -->
+        <RadioGroup
+            android:id="@+id/themeRadioGroup"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <RadioButton
+                android:id="@+id/radio_theme_auto"
+                android:layout_width="match_parent"
+                android:layout_height="48dp"
+                android:gravity="center_vertical"
+                android:text="Automático"
+                android:textAppearance="@style/TextAppearance.Material3.BodyMedium"
+                android:textColor="?attr/colorOnSurface"
+                android:buttonTint="?attr/colorPrimary" />
+
+            <RadioButton
+                android:id="@+id/radio_theme_light"
+                android:layout_width="match_parent"
+                android:layout_height="48dp"
+                android:gravity="center_vertical"
+                android:text="Claro"
+                android:textAppearance="@style/TextAppearance.Material3.BodyMedium"
+                android:textColor="?attr/colorOnSurface"
+                android:buttonTint="?attr/colorPrimary" />
+
+            <RadioButton
+                android:id="@+id/radio_theme_dark"
+                android:layout_width="match_parent"
+                android:layout_height="48dp"
+                android:gravity="center_vertical"
+                android:text="Escuro"
+                android:textAppearance="@style/TextAppearance.Material3.BodyMedium"
+                android:textColor="?attr/colorOnSurface"
+                android:buttonTint="?attr/colorPrimary" />
+
+            <RadioButton
+                android:id="@+id/radio_theme_glass"
+                android:layout_width="match_parent"
+                android:layout_height="48dp"
+                android:gravity="center_vertical"
+                android:text="Vidro (Glass)"
+                android:textAppearance="@style/TextAppearance.Material3.BodyMedium"
+                android:textColor="?attr/colorOnSurface"
+                android:buttonTint="?attr/colorPrimary" />
+
+        </RadioGroup>
+
+    </LinearLayout>
+
+    <!-- Divisor -->
+    <View
+        android:id="@+id/menuDivider"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_marginHorizontal="20dp"
+        android:layout_marginBottom="4dp"
+        android:background="@color/menu_divider" />
+
+</LinearLayout>

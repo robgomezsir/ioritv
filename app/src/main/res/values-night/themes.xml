@@ -36,13 +36,18 @@
         <item name="colorSurfaceBright">@color/md_theme_dark_surfaceBright</item>
         <item name="colorSurfaceDim">@color/md_theme_dark_surfaceDim</item>
         
-        <!-- Status Bar e Navigation Bar -->
-        <item name="android:statusBarColor">@color/toolbar_color</item>
-        <item name="android:navigationBarColor">@color/md_theme_dark_surfaceContainerLow</item>
+        <!-- Status Bar e Navigation Bar: mesma cor dos cards (colorSurfaceContainer) para ornamentar com as cores gerais -->
+        <!-- No Android 15+ o edge-to-edge é obrigatório e ignora statusBarColor/navigationBarColor;
+             a saída explícita garante que as barras usem a cor definida aqui em qualquer versão -->
+        <item name="android:windowOptOutEdgeToEdgeEnforcement">true</item>
+        <item name="android:statusBarColor">?attr/colorSurfaceContainer</item>
+        <item name="android:navigationBarColor">?attr/colorSurfaceContainer</item>
         <item name="android:windowLightStatusBar">false</item>
         <item name="android:windowLightNavigationBar">false</item>
         <item name="android:windowTranslucentStatus">false</item>
         <item name="android:windowDrawsSystemBarBackgrounds">true</item>
+        <item name="android:enforceStatusBarContrast">false</item>
+        <item name="android:enforceNavigationBarContrast">false</item>
         
         <!-- Splash Screen -->
         <item name="windowSplashScreenAnimatedIcon">@drawable/ic_logo</item>
@@ -72,13 +77,6 @@
         <item name="android:windowTranslucentStatus">false</item>
     </style>
 
-    <!-- Tema customizado para o modo escuro da MainActivity2 -->
-    <style name="Theme.IORITv.MainActivity2.Dark" parent="Base.Theme.IORITv.Dark">
-        <item name="android:statusBarColor">@color/toolbar_color</item>
-        <item name="android:windowLightStatusBar">false</item>
-        <item name="android:windowTranslucentStatus">false</item>
-    </style>
-    
     <!-- Tema para Splash Screen no modo escuro -->
     <style name="SplashTheme" parent="Theme.SplashScreen">
         <item name="windowSplashScreenBackground">@android:color/black</item>

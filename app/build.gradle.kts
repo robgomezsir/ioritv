@@ -10,6 +10,15 @@ android {
     namespace = "com.elevadorcom.ioritv"
     compileSdk = 35
 
+    signingConfigs {
+        create("release") {
+            storeFile = file("../ioritv-release.jks")
+            storePassword = "ioritv2026"
+            keyAlias = "ioritv"
+            keyPassword = "ioritv2026"
+        }
+    }
+
     defaultConfig {
         applicationId = "com.elevadorcom.ioritv"
         minSdk = 26
@@ -41,7 +50,7 @@ android {
                 getDefaultProguardFile("proguard-android-optimize.txt"),
                 "proguard-rules.pro"
             )
-            signingConfig = signingConfigs.getByName("debug")
+            signingConfig = signingConfigs.getByName("release")
         }
     }
     compileOptions {

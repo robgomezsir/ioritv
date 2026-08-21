@@ -1,0 +1,189 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="0dp"
+    android:fitsSystemWindows="true"
+    tools:context=".ClientesFragment">
+
+    <!-- Barra de Pesquisa estilo WhatsApp -->
+    <com.google.android.material.card.MaterialCardView
+        android:id="@+id/searchCard"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="16dp"
+        app:cardCornerRadius="12dp"
+        app:cardElevation="0dp"
+        app:strokeWidth="0dp"
+        app:cardBackgroundColor="@color/search_view_bg_fill"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <EditText
+            android:id="@+id/searchEditText"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@null"
+            android:hint="Pesquisar clientes..."
+            android:drawableStart="@android:drawable/ic_menu_search"
+            android:drawablePadding="12dp"
+            android:drawableTint="?attr/colorOnSurfaceVariant"
+            android:inputType="text"
+            android:padding="14dp"
+            android:textColor="?attr/colorOnSurface"
+            android:textColorHint="?attr/colorOnSurfaceVariant"
+            android:textSize="16sp" />
+
+    </com.google.android.material.card.MaterialCardView>
+
+    <!-- HorizontalScrollView para organizar os botões em carrossel -->
+    <HorizontalScrollView
+        android:id="@+id/horizontalScrollView"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="8dp"
+        android:scrollbars="none"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/searchCard">
+
+        <!-- LinearLayout com Filtros e Botão Atualizar -->
+        <LinearLayout
+            android:id="@+id/linearLayoutFilters"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/buttonAtivo"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="8dp"
+                android:minWidth="90dp"
+                android:minHeight="40dp"
+                android:text="ATIVO"
+                android:textColor="@color/filter_button_text_color"
+                android:textSize="13sp"
+                android:textStyle="bold"
+                app:backgroundTint="@color/filter_button_background_tint"
+                app:cornerRadius="20dp"
+                app:iconGravity="textStart"
+                app:iconPadding="8dp"
+                app:iconTint="@color/filter_button_text_color" />
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/buttonAVencer"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="8dp"
+                android:minWidth="100dp"
+                android:minHeight="40dp"
+                android:text="A VENCER"
+                android:textColor="@color/filter_button_text_color"
+                android:textSize="13sp"
+                android:textStyle="bold"
+                app:backgroundTint="@color/filter_button_background_tint"
+                app:cornerRadius="20dp"
+                app:iconGravity="textStart"
+                app:iconPadding="8dp"
+                app:iconTint="@color/filter_button_text_color" />
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/buttonVencido"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="8dp"
+                android:minWidth="90dp"
+                android:minHeight="40dp"
+                android:text="VENCIDO"
+                android:textColor="@color/filter_button_text_color"
+                android:textSize="13sp"
+                android:textStyle="bold"
+                app:backgroundTint="@color/filter_button_background_tint"
+                app:cornerRadius="20dp"
+                app:iconGravity="textStart"
+                app:iconPadding="8dp"
+                app:iconTint="@color/filter_button_text_color" />
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/buttonStandby"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="0dp"
+                android:minWidth="90dp"
+                android:minHeight="40dp"
+                android:text="INATIVO"
+                android:textColor="@color/filter_button_text_color"
+                android:textSize="13sp"
+                android:textStyle="bold"
+                app:backgroundTint="@color/filter_button_background_tint"
+                app:cornerRadius="20dp"
+                app:iconGravity="textStart"
+                app:iconPadding="8dp"
+                app:iconTint="@color/filter_button_text_color" />
+
+            <!-- Botão ATUALIZAR -->
+            <Button
+                android:id="@+id/atualizarButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="ATUALIZAR"
+                android:visibility="gone"
+                app:backgroundTint="@drawable/button_state_selector" /> <!-- Inicialmente oculto -->
+
+        </LinearLayout>
+    </HorizontalScrollView>
+
+    <!-- SwipeRefreshLayout para o RecyclerView -->
+    <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+        android:id="@+id/swipeRefreshLayout"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginTop="8dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/horizontalScrollView"
+        app:layout_constraintVertical_bias="0.0">
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/recyclerViewClientes"
+            android:layout_width="8dp"
+            android:layout_height="8dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="8dp"
+            android:layout_marginBottom="8dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/linearLayoutFilters" />
+
+    </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
+
+    <!-- FAB principal estilo WhatsApp -->
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/fabMenu"
+        style="@style/WhatsAppFAB"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="16dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginBottom="16dp"
+        android:backgroundTint="#2196F3"
+        android:src="@drawable/adduser"
+        android:tint="#FFFFFF"
+        app:elevation="0dp"
+        app:fabSize="normal"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

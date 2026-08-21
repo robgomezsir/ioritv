@@ -26,19 +26,17 @@ export function getSmartStatus(cliente: Cliente): string {
     const terminoDate = termino.toDate();
     const diasParaVencimento = calculateDaysDifference(hoje, terminoDate);
 
-    // Alinhado com MainActivity4.kt do Android
-    if (situacao === "STANDBY" || diasParaVencimento <= -30) {
+    // Regra canônica — Cloud Functions (calculateSituacao) é a fonte da verdade:
+    // STANDBY (≤ −15), VENCIDO (−14..−1), A VENCER (0..2), ATIVO (≥ 3).
+    // Mesmas janelas do SituacaoUtil.kt (app Android).
+    if (diasParaVencimento <= -15) {
         return "STANDBY";
     }
-    if (situacao === "VENCIDO" || (diasParaVencimento <= -15 && diasParaVencimento > -30)) {
+    if (diasParaVencimento >= -14 && diasParaVencimento <= -1) {
         return "VENCIDO";
     }
-    if (situacao === "A VENCER" || (diasParaVencimento >= 0 && diasParaVencimento <= 3)) {
+    if (diasParaVencimento >= 0 && diasParaVencimento <= 2) {
         return "A VENCER";
     }
-    if (situacao === "ATIVO" || diasParaVencimento > 3) {
-        return "ATIVO";
-    }
-
-    return situacao;
+    return "ATIVO";
 }

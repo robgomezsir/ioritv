@@ -61,9 +61,10 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="12dp"
             android:paddingStart="60dp"
-            android:paddingEnd="0dp"
-            android:paddingTop="0dp"
-            android:paddingBottom="0dp"
+            android:paddingEnd="8dp"
+            android:paddingTop="8dp"
+            android:paddingBottom="8dp"
+            android:background="?attr/colorSurfaceContainerHigh"
             android:visibility="gone"
             app:layout_constraintTop_toBottomOf="@+id/statusIcon"
             app:layout_constraintStart_toStartOf="parent">
@@ -80,6 +81,7 @@
                     android:layout_height="wrap_content"
                     android:text="Usuário"
                     android:textSize="14sp"
+                    android:textColor="?attr/colorOnSurface"
                     android:layout_marginTop="8dp" />
 
                 <TextView
@@ -88,6 +90,7 @@
                     android:layout_height="wrap_content"
                     android:text="Senha"
                     android:textSize="14sp"
+                    android:textColor="?attr/colorOnSurface"
                     android:layout_marginTop="4dp" />
 
                 <TextView
@@ -96,6 +99,7 @@
                     android:layout_height="wrap_content"
                     android:text="WhatsApp"
                     android:textSize="14sp"
+                    android:textColor="?attr/colorOnSurface"
                     android:layout_marginTop="4dp" />
 
                 <TextView
@@ -104,6 +108,7 @@
                     android:layout_height="wrap_content"
                     android:text="Modelo"
                     android:textSize="14sp"
+                    android:textColor="?attr/colorOnSurface"
                     android:layout_marginTop="4dp" />
 
                 <TextView
@@ -112,6 +117,7 @@
                     android:layout_height="wrap_content"
                     android:text="Início"
                     android:textSize="14sp"
+                    android:textColor="?attr/colorOnSurface"
                     android:layout_marginTop="4dp" />
 
                 <TextView
@@ -120,6 +126,7 @@
                     android:layout_height="wrap_content"
                     android:text="Créditos"
                     android:textSize="14sp"
+                    android:textColor="?attr/colorOnSurface"
                     android:layout_marginTop="4dp" />
 
                 <TextView
@@ -128,6 +135,7 @@
                     android:layout_height="wrap_content"
                     android:text="Término"
                     android:textSize="14sp"
+                    android:textColor="?attr/colorOnSurface"
                     android:layout_marginTop="4dp" />
 
                 <TextView
@@ -136,6 +144,7 @@
                     android:layout_height="wrap_content"
                     android:text="Vencimento"
                     android:textSize="14sp"
+                    android:textColor="?attr/colorOnSurface"
                     android:layout_marginTop="4dp" />
 
                 <TextView
@@ -144,6 +153,7 @@
                     android:layout_height="wrap_content"
                     android:text="MAC"
                     android:textSize="14sp"
+                    android:textColor="?attr/colorOnSurface"
                     android:layout_marginTop="4dp" />
 
                 <TextView
@@ -152,6 +162,7 @@
                     android:layout_height="wrap_content"
                     android:text="OTP"
                     android:textSize="14sp"
+                    android:textColor="?attr/colorOnSurface"
                     android:layout_marginTop="4dp" />
 
                 <TextView
@@ -160,6 +171,7 @@
                     android:layout_height="wrap_content"
                     android:text="Device"
                     android:textSize="14sp"
+                    android:textColor="?attr/colorOnSurface"
                     android:layout_marginTop="4dp" />
 
                 <TextView
@@ -168,6 +180,7 @@
                     android:layout_height="wrap_content"
                     android:text="Valor"
                     android:textSize="14sp"
+                    android:textColor="?attr/colorOnSurface"
                     android:layout_marginTop="4dp" />
 
                 <TextView
@@ -176,6 +189,7 @@
                     android:layout_height="wrap_content"
                     android:text="Custo"
                     android:textSize="14sp"
+                    android:textColor="?attr/colorOnSurface"
                     android:layout_marginTop="4dp" />
 
                 <TextView
@@ -184,6 +198,7 @@
                     android:layout_height="wrap_content"
                     android:text="Desconto"
                     android:textSize="14sp"
+                    android:textColor="?attr/colorOnSurface"
                     android:layout_marginTop="4dp" />
 
                 <TextView
@@ -192,6 +207,7 @@
                     android:layout_height="wrap_content"
                     android:text="Servidor"
                     android:textSize="14sp"
+                    android:textColor="?attr/colorOnSurface"
                     android:layout_marginTop="4dp" />
                 <LinearLayout
                     android:layout_width="match_parent"

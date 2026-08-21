@@ -37,9 +37,12 @@
         <item name="colorSurfaceBright">@color/md_theme_light_surfaceBright</item>
         <item name="colorSurfaceDim">@color/md_theme_light_surfaceDim</item>
         
-        <!-- Status Bar e Navigation Bar -->
-        <item name="android:statusBarColor">@color/toolbar_color_light</item>
-        <item name="android:navigationBarColor">@color/md_theme_light_surface</item>
+        <!-- Status Bar e Navigation Bar: mesma cor dos cards (colorSurfaceContainer) para ornamentar com as cores gerais -->
+        <!-- No Android 15+ o edge-to-edge é obrigatório e ignora statusBarColor/navigationBarColor;
+             a saída explícita garante que as barras usem a cor definida aqui em qualquer versão -->
+        <item name="android:windowOptOutEdgeToEdgeEnforcement">true</item>
+        <item name="android:statusBarColor">?attr/colorSurfaceContainer</item>
+        <item name="android:navigationBarColor">?attr/colorSurfaceContainer</item>
         <item name="android:windowLightStatusBar">true</item>
         <item name="android:windowLightNavigationBar">true</item>
         <item name="android:windowTranslucentStatus">false</item>
@@ -77,10 +80,40 @@
         <item name="android:enforceStatusBarContrast">false</item>
     </style>
 
-    <!-- Tema customizado para MainActivity2 -->
-    <style name="Theme.IORITv.MainActivity2" parent="Base.Theme.IORITv">
-        <item name="android:statusBarColor">@color/toolbar_color_light</item>
-        <item name="android:windowLightStatusBar">true</item>
+    <!-- Tema Glassmorphism: gradiente vibrante + aurora de fundo + superfícies translúcidas (vidro fosco) -->
+    <style name="Base.Theme.IORITv.Glass" parent="Base.Theme.IORITv">
+        <item name="android:windowBackground">@drawable/bg_glass_paint</item>
+        <item name="android:colorBackground">@color/glass_gradient_mid</item>
+
+        <!-- Superfícies translúcidas (o gradiente aparece através delas) -->
+        <item name="colorPrimary">@color/glass_primary</item>
+        <item name="colorSurface">@color/glass_surface</item>
+        <item name="colorSurfaceContainer">@color/glass_surface_container</item>
+        <item name="colorSurfaceContainerHigh">@color/glass_surface_container_high</item>
+        <item name="colorSurfaceContainerHighest">@color/glass_surface_container_highest</item>
+        <item name="colorSurfaceContainerLow">@color/glass_surface_container_low</item>
+        <item name="colorSurfaceContainerLowest">@color/glass_surface</item>
+        <item name="colorSurfaceVariant">@color/glass_surface_variant</item>
+        <item name="colorOnSurface">@color/glass_on_surface</item>
+        <item name="colorOnSurfaceVariant">@color/glass_on_surface_variant</item>
+        <item name="colorOutlineVariant">@color/glass_outline_variant</item>
+
+        <!-- Texto: claro sobre fundo escuro com vidro translúcido -->
+        <item name="android:textColorPrimary">@color/glass_on_surface</item>
+        <item name="android:textColorSecondary">@color/glass_on_surface_variant</item>
+        <item name="android:textColorTertiary">@color/glass_on_surface_variant</item>
+
+        <!-- Barras de sistema: translúcidas (mesma cor dos cards) com ícones claros -->
+        <!-- No Android 15+ o edge-to-edge é obrigatório e ignora statusBarColor/navigationBarColor;
+             a saída explícita garante que a barra de notificações use a mesma cor translúcida dos cards -->
+        <item name="android:windowOptOutEdgeToEdgeEnforcement">true</item>
+        <item name="android:statusBarColor">?attr/colorSurfaceContainerHigh</item>
+        <item name="android:navigationBarColor">?attr/colorSurfaceContainerHigh</item>
+        <item name="android:windowLightStatusBar">false</item>
+        <item name="android:windowLightNavigationBar">false</item>
+        <item name="android:windowDrawsSystemBarBackgrounds">true</item>
+        <item name="android:enforceStatusBarContrast">false</item>
+        <item name="android:enforceNavigationBarContrast">false</item>
     </style>
 
     <!-- Tema para Splash Screen -->

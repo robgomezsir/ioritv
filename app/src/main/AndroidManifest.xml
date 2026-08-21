@@ -48,41 +48,11 @@
 
         <!-- Outras Activities -->
         <activity
-            android:name=".RankingActivity"
-            android:exported="false"
-            android:screenOrientation="portrait" />
-
-        <activity
-            android:name=".MainActivity4"
-            android:exported="false"
-            android:screenOrientation="portrait" />
-
-        <activity
-            android:name=".EditCadastroActivity"
-            android:screenOrientation="portrait" />
-
-        <activity
             android:name=".ForgotPasswordActivity"
             android:screenOrientation="portrait" />
 
         <activity
-            android:name=".SettingsActivity"
-            android:screenOrientation="portrait" />
-
-        <activity
             android:name=".RegisterActivity"
-            android:screenOrientation="portrait" />
-
-        <activity
-            android:name=".DespesasActivity"
-            android:screenOrientation="portrait" />
-
-        <activity
-            android:name=".MainActivity"
-            android:screenOrientation="portrait" />
-
-        <activity
-            android:name=".MainActivity2"
             android:screenOrientation="portrait" />
 
         <activity
@@ -93,6 +63,12 @@
             android:theme="@style/Theme.IORITv.LoginActivity">
             <!-- Intent-filter removido -->
         </activity>
+
+        <!-- Activity hospedeira única (migração para Fragments) -->
+        <activity
+            android:name=".HomeActivity"
+            android:exported="false"
+            android:screenOrientation="portrait" />
 
         <service
             android:name=".OneSignalFCMService"

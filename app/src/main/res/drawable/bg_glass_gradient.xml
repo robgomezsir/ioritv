@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Fundo Glass refinado: gradiente escuro profundo com subtom quente suave.
+     A base escura permite que as superfícies translúcidas (vidro fosco) se destaquem
+     com elegância, criando profundidade e dimensão. -->
+<shape xmlns:android="http://schemas.android.com/apk/res/android">
+    <gradient
+        android:angle="160"
+        android:startColor="#1B1D2F"
+        android:centerColor="#22253D"
+        android:endColor="#191B2C"
+        android:type="linear" />
+</shape>

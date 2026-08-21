@@ -30,6 +30,8 @@
         <item name="queryHint">Pesquisar...</item>
         <item name="android:layout_margin">16dp</item>
         <item name="android:elevation">0dp</item>
+        <item name="queryBackground">@null</item>
+        <item name="searchHintIcon">@null</item>
     </style>
 
     <!-- Estilo para Cards - Dark -->

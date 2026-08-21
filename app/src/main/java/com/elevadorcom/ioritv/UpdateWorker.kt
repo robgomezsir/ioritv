@@ -34,8 +34,8 @@ class UpdateWorker(
             for (document in result) {
                 val terminoTimestamp = document.getTimestamp("TERMINO")?.toDate()
                 if (terminoTimestamp != null) {
-                    val situacao = calcularSituacao(terminoTimestamp)
-                    val vencimento = calcularVencimento(situacao, terminoTimestamp)
+                    val situacao = SituacaoUtil.calcularSituacao(terminoTimestamp)
+                    val vencimento = calcularVencimento(terminoTimestamp)
 
                     val situacaoAtual = document.getString("SITUACAO") ?: ""
                     val vencimentoAtual = document.getString("VENCIMENTO") ?: ""
@@ -60,32 +60,17 @@ class UpdateWorker(
         }
     }
 
-    private fun calcularSituacao(termino: Date): String {
+    private fun calcularVencimento(termino: Date): String {
         val hoje = clearTime(Date())
         val terminoSemHora = clearTime(termino)
         val diasParaTermino = calculateDaysDifference(hoje, terminoSemHora)
 
+        // Mesmas regras da Cloud Function calculateVencimentoString (fonte da verdade)
         return when {
-            diasParaTermino <= -15 -> "STANDBY"
-            diasParaTermino in -14..-1 -> "VENCIDO"
-            diasParaTermino in 0..2 -> "A VENCER"
-            else -> "ATIVO"
-        }
-    }
-
-    private fun calcularVencimento(situacao: String, termino: Date): String {
-        val hoje = clearTime(Date())
-        val terminoSemHora = clearTime(termino)
-        val diasParaTermino = calculateDaysDifference(hoje, terminoSemHora)
-
-        return when (situacao) {
-            "ATIVO" -> "Faltam $diasParaTermino dias"
-            "VENCIDO", "STANDBY" -> "Já são ${-diasParaTermino} dias desde o vencimento"
-            "A VENCER" -> when (diasParaTermino) {
-                0 -> "Vence hoje"
-                1, 2 -> "Ainda falta(m) $diasParaTermino dia(s)"
-                else -> "Faltam $diasParaTermino dias"
-            }
+            diasParaTermino > 2 -> "Faltam $diasParaTermino dias"
+            diasParaTermino in 1..2 -> "Ainda falta(m) $diasParaTermino dia(s)"
+            diasParaTermino == 0 -> "Vence hoje"
+            diasParaTermino < 0 -> "Já são ${-diasParaTermino} dias vencidos"
             else -> "Faltam $diasParaTermino dias"
         }
     }

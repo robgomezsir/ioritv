@@ -1,6 +1,5 @@
 import android.animation.ValueAnimator
 import android.annotation.SuppressLint
-import android.content.Intent
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -11,7 +10,6 @@ import android.widget.TextView
 import androidx.appcompat.app.AlertDialog
 import androidx.core.animation.addListener
 import androidx.recyclerview.widget.RecyclerView
-import com.elevadorcom.ioritv.EditCadastroActivity
 import com.elevadorcom.ioritv.R
 // import com.elevadorcom.ioritv.utils.DialogUtils
 import com.elevadorcom.ioritv.utils.SituacaoUtil
@@ -26,7 +24,9 @@ import java.util.concurrent.TimeUnit
 
 class ClienteAdapter(
     private val clientes: List<DocumentSnapshot>,
-    private val onDeleteClick: (DocumentSnapshot) -> Unit
+    private val onDeleteClick: (DocumentSnapshot) -> Unit,
+    private val onEditClick: (DocumentSnapshot) -> Unit = {},
+    private val isGlassTheme: Boolean = false
 ) : RecyclerView.Adapter<ClienteAdapter.ClienteViewHolder>() {
 
     private val db = FirebaseFirestore.getInstance() // Instância do Firestore
@@ -120,12 +120,9 @@ class ClienteAdapter(
                 else -> View.GONE
             }
 
-            // Listener para o clique no botão "Liberar TV"
+            // Listener para o clique no botão "Liberar TV" (navegação via callback — Fase 5)
             btnLiberarTV.setOnClickListener {
-                val context = itemView.context
-                val intent = Intent(context, EditCadastroActivity::class.java)
-                intent.putExtra("cadastroId", cliente.id) // Passar o ID do cliente para a próxima Activity
-                context.startActivity(intent)
+                onEditClick(cliente)
             }
 
             // Listener para o clique no botão "Delete"
@@ -163,7 +160,7 @@ class ClienteAdapter(
             val diasRestantes = calculateDaysDifference(hoje, terminoDate)
 
             return when {
-                diasRestantes > 3 -> "Faltam $diasRestantes dias"
+                diasRestantes > 2 -> "Faltam $diasRestantes dias"
                 diasRestantes in 1..2 -> "Ainda falta(m) $diasRestantes dia(s)"
                 diasRestantes == 0 -> "Vence hoje"
                 diasRestantes < 0 -> "Já são ${-diasRestantes} dias vencidos"

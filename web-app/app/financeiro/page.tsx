@@ -84,14 +84,10 @@ export default function FinanceiroPage() {
         };
     }, [router]);
 
-    // --- Calculations (matching Android Logic) ---
-    // Android:
-    // vendas += valor if (ATIVO or (AVENCER and daysDifference <= 3)) -> wait, logic in Android was simpler:
-    // if situacao == ATIVO or AVENCER -> Count as revenue?
-    // Let's re-read Android logic briefly in memory:
-    // situacao == "A VENCER" || (diasParaVencimento >= 0 && diasParaVencimento <= 3) -> Revenue
-    // situacao == "ATIVO" || diasParaVencimento > 3 -> Revenue
-    // Simplification: If STATUS is ATIVO or A VENCER, we count it.
+    // --- Calculations (matching Cloud Functions) ---
+    // Regra canônica (Cloud Functions calculateSituacao — fonte da verdade):
+    // ATIVO (≥ 3 dias), A VENCER (0..2), VENCIDO (−14..−1), STANDBY (≤ −15).
+    // Vendas contam clientes com status ATIVO ou A VENCER (via getSmartStatus).
 
     let totalVendas = 0;
     clientes.forEach(c => {

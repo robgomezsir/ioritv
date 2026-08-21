@@ -33,8 +33,8 @@ class BiometricPromptFragment : DialogFragment() {
                 super.onAuthenticationSucceeded(result)
                 Toast.makeText(requireContext(), "Autenticação bem-sucedida", Toast.LENGTH_SHORT).show()
 
-                // Após autenticação bem-sucedida, navega para a tela de ranking
-                val intent = Intent(requireContext(), RankingActivity::class.java)
+                // Após autenticação bem-sucedida, navega para a tela principal (HomeActivity)
+                val intent = Intent(requireContext(), HomeActivity::class.java)
                 startActivity(intent)
                 activity?.finish() // Fecha a atividade atual
             }

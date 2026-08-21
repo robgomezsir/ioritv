@@ -31,6 +31,11 @@ class LoginActivity : AppCompatActivity() {
         binding = ActivityLoginBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
+        // No tema Glass, o backdrop vibrante (gradiente + aurora) substitui o fundo fixo do login
+        if (ThemeUtils.getSavedThemeMode(this) == ThemeUtils.MODE_GLASS) {
+            binding.root.setBackgroundResource(R.drawable.bg_glass_paint)
+        }
+
         auth = FirebaseAuth.getInstance()
         sessionManager = SessionManager.getInstance(this)
         
@@ -148,7 +153,7 @@ class LoginActivity : AppCompatActivity() {
 
     // Função para navegar para a tela principal
     private fun navigateToMainScreen() {
-        startActivity(Intent(this, RankingActivity::class.java))
+        startActivity(Intent(this, HomeActivity::class.java))
         finish()
     }
     

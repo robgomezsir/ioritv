@@ -4,9 +4,7 @@ import java.util.*
 
 object SituacaoUtil {
     fun calcularSituacao(termino: Date): String {
-        val hoje = clearTime(Date())
-        val terminoSemHora = clearTime(termino)
-        val diasParaTermino = calculateDaysDifference(hoje, terminoSemHora)
+        val diasParaTermino = diasParaVencimento(termino)
 
         return when {
             diasParaTermino <= -15 -> SituacaoConstants.STANDBY
@@ -14,6 +12,16 @@ object SituacaoUtil {
             diasParaTermino in 0..2 -> SituacaoConstants.A_VENCER
             else -> SituacaoConstants.ATIVO
         }
+    }
+
+    /**
+     * Dias até o término, ignorando a hora (0 = hoje, positivo = futuro, negativo = vencido).
+     * Mesma regra de cálculo usada por calcularSituacao — fonte única para contagens regressivas.
+     */
+    fun diasParaVencimento(termino: Date): Int {
+        val hoje = clearTime(Date())
+        val terminoSemHora = clearTime(termino)
+        return calculateDaysDifference(hoje, terminoSemHora)
     }
 
     private fun clearTime(date: Date): Date {

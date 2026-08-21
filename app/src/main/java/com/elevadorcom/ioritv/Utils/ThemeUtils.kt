@@ -15,6 +15,12 @@ object ThemeUtils {
     private const val THEME_MODE_KEY = "theme_mode"
 
     /**
+     * Modo de tema Glassmorphism (valor próprio — não é um modo do AppCompatDelegate).
+     * Não deve ser passado para AppCompatDelegate.setDefaultNightMode().
+     */
+    const val MODE_GLASS = 4
+
+    /**
      * Aplica o tema apropriado para a Activity baseado nas preferências do usuário
      */
     fun applyTheme(activity: AppCompatActivity) {
@@ -30,6 +36,10 @@ object ThemeUtils {
             AppCompatDelegate.MODE_NIGHT_YES -> {
                 // Modo escuro
                 activity.setTheme(R.style.Base_Theme_IORITv_Dark)
+            }
+            MODE_GLASS -> {
+                // Tema Glassmorphism (único — não depende do modo noite do sistema)
+                activity.setTheme(R.style.Base_Theme_IORITv_Glass)
             }
             else -> {
                 // Modo automático - segue o sistema
@@ -55,8 +65,10 @@ object ThemeUtils {
         editor.putInt(THEME_MODE_KEY, mode)
         editor.apply()
         
-        // Aplica o novo tema imediatamente
-        AppCompatDelegate.setDefaultNightMode(mode)
+        // Aplica o novo tema imediatamente (Glass é um tema próprio, não um modo noite do AppCompat)
+        if (mode != MODE_GLASS) {
+            AppCompatDelegate.setDefaultNightMode(mode)
+        }
     }
 
     /**
@@ -75,6 +87,7 @@ object ThemeUtils {
             AppCompatDelegate.MODE_NIGHT_FOLLOW_SYSTEM -> 0 // Automático
             AppCompatDelegate.MODE_NIGHT_NO -> 1 // Claro
             AppCompatDelegate.MODE_NIGHT_YES -> 2 // Escuro
+            MODE_GLASS -> 3 // Vidro
             else -> 0
         }
     }
@@ -89,6 +102,7 @@ object ThemeUtils {
         return when (themeMode) {
             AppCompatDelegate.MODE_NIGHT_YES -> true
             AppCompatDelegate.MODE_NIGHT_NO -> false
+            MODE_GLASS -> false
             else -> {
                 // Modo automático - verifica o sistema
                 val isSystemDarkMode = context.resources.configuration.uiMode and 

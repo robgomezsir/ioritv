@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Backdrop Glassmorphism refinado: blobs difusos suaves + incidência de luz indireta.
+     No Android 12+ (API 31+) o HomeActivity aplica RenderEffect blur nesta camada,
+     gerando o vidro fosco REAL atrás dos cards/toolbar/bottom nav translúcidos.
+     Em versões anteriores, os blobs já são suaves e o efeito translúcido é o fallback.
+
+     Design: fundo escuro profundo com luz indireta vinda de cima,
+     criando uma sensação de profundidade e elegância. -->
+<layer-list xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <!-- Camada 1: Gradiente base escuro -->
+    <item android:drawable="@drawable/bg_glass_gradient" />
+
+    <!-- Camada 2: Luz indireta — glow suave do topo-central (simula iluminação ambiente) -->
+    <item
+        android:width="600dp"
+        android:height="500dp"
+        android:gravity="top|center_horizontal"
+        android:top="-200dp">
+        <shape android:shape="oval">
+            <gradient
+                android:endColor="#00FFFFFF"
+                android:gradientRadius="300dp"
+                android:startColor="#12FFFFFF"
+                android:type="radial" />
+        </shape>
+    </item>
+
+    <!-- Camada 3: Blob índigo suave (canto superior esquerdo) — luz ambiente fria -->
+    <item
+        android:width="380dp"
+        android:height="380dp"
+        android:gravity="top|left"
+        android:left="-140dp"
+        android:top="-120dp">
+        <shape android:shape="oval">
+            <gradient
+                android:endColor="#004A5A9A"
+                android:gradientRadius="190dp"
+                android:startColor="#304A5A9A"
+                android:type="radial" />
+        </shape>
+    </item>
+
+    <!-- Camada 4: Blob teal suave (canto superior direito) — luz ambiente refletida -->
+    <item
+        android:width="340dp"
+        android:height="340dp"
+        android:gravity="top|right"
+        android:right="-100dp"
+        android:top="80dp">
+        <shape android:shape="oval">
+            <gradient
+                android:endColor="#003A8A8A"
+                android:gradientRadius="170dp"
+                android:startColor="#283A8A8A"
+                android:type="radial" />
+        </shape>
+    </item>
+
+    <!-- Camada 5: Blob âmbar quente (canto inferior esquerdo) — luz quente indireta -->
+    <item
+        android:width="400dp"
+        android:height="400dp"
+        android:gravity="bottom|left"
+        android:left="-160dp"
+        android:bottom="-220dp">
+        <shape android:shape="oval">
+            <gradient
+                android:endColor="#008A6A30"
+                android:gradientRadius="200dp"
+                android:startColor="#208A6A30"
+                android:type="radial" />
+        </shape>
+    </item>
+
+    <!-- Camada 6: Blob roxo sutil (canto inferior direito) — profundidade -->
+    <item
+        android:width="360dp"
+        android:height="360dp"
+        android:gravity="bottom|right"
+        android:right="-120dp"
+        android:bottom="-160dp">
+        <shape android:shape="oval">
+            <gradient
+                android:endColor="#005A3A7A"
+                android:gradientRadius="180dp"
+                android:startColor="#185A3A7A"
+                android:type="radial" />
+        </shape>
+    </item>
+
+</layer-list>
