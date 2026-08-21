@@ -1,11 +1,12 @@
-# Deploy Firebase Hosting on merge to main
-name: Deploy to Firebase Hosting on merge
+# Build and validate on merge to main
+# Web-app deploy is handled by Vercel automatically
+name: Validate Build on merge
 on:
   push:
     branches:
       - main
 jobs:
-  build_and_deploy:
+  build:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
@@ -21,11 +22,3 @@ jobs:
       - name: Build
         working-directory: web-app
         run: npm run build
-      - name: Deploy to Firebase Hosting
-        uses: FirebaseExtended/action-hosting-deploy@v0
-        with:
-          repoToken: ${{ secrets.GITHUB_TOKEN }}
-          firebaseServiceAccount: ${{ secrets.FIREBASE_SERVICE_ACCOUNT_IORITV_70318 }}
-          channelId: live
-          projectId: ioritv-70318
-          entryPoint: .
