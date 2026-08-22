@@ -81,7 +81,7 @@
 
     <!-- Estilo para FloatingActionButton - Light -->
     <style name="WhatsAppFAB" parent="Widget.Material3.FloatingActionButton.Primary">
-        <item name="backgroundTint">@color/md_theme_light_primaryContainer</item>
+        <item name="backgroundTint">@color/fab_gold</item>
         <item name="tint">@color/white</item>
         <item name="elevation">@dimen/elevation_level4</item>
         <item name="pressedTranslationZ">@dimen/elevation_level5</item>

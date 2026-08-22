@@ -677,7 +677,7 @@
         android:layout_margin="@dimen/spacing_medium"
         android:layout_marginEnd="@dimen/spacing_medium"
         android:layout_marginBottom="@dimen/spacing_medium"
-        android:backgroundTint="?attr/colorPrimary"
+        android:backgroundTint="@color/fab_gold"
         android:src="@drawable/ic_baseline_add_24"
         android:tint="?attr/colorOnPrimary"
         app:elevation="@dimen/elevation_level3"

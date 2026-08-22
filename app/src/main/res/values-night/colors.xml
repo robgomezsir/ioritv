@@ -77,6 +77,9 @@
     <color name="status_pending_color">#E8913A</color>
     <color name="red_accent">#BA1A1A</color>
 
+    <!-- FAB principal: dourada para contraste -->
+    <color name="fab_gold">#E8913A</color>
+
     <!-- ═══════════════════════════════════════════════════════════════
          Toolbar & App Bar (escuro)
          ═══════════════════════════════════════════════════════════════ -->

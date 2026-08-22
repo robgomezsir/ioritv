@@ -49,6 +49,9 @@
     <color name="status_pending_color">#E8913A</color>
     <color name="red_accent">#BA1A1A</color>
 
+    <!-- FAB principal: dourada para contraste -->
+    <color name="fab_gold">#E8913A</color>
+
     <!-- Toolbar -->
     <color name="toolbar_color_light">#006874</color>
     <color name="toolbar_color">#006874</color>
