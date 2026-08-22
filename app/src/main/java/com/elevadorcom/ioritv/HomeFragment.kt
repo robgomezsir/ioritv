@@ -197,11 +197,24 @@ class HomeFragment : Fragment() {
         val margem = if (vendas > 0) (vendas - custo - despesasTotal) * 100.0 / vendas else 0.0
 
         binding.textPulseScore.text = "${adimplenciaInt}%"
-        binding.textPulseLabel.text = when {
-            adimplenciaInt >= 80 -> "Excelente"
-            adimplenciaInt >= 50 -> "Em observação"
-            else -> "Precisa de atenção"
+        val statusText: String
+        val statusColor: Int
+        when {
+            adimplenciaInt >= 80 -> {
+                statusText = "Excelente"
+                statusColor = ContextCompat.getColor(requireContext(), R.color.bar_color_due)
+            }
+            adimplenciaInt >= 50 -> {
+                statusText = "Em observação"
+                statusColor = ContextCompat.getColor(requireContext(), R.color.bar_color_overdue)
+            }
+            else -> {
+                statusText = "Precisa de atenção"
+                statusColor = ContextCompat.getColor(requireContext(), R.color.md_theme_light_error)
+            }
         }
+        binding.textPulseLabel.text = statusText
+        binding.textPulseLabel.setTextColor(statusColor)
         binding.textPulseAdimplencia.text = "Margem: ${String.format(Locale.US, "%.1f%%", margem)}"
         binding.textPulseMargem.visibility = View.GONE
         val lucroLiquido = vendas - custo - despesasTotal
