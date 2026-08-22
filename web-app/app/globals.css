@@ -1,26 +1,162 @@
 @import "tailwindcss";
 
-/* 
-  Tailwind v4 / Next.js setup might handle dark mode differently.
-  Since we use generic Tailwind classes (bg-gray-950), we rely on next-themes adding 'dark' class to html.
-  We define CSS vars for cases where we rely on them, ensuring they flip.
-*/
-
 :root {
-  --background: #f9fafb;
-  /* gray-50 */
-  --foreground: #111827;
-  /* gray-900 */
+  --background: #F5FAFB;
+  --foreground: #171D1E;
+  --surface: #FFFFFF;
+  --surface-container: #E9EFF0;
+  --surface-container-high: #E3E9EA;
+  --primary: #006874;
+  --on-primary: #FFFFFF;
+  --on-surface: #171D1E;
+  --on-surface-variant: #3F484A;
+  --outline-variant: #BFC8CA;
+  --error: #BA1A1A;
+  --status-active: #2E9E5A;
+  --status-pending: #E8913A;
+  --fab-gold: #E8913A;
 }
 
-/* Specific overrides when .dark class is present on html/body */
 .dark {
-  --background: #030712;
-  /* gray-950 */
-  --foreground: #ededed;
+  --background: #0E1415;
+  --foreground: #DEE3E5;
+  --surface: #111A1B;
+  --surface-container: #171D1E;
+  --surface-container-high: #252B2C;
+  --primary: #82D3E0;
+  --on-primary: #00363D;
+  --on-surface: #DEE3E5;
+  --on-surface-variant: #BFC8CA;
+  --outline-variant: #3F484A;
+  --error: #FFB4AB;
+  --status-active: #2E9E5A;
+  --status-pending: #E8913A;
+  --fab-gold: #E8913A;
+}
+
+.glass {
+  --background: #0E1415;
+  --surface: rgba(255,255,255,0.08);
+  --surface-container: rgba(255,255,255,0.12);
+  --surface-container-high: rgba(255,255,255,0.16);
+  --on-surface: #DEE3E5;
+  --on-surface-variant: #BFC8CA;
 }
 
 body {
   background: var(--background);
   color: var(--foreground);
+  transition: background-color 0.3s ease, color 0.3s ease;
 }
+
+.glass-card {
+  background: var(--surface-container);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid rgba(255,255,255,0.08);
+  border-radius: 16px;
+  transition: all 0.3s ease;
+}
+.glass-card:hover {
+  background: var(--surface-container-high);
+  border-color: rgba(255,255,255,0.12);
+  box-shadow: 0 8px 32px rgba(0,0,0,0.12);
+}
+.dark .glass-card { border-color: rgba(255,255,255,0.06); box-shadow: 0 4px 16px rgba(0,0,0,0.2); }
+.dark .glass-card:hover { border-color: rgba(255,255,255,0.10); box-shadow: 0 8px 32px rgba(0,0,0,0.3); }
+
+.glass-sidebar {
+  background: rgba(14,20,21,0.85);
+  backdrop-filter: blur(24px);
+  -webkit-backdrop-filter: blur(24px);
+  border-right: 1px solid rgba(255,255,255,0.06);
+}
+
+.glass-header {
+  background: var(--surface-container);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border-bottom: 1px solid rgba(255,255,255,0.06);
+}
+
+.glass-modal-overlay {
+  background: rgba(0,0,0,0.6);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+}
+
+.glass-modal {
+  background: var(--surface-container-high);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid rgba(255,255,255,0.10);
+  border-radius: 20px;
+  box-shadow: 0 24px 48px rgba(0,0,0,0.2);
+}
+.dark .glass-modal { background: rgba(37,43,44,0.90); border-color: rgba(255,255,255,0.08); }
+
+.glass-input {
+  background: var(--surface);
+  border: 1px solid var(--outline-variant);
+  border-radius: 12px;
+  padding: 10px 16px;
+  color: var(--on-surface);
+  transition: all 0.2s ease;
+}
+.glass-input:focus { outline: none; border-color: var(--primary); box-shadow: 0 0 0 3px rgba(0,104,116,0.15); }
+.dark .glass-input:focus { box-shadow: 0 0 0 3px rgba(130,211,224,0.15); }
+
+.glass-btn-primary {
+  background: var(--primary);
+  color: var(--on-primary);
+  border: none;
+  border-radius: 12px;
+  padding: 10px 24px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+.glass-btn-primary:hover { opacity: 0.9; transform: translateY(-1px); box-shadow: 0 4px 12px rgba(0,104,116,0.3); }
+
+.glass-btn-gold {
+  background: var(--fab-gold);
+  color: white;
+  border: none;
+  border-radius: 12px;
+  padding: 10px 24px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+.glass-btn-gold:hover { opacity: 0.9; transform: translateY(-1px); box-shadow: 0 4px 12px rgba(232,145,58,0.3); }
+
+.glass-table { border-collapse: separate; border-spacing: 0; }
+.glass-table thead th { background: var(--surface-container); backdrop-filter: blur(8px); border-bottom: 1px solid rgba(255,255,255,0.06); }
+.glass-table tbody tr { transition: background-color 0.15s ease; }
+.glass-table tbody tr:hover { background: var(--surface-container); }
+
+.aurora-bg {
+  position: fixed; inset: 0; z-index: -1;
+  background: linear-gradient(160deg, #07181D 0%, #0B2A33 25%, #12434E 50%, #0D3345 75%, #07181D 100%);
+  overflow: hidden;
+}
+.aurora-bg::before {
+  content: ''; position: absolute; width: 600px; height: 600px; border-radius: 50%;
+  background: radial-gradient(circle, rgba(27,122,140,0.4) 0%, transparent 70%);
+  top: -200px; left: -100px; animation: aurora-float 20s ease-in-out infinite;
+}
+.aurora-bg::after {
+  content: ''; position: absolute; width: 500px; height: 500px; border-radius: 50%;
+  background: radial-gradient(circle, rgba(75,94,158,0.3) 0%, transparent 70%);
+  bottom: -150px; right: -100px; animation: aurora-float 25s ease-in-out infinite reverse;
+}
+@keyframes aurora-float {
+  0%, 100% { transform: translate(0, 0) scale(1); }
+  33% { transform: translate(30px, -40px) scale(1.1); }
+  66% { transform: translate(-20px, 20px) scale(0.95); }
+}
+
+::-webkit-scrollbar { width: 6px; }
+::-webkit-scrollbar-track { background: transparent; }
+::-webkit-scrollbar-thumb { background: var(--outline-variant); border-radius: 3px; }
+::-webkit-scrollbar-thumb:hover { background: var(--outline); }

@@ -45,8 +45,12 @@ object ThemeUtils {
 
         val sharedPreferences = activity.getSharedPreferences(PREFERENCES_NAME, Context.MODE_PRIVATE)
         val themeMode = sharedPreferences.getInt(THEME_MODE_KEY, AppCompatDelegate.MODE_NIGHT_FOLLOW_SYSTEM)
+        val glassEnabled = sharedPreferences.getBoolean(GLASS_ENABLED_KEY, false)
 
-        when (themeMode) {
+        if (glassEnabled) {
+            // Glass skin: tema Glass tem barras transparentes + aurora
+            activity.setTheme(R.style.Base_Theme_IORITv_Glass)
+        } else when (themeMode) {
             AppCompatDelegate.MODE_NIGHT_NO -> {
                 activity.setTheme(R.style.Base_Theme_IORITv)
             }
@@ -54,7 +58,6 @@ object ThemeUtils {
                 activity.setTheme(R.style.Base_Theme_IORITv_Dark)
             }
             else -> {
-                // Modo automatico - segue o sistema
                 val isSystemDarkMode = activity.resources.configuration.uiMode and
                     android.content.res.Configuration.UI_MODE_NIGHT_MASK ==
                     android.content.res.Configuration.UI_MODE_NIGHT_YES

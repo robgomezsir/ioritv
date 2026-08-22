@@ -4,7 +4,7 @@ import { useEffect } from "react";
 import { Geist, Geist_Mono } from "next/font/google";
 import Sidebar from "@/components/Sidebar";
 import "./globals.css";
-import { ThemeProvider } from "@/components/ThemeProvider";
+import { ThemeProvider, useGlass } from "@/components/ThemeProvider";
 import { usePathname } from "next/navigation";
 import { SidebarProvider, useSidebar } from "@/contexts/SidebarContext";
 
@@ -18,59 +18,29 @@ const geistMono = Geist_Mono({
   subsets: ["latin"],
 });
 
+function AuroraBackground() {
+  const { isGlass } = useGlass();
+  if (!isGlass) return null;
+  return <div className="aurora-bg" />;
+}
+
 function LayoutContent({ children }: { children: React.ReactNode }) {
   const pathname = usePathname();
   const isLoginPage = pathname === "/login";
   const { isCollapsed } = useSidebar();
 
-  useEffect(() => {
-    // Handle ChunkLoadError globally
-    const handleError = (e: ErrorEvent) => {
-      if (e.message.includes('Loading chunk') || e.message.includes('CSS chunk')) {
-        console.warn('ChunkLoadError detected, forcing reload...', e);
-        window.location.reload();
-      }
-    };
-
-    window.addEventListener('error', handleError);
-
-    if ('serviceWorker' in navigator && window.location.protocol === 'https:') {
-      window.addEventListener('load', () => {
-        navigator.serviceWorker.register('/sw.js').then(
-          (registration) => {
-            console.log('SW registered: ', registration);
-            // Check for updates
-            registration.onupdatefound = () => {
-              const installingWorker = registration.installing;
-              if (installingWorker) {
-                installingWorker.onstatechange = () => {
-                  if (installingWorker.state === 'installed') {
-                    if (navigator.serviceWorker.controller) {
-                      console.log('New content available; please refresh.');
-                      window.location.reload();
-                    }
-                  }
-                };
-              }
-            };
-          },
-          (registrationError) => {
-            console.log('SW registration failed: ', registrationError);
-          }
-        );
-      });
-    }
-
-    return () => window.removeEventListener('error', handleError);
-  }, []);
-
   return (
     <body
-      className={`${geistSans.variable} ${geistMono.variable} antialiased bg-gray-50 dark:bg-gray-950 text-gray-900 dark:text-gray-100 ${!isLoginPage ? 'flex min-h-screen' : ''} transition-colors duration-300`}
+      className={`${geistSans.variable} ${geistMono.variable} antialiased bg-[var(--background)] text-[var(--foreground)] ${!isLoginPage ? "flex min-h-screen" : ""} transition-colors duration-300`}
     >
       <ThemeProvider>
+        <AuroraBackground />
         {!isLoginPage && <Sidebar />}
-        <div className={`flex-1 flex flex-col min-h-screen relative transition-all duration-300 ${!isLoginPage ? (isCollapsed ? 'ml-0 md:ml-20' : 'ml-0 md:ml-64') : ''}`}>
+        <div
+          className={`flex-1 flex flex-col min-h-screen relative transition-all duration-300 ${
+            !isLoginPage ? (isCollapsed ? "ml-0 md:ml-20" : "ml-0 md:ml-64") : ""
+          }`}
+        >
           {children}
         </div>
       </ThemeProvider>
@@ -87,7 +57,7 @@ export default function RootLayout({
     <html lang="pt-BR" suppressHydrationWarning>
       <head>
         <link rel="manifest" href="/manifest.json" />
-        <meta name="theme-color" content="#141b2d" />
+        <meta name="theme-color" content="#0E1415" />
         <meta name="mobile-web-app-capable" content="yes" />
         <meta name="apple-mobile-web-app-capable" content="yes" />
         <meta name="apple-mobile-web-app-status-bar-style" content="default" />
