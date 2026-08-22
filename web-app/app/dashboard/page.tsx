@@ -192,9 +192,13 @@ export default function DashboardHome() {
                                         <p className="text-[var(--on-surface-variant)]">Faturamento</p>
                                         <p className="font-bold text-[var(--on-surface)]">{fmt(totalVendas)}</p>
                                     </div>
-                                    <div>
-                                        <p className="text-[var(--on-surface-variant)]">Custo Fixo</p>
-                                        <p className="font-bold text-[var(--on-surface)]">{fmt(custoTotalFixo)}</p>
+                                    <div
+                                        className="cursor-pointer hover:bg-white/5 rounded-lg px-2 py-1 -mx-2 -my-1 transition-colors group"
+                                        onClick={() => { setNewCustoValue(custoTotalFixo.toFixed(2)); setIsEditCustoOpen(true); }}
+                                        title="Clique para editar o custo fixo"
+                                    >
+                                        <p className="text-[var(--on-surface-variant)]">Custo Fixo ✏️</p>
+                                        <p className="font-bold text-[var(--on-surface)] group-hover:text-[var(--primary)] transition-colors">{fmt(custoTotalFixo)}</p>
                                     </div>
                                     <div>
                                         <p className="text-[var(--on-surface-variant)]">Despesas</p>
