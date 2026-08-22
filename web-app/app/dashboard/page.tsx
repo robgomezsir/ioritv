@@ -250,7 +250,7 @@ export default function DashboardHome() {
                                             contentStyle={{ background: 'var(--surface-container-high)', border: '1px solid rgba(255,255,255,0.1)', borderRadius: '12px', color: 'var(--on-surface)' }}
                                             cursor={{ fill: 'rgba(255,255,255,0.05)' }}
                                         />
-                                        <Bar dataKey="value" radius={[6, 6, 0, 0]}>
+                                        <Bar dataKey="value" radius={[6, 6, 0, 0]} label={{ position: 'top', fill: 'var(--on-surface)', fontSize: 14, fontWeight: 700 }}>
                                             {chartData.map((entry, i) => <Cell key={i} fill={entry.color} />)}
                                         </Bar>
                                     </BarChart>
