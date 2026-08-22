@@ -229,7 +229,7 @@ export default function DashboardHome() {
                                 </div>
                                 <p className="text-2xl font-bold text-[var(--on-surface)]">{item.count}</p>
                                 <div className="mt-2 relative h-2.5 w-full rounded-full bg-[var(--surface-container)]">
-                                    <div className={`h-2.5 rounded-full transition-all duration-700 ${item.color.replace('text-', 'bg-')}`} style={{ width: `${item.pct}%` }}></div>
+                                    <div className={`flash-bar h-2.5 rounded-full transition-all duration-700 ${item.color.replace('text-', 'bg-')}`} style={{ width: `${item.pct}%` }}></div>
                                     <span className={`absolute -top-6 text-[11px] font-bold ${item.color}`} style={{ left: `${Math.min(item.pct, 95)}%`, transform: 'translateX(-50%)' }}>
                                         {item.pct.toFixed(0)}%
                                     </span>

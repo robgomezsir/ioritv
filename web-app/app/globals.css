@@ -160,3 +160,33 @@ body {
 ::-webkit-scrollbar-track { background: transparent; }
 ::-webkit-scrollbar-thumb { background: var(--outline-variant); border-radius: 3px; }
 ::-webkit-scrollbar-thumb:hover { background: var(--outline); }
+
+/* ═══ Progress Bar Flash Animation ═══ */
+.flash-bar {
+  position: relative;
+  overflow: hidden;
+}
+.flash-bar::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -60%;
+  width: 60%;
+  height: 100%;
+  background: linear-gradient(
+    90deg,
+    transparent 0%,
+    rgba(255,255,255,0.25) 30%,
+    rgba(255,255,255,0.55) 50%,
+    rgba(255,255,255,0.25) 70%,
+    transparent 100%
+  );
+  border-radius: inherit;
+  animation: flash-sweep 1.8s ease-in-out infinite;
+}
+@keyframes flash-sweep {
+  0%   { left: -60%; opacity: 0; }
+  15%  { opacity: 1; }
+  85%  { opacity: 1; }
+  100% { left: 100%; opacity: 0; }
+}
