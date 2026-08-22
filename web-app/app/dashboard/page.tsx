@@ -32,7 +32,7 @@ export default function DashboardHome() {
     const [clientes, setClientes] = useState<Cliente[]>([]);
     const [despesas, setDespesas] = useState<Despesa[]>([]);
     const [custoTotalFixo, setCustoTotalFixo] = useState(0);
-    const [loading] = useState(true);
+    const [loading, setLoading] = useState(true);
     const [isDespesaModalOpen, setIsDespesaModalOpen] = useState(false);
     const [despesaToEdit, setDespesaToEdit] = useState<Despesa | null>(null);
     const [deleteConfirmation, setDeleteConfirmation] = useState<{ isOpen: boolean; id: string | null }>({
@@ -53,6 +53,7 @@ export default function DashboardHome() {
         const unsubClientes = onSnapshot(qClientes, (snapshot) => {
             const data = snapshot.docs.map((d) => d.data() as Cliente);
             setClientes(data);
+            setLoading(false);
         });
 
         const qDespesas = query(collection(db, "despesas"), orderBy("dataTimestamp", "desc"));
