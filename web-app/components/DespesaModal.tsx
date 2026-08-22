@@ -2,12 +2,13 @@
 
 import { useEffect, useState } from "react";
 import { collection, addDoc, doc, updateDoc } from "firebase/firestore";
-import { db } from "@/firebase/config";
+import { db } from "@//firebase/config";
 
 interface Despesa {
     id?: string;
-    data: string; // Stored as string dd/MM/yyyy in Android, let's keep consistency or upgrade to ISO? Android saves as string "data" and timestamp "dataTimestamp".
+    data: string;
     descricao: string;
+    detalhes?: string;
     valor: number;
     dataTimestamp?: number;
 }
@@ -21,6 +22,7 @@ interface DespesaModalProps {
 
 export default function DespesaModal({ isOpen, onClose, despesaToEdit, onSuccess }: DespesaModalProps) {
     const [dataStr, setDataStr] = useState("");
+    const [titulo, setTitulo] = useState("");
     const [descricao, setDescricao] = useState("");
     const [valorStr, setValorStr] = useState("");
     const [loading, setLoading] = useState(false);
@@ -29,15 +31,16 @@ export default function DespesaModal({ isOpen, onClose, despesaToEdit, onSuccess
         if (isOpen) {
             if (despesaToEdit) {
                 setDataStr(despesaToEdit.data);
-                setDescricao(despesaToEdit.descricao);
+                setTitulo(despesaToEdit.descricao);
+                setDescricao(despesaToEdit.detalhes || "");
                 setValorStr(despesaToEdit.valor.toFixed(2));
             } else {
-                // Default to today
                 const today = new Date();
                 const dd = String(today.getDate()).padStart(2, '0');
                 const mm = String(today.getMonth() + 1).padStart(2, '0');
                 const yyyy = today.getFullYear();
                 setDataStr(`${dd}/${mm}/${yyyy}`);
+                setTitulo("");
                 setDescricao("");
                 setValorStr("");
             }
@@ -54,9 +57,10 @@ export default function DespesaModal({ isOpen, onClose, despesaToEdit, onSuccess
 
             const despesaData = {
                 data: dataStr,
-                descricao,
+                descricao: titulo,
+                detalhes: descricao,
                 valor,
-                dataTimestamp: Date.now() // Simple timestamp for sorting
+                dataTimestamp: Date.now()
             };
 
             if (despesaToEdit?.id) {
@@ -79,61 +83,87 @@ export default function DespesaModal({ isOpen, onClose, despesaToEdit, onSuccess
 
     return (
         <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/70 backdrop-blur-sm">
-            <div className="bg-white dark:bg-gray-800 rounded-xl max-w-md w-full border border-gray-200 dark:border-gray-700 shadow-2xl overflow-hidden">
-                <div className="px-6 py-4 border-b border-gray-200 dark:border-gray-700 bg-gray-50 dark:bg-gray-800/50">
-                    <h2 className="text-xl font-semibold text-gray-900 dark:text-white">
+            <div className="glass-modal max-w-md w-full overflow-hidden">
+                <div className="px-6 py-4 border-b border-white/5">
+                    <h2 className="text-xl font-bold text-[var(--on-surface)]">
                         {despesaToEdit ? "Editar Despesa" : "Nova Despesa"}
                     </h2>
                 </div>
 
                 <form onSubmit={handleSubmit} className="p-6 space-y-4">
+                    {/* Data */}
                     <div>
-                        <label className="block text-sm font-medium text-gray-700 dark:text-gray-400 mb-1">Data (dd/mm/aaaa)</label>
+                        <label className="block text-xs font-semibold text-[var(--on-surface-variant)] mb-1.5 uppercase tracking-wider">
+                            Data
+                        </label>
                         <input
                             type="text"
                             required
                             placeholder="dd/mm/aaaa"
-                            className="w-full bg-gray-50 dark:bg-gray-900 border border-gray-300 dark:border-gray-700 rounded-lg px-4 py-2 text-gray-900 dark:text-white focus:ring-2 focus:ring-blue-500 outline-none transition-all"
+                            className="glass-input w-full"
                             value={dataStr}
                             onChange={(e) => setDataStr(e.target.value)}
                         />
                     </div>
 
+                    {/* Título */}
                     <div>
-                        <label className="block text-sm font-medium text-gray-700 dark:text-gray-400 mb-1">Descrição</label>
+                        <label className="block text-xs font-semibold text-[var(--on-surface-variant)] mb-1.5 uppercase tracking-wider">
+                            Título da Despesa
+                        </label>
                         <input
                             type="text"
                             required
-                            className="w-full bg-gray-50 dark:bg-gray-900 border border-gray-300 dark:border-gray-700 rounded-lg px-4 py-2 text-gray-900 dark:text-white focus:ring-2 focus:ring-blue-500 outline-none transition-all"
+                            placeholder="Ex: Aluguel, Internet, Equipamento..."
+                            className="glass-input w-full"
+                            value={titulo}
+                            onChange={(e) => setTitulo(e.target.value)}
+                        />
+                    </div>
+
+                    {/* Descrição (multiline) */}
+                    <div>
+                        <label className="block text-xs font-semibold text-[var(--on-surface-variant)] mb-1.5 uppercase tracking-wider">
+                            Descrição
+                        </label>
+                        <textarea
+                            rows={4}
+                            placeholder="Detalhes sobre esta despesa..."
+                            className="glass-input w-full resize-y min-h-[100px]"
                             value={descricao}
                             onChange={(e) => setDescricao(e.target.value)}
                         />
                     </div>
 
+                    {/* Valor */}
                     <div>
-                        <label className="block text-sm font-medium text-gray-700 dark:text-gray-400 mb-1">Valor (R$)</label>
+                        <label className="block text-xs font-semibold text-[var(--on-surface-variant)] mb-1.5 uppercase tracking-wider">
+                            Valor (R$)
+                        </label>
                         <input
                             type="number"
                             step="0.01"
                             required
-                            className="w-full bg-gray-50 dark:bg-gray-900 border border-gray-300 dark:border-gray-700 rounded-lg px-4 py-2 text-gray-900 dark:text-white focus:ring-2 focus:ring-blue-500 outline-none transition-all"
+                            placeholder="0,00"
+                            className="glass-input w-full"
                             value={valorStr}
                             onChange={(e) => setValorStr(e.target.value)}
                         />
                     </div>
 
-                    <div className="flex gap-3 pt-4 border-t border-gray-200 dark:border-gray-700">
+                    {/* Botões */}
+                    <div className="flex gap-3 pt-4 border-t border-white/5">
                         <button
                             type="button"
                             onClick={onClose}
-                            className="flex-1 px-4 py-2 bg-gray-200 dark:bg-gray-700 hover:bg-gray-300 dark:hover:bg-gray-600 rounded-lg text-gray-700 dark:text-gray-200 font-medium transition-colors"
+                            className="flex-1 glass-input text-center text-sm cursor-pointer"
                         >
                             Cancelar
                         </button>
                         <button
                             type="submit"
                             disabled={loading}
-                            className="flex-1 px-4 py-2 bg-blue-600 hover:bg-blue-500 rounded-lg text-white font-medium transition-colors disabled:opacity-50 disabled:cursor-not-allowed shadow-lg hover:shadow-blue-500/25"
+                            className="flex-1 glass-btn-primary text-sm disabled:opacity-50 disabled:cursor-not-allowed"
                         >
                             {loading ? "Salvando..." : "Salvar"}
                         </button>
