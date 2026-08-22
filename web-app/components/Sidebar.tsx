@@ -9,7 +9,6 @@ import { useTheme } from "next-themes";
 const navItems = [
   { href: "/dashboard", label: "Dashboard", icon: "📊" },
   { href: "/clientes", label: "Carteira", icon: "👥" },
-  { href: "/financeiro", label: "Finanças", icon: "💰" },
   { href: "/configuracoes", label: "Config", icon: "⚙️" },
 ];
 
