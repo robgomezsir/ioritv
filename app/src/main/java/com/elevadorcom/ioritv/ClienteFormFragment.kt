@@ -49,6 +49,33 @@ class ClienteFormFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        // Garantir scroll automático quando teclado abre via ViewTreeObserver
+        val rootView = binding.root
+        val defaultHeight = arrayOf(0)
+        rootView.viewTreeObserver.addOnGlobalLayoutListener {
+            val r = android.graphics.Rect()
+            rootView.getWindowVisibleDisplayFrame(r)
+            val currentHeight = r.height()
+            if (defaultHeight[0] == 0) defaultHeight[0] = currentHeight
+            val diff = defaultHeight[0] - currentHeight
+            if (diff > 150) {
+                // Teclado abriu — scroll o campo focado para cima
+                val focused = rootView.findFocus()
+                if (focused is android.view.View) {
+                    focused.post {
+                        val location = IntArray(2)
+                        focused.getLocationOnScreen(location)
+                        val y = location[1]
+                        val visibleBottom = r.bottom
+                        if (y + focused.height > visibleBottom - 100) {
+                            val scrollAmount = (y + focused.height) - visibleBottom + 150
+                            rootView.smoothScrollBy(0, scrollAmount)
+                        }
+                    }
+                }
+            }
+        }
+
         // Skin Glass: aplicar efeitos glassmorphism nos cards
         if (com.elevadorcom.ioritv.utils.ThemeUtils.isGlassEnabled(requireContext())) {
             com.elevadorcom.ioritv.utils.GlassUtils.applyGlassToFragment(view)

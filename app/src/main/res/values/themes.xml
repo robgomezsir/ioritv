@@ -108,8 +108,8 @@
         <!-- No Android 15+ o edge-to-edge é obrigatório e ignora statusBarColor/navigationBarColor;
              a saída explícita garante que a barra de notificações use a mesma cor translúcida dos cards -->
         <item name="android:windowOptOutEdgeToEdgeEnforcement">true</item>
-        <item name="android:statusBarColor">?attr/colorSurfaceContainerHigh</item>
-        <item name="android:navigationBarColor">?attr/colorSurfaceContainerHigh</item>
+        <item name="android:statusBarColor">@android:color/transparent</item>
+        <item name="android:navigationBarColor">@android:color/transparent</item>
         <item name="android:windowLightStatusBar">false</item>
         <item name="android:windowLightNavigationBar">false</item>
         <item name="android:windowDrawsSystemBarBackgrounds">true</item>

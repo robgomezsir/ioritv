@@ -42,6 +42,24 @@
 
     </com.google.android.material.textfield.TextInputLayout>
 
+    <!-- Campo Descrição -->
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/descricaoInputLayout"
+        style="@style/CustomTextInputLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="16dp"
+        android:hint="Descrição"
+        app:startIconDrawable="@drawable/ic_baseline_description_24">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/inputDescricao"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:inputType="textMultiLine" />
+
+    </com.google.android.material.textfield.TextInputLayout>
+
     <!-- Campo Valor -->
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/valorInputLayout"

@@ -180,7 +180,7 @@
         android:layout_marginBottom="@dimen/spacing_medium"
         android:backgroundTint="?attr/colorPrimary"
         android:src="@drawable/adduser"
-        android:tint="?attr/colorOnPrimary"
+        app:tint="@null"
         app:elevation="0dp"
         app:fabSize="normal"
         app:layout_constraintBottom_toBottomOf="parent"

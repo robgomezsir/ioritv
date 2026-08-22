@@ -77,5 +77,6 @@ data class DespesaItem(
     val id: String,
     val data: String,
     val descricao: String,
+    val detalhes: String = "",
     val valor: Double
 )

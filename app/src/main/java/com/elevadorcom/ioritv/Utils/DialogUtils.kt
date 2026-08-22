@@ -29,10 +29,13 @@ object DialogUtils {
         val isGlass = ThemeUtils.isGlassEnabled(context)
 
         // Cor de fundo do dialog
-        val dialogBgColor = ContextCompat.getColor(context,
-            if (isDark || isGlass) R.color.md_theme_dark_surfaceContainerHigh
-            else R.color.md_theme_light_surfaceContainerHigh
-        )
+        // Glass: quase opaco (95% branco/preto) para legibilidade
+        val dialogBgColor = when {
+            isGlass && isDark -> 0xF20E1415.toInt()  // 95% opaco escuro
+            isGlass && !isDark -> 0xF2FFFFFF.toInt()  // 95% opaco claro
+            isDark -> ContextCompat.getColor(context, R.color.md_theme_dark_surfaceContainerHigh)
+            else -> ContextCompat.getColor(context, R.color.md_theme_light_surfaceContainerHigh)
+        }
         val density = context.resources.displayMetrics.density
 
         // Background arredondado para o dialog
@@ -43,17 +46,26 @@ object DialogUtils {
         }
         dialog.window?.setBackgroundDrawable(bgDrawable)
 
+        // Overlay scrim mais escuro no glass para contraste
+        if (isGlass) {
+            dialog.window?.setDimAmount(0.7f)
+        }
+
         dialog.setOnShowListener {
             // Cores baseadas no tema
             val primaryColor = ContextCompat.getColor(context,
                 if (isDark || isGlass) R.color.md_theme_dark_primary
                 else R.color.md_theme_light_primary
             )
-            val onPrimaryColor = ContextCompat.getColor(context, R.color.white)
+            val textColor = when {
+                isGlass && isDark -> 0xFFDEE3E5.toInt()  // texto claro glass
+                isGlass && !isDark -> 0xFF171D1E.toInt()  // texto escuro glass
+                else -> ContextCompat.getColor(context, R.color.white)
+            }
 
-            // Botão positivo (Confirmar/Salvar) — fundo primary, texto white
+            // Botão positivo (Confirmar/Salvar) — fundo primary, texto branco
             dialog.getButton(AlertDialog.BUTTON_POSITIVE)?.let { button ->
-                button.setTextColor(onPrimaryColor)
+                button.setTextColor(textColor)
                 button.background = createRoundedButton(context, primaryColor)
                 button.minimumWidth = 0
                 button.minimumHeight = 0

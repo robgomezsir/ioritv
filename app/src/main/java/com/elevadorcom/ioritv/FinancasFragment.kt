@@ -325,6 +325,8 @@ class FinancasFragment : Fragment() {
             .setNegativeButton("Cancelar", null)
             .create()
 
+        com.elevadorcom.ioritv.utils.DialogUtils.styleAlertDialogButtons(dialog, requireContext())
+
         if (ThemeUtils.isDarkTheme(requireContext())) {
             DialogUtils.styleAlertDialogButtonsDark(dialog, requireContext())
         } else {
@@ -571,12 +573,14 @@ class FinancasFragment : Fragment() {
                 val despesas = result.map { document ->
                     val data = document.getString("data") ?: "Data não disponível"
                     val descricao = document.getString("descricao") ?: "Despesa operacional"
+                    val detalhes = document.getString("detalhes") ?: ""
                     val valor = document.getDouble("valor") ?: 0.0
 
                     DespesaItem(
                         id = document.id,
                         data = data,
                         descricao = descricao,
+                        detalhes = detalhes,
                         valor = valor
                     )
                 }
@@ -596,6 +600,7 @@ class FinancasFragment : Fragment() {
 
         val inputData = dialogView.findViewById<EditText>(R.id.inputData)
         val inputDespesa = dialogView.findViewById<EditText>(R.id.inputDespesa)
+        val inputDescricao = dialogView.findViewById<EditText>(R.id.inputDescricao)
         val inputValor = dialogView.findViewById<EditText>(R.id.inputValor)
 
         // Aplicar formatação monetária automática no campo de valor
@@ -611,6 +616,7 @@ class FinancasFragment : Fragment() {
             .setPositiveButton("Salvar") { _, _ ->
                 val data = inputData.text.toString()
                 val descricao = inputDespesa.text.toString()
+                val detalhes = inputDescricao.text.toString()
                 val valorStr = inputValor.text.toString()
 
                 if (data.isEmpty() || descricao.isEmpty() || valorStr.isEmpty()) {
@@ -624,18 +630,21 @@ class FinancasFragment : Fragment() {
                     return@setPositiveButton
                 }
 
-                addDespesa(data, descricao, valor)
+                addDespesa(data, descricao, detalhes, valor)
             }
             .setNegativeButton("Cancelar", null)
             .create()
 
+        com.elevadorcom.ioritv.utils.DialogUtils.styleAlertDialogButtons(dialog, requireContext())
+
         dialog.show()
     }
 
-    private fun addDespesa(data: String, descricao: String, valor: Double) {
+    private fun addDespesa(data: String, descricao: String, detalhes: String, valor: Double) {
         val despesaData = hashMapOf(
             "data" to data,
             "descricao" to descricao,
+            "detalhes" to detalhes,
             "valor" to valor,
             "dataTimestamp" to System.currentTimeMillis()
         )
@@ -733,6 +742,8 @@ class FinancasFragment : Fragment() {
                     }
                     .create()
 
+        com.elevadorcom.ioritv.utils.DialogUtils.styleAlertDialogButtons(dialog, requireContext())
+
                 dialog.show()
             } else {
                 Toast.makeText(requireContext(), message, Toast.LENGTH_LONG).show()
@@ -754,6 +765,8 @@ class FinancasFragment : Fragment() {
             .setNegativeButton("Cancelar", null)
             .create()
 
+        com.elevadorcom.ioritv.utils.DialogUtils.styleAlertDialogButtons(dialog, requireContext())
+
         dialog.show()
     }
 
@@ -763,6 +776,7 @@ class FinancasFragment : Fragment() {
 
         val inputData = dialogView.findViewById<EditText>(R.id.inputData)
         val inputDespesa = dialogView.findViewById<EditText>(R.id.inputDespesa)
+        val inputDescricao = dialogView.findViewById<EditText>(R.id.inputDescricao)
         val inputValor = dialogView.findViewById<EditText>(R.id.inputValor)
 
         // Aplicar formatação monetária automática no campo de valor
@@ -771,6 +785,7 @@ class FinancasFragment : Fragment() {
         // Pré-preencher com dados existentes
         inputData.setText(despesa.data)
         inputDespesa.setText(despesa.descricao)
+        inputDescricao.setText(despesa.detalhes)
         inputValor.setText(MoneyTextWatcher.formatCurrency(despesa.valor))
 
         val dialog = com.elevadorcom.ioritv.utils.DialogUtils.materialDialog(requireContext())
@@ -779,6 +794,7 @@ class FinancasFragment : Fragment() {
             .setPositiveButton("Salvar") { _, _ ->
                 val data = inputData.text.toString()
                 val descricao = inputDespesa.text.toString()
+                val detalhes = inputDescricao.text.toString()
                 val valorStr = inputValor.text.toString()
 
                 if (data.isEmpty() || descricao.isEmpty() || valorStr.isEmpty()) {
@@ -792,18 +808,21 @@ class FinancasFragment : Fragment() {
                     return@setPositiveButton
                 }
 
-                updateDespesa(despesa.id, data, descricao, valor)
+                updateDespesa(despesa.id, data, descricao, detalhes, valor)
             }
             .setNegativeButton("Cancelar", null)
             .create()
 
+        com.elevadorcom.ioritv.utils.DialogUtils.styleAlertDialogButtons(dialog, requireContext())
+
         dialog.show()
     }
 
-    private fun updateDespesa(despesaId: String, data: String, descricao: String, valor: Double) {
+    private fun updateDespesa(despesaId: String, data: String, descricao: String, detalhes: String, valor: Double) {
         val despesaData = hashMapOf(
             "data" to data,
             "descricao" to descricao,
+            "detalhes" to detalhes,
             "valor" to valor,
             "dataTimestamp" to System.currentTimeMillis()
         )

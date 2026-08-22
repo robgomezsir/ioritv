@@ -59,11 +59,9 @@ class ClienteAdapter(
             itemView.cardElevation = 0f
         }
 
-        // Expanded section: background glass mais opaco
+        // Expanded section: transparente — mesmo background do card (extensão)
         val expandedSection = itemView.findViewById<View>(R.id.expandedLayout)
-        if (expandedSection != null) {
-            expandedSection.setBackgroundColor(context.getColor(R.color.glass_surface_container))
-        }
+        expandedSection?.setBackgroundColor(android.graphics.Color.TRANSPARENT)
     }
 
     override fun getItemCount(): Int = clientes.size

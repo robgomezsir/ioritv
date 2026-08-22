@@ -17,6 +17,8 @@ import android.widget.RadioGroup
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.app.AppCompatDelegate
+import androidx.core.view.ViewCompat
+import androidx.core.view.WindowInsetsCompat
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
@@ -25,35 +27,37 @@ import com.elevadorcom.ioritv.utils.ThemeUtils
 
 /**
  * Activity hospedeira única (migração para Fragments).
- * Hospeda o NavHostFragment das abas (Home, Cadastros, Finanças) e a toolbar única
- * com menu de tema e logout — antes duplicados em RankingActivity/MainActivity2/MainActivity4.
  *
- * Glass agora é uma SKIN OVERLAY aplicada sobre o tema base (claro ou escuro).
+ * API 35+ (Android 15+): edge-to-edge obrigatório.
+ * Estratégia dupla:
+ *   1. window.statusBarColor / navigationBarColor → cores do system-drawn background
+ *   2. WindowInsets padding → toolbar/bottom nav se estendem atrás das barras
+ *
+ * Assim tanto o background do sistema quanto o conteúdo do app combinam.
  */
 class HomeActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityHomeBinding
+    private var currentIsDark = false
+    private var currentIsGlass = false
 
     override fun onCreate(savedInstanceState: Bundle?) {
-        // Aplica o tema base usando ThemeUtils (light/dark)
         ThemeUtils.applyTheme(this)
-
         super.onCreate(savedInstanceState)
         binding = ActivityHomeBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        val isDark = ThemeUtils.isDarkTheme(this)
-        val isGlass = ThemeUtils.isGlassEnabled(this)
+        currentIsDark = ThemeUtils.isDarkTheme(this)
+        currentIsGlass = ThemeUtils.isGlassEnabled(this)
 
         // ── Glass overlay: aurora + blur ──────────────────────────────
-        if (isGlass) {
+        if (currentIsGlass) {
             binding.glassBlurLayer.visibility = View.VISIBLE
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) {
                 binding.glassBlurLayer.setRenderEffect(
                     RenderEffect.createBlurEffect(24f, 24f, Shader.TileMode.CLAMP)
                 )
             }
-            // Tornar o container de fragments transparente para o aurora brilhar através
             binding.navHostFragment.setBackgroundColor(Color.TRANSPARENT)
         }
 
@@ -66,62 +70,14 @@ class HomeActivity : AppCompatActivity() {
         setupActionBarWithNavController(navController)
         supportActionBar?.title = "Meu Ioritv"
 
-        // ── Barras de sistema (status + navigation) ──────────────────
-        val statusBarColor: Int
-        val navBarColor: Int
-        val lightBars: Boolean
+        // ── WindowInsets: toolbar sob status bar, bottom nav sob nav bar ──
+        setupWindowInsets()
 
-        when {
-            isGlass -> {
-                // Cor da toolbar glass — sincronizada com applyToolbarAndNavColors
-                statusBarColor = getColor(R.color.glass_surface_container_high)
-                navBarColor = getColor(R.color.glass_surface_container_high)
-                lightBars = false
-            }
-            isDark -> {
-                statusBarColor = getColor(R.color.md_theme_dark_background)
-                navBarColor = getColor(R.color.md_theme_dark_background)
-                lightBars = false
-            }
-            else -> {
-                statusBarColor = getColor(R.color.md_theme_light_background)
-                navBarColor = getColor(R.color.md_theme_light_background)
-                lightBars = true
-            }
-        }
-
-        window.statusBarColor = statusBarColor
-        window.navigationBarColor = navBarColor
-
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {
-            window.insetsController?.let { ctrl ->
-                ctrl.setSystemBarsAppearance(
-                    if (lightBars) WindowInsetsController.APPEARANCE_LIGHT_STATUS_BARS else 0,
-                    WindowInsetsController.APPEARANCE_LIGHT_STATUS_BARS
-                )
-                ctrl.setSystemBarsAppearance(
-                    if (lightBars) WindowInsetsController.APPEARANCE_LIGHT_NAVIGATION_BARS else 0,
-                    WindowInsetsController.APPEARANCE_LIGHT_NAVIGATION_BARS
-                )
-            }
-        } else {
-            @Suppress("DEPRECATION")
-            window.decorView.systemUiVisibility = (window.decorView.systemUiVisibility).let {
-                var flags = it
-                if (lightBars) {
-                    flags = flags or View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR
-                    flags = flags or View.SYSTEM_UI_FLAG_LIGHT_NAVIGATION_BAR
-                } else {
-                    flags = flags and View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR.inv()
-                    flags = flags and View.SYSTEM_UI_FLAG_LIGHT_NAVIGATION_BAR.inv()
-                }
-                flags
-            }
-        }
-
-        // ── Cores da toolbar + bottom nav (ULTIMA coisa — após todo setup) ──
-        // setupActionBarWithNavController reseta o background — aplicamos AQUI no final.
-        applyToolbarAndNavColors(isDark, isGlass)
+        // ── Aplicar cores (toolbar + system bars) ──
+        applyAllColors()
+        // Re-aplicar após layout do Material3
+        binding.toolbar.post { applyAllColors() }
+        binding.toolbar.postDelayed({ applyAllColors() }, 200)
 
         // Título dinâmico
         navController.addOnDestinationChangedListener { _, destination, arguments ->
@@ -140,6 +96,12 @@ class HomeActivity : AppCompatActivity() {
 
         supportActionBar?.title = "Meu Ioritv"
         binding.bottomNavigation.selectedItemId = R.id.nav_home
+    }
+
+    override fun onResume() {
+        super.onResume()
+        applyAllColors()
+        binding.toolbar.postDelayed({ applyAllColors() }, 100)
     }
 
     override fun onSupportNavigateUp(): Boolean {
@@ -168,18 +130,58 @@ class HomeActivity : AppCompatActivity() {
     }
 
     /**
-     * Aplica cores na toolbar e bottom nav.
-     * Usa ColorDrawable + postDelayed para sobrescrever definitivamente
-     * o MaterialShapeDrawable + backgroundTint do Material3 Toolbar.
+     * Configura WindowInsets para toolbar e bottom nav se estenderem
+     * por trás das barras de sistema.
+     *
+     * toolbar.paddingTop = statusBarHeight → background preenche status bar
+     * bottomNav.paddingBottom = navBarHeight → background preenche nav bar
      */
-    private fun applyToolbarAndNavColors(isDark: Boolean, isGlass: Boolean) {
+    private fun setupWindowInsets() {
+        ViewCompat.setOnApplyWindowInsetsListener(binding.root) { _, insets ->
+            val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
+
+            // Toolbar: padding-top = status bar height
+            binding.toolbar.setPadding(
+                binding.toolbar.paddingLeft,
+                systemBars.top,
+                binding.toolbar.paddingRight,
+                binding.toolbar.paddingBottom
+            )
+
+            // Bottom nav: padding-bottom = nav bar height
+            binding.bottomNavigation.setPadding(
+                binding.bottomNavigation.paddingLeft,
+                binding.bottomNavigation.paddingTop,
+                binding.bottomNavigation.paddingRight,
+                systemBars.bottom
+            )
+
+            insets
+        }
+    }
+
+    /**
+     * Aplica TODAS as cores: toolbar background, bottom nav, system bars.
+     *
+     * Estratégia dupla para API 35+:
+     *   1. window.statusBarColor → cor do background desenhado pelo sistema
+     *   2. Toolbar ColorDrawable → cor do conteúdo desenhado pelo app atrás da barra
+     *   Ambas devem ser iguais para criar a extensão visual perfeita.
+     */
+    private fun applyAllColors() {
+        val isDark = currentIsDark
+        val isGlass = currentIsGlass
+
         val toolbarColor: Int
         val bottomNavColor: Int
+        val lightBars: Boolean
 
         when {
             isGlass && isDark -> {
-                toolbarColor = getColor(R.color.glass_surface_container_high)
-                bottomNavColor = getColor(R.color.glass_surface_container_high)
+                toolbarColor = Color.TRANSPARENT
+                bottomNavColor = Color.TRANSPARENT
+                lightBars = false
+
                 binding.toolbar.setTitleTextColor(getColor(R.color.glass_on_surface))
                 binding.toolbar.setSubtitleTextColor(getColor(R.color.glass_on_surface_variant))
                 binding.toolbar.navigationIcon?.setTint(getColor(R.color.glass_on_surface))
@@ -189,8 +191,10 @@ class HomeActivity : AppCompatActivity() {
                 binding.bottomNavigation.itemTextColor = glassItemColor
             }
             isGlass && !isDark -> {
-                toolbarColor = getColor(R.color.glass_surface_container_high)
-                bottomNavColor = getColor(R.color.glass_surface_container_high)
+                toolbarColor = Color.TRANSPARENT
+                bottomNavColor = Color.TRANSPARENT
+                lightBars = true
+
                 binding.toolbar.setTitleTextColor(getColor(R.color.glass_on_surface))
                 binding.toolbar.setSubtitleTextColor(getColor(R.color.glass_on_surface_variant))
                 binding.toolbar.navigationIcon?.setTint(getColor(R.color.glass_on_surface))
@@ -202,30 +206,76 @@ class HomeActivity : AppCompatActivity() {
             isDark -> {
                 toolbarColor = getColor(R.color.md_theme_dark_background)
                 bottomNavColor = getColor(R.color.md_theme_dark_background)
+                lightBars = false
+
+                binding.bottomNavigation.background = null
+                binding.bottomNavigation.backgroundTintList = android.content.res.ColorStateList.valueOf(bottomNavColor)
+                val itemColor = android.content.res.ColorStateList.valueOf(getColor(R.color.md_theme_dark_onSurfaceVariant))
+                binding.bottomNavigation.itemIconTintList = itemColor
+                binding.bottomNavigation.itemTextColor = itemColor
             }
             else -> {
                 toolbarColor = getColor(R.color.md_theme_light_background)
                 bottomNavColor = getColor(R.color.md_theme_light_background)
+                lightBars = true
+
+                binding.bottomNavigation.background = null
+                binding.bottomNavigation.backgroundTintList = android.content.res.ColorStateList.valueOf(bottomNavColor)
+                val itemColor = android.content.res.ColorStateList.valueOf(getColor(R.color.md_theme_light_onSurfaceVariant))
+                binding.bottomNavigation.itemIconTintList = itemColor
+                binding.bottomNavigation.itemTextColor = itemColor
             }
         }
 
-        // Forçar background: limpar tint + substituir drawable inteiro
-        // Usar postDelayed(200ms) para rodar DEPOIS de todos os layout passes do Material3
-        binding.toolbar.postDelayed({
-            binding.toolbar.background = null
-            binding.toolbar.backgroundTintList = null
-            binding.toolbar.background = android.graphics.drawable.ColorDrawable(toolbarColor)
+        // ── Toolbar: ColorDrawable que preenche atrás da status bar ──
+        binding.toolbar.background = null
+        binding.toolbar.backgroundTintList = null
+        binding.toolbar.background = ColorDrawable(toolbarColor)
 
-            // Sincronizar barra de notificação com a cor da toolbar
-            window.statusBarColor = toolbarColor
-        }, 200)
-
+        // ── Bottom nav (não-glass): ColorDrawable ──
         if (!isGlass) {
-            binding.bottomNavigation.postDelayed({
-                binding.bottomNavigation.background = null
-                binding.bottomNavigation.backgroundTintList = null
-                binding.bottomNavigation.background = android.graphics.drawable.ColorDrawable(bottomNavColor)
-            }, 200)
+            binding.bottomNavigation.background = null
+            binding.bottomNavigation.backgroundTintList = null
+            binding.bottomNavigation.background = ColorDrawable(bottomNavColor)
+        }
+
+        // ══════════════════════════════════════════════════════════
+        // SYSTEM BARS — Estratégia dupla:
+        // 1. window.statusBarColor/navigationBarColor: cor do background
+        //    que o sistema desenha (FORCE_DRAW_STATUS_BAR_BACKGROUND)
+        // 2. WindowInsets padding: o conteúdo do app se estende atrás
+        //    das barras transparentes
+        //
+        // Na API < 35: apenas o #1 funciona (barras não são transparentes)
+        // Na API 35+: ambos funcionam juntos
+        // ══════════════════════════════════════════════════════════
+        @Suppress("DEPRECATION")
+        window.statusBarColor = toolbarColor
+        @Suppress("DEPRECATION")
+        window.navigationBarColor = bottomNavColor
+
+        // ── Aparência dos ícones das barras ──
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {
+            window.insetsController?.let { ctrl ->
+                ctrl.setSystemBarsAppearance(
+                    if (lightBars) WindowInsetsController.APPEARANCE_LIGHT_STATUS_BARS else 0,
+                    WindowInsetsController.APPEARANCE_LIGHT_STATUS_BARS
+                )
+                ctrl.setSystemBarsAppearance(
+                    if (lightBars) WindowInsetsController.APPEARANCE_LIGHT_NAVIGATION_BARS else 0,
+                    WindowInsetsController.APPEARANCE_LIGHT_NAVIGATION_BARS
+                )
+            }
+        } else {
+            var flags = window.decorView.systemUiVisibility
+            if (lightBars) {
+                flags = flags or View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR
+                flags = flags or View.SYSTEM_UI_FLAG_LIGHT_NAVIGATION_BAR
+            } else {
+                flags = flags and View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR.inv()
+                flags = flags and View.SYSTEM_UI_FLAG_LIGHT_NAVIGATION_BAR.inv()
+            }
+            window.decorView.systemUiVisibility = flags
         }
     }
 
@@ -247,7 +297,6 @@ class HomeActivity : AppCompatActivity() {
             isOutsideTouchable = true
         }
 
-        // Referências
         val themeGroup = menuView.findViewById<RadioGroup>(R.id.themeRadioGroup)
         val menuItemTheme = menuView.findViewById<View>(R.id.menuItemTheme)
         val submenuTheme = menuView.findViewById<View>(R.id.submenuTheme)
@@ -255,12 +304,10 @@ class HomeActivity : AppCompatActivity() {
         val menuTitle = menuView.findViewById<TextView>(R.id.menuTitle)
         val switchGlass = menuView.findViewById<com.google.android.material.switchmaterial.SwitchMaterial>(R.id.switchGlass)
 
-        // Estado atual
         val baseThemeMode = ThemeUtils.getSavedThemeMode(this)
         val glassEnabled = ThemeUtils.isGlassEnabled(this)
         val isDark = ThemeUtils.isDarkTheme(this)
 
-        // Cores do menu baseado no tema (glass ou não)
         val bg = menuView.background as? android.graphics.drawable.GradientDrawable
         val textColor: Int
         val textSecondaryColor: Int
@@ -303,18 +350,15 @@ class HomeActivity : AppCompatActivity() {
             }
         }
 
-        // Aplicar cores
         menuTitle.setTextColor(textColor)
         menuView.findViewById<TextView>(R.id.labelTheme).setTextColor(textSecondaryColor)
         menuView.findViewById<TextView>(R.id.radio_theme_auto).setTextColor(textColor)
         menuView.findViewById<TextView>(R.id.radio_theme_light).setTextColor(textColor)
         menuView.findViewById<TextView>(R.id.radio_theme_dark).setTextColor(textColor)
 
-        // Tint ícones
         arrowTheme.setColorFilter(iconTint)
         menuView.findViewById<ImageView>(R.id.iconTheme).setColorFilter(iconTint)
 
-        // Tint radio buttons
         for (i in 0 until themeGroup.childCount) {
             val child = themeGroup.getChildAt(i)
             if (child is android.widget.RadioButton) {
@@ -322,28 +366,23 @@ class HomeActivity : AppCompatActivity() {
             }
         }
 
-        // Dividers
         menuView.findViewById<View>(R.id.menuDivider).setBackgroundColor(dividerColor)
         menuView.findViewById<View>(R.id.menuDividerTop).setBackgroundColor(dividerColor)
 
-        // Abrir submenu por padrão
         submenuTheme.visibility = View.VISIBLE
         arrowTheme.rotation = 90f
 
-        // ── Marcar tema base atual no RadioGroup (apenas 3 opções) ──
         when (baseThemeMode) {
             AppCompatDelegate.MODE_NIGHT_FOLLOW_SYSTEM -> themeGroup.check(R.id.radio_theme_auto)
             AppCompatDelegate.MODE_NIGHT_NO -> themeGroup.check(R.id.radio_theme_light)
             AppCompatDelegate.MODE_NIGHT_YES -> themeGroup.check(R.id.radio_theme_dark)
-            ThemeUtils.MODE_GLASS -> themeGroup.check(R.id.radio_theme_light) // migração: glass base era light
+            ThemeUtils.MODE_GLASS -> themeGroup.check(R.id.radio_theme_light)
             else -> themeGroup.check(R.id.radio_theme_auto)
         }
 
-        // ── Toggle Glass ──
         switchGlass.isChecked = glassEnabled
         switchGlass.thumbTintList = android.content.res.ColorStateList.valueOf(radioTint)
 
-        // Tocar na row inteira alterna o switch
         menuView.findViewById<View>(R.id.glassToggleRow).setOnClickListener {
             switchGlass.isChecked = !switchGlass.isChecked
         }
@@ -353,7 +392,6 @@ class HomeActivity : AppCompatActivity() {
             recreate()
         }
 
-        // ── Expansão/colapso do submenu ──
         menuItemTheme.setOnClickListener {
             if (submenuTheme.visibility == View.VISIBLE) {
                 arrowTheme.animate().rotation(0f).setDuration(200).start()
@@ -373,7 +411,6 @@ class HomeActivity : AppCompatActivity() {
             }
         }
 
-        // ── Listener para mudança de tema base ──
         themeGroup.setOnCheckedChangeListener { _, checkedId ->
             val themeMode = when (checkedId) {
                 R.id.radio_theme_auto -> AppCompatDelegate.MODE_NIGHT_FOLLOW_SYSTEM
