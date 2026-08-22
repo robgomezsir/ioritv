@@ -217,10 +217,10 @@ export default function DashboardHome() {
                     {/* ── Cards de Status ── */}
                     <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
                         {[
-                            { label: "Ativos", count: situacaoCounts["ATIVO"], icon: "✓", color: "text-emerald-400", pct: totalClientes > 0 ? (situacaoCounts["ATIVO"] / totalClientes) * 100 : 0 },
-                            { label: "A Vencer", count: situacaoCounts["A VENCER"], icon: "⏰", color: "text-amber-400", pct: totalClientes > 0 ? (situacaoCounts["A VENCER"] / totalClientes) * 100 : 0 },
-                            { label: "Vencidos", count: situacaoCounts["VENCIDO"], icon: "⚠", color: "text-red-400", pct: totalClientes > 0 ? (situacaoCounts["VENCIDO"] / totalClientes) * 100 : 0 },
-                            { label: "Standby", count: situacaoCounts["STANDBY"], icon: "⏸", color: "text-gray-400", pct: totalClientes > 0 ? (situacaoCounts["STANDBY"] / totalClientes) * 100 : 0 },
+                            { label: "Ativos", count: situacaoCounts["ATIVO"], icon: "✓", color: "text-emerald-400", barColor: "#2E9E5A", pct: totalClientes > 0 ? (situacaoCounts["ATIVO"] / totalClientes) * 100 : 0 },
+                            { label: "A Vencer", count: situacaoCounts["A VENCER"], icon: "⏰", color: "text-amber-400", barColor: "#E8913A", pct: totalClientes > 0 ? (situacaoCounts["A VENCER"] / totalClientes) * 100 : 0 },
+                            { label: "Vencidos", count: situacaoCounts["VENCIDO"], icon: "⚠", color: "text-red-400", barColor: "#BA1A1A", pct: totalClientes > 0 ? (situacaoCounts["VENCIDO"] / totalClientes) * 100 : 0 },
+                            { label: "Standby", count: situacaoCounts["STANDBY"], icon: "⏸", color: "text-gray-400", barColor: "#6b7280", pct: totalClientes > 0 ? (situacaoCounts["STANDBY"] / totalClientes) * 100 : 0 },
                         ].map((item) => (
                             <div key={item.label} className="glass-card p-4">
                                 <div className="flex items-center justify-between mb-3">
@@ -229,7 +229,7 @@ export default function DashboardHome() {
                                 </div>
                                 <p className="text-2xl font-bold text-[var(--on-surface)]">{item.count}</p>
                                 <div className="mt-2 relative h-2.5 w-full rounded-full bg-[var(--surface-container)]">
-                                    <div className={`flash-bar h-2.5 rounded-full transition-all duration-700 ${item.color.replace('text-', 'bg-')}`} style={{ width: `${item.pct}%` }}></div>
+                                    <div className="flash-bar h-2.5 rounded-full transition-all duration-700" style={{ width: `${item.pct}%`, backgroundColor: item.barColor }}></div>
                                     <span className={`absolute -top-6 text-[11px] font-bold ${item.color}`} style={{ left: `${Math.min(item.pct, 95)}%`, transform: 'translateX(-50%)' }}>
                                         {item.pct.toFixed(0)}%
                                     </span>
